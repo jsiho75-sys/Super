@@ -1,1 +1,6232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0,
+  maximum-scale=1.0, viewport-fit=cover"
+>
+
+<title>SuperLotto Plus AI Lab V6.3.1</title>
+
+<style>
+
+:root{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --accent:#38bdf8;
+  --accent2:#818cf8;
+  --success:#34d399;
+  --danger:#fb7185;
+  --border:#334155;
+  --shadow:0 10px 30px rgba(0,0,0,.22);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  background:var(--bg);
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  -webkit-tap-highlight-color:transparent;
+}
+
+.container{
+  width:min(100%,760px);
+  margin:0 auto;
+  padding:
+    calc(10px + env(safe-area-inset-top))
+    10px
+    calc(20px + env(safe-area-inset-bottom));
+}
+
+header{
+  text-align:center;
+  padding:8px 4px 12px;
+}
+
+h1{
+  margin:0;
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:-.4px;
+}
+
+.subtitle{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:13px;
+  margin-bottom:10px;
+  box-shadow:var(--shadow);
+}
+
+.card h2{
+  margin:0 0 9px;
+  font-size:15px;
+  font-weight:900;
+}
+
+.jackpot{
+  text-align:center;
+  padding:16px 12px;
+}
+
+.jackpot-label{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+.jackpot-value{
+  margin-top:4px;
+  font-size:34px;
+  line-height:1.05;
+  font-weight:950;
+  color:var(--accent);
+}
+
+.cash{
+  margin-top:5px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.next{
+  margin-top:3px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.sync{
+  margin-top:8px;
+  font-size:10px;
+  color:var(--success);
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+
+.control-group{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.control-group label{
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+}
+
+select,
+input[type="number"],
+input[type="text"],
+input[type="url"]{
+  width:100%;
+  min-height:38px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  background:#0f172a;
+  color:var(--text);
+  padding:8px 9px;
+  outline:none;
+}
+
+select:focus,
+input:focus{
+  border-color:var(--accent);
+}
+
+.btn{
+  border:0;
+  border-radius:11px;
+  padding:10px 13px;
+  background:var(--accent);
+  color:#082f49;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.btn.secondary{
+  background:#334155;
+  color:var(--text);
+}
+
+.btn.success{
+  background:var(--success);
+  color:#052e1b;
+}
+
+.btn.danger{
+  background:var(--danger);
+  color:#450a0a;
+}
+
+.btn.full{
+  width:100%;
+}
+
+.action-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:10px;
+}
+
+.generate-row{
+  display:grid;
+  grid-template-columns:
+    1fr auto;
+  gap:8px;
+  margin-top:10px;
+}
+
+.ticket{
+  margin-top:8px;
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#0f172a;
+}
+
+.ticket-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-bottom:7px;
+}
+
+.ticket-title{
+  font-size:11px;
+  color:var(--muted);
+  font-weight:800;
+}
+
+.balls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-items:center;
+}
+
+.ball{
+  width:31px;
+  height:31px;
+  border-radius:50%;
+  background:#f8fafc;
+  color:#0f172a;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:11px;
+  font-weight:950;
+}
+
+.ball.super{
+  background:var(--accent2);
+  color:white;
+}
+
+.ball-label{
+  color:var(--muted);
+  font-size:10px;
+  margin-right:2px;
+}
+
+.manual-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(5,minmax(0,1fr));
+  gap:6px;
+  margin-top:8px;
+}
+
+.manual-grid .super-input{
+  grid-column:1/-1;
+}
+
+.saved-ticket{
+  padding:10px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#0f172a;
+  margin-top:8px;
+}
+
+.saved-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.saved-name{
+  font-size:11px;
+  font-weight:900;
+}
+
+.saved-date{
+  color:var(--muted);
+  font-size:9px;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+
+.stat{
+  background:#0f172a;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:11px;
+  text-align:center;
+}
+
+.stat-value{
+  font-size:20px;
+  font-weight:950;
+}
+
+.stat-label{
+  margin-top:2px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.table-wrap{
+  overflow-x:auto;
+  margin-top:8px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:10px;
+}
+
+th,
+td{
+  padding:7px 4px;
+  border-bottom:1px solid var(--border);
+  text-align:center;
+  white-space:nowrap;
+}
+
+th{
+  color:var(--accent);
+  font-weight:900;
+}
+
+.status{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.4;
+}
+
+.section-note{
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.5;
+}
+
+.progress{
+  height:9px;
+  background:#0f172a;
+  border-radius:99px;
+  overflow:hidden;
+  margin:10px 0;
+  border:1px solid var(--border);
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent),
+      var(--accent2)
+    );
+  transition:width .2s;
+}
+
+.file-label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 13px;
+  border-radius:11px;
+  background:#334155;
+  color:white;
+  font-weight:700;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.file-label input{
+  display:none;
+}
+
+.checkbox-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:9px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.checkbox-row input{
+  width:18px;
+  height:18px;
+}
+
+.loading{
+  opacity:.65;
+  pointer-events:none;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:
+    calc(22px + env(safe-area-inset-bottom));
+  transform:translate(-50%,120px);
+  background:#020617;
+  border:1px solid var(--border);
+  color:white;
+  padding:11px 15px;
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  font-size:12px;
+  z-index:9999;
+  transition:.25s;
+  max-width:90%;
+  text-align:center;
+}
+
+.toast.show{
+  transform:translate(-50%,0);
+}
+
+@media(max-width:430px){
+
+  .container{
+    padding-left:8px;
+    padding-right:8px;
+  }
+
+  h1{
+    font-size:22px;
+  }
+
+  .jackpot-value{
+    font-size:31px;
+  }
+
+  .controls{
+    grid-template-columns:1fr;
+  }
+
+  .generate-row{
+    grid-template-columns:1fr;
+  }
+
+  .ball{
+    width:28px;
+    height:28px;
+  }
+
+  .manual-grid{
+    grid-template-columns:
+      repeat(5,1fr);
+  }
+
+}
+
+footer{
+  color:var(--muted);
+  text-align:center;
+  font-size:10px;
+  line-height:1.5;
+  padding:10px 8px 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+  <h1>SuperLotto Plus AI Lab V6.3.1</h1>
+  <div class="subtitle">
+    Version 6.3 • Statistics • Strategies • Backtesting
+  </div>
+</header>
+
+
+<!-- ========================================================
+     JACKPOT
+========================================================= -->
+
+<section class="card jackpot">
+
+  <div class="jackpot-label">
+    Current Estimated Jackpot
+  </div>
+
+  <div id="jackpot"
+       class="jackpot-value">
+    —
+  </div>
+
+  <div id="cashValue"
+       class="cash">
+    Cash Value: —
+  </div>
+
+  <div id="nextDrawing"
+       class="next">
+    Next Drawing: —
+  </div>
+
+  <div id="syncStatus"
+       class="sync">
+    Waiting for data...
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     LATEST DRAWINGS
+========================================================= -->
+
+<section class="card">
+
+  <h2>🎯 Latest Drawings</h2>
+
+  <div class="controls">
+
+    <div class="control-group">
+
+      <label for="latestCount">
+        Number of Drawings
+      </label>
+
+      <select id="latestCount">
+        <option value="2">2</option>
+        <option value="3" selected>3</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+      </select>
+
+    </div>
+
+    <div class="control-group">
+
+      <label>&nbsp;</label>
+
+      <button
+        class="btn secondary"
+        id="refreshBtn">
+        Refresh
+      </button>
+
+    </div>
+
+  </div>
+
+  <div id="latestDrawings"></div>
+
+</section>
+
+
+<!-- ========================================================
+     AI TICKET GENERATOR
+========================================================= -->
+
+<section class="card">
+
+  <h2>🤖 AI Ticket Generator</h2>
+
+  <div class="controls">
+
+    <div class="control-group">
+
+      <label for="strategy">
+        Strategy
+      </label>
+
+      <select id="strategy">
+
+        <option>Random</option>
+
+        <option>Balanced Odd / Even</option>
+
+        <option>Hot Numbers</option>
+
+        <option>Cold Numbers</option>
+
+        <option>Hot + Cold Mix</option>
+
+        <option>Good Spread</option>
+
+        <option>Weighted Frequency</option>
+
+        <option>Weighted + Balanced ⭐</option>
+
+        <option>Low + High Mix</option>
+
+        <option>Recency</option>
+
+        <option>Hybrid AI</option>
+
+        <option>Overdue Numbers</option>
+
+        <option>Decade Spread</option>
+
+        <option>Sum Balanced</option>
+
+        <option>Pair Boost</option>
+
+      </select>
+
+    </div>
+
+    <div class="control-group">
+
+      <label for="ticketCount">
+        Tickets
+      </label>
+
+      <select id="ticketCount">
+
+        <option value="1">1</option>
+        <option value="3" selected>3</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+  <div class="generate-row">
+
+    <div></div>
+
+    <button
+      class="btn success"
+      id="generateBtn">
+      Generate Tickets
+    </button>
+
+  </div>
+
+  <div id="generatedTickets"></div>
+
+</section>
+
+
+<!-- ========================================================
+     STRATEGY ANALYSIS HISTORY
+========================================================= -->
+
+<section class="card">
+
+  <h2>📊 Strategy Analysis History</h2>
+
+  <div class="controls">
+
+    <div class="control-group">
+
+      <label for="analysisWindow">
+        History Window
+      </label>
+
+      <select id="analysisWindow">
+
+        <option value="20">20</option>
+        <option value="30" selected>30</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="500">500</option>
+        <option value="all">All Available</option>
+
+      </select>
+
+    </div>
+
+    <div class="control-group">
+
+      <label for="analysisMode">
+        Analysis
+      </label>
+
+      <select id="analysisMode">
+
+        <option value="frequency">
+          Frequency
+        </option>
+
+        <option value="recency">
+          Recency
+        </option>
+
+        <option value="combined">
+          Combined
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+  <div id="strategyAnalysis"></div>
+
+</section>
+
+
+<!-- ========================================================
+     SAVING NUMBERS
+========================================================= -->
+
+<section class="card">
+
+  <h2>💾 Saving Numbers</h2>
+
+  <div class="section-note">
+    Save generated tickets or manually enter your
+    own SuperLotto Plus numbers.
+  </div>
+
+  <div id="savedNumbers"></div>
+
+
+  <h3 style="font-size:12px;margin:14px 0 5px;">
+    Manual Entry
+  </h3>
+
+  <div class="manual-grid">
+
+    <input
+      class="main-input"
+      type="number"
+      min="1"
+      max="47"
+      placeholder="1"
+      id="m1">
+
+    <input
+      class="main-input"
+      type="number"
+      min="1"
+      max="47"
+      placeholder="2"
+      id="m2">
+
+    <input
+      class="main-input"
+      type="number"
+      min="1"
+      max="47"
+      placeholder="3"
+      id="m3">
+
+    <input
+      class="main-input"
+      type="number"
+      min="1"
+      max="47"
+      placeholder="4"
+      id="m4">
+
+    <input
+      class="main-input"
+      type="number"
+      min="1"
+      max="47"
+      placeholder="5"
+      id="m5">
+
+    <input
+      class="super-input"
+      type="number"
+      min="1"
+      max="27"
+      placeholder="Superball 1–27"
+      id="ms">
+
+  </div>
+
+  <div class="action-row">
+
+    <button
+      class="btn"
+      id="saveManualBtn">
+      Save Manual Ticket
+    </button>
+
+    <button
+      class="btn secondary"
+      id="clearManualBtn">
+      Clear
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     HISTORICAL STATISTICS
+========================================================= -->
+
+<section class="card">
+
+  <h2>📈 Historical Statistics</h2>
+
+  <div class="controls">
+
+    <div class="control-group">
+
+      <label for="statsWindow">
+        Analysis Window
+      </label>
+
+      <select id="statsWindow">
+
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="all" selected>
+          All Available
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+  <div id="statistics"></div>
+
+</section>
+
+
+<!-- ========================================================
+     WALK FORWARD BACKTESTING
+========================================================= -->
+
+<section class="card">
+
+  <h2>🧪 Walk-Forward Backtesting</h2>
+
+  <div class="section-note">
+
+    The backtester uses only historical drawings available
+    before each simulated draw. It does not use future results
+    to generate a ticket.
+
+  </div>
+
+  <div class="controls">
+
+    <div class="control-group">
+
+      <label for="trainingWindow">
+        Minimum Training
+      </label>
+
+      <select id="trainingWindow">
+
+        <option value="20">20</option>
+        <option value="30" selected>30</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+
+      </select>
+
+    </div>
+
+    <div class="control-group">
+
+      <label for="recencyWindow">
+        Recency Window
+      </label>
+
+      <select id="recencyWindow">
+
+        <option value="10">10</option>
+        <option value="20" selected>20</option>
+        <option value="30">30</option>
+        <option value="60">60</option>
+        <option value="120">120</option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+  <button
+    class="btn full"
+    id="backtestBtn"
+    style="margin-top:12px;">
+    Run Walk-Forward Backtest
+  </button>
+
+  <div
+    id="progressArea"
+    style="display:none;">
+
+    <div class="progress">
+
+      <div
+        id="progressBar"
+        class="progress-bar">
+      </div>
+
+    </div>
+
+    <div
+      id="progressText"
+      class="section-note">
+      Running…
+    </div>
+
+  </div>
+
+  <div
+    id="backtestOutput"
+    style="margin-top:12px;">
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     AUTOMATIC UPDATE
+========================================================= -->
+
+<section class="card">
+
+  <h2>🔄 Automatic Update</h2>
+
+  <div class="control-group">
+
+    <label for="workerUrl">
+      Cloudflare Worker URL
+    </label>
+
+    <input
+      id="workerUrl"
+      type="url"
+      placeholder="https://your-worker.workers.dev">
+
+  </div>
+
+  <div class="checkbox-row">
+
+    <input
+      type="checkbox"
+      id="updateOnOpen"
+      checked>
+
+    <label for="updateOnOpen">
+      Automatically update every time the app
+      opens or returns to foreground
+    </label>
+
+  </div>
+
+  <div class="action-row">
+
+    <button
+      class="btn"
+      id="saveSettingsBtn">
+      Save Settings
+    </button>
+
+    <button
+      class="btn secondary"
+      id="updateNowBtn">
+      Update Now
+    </button>
+
+  </div>
+
+  <div
+    id="updateMessage"
+    class="status">
+    Automatic updates use your Cloudflare Worker.
+  </div>
+
+</section>
+
+
+<!-- ========================================================
+     DATA TOOLS
+========================================================= -->
+
+<section class="card">
+
+  <h2>🗄 Data Tools</h2>
+
+  <div class="action-row">
+
+    <button
+      class="btn secondary"
+      id="exportCsvBtn">
+      Export CSV
+    </button>
+
+    <button
+      class="btn secondary"
+      id="exportJsonBtn">
+      Export JSON
+    </button>
+
+    <label class="file-label">
+
+      Import CSV
+
+      <input
+        id="csvFile"
+        type="file"
+        accept=".csv,text/csv">
+
+    </label>
+
+  </div>
+
+  <div class="action-row">
+
+    <button
+      class="btn danger"
+      id="resetDbBtn">
+      Reset Historical Database
+    </button>
+
+  </div>
+
+  <p class="section-note">
+
+    Historical results are stored locally in your browser.
+    Resetting the historical database does not delete
+    your saved numbers.
+
+  </p>
+
+</section>
+
+
+<footer>
+
+  SuperLotto Plus AI Lab V6.3.1<br>
+
+  For research and entertainment only.
+  No strategy can predict a random SuperLotto Plus drawing
+  or improve the mathematical odds of a ticket.
+
+</footer>
+
+</div>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+"use strict";
+
+/* ============================================================
+   SUPERLOTTO PLUS AI LAB V6.3.1
+   ============================================================ */
+
+const STORAGE_KEY =
+  "superlotto_plus_ai_lab_v6_draws";
+
+const SETTINGS_KEY =
+  "superlotto_plus_ai_lab_v6_settings";
+
+const SAVED_KEY =
+  "superlotto_plus_ai_lab_v6_saved_numbers";
+
+
+/* ------------------------------------------------------------
+   GAME RULES
+------------------------------------------------------------ */
+
+const WHITE_MIN = 1;
+const WHITE_MAX = 47;
+
+const SUPER_MIN = 1;
+const SUPER_MAX = 27;
+
+
+/* ------------------------------------------------------------
+   STARTER DATA
+------------------------------------------------------------ */
+
+const SEED_DRAWS = [
+
+  {
+    date:"2026-09-09",
+    white:[9,24,28,34,41],
+    pb:6
+  },
+
+  {
+    date:"2026-09-05",
+    white:[4,12,17,31,43],
+    pb:19
+  },
+
+  {
+    date:"2026-09-02",
+    white:[7,16,21,29,45],
+    pb:11
+  },
+
+  {
+    date:"2026-08-29",
+    white:[3,14,23,35,46],
+    pb:7
+  },
+
+  {
+    date:"2026-08-26",
+    white:[5,18,27,32,40],
+    pb:24
+  },
+
+  {
+    date:"2026-08-22",
+    white:[8,13,20,33,44],
+    pb:4
+  },
+
+  {
+    date:"2026-08-19",
+    white:[2,11,26,37,42],
+    pb:16
+  },
+
+  {
+    date:"2026-08-15",
+    white:[6,15,22,30,39],
+    pb:9
+  },
+
+  {
+    date:"2026-08-12",
+    white:[1,10,25,36,47],
+    pb:21
+  },
+
+  {
+    date:"2026-08-08",
+    white:[12,19,28,38,45],
+    pb:3
+  },
+
+  {
+    date:"2026-08-05",
+    white:[4,16,24,31,43],
+    pb:14
+  },
+
+  {
+    date:"2026-08-01",
+    white:[7,17,29,34,40],
+    pb:26
+  },
+
+  {
+    date:"2026-07-29",
+    white:[3,13,21,32,46],
+    pb:8
+  },
+
+  {
+    date:"2026-07-25",
+    white:[5,11,23,37,44],
+    pb:18
+  },
+
+  {
+    date:"2026-07-22",
+    white:[9,15,27,35,41],
+    pb:2
+  },
+
+  {
+    date:"2026-07-18",
+    white:[1,14,20,30,39],
+    pb:12
+  },
+
+  {
+    date:"2026-07-15",
+    white:[6,18,26,33,47],
+    pb:23
+  },
+
+  {
+    date:"2026-07-11",
+    white:[2,10,22,36,45],
+    pb:5
+  },
+
+  {
+    date:"2026-07-08",
+    white:[8,17,25,31,42],
+    pb:20
+  },
+
+  {
+    date:"2026-07-04",
+    white:[4,13,24,38,46],
+    pb:15
+  },
+
+  {
+    date:"2026-07-01",
+    white:[7,16,28,34,43],
+    pb:10
+  },
+
+  {
+    date:"2026-06-27",
+    white:[3,12,21,32,40],
+    pb:22
+  },
+
+  {
+    date:"2026-06-24",
+    white:[5,19,27,35,44],
+    pb:6
+  },
+
+  {
+    date:"2026-06-20",
+    white:[1,11,23,30,47],
+    pb:17
+  },
+
+  {
+    date:"2026-06-17",
+    white:[6,14,26,37,41],
+    pb:3
+  },
+
+  {
+    date:"2026-06-13",
+    white:[8,18,20,33,45],
+    pb:25
+  },
+
+  {
+    date:"2026-06-10",
+    white:[2,15,24,36,42],
+    pb:9
+  },
+
+  {
+    date:"2026-06-06",
+    white:[4,10,22,31,46],
+    pb:13
+  },
+
+  {
+    date:"2026-06-03",
+    white:[7,17,25,38,43],
+    pb:1
+  },
+
+  {
+    date:"2026-05-30",
+    white:[3,16,28,34,40],
+    pb:19
+  }
+
+];
+
+
+let history = [];
+
+let savedNumbers = [];
+
+let settings = {
+  workerUrl:"",
+  updateOnOpen:true
+};
+
+
+/* ------------------------------------------------------------
+   SHORTCUT
+------------------------------------------------------------ */
+
+const $ = id =>
+  document.getElementById(id);
+
+
+/* ------------------------------------------------------------
+   TOAST
+------------------------------------------------------------ */
+
+let toastTimer = null;
+
+function showToast(message){
+
+  const el = $("toast");
+
+  el.textContent = message;
+
+  el.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(
+    () => el.classList.remove("show"),
+    2200
+  );
+}
+
+
+/* ------------------------------------------------------------
+   RANDOM
+------------------------------------------------------------ */
+
+function randomInt(min,max){
+
+  return Math.floor(
+    Math.random() * (max-min+1)
+  ) + min;
+
+}
+
+
+function shuffle(array){
+
+  const a = [...array];
+
+  for(let i=a.length-1;i>0;i--){
+
+    const j =
+      Math.floor(Math.random()*(i+1));
+
+    [a[i],a[j]] =
+      [a[j],a[i]];
+  }
+
+  return a;
+}
+
+
+/* ------------------------------------------------------------
+   RANGE
+------------------------------------------------------------ */
+
+function range(min,max){
+
+  return Array.from(
+    {length:max-min+1},
+    (_,i)=>min+i
+  );
+
+}
+
+
+function allWhite(){
+
+  return range(
+    WHITE_MIN,
+    WHITE_MAX
+  );
+
+}
+
+
+function allSuper(){
+
+  return range(
+    SUPER_MIN,
+    SUPER_MAX
+  );
+
+}
+
+
+/* ------------------------------------------------------------
+   NORMALIZE DRAW
+------------------------------------------------------------ */
+
+function normalizeDraw(d){
+
+  if(!d) return null;
+
+  const white =
+    [...new Set(
+      (d.white || [])
+        .map(Number)
+        .filter(
+          n =>
+            Number.isInteger(n) &&
+            n>=WHITE_MIN &&
+            n<=WHITE_MAX
+        )
+    )].sort((a,b)=>a-b);
+
+  const pb = Number(d.pb);
+
+  if(
+    !d.date ||
+    white.length!==5 ||
+    !Number.isInteger(pb) ||
+    pb<SUPER_MIN ||
+    pb>SUPER_MAX
+  ){
+    return null;
+  }
+
+  return {
+    date:String(d.date).slice(0,10),
+    white,
+    pb
+  };
+
+}
+
+
+/* ------------------------------------------------------------
+   NORMALIZE HISTORY
+------------------------------------------------------------ */
+
+function normalizeHistory(rows){
+
+  const map = new Map();
+
+  for(const row of rows){
+
+    const d =
+      normalizeDraw(row);
+
+    if(d){
+      map.set(
+        d.date +
+        "|" +
+        d.white.join("-") +
+        "|" +
+        d.pb,
+        d
+      );
+    }
+
+  }
+
+  return [...map.values()]
+    .sort(
+      (a,b)=>
+        new Date(b.date) -
+        new Date(a.date)
+    );
+
+}
+
+
+/* ------------------------------------------------------------
+   STORAGE
+------------------------------------------------------------ */
+
+function saveHistory(){
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(history)
+  );
+
+}
+
+
+function loadHistory(){
+
+  try{
+
+    const raw =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
+
+    if(raw){
+
+      history =
+        normalizeHistory(
+          JSON.parse(raw)
+        );
+
+    }
+
+  }catch(e){
+
+    history = [];
+
+  }
+
+  if(!history.length){
+
+    history =
+      normalizeHistory(
+        SEED_DRAWS
+      );
+
+    saveHistory();
+
+  }
+
+}
+
+
+function saveSettings(){
+
+  settings = {
+
+    workerUrl:
+      $("workerUrl").value.trim(),
+
+    updateOnOpen:
+      $("updateOnOpen").checked
+
+  };
+
+  localStorage.setItem(
+    SETTINGS_KEY,
+    JSON.stringify(settings)
+  );
+
+}
+
+
+function loadSettings(){
+
+  try{
+
+    const raw =
+      localStorage.getItem(
+        SETTINGS_KEY
+      );
+
+    if(raw){
+
+      settings =
+        {
+          ...settings,
+          ...JSON.parse(raw)
+        };
+
+    }
+
+  }catch(e){}
+
+  $("workerUrl").value =
+    settings.workerUrl || "";
+
+  $("updateOnOpen").checked =
+    settings.updateOnOpen !== false;
+
+}
+
+
+function loadSaved(){
+
+  try{
+
+    const raw =
+      localStorage.getItem(
+        SAVED_KEY
+      );
+
+    savedNumbers =
+      raw ?
+      JSON.parse(raw) :
+      [];
+
+  }catch(e){
+
+    savedNumbers = [];
+
+  }
+
+}
+
+
+function saveSaved(){
+
+  localStorage.setItem(
+    SAVED_KEY,
+    JSON.stringify(savedNumbers)
+  );
+
+}
+
+
+/* ------------------------------------------------------------
+   FORMATTING
+------------------------------------------------------------ */
+
+function formatMoney(value){
+
+  if(
+    value===null ||
+    value===undefined ||
+    value===""
+  ){
+    return "—";
+  }
+
+  const n = Number(value);
+
+  if(!Number.isFinite(n)){
+    return String(value);
+  }
+
+  return "$" +
+    n.toLocaleString(
+      "en-US",
+      {
+        maximumFractionDigits:0
+      }
+    );
+
+}
+
+
+function formatDate(date){
+
+  if(!date) return "—";
+
+  const d =
+    new Date(date);
+
+  if(Number.isNaN(d.getTime())){
+    return String(date);
+  }
+
+  return d.toLocaleDateString(
+    "en-US",
+    {
+      weekday:"short",
+      month:"short",
+      day:"numeric",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+/* ------------------------------------------------------------
+   DRAWING DISPLAY
+------------------------------------------------------------ */
+
+function ticketHTML(
+  white,
+  pb,
+  title="Ticket"
+){
+
+  return `
+
+    <div class="ticket">
+
+      <div class="ticket-header">
+
+        <div class="ticket-title">
+          ${title}
+        </div>
+
+      </div>
+
+      <div class="balls">
+
+        ${white.map(
+          n =>
+          `<span class="ball">
+             ${n}
+           </span>`
+        ).join("")}
+
+        <span class="ball-label">
+          Superball
+        </span>
+
+        <span class="ball super">
+          ${pb}
+        </span>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ------------------------------------------------------------
+   LATEST DRAWINGS
+------------------------------------------------------------ */
+
+function renderLatest(){
+
+  const count =
+    Number(
+      $("latestCount").value
+    );
+
+  const rows =
+    history.slice(0,count);
+
+  $("latestDrawings").innerHTML =
+    rows.map(
+      d =>
+      ticketHTML(
+        d.white,
+        d.pb,
+        formatDate(d.date)
+      )
+    ).join("");
+
+}
+
+
+/* ------------------------------------------------------------
+   FREQUENCY
+------------------------------------------------------------ */
+
+function getWhiteFrequency(rows){
+
+  const freq = {};
+
+  for(const n of allWhite()){
+    freq[n]=0;
+  }
+
+  for(const d of rows){
+
+    for(const n of d.white){
+      freq[n]++;
+    }
+
+  }
+
+  return freq;
+
+}
+
+
+function getSuperFrequency(rows){
+
+  const freq = {};
+
+  for(const n of allSuper()){
+    freq[n]=0;
+  }
+
+  for(const d of rows){
+    freq[d.pb]++;
+  }
+
+  return freq;
+
+}
+
+
+/* ------------------------------------------------------------
+   RECENCY
+------------------------------------------------------------ */
+
+function getWhiteLastSeen(rows){
+
+  const result = {};
+
+  for(const n of allWhite()){
+    result[n] = Infinity;
+  }
+
+  rows.forEach(
+    (d,index)=>{
+
+      for(const n of d.white){
+
+        if(result[n]===Infinity){
+          result[n]=index;
+        }
+
+      }
+
+    }
+  );
+
+  return result;
+
+}
+
+
+function getSuperLastSeen(rows){
+
+  const result = {};
+
+  for(const n of allSuper()){
+    result[n] = Infinity;
+  }
+
+  rows.forEach(
+    (d,index)=>{
+
+      if(result[d.pb]===Infinity){
+        result[d.pb]=index;
+      }
+
+    }
+  );
+
+  return result;
+
+}
+
+
+/* ------------------------------------------------------------
+   WEIGHTED PICK
+------------------------------------------------------------ */
+
+function weightedPick(
+  values,
+  weights,
+  count
+){
+
+  const pool =
+    values.map(
+      (value,i)=>({
+        value,
+        weight:
+          Math.max(
+            0.001,
+            Number(weights[i]) || 0.001
+          )
+      })
+    );
+
+  const result = [];
+
+  while(
+    result.length<count &&
+    pool.length
+  ){
+
+    const total =
+      pool.reduce(
+        (sum,x)=>
+          sum+x.weight,
+        0
+      );
+
+    let r =
+      Math.random()*total;
+
+    let chosen =
+      pool.length-1;
+
+    for(
+      let i=0;
+      i<pool.length;
+      i++
+    ){
+
+      r -= pool[i].weight;
+
+      if(r<=0){
+
+        chosen=i;
+        break;
+
+      }
+
+    }
+
+    result.push(
+      pool[chosen].value
+    );
+
+    pool.splice(
+      chosen,
+      1
+    );
+
+  }
+
+  return result.sort(
+    (a,b)=>a-b
+  );
+
+}
+
+
+/* ------------------------------------------------------------
+   TICKET VALIDATION
+------------------------------------------------------------ */
+
+function makeTicket(
+  white,
+  pb
+){
+
+  white =
+    [...new Set(
+      white.map(Number)
+    )]
+    .filter(
+      n =>
+        n>=WHITE_MIN &&
+        n<=WHITE_MAX
+    )
+    .sort((a,b)=>a-b);
+
+  pb=Number(pb);
+
+  if(
+    white.length!==5 ||
+    !Number.isInteger(pb) ||
+    pb<SUPER_MIN ||
+    pb>SUPER_MAX
+  ){
+    return null;
+  }
+
+  return {
+    white,
+    pb
+  };
+
+}
+
+
+/* ------------------------------------------------------------
+   SAVE TICKET
+------------------------------------------------------------ */
+
+function saveTicket(
+  ticket,
+  source="Manual"
+){
+
+  if(!ticket) return;
+
+  savedNumbers.unshift({
+
+    id:
+      Date.now() +
+      Math.random(),
+
+    date:
+      new Date().toISOString(),
+
+    source,
+
+    white:
+      ticket.white,
+
+    pb:
+      ticket.pb
+
+  });
+
+  savedNumbers =
+    savedNumbers.slice(0,100);
+
+  saveSaved();
+
+  renderSaved();
+
+  showToast(
+    "Ticket saved"
+  );
+
+} /* ============================================================
+   RENDER SAVED NUMBERS
+   ============================================================ */
+
+function renderSaved(){
+
+  const el = $("savedNumbers");
+
+  if(!savedNumbers.length){
+
+    el.innerHTML = `
+      <div class="section-note">
+        No saved tickets yet.
+      </div>
+    `;
+
+    return;
+  }
+
+  el.innerHTML =
+    savedNumbers.map(
+      (ticket,index)=>`
+
+        <div class="saved-ticket">
+
+          <div class="saved-head">
+
+            <div>
+
+              <div class="saved-name">
+                ${ticket.source || "Saved Ticket"}
+              </div>
+
+              <div class="saved-date">
+                ${formatDate(ticket.date)}
+              </div>
+
+            </div>
+
+            <button
+              class="btn danger"
+              onclick="deleteSaved(${index})">
+              Delete
+            </button>
+
+          </div>
+
+          ${ticketHTML(
+            ticket.white,
+            ticket.pb,
+            ""
+          )}
+
+        </div>
+
+      `
+    ).join("");
+
+}
+
+
+function deleteSaved(index){
+
+  if(
+    !confirm(
+      "Delete this saved SuperLotto Plus ticket?"
+    )
+  ){
+    return;
+  }
+
+  savedNumbers.splice(index,1);
+
+  saveSaved();
+
+  renderSaved();
+
+  showToast(
+    "Saved ticket deleted"
+  );
+
+}
+
+
+/* ============================================================
+   MANUAL ENTRY
+   ============================================================ */
+
+function getManualTicket(){
+
+  const white = [
+    $("m1").value,
+    $("m2").value,
+    $("m3").value,
+    $("m4").value,
+    $("m5").value
+  ].map(Number);
+
+  const pb =
+    Number(
+      $("ms").value
+    );
+
+  if(
+    white.some(
+      n =>
+        !Number.isInteger(n) ||
+        n<WHITE_MIN ||
+        n>WHITE_MAX
+    )
+  ){
+
+    showToast(
+      "Enter 5 valid numbers from 1–47"
+    );
+
+    return null;
+  }
+
+  if(
+    new Set(white).size !== 5
+  ){
+
+    showToast(
+      "Main numbers cannot repeat"
+    );
+
+    return null;
+  }
+
+  if(
+    !Number.isInteger(pb) ||
+    pb<SUPER_MIN ||
+    pb>SUPER_MAX
+  ){
+
+    showToast(
+      "Enter a Superball from 1–27"
+    );
+
+    return null;
+  }
+
+  return makeTicket(
+    white,
+    pb
+  );
+
+}
+
+
+function clearManual(){
+
+  [
+    "m1",
+    "m2",
+    "m3",
+    "m4",
+    "m5",
+    "ms"
+  ].forEach(
+    id => {
+      $(id).value="";
+    }
+  );
+
+}
+
+
+/* ============================================================
+   STRATEGY HELPERS
+   ============================================================ */
+
+function getAnalysisRows(){
+
+  const value =
+    $("analysisWindow").value;
+
+  if(value==="all"){
+    return history;
+  }
+
+  return history.slice(
+    0,
+    Number(value)
+  );
+
+}
+
+
+function getStatsRows(){
+
+  const value =
+    $("statsWindow").value;
+
+  if(value==="all"){
+    return history;
+  }
+
+  return history.slice(
+    0,
+    Number(value)
+  );
+
+}
+
+
+/* ============================================================
+   RANDOM STRATEGY
+   ============================================================ */
+
+function strategyRandom(){
+
+  const white =
+    weightedPick(
+      allWhite(),
+      allWhite().map(
+        ()=>1
+      ),
+      5
+    );
+
+  const pb =
+    randomInt(
+      SUPER_MIN,
+      SUPER_MAX
+    );
+
+  return makeTicket(
+    white,
+    pb
+  );
+
+}
+
+
+/* ============================================================
+   BALANCED ODD / EVEN
+   ============================================================ */
+
+function strategyBalanced(){
+
+  const odds =
+    allWhite().filter(
+      n => n%2===1
+    );
+
+  const evens =
+    allWhite().filter(
+      n => n%2===0
+    );
+
+  const oddCount =
+    Math.random()<0.5 ? 2 : 3;
+
+  const evenCount =
+    5-oddCount;
+
+  const white = [
+
+    ...shuffle(odds)
+      .slice(0,oddCount),
+
+    ...shuffle(evens)
+      .slice(0,evenCount)
+
+  ].sort(
+    (a,b)=>a-b
+  );
+
+  return makeTicket(
+    white,
+    randomInt(
+      SUPER_MIN,
+      SUPER_MAX
+    )
+  );
+
+}
+
+
+/* ============================================================
+   FREQUENCY DATA
+   ============================================================ */
+
+function frequencyWeights(rows){
+
+  const freq =
+    getWhiteFrequency(rows);
+
+  return allWhite().map(
+    n => 1 + freq[n]
+  );
+
+}
+
+
+function superFrequencyWeights(rows){
+
+  const freq =
+    getSuperFrequency(rows);
+
+  return allSuper().map(
+    n => 1 + freq[n]
+  );
+
+}
+
+
+/* ============================================================
+   HOT NUMBERS
+   ============================================================ */
+
+function strategyHot(rows){
+
+  const values =
+    allWhite();
+
+  const weights =
+    frequencyWeights(rows);
+
+  const white =
+    weightedPick(
+      values,
+      weights,
+      5
+    );
+
+  const pb =
+    weightedPick(
+      allSuper(),
+      superFrequencyWeights(rows),
+      1
+    )[0];
+
+  return makeTicket(
+    white,
+    pb
+  );
+
+}
+
+
+/* ============================================================
+   COLD NUMBERS
+   ============================================================ */
+
+function strategyCold(rows){
+
+  const freq =
+    getWhiteFrequency(rows);
+
+  const values =
+    allWhite();
+
+  const weights =
+    values.map(
+      n =>
+        1 /
+        (1 + freq[n])
+    );
+
+  const white =
+    weightedPick(
+      values,
+      weights,
+      5
+    );
+
+  const sf =
+    getSuperFrequency(rows);
+
+  const sw =
+    allSuper().map(
+      n =>
+        1 /
+        (1 + sf[n])
+    );
+
+  const pb =
+    weightedPick(
+      allSuper(),
+      sw,
+      1
+    )[0];
+
+  return makeTicket(
+    white,
+    pb
+  );
+
+}
+
+
+/* ============================================================
+   HOT + COLD MIX
+   ============================================================ */
+
+function strategyHotCold(rows){
+
+  const freq =
+    getWhiteFrequency(rows);
+
+  const sorted =
+    allWhite().sort(
+      (a,b)=>
+        freq[b]-freq[a]
+    );
+
+  const hot =
+    sorted.slice(
+      0,
+      Math.max(10,
+        Math.floor(sorted.length*.25)
+      )
+    );
+
+  const cold =
+    sorted.slice(
+      -Math.max(10,
+        Math.floor(sorted.length*.25)
+      )
+    );
+
+  const white = [
+
+    ...shuffle(hot).slice(0,2),
+
+    ...shuffle(cold).slice(0,2)
+
+  ];
+
+  const remaining =
+    allWhite().filter(
+      n =>
+        !white.includes(n)
+    );
+
+  white.push(
+    shuffle(remaining)[0]
+  );
+
+  const sf =
+    getSuperFrequency(rows);
+
+  const ss =
+    allSuper().sort(
+      (a,b)=>
+        sf[b]-sf[a]
+    );
+
+  const superCandidates = [
+
+    ...ss.slice(0,8),
+
+    ...ss.slice(-8)
+
+  ];
+
+  const pb =
+    shuffle(
+      superCandidates
+    )[0];
+
+  return makeTicket(
+    white,
+    pb
+  );
+
+}
+
+
+/* ============================================================
+   GOOD SPREAD
+   ============================================================ */
+
+function strategyGoodSpread(){
+
+  const bands = [
+
+    range(1,9),
+
+    range(10,18),
+
+    range(19,27),
+
+    range(28,37),
+
+    range(38,47)
+
+  ];
+
+  const white = [];
+
+  for(
+    const band of bands
+  ){
+
+    const choices =
+      shuffle(band)
+        .filter(
+          n =>
+            !white.includes(n)
+        );
+
+    if(choices.length){
+      white.push(
+        choices[0]
+      );
+    }
+
+  }
+
+  return makeTicket(
+    white,
+    randomInt(
+      SUPER_MIN,
+      SUPER_MAX
+    )
+  );
+
+}
+
+
+/* ============================================================
+   WEIGHTED FREQUENCY
+   ============================================================ */
+
+function strategyWeighted(rows){
+
+  const freq =
+    getWhiteFrequency(rows);
+
+  const values =
+    allWhite();
+
+  const weights =
+    values.map(
+      n =>
+        Math.pow(
+          freq[n]+1,
+          1.35
+        )
+    );
+
+  const white =
+    weightedPick(
+      values,
+      weights,
+      5
+    );
+
+  const sf =
+    getSuperFrequency(rows);
+
+  const superValues =
+    allSuper();
+
+  const superWeights =
+    superValues.map(
+      n =>
+        Math.pow(
+          sf[n]+1,
+          1.35
+        )
+    );
+
+  const pb =
+    weightedPick(
+      superValues,
+      superWeights,
+      1
+    )[0];
+
+  return makeTicket(
+    white,
+    pb
+  );
+
+}
+
+
+/* ============================================================
+   WEIGHTED + BALANCED
+   ============================================================ */
+
+function strategyWeightedBalanced(rows){
+
+  const freq =
+    getWhiteFrequency(rows);
+
+  const candidates =
+    allWhite().sort(
+      (a,b)=>
+        freq[b]-freq[a]
+    );
+
+  const odd =
+    candidates.filter(
+      n=>n%2===1
+    );
+
+  const even =
+    candidates.filter(
+      n=>n%2===0
+    );
+
+  const oddCount =
+    Math.random()<0.5 ? 2 : 3;
+
+  const evenCount =
+    5-oddCount;
+
+  const white = [
+
+    ...shuffle(odd)
+      .slice(0,oddCount),
+
+    ...shuffle(even)
+      .slice(0,evenCount)
+
+  ];
+
+  const unique =
+    [...new Set(white)];
+
+  while(
+    unique.length<5
+  ){
+
+    const n =
+      randomInt(
+        WHITE_MIN,
+        WHITE_MAX
+      );
+
+    if(
+      !unique.includes(n)
+    ){
+      unique.push(n);
+    }
+
+  }
+
+  const sf =
+    getSuperFrequency(rows);
+
+  const pb =
+    weightedPick(
+      allSuper(),
+      allSuper().map(
+        n=>1+sf[n]
+      ),
+      1
+    )[0];
+
+  return makeTicket(
+    unique,
+    pb
+  );
+
+}
+
+
+/* ============================================================
+   LOW + HIGH MIX
+   ============================================================ */
+
+function strategyLowHigh(){
+
+  const low =
+    range(1,23);
+
+  const high =
+    range(24,47);
+
+  const white = [
+
+    ...shuffle(low).slice(0,2),
+
+    ...shuffle(high).slice(0,2)
+
+  ];
+
+  const remaining =
+    allWhite().filter(
+      n =>
+        !white.includes(n)
+    );
+
+  white.push(
+    shuffle(remaining)[0]
+  );
+
+  return makeTicket(
+    white,
+    randomInt(
+      SUPER_MIN,
+      SUPER_MAX
+    )
+  );
+
+}
+
+
+/* ============================================================
+   RECENCY STRATEGY
+   ============================================================ */
+
+function strategyRecency(rows){
+
+  const lastSeen =
+    getWhiteLastSeen(rows);
+
+  const values =
+    allWhite();
+
+  const weights =
+    values.map(
+      n => {
+
+        const age =
+          lastSeen[n];
+
+        if(
+          age===Infinity
+        ){
+          return 5;
+        }
+
+        return 1 /
+          (1 + age);
+
+      }
+    );
+
+  const white =
+    weightedPick(
+      values,
+      weights,
+      5
+    );
+
+  const superLast =
+    getSuperLastSeen(rows);
+
+  const sw =
+    allSuper().map(
+      n => {
+
+        const age =
+          superLast[n];
+
+        if(
+          age===Infinity
+        ){
+          return 5;
+        }
+
+        return 1 /
+          (1 + age);
+
+      }
+    );
+
+  const pb =
+    weightedPick(
+      allSuper(),
+      sw,
+      1
+    )[0];
+
+  return makeTicket(
+    white,
+    pb
+  );
+
+}
+
+
+/* ============================================================
+   HYBRID AI
+   ============================================================ */
+
+function strategyHybrid(rows){
+
+  const freq =
+    getWhiteFrequency(rows);
+
+  const last =
+    getWhiteLastSeen(rows);
+
+  const values =
+    allWhite();
+
+  const weights =
+    values.map(
+      n => {
+
+        const frequencyScore =
+          1 + freq[n];
+
+        const recencyScore =
+          last[n]===Infinity
+          ? 1
+          : 1/(1+last[n]);
+
+        return (
+          frequencyScore*.65 +
+          recencyScore*10*.35
+        );
+
+      }
+    );
+
+  let white =
+    weightedPick(
+      values,
+      weights,
+      5
+    );
+
+  /*
+   * Encourage reasonable odd/even balance.
+   */
+
+  let attempts=0;
+
+  while(
+    attempts<30 &&
+    (
+      white.filter(
+        n=>n%2===1
+      ).length<1 ||
+      white.filter(
+        n=>n%2===1
+      ).length>4
+    )
+  ){
+
+    white =
+      weightedPick(
+        values,
+        weights,
+        5
+      );
+
+    attempts++;
+
+  }
+
+  const sf =
+    getSuperFrequency(rows);
+
+  const sl =
+    getSuperLastSeen(rows);
+
+  const superWeights =
+    allSuper().map(
+      n => {
+
+        const f =
+          1 + sf[n];
+
+        const r =
+          sl[n]===Infinity
+          ? 1
+          : 1/(1+sl[n]);
+
+        return f*.65+r*10*.35;
+
+      }
+    );
+
+  const pb =
+    weightedPick(
+      allSuper(),
+      superWeights,
+      1
+    )[0];
+
+  return makeTicket(
+    white,
+    pb
+  );
+
+}
+
+
+/* ============================================================
+   OVERDUE NUMBERS
+   ============================================================ */
+
+function strategyOverdue(rows){
+
+  const last =
+    getWhiteLastSeen(rows);
+
+  const sorted =
+    allWhite().sort(
+      (a,b)=>
+        last[b]-last[a]
+    );
+
+  const overdue =
+    sorted.slice(
+      0,
+      15
+    );
+
+  const white =
+    shuffle(overdue)
+      .slice(0,5);
+
+  const superLast =
+    getSuperLastSeen(rows);
+
+  const superSorted =
+    allSuper().sort(
+      (a,b)=>
+        superLast[b]-superLast[a]
+    );
+
+  const pb =
+    superSorted[
+      randomInt(
+        0,
+        Math.min(
+          9,
+          superSorted.length-1
+        )
+      )
+    ];
+
+  return makeTicket(
+    white,
+    pb
+  );
+
+}
+
+
+/* ============================================================
+   DECADE / RANGE SPREAD
+   ============================================================ */
+
+function strategyDecadeSpread(){
+
+  const groups = [
+
+    range(1,10),
+
+    range(11,20),
+
+    range(21,30),
+
+    range(31,40),
+
+    range(41,47)
+
+  ];
+
+  const white=[];
+
+  for(
+    const group of groups
+  ){
+
+    const available =
+      shuffle(group)
+        .filter(
+          n =>
+            !white.includes(n)
+        );
+
+    if(
+      available.length
+    ){
+
+      white.push(
+        available[0]
+      );
+
+    }
+
+  }
+
+  return makeTicket(
+    white,
+    randomInt(
+      SUPER_MIN,
+      SUPER_MAX
+    )
+  );
+
+}
+
+
+/* ============================================================
+   SUM BALANCED
+   ============================================================ */
+
+function strategySumBalanced(){
+
+  let best=null;
+
+  let bestDistance=
+    Infinity;
+
+  /*
+   * A typical five-number combination from
+   * 1–47 has a center of gravity around
+   * the mid-range. We use a broad target
+   * instead of attempting to predict a draw.
+   */
+
+  const target =
+    120;
+
+  for(
+    let i=0;
+    i<100;
+    i++
+  ){
+
+    const white =
+      shuffle(
+        allWhite()
+      ).slice(0,5)
+      .sort(
+        (a,b)=>a-b
+      );
+
+    const sum =
+      white.reduce(
+        (a,b)=>a+b,
+        0
+      );
+
+    const distance =
+      Math.abs(
+        sum-target
+      );
+
+    if(
+      distance<bestDistance
+    ){
+
+      bestDistance=
+        distance;
+
+      best=white;
+
+    }
+
+  }
+
+  return makeTicket(
+    best,
+    randomInt(
+      SUPER_MIN,
+      SUPER_MAX
+    )
+  );
+
+}
+
+
+/* ============================================================
+   PAIR BOOST
+   ============================================================ */
+
+function strategyPairBoost(rows){
+
+  const pairMap = {};
+
+  for(
+    const d of rows
+  ){
+
+    const nums =
+      d.white;
+
+    for(
+      let i=0;
+      i<nums.length;
+      i++
+    ){
+
+      for(
+        let j=i+1;
+        j<nums.length;
+        j++
+      ){
+
+        const a =
+          Math.min(
+            nums[i],
+            nums[j]
+          );
+
+        const b =
+          Math.max(
+            nums[i],
+            nums[j]
+          );
+
+        const key =
+          `${a}-${b}`;
+
+        pairMap[key] =
+          (pairMap[key]||0)+1;
+
+      }
+
+    }
+
+  }
+
+  const pairs =
+    Object.entries(
+      pairMap
+    ).sort(
+      (a,b)=>b[1]-a[1]
+    );
+
+  let white=[];
+
+  if(pairs.length){
+
+    const pair =
+      pairs[
+        randomInt(
+          0,
+          Math.min(
+            9,
+            pairs.length-1
+          )
+        )
+      ][0]
+      .split("-")
+      .map(Number);
+
+    white.push(
+      ...pair
+    );
+
+  }
+
+  const remaining =
+    shuffle(
+      allWhite()
+    ).filter(
+      n =>
+        !white.includes(n)
+    );
+
+  white.push(
+    ...remaining.slice(
+      0,
+      5-white.length
+    )
+  );
+
+  return makeTicket(
+    white,
+    randomInt(
+      SUPER_MIN,
+      SUPER_MAX
+    )
+  );
+
+}
+
+
+/* ============================================================
+   STRATEGY DISPATCHER
+   ============================================================ */
+
+function generateByStrategy(
+  strategy,
+  rows
+){
+
+  switch(strategy){
+
+    case "Random":
+      return strategyRandom();
+
+    case "Balanced Odd / Even":
+      return strategyBalanced();
+
+    case "Hot Numbers":
+      return strategyHot(rows);
+
+    case "Cold Numbers":
+      return strategyCold(rows);
+
+    case "Hot + Cold Mix":
+      return strategyHotCold(rows);
+
+    case "Good Spread":
+      return strategyGoodSpread();
+
+    case "Weighted Frequency":
+      return strategyWeighted(rows);
+
+    case "Weighted + Balanced ⭐":
+      return strategyWeightedBalanced(rows);
+
+    case "Low + High Mix":
+      return strategyLowHigh();
+
+    case "Recency":
+      return strategyRecency(rows);
+
+    case "Hybrid AI":
+      return strategyHybrid(rows);
+
+    case "Overdue Numbers":
+      return strategyOverdue(rows);
+
+    case "Decade Spread":
+      return strategyDecadeSpread();
+
+    case "Sum Balanced":
+      return strategySumBalanced();
+
+    case "Pair Boost":
+      return strategyPairBoost(rows);
+
+    default:
+      return strategyRandom();
+
+  }
+
+}
+
+
+/* ============================================================
+   GENERATE TICKETS
+   ============================================================ */
+
+function generateTickets(){
+
+  const strategy =
+    $("strategy").value;
+
+  const count =
+    Number(
+      $("ticketCount").value
+    );
+
+  const rows =
+    history.length
+    ? history
+    : SEED_DRAWS;
+
+  const output=[];
+
+  for(
+    let i=0;
+    i<count;
+    i++
+  ){
+
+    let ticket =
+      generateByStrategy(
+        strategy,
+        rows
+      );
+
+    /*
+     * Safety fallback.
+     */
+
+    if(!ticket){
+
+      ticket =
+        strategyRandom();
+
+    }
+
+    output.push(ticket);
+
+  }
+
+  $("generatedTickets").innerHTML =
+
+    output.map(
+      (ticket,index)=>`
+
+        <div class="ticket">
+
+          <div class="ticket-header">
+
+            <div class="ticket-title">
+              ${strategy} • Ticket ${index+1}
+            </div>
+
+            <button
+              class="btn"
+              onclick='saveGeneratedTicket(${JSON.stringify(ticket)})'>
+              Save
+            </button>
+
+          </div>
+
+          <div class="balls">
+
+            ${ticket.white.map(
+              n =>
+              `<span class="ball">
+                ${n}
+              </span>`
+            ).join("")}
+
+            <span class="ball-label">
+              Superball
+            </span>
+
+            <span class="ball super">
+              ${ticket.pb}
+            </span>
+
+          </div>
+
+        </div>
+
+      `
+    ).join("");
+
+}
+
+
+function saveGeneratedTicket(ticket){
+
+  saveTicket(
+    ticket,
+    $("strategy").value
+  );
+
+}
+
+
+/* ============================================================
+   STRATEGY ANALYSIS
+   ============================================================ */
+
+function renderStrategyAnalysis(){
+
+  const rows =
+    getAnalysisRows();
+
+  if(!rows.length){
+
+    $("strategyAnalysis").innerHTML =
+      `<div class="section-note">
+        No historical data available.
+      </div>`;
+
+    return;
+
+  }
+
+  const freq =
+    getWhiteFrequency(rows);
+
+  const last =
+    getWhiteLastSeen(rows);
+
+  const hottest =
+    allWhite()
+      .sort(
+        (a,b)=>
+          freq[b]-freq[a]
+      )
+      .slice(0,10);
+
+  const coldest =
+    allWhite()
+      .sort(
+        (a,b)=>
+          freq[a]-freq[b]
+      )
+      .slice(0,10);
+
+  const recent =
+    allWhite()
+      .sort(
+        (a,b)=>
+          last[a]-last[b]
+      )
+      .slice(0,10);
+
+  const overdue =
+    allWhite()
+      .sort(
+        (a,b)=>
+          last[b]-last[a]
+      )
+      .slice(0,10);
+
+  const sf =
+    getSuperFrequency(rows);
+
+  const hotSuper =
+    allSuper()
+      .sort(
+        (a,b)=>
+          sf[b]-sf[a]
+      )
+      .slice(0,8);
+
+  $("strategyAnalysis").innerHTML = `
+
+    <div class="stat-grid">
+
+      <div class="stat">
+
+        <div class="stat-value">
+          ${rows.length}
+        </div>
+
+        <div class="stat-label">
+          Drawings Analyzed
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-value">
+          ${hottest[0]}
+        </div>
+
+        <div class="stat-label">
+          Hottest Main Number
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-value">
+          ${coldest[0]}
+        </div>
+
+        <div class="stat-label">
+          Coldest Main Number
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-value">
+          ${hotSuper[0]}
+        </div>
+
+        <div class="stat-label">
+          Hottest Superball
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Category</th>
+            <th>Main Numbers</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr>
+            <td>🔥 Hot</td>
+            <td>
+              ${hottest.join(", ")}
+            </td>
+          </tr>
+
+          <tr>
+            <td>❄️ Cold</td>
+            <td>
+              ${coldest.join(", ")}
+            </td>
+          </tr>
+
+          <tr>
+            <td>⚡ Recent</td>
+            <td>
+              ${recent.join(", ")}
+            </td>
+          </tr>
+
+          <tr>
+            <td>⏰ Overdue</td>
+            <td>
+              ${overdue.join(", ")}
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="section-note"
+         style="margin-top:8px;">
+
+      Hottest Superballs:
+      ${hotSuper.join(", ")}
+
+    </div>
+
+  `;
+
+}
+
+
+/* ============================================================
+   HISTORICAL STATISTICS
+   ============================================================ */
+
+function renderStatistics(){
+
+  const rows =
+    getStatsRows();
+
+  if(!rows.length){
+
+    $("statistics").innerHTML =
+      `<div class="section-note">
+        No historical data available.
+      </div>`;
+
+    return;
+
+  }
+
+  const freq =
+    getWhiteFrequency(rows);
+
+  const sf =
+    getSuperFrequency(rows);
+
+  const sortedWhite =
+    allWhite()
+      .sort(
+        (a,b)=>
+          freq[b]-freq[a]
+      );
+
+  const sortedSuper =
+    allSuper()
+      .sort(
+        (a,b)=>
+          sf[b]-sf[a]
+      );
+
+  const totalMain =
+    rows.length*5;
+
+  const averageFrequency =
+    totalMain /
+    WHITE_MAX;
+
+  const hot =
+    sortedWhite.slice(0,10);
+
+  const cold =
+    [...sortedWhite]
+      .reverse()
+      .slice(0,10);
+
+  $("statistics").innerHTML = `
+
+    <div class="stat-grid">
+
+      <div class="stat">
+
+        <div class="stat-value">
+          ${rows.length}
+        </div>
+
+        <div class="stat-label">
+          Drawings
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-value">
+          ${averageFrequency.toFixed(1)}
+        </div>
+
+        <div class="stat-label">
+          Avg Main Frequency
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-value">
+          ${hot[0]}
+        </div>
+
+        <div class="stat-label">
+          Most Frequent
+        </div>
+
+      </div>
+
+      <div class="stat">
+
+        <div class="stat-value">
+          ${cold[0]}
+        </div>
+
+        <div class="stat-label">
+          Least Frequent
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Main #</th>
+            <th>Frequency</th>
+            <th>Superball</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          ${allWhite().map(
+            n => `
+
+              <tr>
+
+                <td>
+                  ${n}
+                </td>
+
+                <td>
+                  ${freq[n]}
+                </td>
+
+                <td>
+                  ${n<=27 ? sf[n] : "—"}
+                </td>
+
+              </tr>
+
+            `
+          ).join("")}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  `;
+
+}
+
+
+/* ============================================================
+   HEADER UPDATE
+   ============================================================ */
+
+function updateHeader(data){
+
+  if(!data) return;
+
+  if(
+    data.jackpot !== undefined &&
+    data.jackpot !== null
+  ){
+
+    $("jackpot").textContent =
+      formatMoney(
+        data.jackpot
+      );
+
+  }
+
+  if(
+    data.cashValue !== undefined &&
+    data.cashValue !== null
+  ){
+
+    $("cashValue").textContent =
+      "Cash Value: " +
+      formatMoney(
+        data.cashValue
+      );
+
+  }
+
+  if(data.nextDrawing){
+
+    $("nextDrawing").textContent =
+      "Next Drawing: " +
+      formatDate(
+        data.nextDrawing
+      );
+
+  }
+
+} /* =========================================================
+   PART 3 — BACKTESTING / DATA TOOLS / WORKER UPDATE
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   BACKTEST HELPERS
+   --------------------------------------------------------- */
+
+function intersectionCount(a, b){
+
+  const setB = new Set(b);
+
+  return a.filter(
+    x => setB.has(x)
+  ).length;
+
+}
+
+
+function scoreTicket(ticket, draw){
+
+  const whiteHits =
+    intersectionCount(
+      ticket.white,
+      draw.white
+    );
+
+  const superHit =
+    Number(ticket.super) ===
+    Number(draw.super)
+      ? 1
+      : 0;
+
+  return {
+    whiteHits,
+    superHit
+  };
+
+}
+
+
+function prizeMatchLabel(
+  whiteHits,
+  superHit
+){
+
+  if(
+    whiteHits === 5 &&
+    superHit === 1
+  ){
+
+    return "5 + Superball";
+
+  }
+
+  if(
+    whiteHits === 5 &&
+    superHit === 0
+  ){
+
+    return "5 + 0";
+
+  }
+
+  if(
+    whiteHits === 4 &&
+    superHit === 1
+  ){
+
+    return "4 + Superball";
+
+  }
+
+  if(
+    whiteHits === 4 &&
+    superHit === 0
+  ){
+
+    return "4 + 0";
+
+  }
+
+  if(
+    whiteHits === 3 &&
+    superHit === 1
+  ){
+
+    return "3 + Superball";
+
+  }
+
+  if(
+    whiteHits === 3 &&
+    superHit === 0
+  ){
+
+    return "3 + 0";
+
+  }
+
+  if(
+    whiteHits === 2 &&
+    superHit === 1
+  ){
+
+    return "2 + Superball";
+
+  }
+
+  if(
+    whiteHits === 1 &&
+    superHit === 1
+  ){
+
+    return "1 + Superball";
+
+  }
+
+  if(
+    whiteHits === 0 &&
+    superHit === 1
+  ){
+
+    return "0 + Superball";
+
+  }
+
+  return "No Prize Match";
+
+}
+
+
+/* ---------------------------------------------------------
+   CREATE A TICKET FOR A HISTORICAL TRAINING WINDOW
+   --------------------------------------------------------- */
+
+function generateBacktestTicket(
+  strategyName,
+  trainingRows,
+  recencyRows
+){
+
+  const originalHistory =
+    loadHistory();
+
+  /*
+    Temporarily use the selected historical
+    training data for strategy calculations.
+  */
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(
+      trainingRows
+    )
+  );
+
+  let ticket;
+
+  try{
+
+    ticket =
+      generateByStrategy(
+        strategyName
+      );
+
+  }catch(error){
+
+    console.error(
+      "Backtest generation error:",
+      error
+    );
+
+    ticket =
+      strategyRandom(
+        trainingRows
+      );
+
+  }
+
+  /*
+    Restore the complete database.
+  */
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(
+      originalHistory
+    )
+  );
+
+  return ticket;
+
+}
+
+
+/* ---------------------------------------------------------
+   RUN ONE STRATEGY AGAINST ONE HISTORICAL DRAW
+   --------------------------------------------------------- */
+
+function evaluateBacktestStep(
+  strategyName,
+  trainingRows,
+  targetDraw
+){
+
+  const ticket =
+    generateBacktestTicket(
+      strategyName,
+      trainingRows,
+      trainingRows
+    );
+
+  const score =
+    scoreTicket(
+      ticket,
+      targetDraw
+    );
+
+  return {
+    ticket,
+    targetDraw,
+    whiteHits: score.whiteHits,
+    superHit: score.superHit,
+    label: prizeMatchLabel(
+      score.whiteHits,
+      score.superHit
+    )
+  };
+
+}
+
+
+/* ---------------------------------------------------------
+   BACKTEST SUMMARY
+   --------------------------------------------------------- */
+
+function createEmptyBacktestSummary(
+  strategyName
+){
+
+  return {
+
+    strategy: strategyName,
+
+    drawsTested: 0,
+
+    totalWhiteHits: 0,
+
+    totalSuperHits: 0,
+
+    zeroHits: 0,
+
+    oneHits: 0,
+
+    twoHits: 0,
+
+    threeHits: 0,
+
+    fourHits: 0,
+
+    fiveHits: 0,
+
+    superOnly: 0,
+
+    bestWhiteHits: 0,
+
+    prizeMatches: 0,
+
+    averageWhiteHits: 0
+
+  };
+
+}
+
+
+function addBacktestResult(
+  summary,
+  result
+){
+
+  summary.drawsTested++;
+
+  summary.totalWhiteHits +=
+    result.whiteHits;
+
+  if(result.superHit){
+
+    summary.totalSuperHits++;
+
+  }
+
+  if(result.whiteHits === 0){
+
+    summary.zeroHits++;
+
+    if(result.superHit){
+
+      summary.superOnly++;
+
+    }
+
+  }
+
+  if(result.whiteHits === 1){
+
+    summary.oneHits++;
+
+  }
+
+  if(result.whiteHits === 2){
+
+    summary.twoHits++;
+
+  }
+
+  if(result.whiteHits === 3){
+
+    summary.threeHits++;
+
+  }
+
+  if(result.whiteHits === 4){
+
+    summary.fourHits++;
+
+  }
+
+  if(result.whiteHits === 5){
+
+    summary.fiveHits++;
+
+  }
+
+  if(
+    result.whiteHits >=
+    summary.bestWhiteHits
+  ){
+
+    summary.bestWhiteHits =
+      result.whiteHits;
+
+  }
+
+  /*
+    SuperLotto Plus has prize combinations
+    beginning at 2 white numbers + Superball,
+    3 + Superball, etc.
+
+    We count any recognized prize match.
+  */
+
+  if(
+    result.label !==
+    "No Prize Match"
+  ){
+
+    summary.prizeMatches++;
+
+  }
+
+}
+
+
+function finalizeBacktestSummary(
+  summary
+){
+
+  if(summary.drawsTested > 0){
+
+    summary.averageWhiteHits =
+      summary.totalWhiteHits /
+      summary.drawsTested;
+
+  }else{
+
+    summary.averageWhiteHits = 0;
+
+  }
+
+  return summary;
+
+}
+
+
+/* ---------------------------------------------------------
+   FORMAT BACKTEST NUMBER
+   --------------------------------------------------------- */
+
+function backtestNumber(
+  value,
+  digits = 1
+){
+
+  return Number(value)
+    .toFixed(digits);
+
+}
+
+
+/* ---------------------------------------------------------
+   RENDER BACKTEST RESULTS
+   --------------------------------------------------------- */
+
+function renderBacktestResults(
+  summaries,
+  settings
+){
+
+  const box =
+    $("backtestOutput");
+
+  if(!box) return;
+
+  if(
+    !summaries ||
+    !summaries.length
+  ){
+
+    box.innerHTML = `
+      <div class="empty">
+        No backtest results yet.
+      </div>
+    `;
+
+    return;
+
+  }
+
+  let html = "";
+
+  html += `
+    <div class="sectionTitle">
+      Backtest Results
+    </div>
+  `;
+
+  html += `
+    <div class="small">
+      Tested
+      <b>${settings.drawsTested}</b>
+      historical drawings.
+      Each strategy generated one ticket
+      using only information available before
+      the target drawing.
+    </div>
+  `;
+
+  html += `
+    <div class="tableWrap">
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>Strategy</th>
+
+            <th>Draws</th>
+
+            <th>Avg White Hits</th>
+
+            <th>Best</th>
+
+            <th>Superball</th>
+
+            <th>Prize Matches</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+  `;
+
+  summaries.forEach(
+    summary => {
+
+      html += `
+        <tr>
+
+          <td>
+            <b>${summary.strategy}</b>
+          </td>
+
+          <td>
+            ${summary.drawsTested}
+          </td>
+
+          <td>
+            ${backtestNumber(
+              summary.averageWhiteHits,
+              2
+            )}
+          </td>
+
+          <td>
+            ${summary.bestWhiteHits}
+          </td>
+
+          <td>
+            ${summary.totalSuperHits}
+          </td>
+
+          <td>
+            ${summary.prizeMatches}
+          </td>
+
+        </tr>
+      `;
+
+    }
+  );
+
+  html += `
+        </tbody>
+
+      </table>
+    </div>
+  `;
+
+  /*
+    Detailed result cards
+  */
+
+  summaries.forEach(
+    summary => {
+
+      html += `
+        <div class="card" style="margin-top:10px">
+
+          <div class="sectionTitle">
+            ${summary.strategy}
+          </div>
+
+          <div class="grid">
+
+            <div class="stat">
+              <span>0 White</span>
+              <b>${summary.zeroHits}</b>
+            </div>
+
+            <div class="stat">
+              <span>1 White</span>
+              <b>${summary.oneHits}</b>
+            </div>
+
+            <div class="stat">
+              <span>2 White</span>
+              <b>${summary.twoHits}</b>
+            </div>
+
+            <div class="stat">
+              <span>3 White</span>
+              <b>${summary.threeHits}</b>
+            </div>
+
+            <div class="stat">
+              <span>4 White</span>
+              <b>${summary.fourHits}</b>
+            </div>
+
+            <div class="stat">
+              <span>5 White</span>
+              <b>${summary.fiveHits}</b>
+            </div>
+
+            <div class="stat">
+              <span>Superball</span>
+              <b>${summary.totalSuperHits}</b>
+            </div>
+
+            <div class="stat">
+              <span>Prize Matches</span>
+              <b>${summary.prizeMatches}</b>
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+    }
+  );
+
+  box.innerHTML = html;
+
+}
+
+
+/* ---------------------------------------------------------
+   WALK-FORWARD BACKTEST
+   --------------------------------------------------------- */
+
+async function runBacktest(){
+
+  const history =
+    loadHistory();
+
+  const trainingWindow =
+    Number(
+      $("trainingWindow").value
+    ) || 50;
+
+  const recencyWindow =
+    Number(
+      $("recencyWindow").value
+    ) || 20;
+
+  /*
+    Use chronological order:
+    oldest -> newest
+  */
+
+  const rows =
+    [...history].sort(
+      (a,b) =>
+        new Date(a.date) -
+        new Date(b.date)
+    );
+
+  if(
+    rows.length <
+    trainingWindow + 1
+  ){
+
+    showToast(
+      "Not enough historical drawings for backtesting."
+    );
+
+    return;
+
+  }
+
+  const strategies = [
+
+    "Random",
+
+    "Balanced Odd / Even",
+
+    "Hot Numbers",
+
+    "Cold Numbers",
+
+    "Hot + Cold Mix",
+
+    "Good Spread",
+
+    "Weighted Frequency",
+
+    "Weighted + Balanced",
+
+    "Low + High Mix",
+
+    "Recency",
+
+    "Hybrid AI",
+
+    "Overdue Numbers",
+
+    "Decade Spread",
+
+    "Sum Balanced",
+
+    "Pair Boost"
+
+  ];
+
+  const summaries =
+    strategies.map(
+      name =>
+        createEmptyBacktestSummary(
+          name
+        )
+    );
+
+  const totalSteps =
+    (
+      rows.length -
+      trainingWindow
+    ) *
+    strategies.length;
+
+  let completed = 0;
+
+  const progressArea =
+    $("progressArea");
+
+  const progressBar =
+    $("progressBar");
+
+  const progressText =
+    $("progressText");
+
+  if(progressArea){
+
+    progressArea.style.display =
+      "block";
+
+  }
+
+  if(progressBar){
+
+    progressBar.style.width =
+      "0%";
+
+  }
+
+  if(progressText){
+
+    progressText.textContent =
+      "Starting backtest...";
+
+  }
+
+  /*
+    Walk forward through history.
+
+    For every target draw:
+      training = previous drawings
+      target = current drawing
+
+    The target draw is NEVER included
+    in the training data.
+  */
+
+  for(
+    let i = trainingWindow;
+    i < rows.length;
+    i++
+  ){
+
+    const targetDraw =
+      rows[i];
+
+    let trainingRows =
+      rows.slice(
+        0,
+        i
+      );
+
+    /*
+      Optional recency window.
+
+      If recencyWindow is smaller than
+      trainingWindow, use only the most recent
+      recencyWindow drawings for strategies
+      that rely heavily on recent data.
+    */
+
+    let strategyRows =
+      trainingRows;
+
+    if(
+      recencyWindow > 0 &&
+      recencyWindow <
+      trainingRows.length
+    ){
+
+      strategyRows =
+        trainingRows.slice(
+          -recencyWindow
+        );
+
+    }
+
+    for(
+      let s = 0;
+      s < strategies.length;
+      s++
+    ){
+
+      const strategyName =
+        strategies[s];
+
+      let ticket;
+
+      /*
+        Temporarily expose the selected
+        walk-forward data to the strategy
+        functions.
+      */
+
+      const originalHistory =
+        loadHistory();
+
+      try{
+
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(
+            strategyRows
+          )
+        );
+
+        ticket =
+          generateByStrategy(
+            strategyName
+          );
+
+      }catch(error){
+
+        console.error(
+          "Strategy backtest error:",
+          strategyName,
+          error
+        );
+
+        ticket =
+          strategyRandom(
+            strategyRows
+          );
+
+      }finally{
+
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(
+            originalHistory
+          )
+        );
+
+      }
+
+      const score =
+        scoreTicket(
+          ticket,
+          targetDraw
+        );
+
+      const result = {
+
+        ticket,
+
+        targetDraw,
+
+        whiteHits:
+          score.whiteHits,
+
+        superHit:
+          score.superHit,
+
+        label:
+          prizeMatchLabel(
+            score.whiteHits,
+            score.superHit
+          )
+
+      };
+
+      addBacktestResult(
+        summaries[s],
+        result
+      );
+
+      completed++;
+
+      const percent =
+        Math.round(
+          (
+            completed /
+            totalSteps
+          ) *
+          100
+        );
+
+      if(progressBar){
+
+        progressBar.style.width =
+          percent + "%";
+
+      }
+
+      if(progressText){
+
+        progressText.textContent =
+          "Backtesting " +
+          strategyName +
+          " • " +
+          percent +
+          "%";
+
+      }
+
+      /*
+        Give the browser a chance to repaint
+        the progress bar on iPhone.
+      */
+
+      if(
+        completed % 10 === 0
+      ){
+
+        await new Promise(
+          resolve =>
+            setTimeout(
+              resolve,
+              0
+            )
+        );
+
+      }
+
+    }
+
+  }
+
+  summaries.forEach(
+    finalizeBacktestSummary
+  );
+
+  renderBacktestResults(
+    summaries,
+    {
+      drawsTested:
+        rows.length -
+        trainingWindow
+    }
+  );
+
+  if(progressBar){
+
+    progressBar.style.width =
+      "100%";
+
+  }
+
+  if(progressText){
+
+    progressText.textContent =
+      "Backtest complete.";
+
+  }
+
+  showToast(
+    "Backtest complete."
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   CSV EXPORT
+   --------------------------------------------------------- */
+
+function escapeCsv(
+  value
+){
+
+  const text =
+    String(
+      value ?? ""
+    );
+
+  if(
+    /[",\n]/.test(text)
+  ){
+
+    return '"' +
+      text.replace(
+        /"/g,
+        '""'
+      ) +
+      '"';
+
+  }
+
+  return text;
+
+}
+
+
+function exportCSV(){
+
+  const history =
+    loadHistory();
+
+  if(
+    !history.length
+  ){
+
+    showToast(
+      "No historical data to export."
+    );
+
+    return;
+
+  }
+
+  const header = [
+    "date",
+    "n1",
+    "n2",
+    "n3",
+    "n4",
+    "n5",
+    "superball"
+  ];
+
+  const lines = [
+    header.join(",")
+  ];
+
+  history.forEach(
+    draw => {
+
+      lines.push(
+        [
+          draw.date,
+
+          draw.white[0],
+
+          draw.white[1],
+
+          draw.white[2],
+
+          draw.white[3],
+
+          draw.white[4],
+
+          draw.super
+
+        ]
+        .map(
+          escapeCsv
+        )
+        .join(",")
+      );
+
+    }
+  );
+
+  const blob =
+    new Blob(
+      [
+        lines.join("\n")
+      ],
+      {
+        type:
+          "text/csv;charset=utf-8"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+  a.href = url;
+
+  a.download =
+    "superlotto-plus-history.csv";
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+  URL.revokeObjectURL(
+    url
+  );
+
+  showToast(
+    "CSV exported."
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   JSON EXPORT
+   --------------------------------------------------------- */
+
+function exportJSON(){
+
+  const history =
+    loadHistory();
+
+  const data = {
+
+    game:
+      "SuperLotto Plus",
+
+    version:
+      "V6.3.1",
+
+    exportedAt:
+      new Date().toISOString(),
+
+    draws:
+      history
+
+  };
+
+  const blob =
+    new Blob(
+      [
+        JSON.stringify(
+          data,
+          null,
+          2
+        )
+      ],
+      {
+        type:
+          "application/json"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(
+      blob
+    );
+
+  const a =
+    document.createElement(
+      "a"
+    );
+
+  a.href = url;
+
+  a.download =
+    "superlotto-plus-history.json";
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+  URL.revokeObjectURL(
+    url
+  );
+
+  showToast(
+    "JSON exported."
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   CSV IMPORT
+   --------------------------------------------------------- */
+
+function parseCSVLine(
+  line
+){
+
+  const result = [];
+
+  let current = "";
+
+  let insideQuotes =
+    false;
+
+  for(
+    let i = 0;
+    i < line.length;
+    i++
+  ){
+
+    const char =
+      line[i];
+
+    if(char === '"'){
+
+      if(
+        insideQuotes &&
+        line[i + 1] === '"'
+      ){
+
+        current += '"';
+
+        i++;
+
+      }else{
+
+        insideQuotes =
+          !insideQuotes;
+
+      }
+
+    }else if(
+      char === "," &&
+      !insideQuotes
+    ){
+
+      result.push(
+        current
+      );
+
+      current = "";
+
+    }else{
+
+      current += char;
+
+    }
+
+  }
+
+  result.push(
+    current
+  );
+
+  return result;
+
+}
+
+
+function importCSVText(
+  text
+){
+
+  const lines =
+    text
+      .split(/\r?\n/)
+      .map(
+        x => x.trim()
+      )
+      .filter(
+        x => x.length
+      );
+
+  if(
+    lines.length < 2
+  ){
+
+    throw new Error(
+      "CSV file is empty."
+    );
+
+  }
+
+  const header =
+    parseCSVLine(
+      lines[0]
+    )
+      .map(
+        x =>
+          x
+            .trim()
+            .toLowerCase()
+      );
+
+  const dateIndex =
+    header.indexOf(
+      "date"
+    );
+
+  const n1Index =
+    header.indexOf(
+      "n1"
+    );
+
+  const n2Index =
+    header.indexOf(
+      "n2"
+    );
+
+  const n3Index =
+    header.indexOf(
+      "n3"
+    );
+
+  const n4Index =
+    header.indexOf(
+      "n4"
+    );
+
+  const n5Index =
+    header.indexOf(
+      "n5"
+    );
+
+  let superIndex =
+    header.indexOf(
+      "superball"
+    );
+
+  if(
+    superIndex < 0
+  ){
+
+    superIndex =
+      header.indexOf(
+        "super"
+      );
+
+  }
+
+  if(
+    dateIndex < 0 ||
+    n1Index < 0 ||
+    n2Index < 0 ||
+    n3Index < 0 ||
+    n4Index < 0 ||
+    n5Index < 0 ||
+    superIndex < 0
+  ){
+
+    throw new Error(
+      "CSV columns must include date, n1, n2, n3, n4, n5 and superball."
+    );
+
+  }
+
+  const imported = [];
+
+  for(
+    let i = 1;
+    i < lines.length;
+    i++
+  ){
+
+    const row =
+      parseCSVLine(
+        lines[i]
+      );
+
+    const draw = {
+
+      date:
+        row[dateIndex],
+
+      white: [
+
+        Number(
+          row[n1Index]
+        ),
+
+        Number(
+          row[n2Index]
+        ),
+
+        Number(
+          row[n3Index]
+        ),
+
+        Number(
+          row[n4Index]
+        ),
+
+        Number(
+          row[n5Index]
+        )
+
+      ],
+
+      super:
+        Number(
+          row[superIndex]
+        )
+
+    };
+
+    try{
+
+      imported.push(
+        normalizeDraw(
+          draw
+        )
+      );
+
+    }catch(error){
+
+      console.warn(
+        "Skipping invalid CSV row:",
+        i + 1,
+        error
+      );
+
+    }
+
+  }
+
+  if(
+    !imported.length
+  ){
+
+    throw new Error(
+      "No valid drawings were found."
+    );
+
+  }
+
+  /*
+    Merge imported drawings with
+    the existing database.
+  */
+
+  const existing =
+    loadHistory();
+
+  const map =
+    new Map();
+
+  existing.forEach(
+    draw => {
+
+      map.set(
+        draw.date +
+        "|" +
+        draw.white.join("-") +
+        "|" +
+        draw.super,
+
+        draw
+      );
+
+    }
+  );
+
+  imported.forEach(
+    draw => {
+
+      map.set(
+        draw.date +
+        "|" +
+        draw.white.join("-") +
+        "|" +
+        draw.super,
+
+        draw
+      );
+
+    }
+  );
+
+  const merged =
+    Array.from(
+      map.values()
+    )
+      .sort(
+        (a,b) =>
+          new Date(b.date) -
+          new Date(a.date)
+      );
+
+  saveHistory(
+    merged
+  );
+
+  return imported.length;
+
+}
+
+
+/* ---------------------------------------------------------
+   RESET HISTORICAL DATABASE
+   --------------------------------------------------------- */
+
+function resetDatabase(){
+
+  const confirmed =
+    window.confirm(
+      "Reset the SuperLotto Plus historical database to the built-in seed data?"
+    );
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+  saveHistory(
+    SEED_DRAWS
+  );
+
+  renderLatest();
+
+  renderStrategyAnalysis();
+
+  renderStatistics();
+
+  showToast(
+    "Historical database reset."
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   WORKER RESPONSE NORMALIZATION
+   --------------------------------------------------------- */
+
+function normalizeWorkerResponse(
+  data
+){
+
+  if(!data){
+
+    throw new Error(
+      "Empty Worker response."
+    );
+
+  }
+
+  /*
+    Accept either:
+
+      {
+        game,
+        jackpot,
+        cashValue,
+        nextDrawing,
+        latestDrawings
+      }
+
+    or:
+
+      {
+        data: {...}
+      }
+  */
+
+  if(
+    data.data &&
+    typeof data.data ===
+    "object"
+  ){
+
+    data =
+      data.data;
+
+  }
+
+  const result = {
+
+    jackpot:
+      data.jackpot,
+
+    cashValue:
+      data.cashValue,
+
+    nextDrawing:
+      data.nextDrawing,
+
+    latestDrawings:
+      []
+
+  };
+
+  const incoming =
+    data.latestDrawings ||
+    data.drawings ||
+    data.history ||
+    [];
+
+  if(
+    Array.isArray(
+      incoming
+    )
+  ){
+
+    result.latestDrawings =
+      normalizeHistory(
+        incoming
+      );
+
+  }
+
+  return result;
+
+}
+
+
+/* ---------------------------------------------------------
+   MERGE WORKER HISTORY
+   --------------------------------------------------------- */
+
+function mergeWorkerHistory(
+  incoming
+){
+
+  if(
+    !Array.isArray(
+      incoming
+    ) ||
+    !incoming.length
+  ){
+
+    return 0;
+
+  }
+
+  const existing =
+    loadHistory();
+
+  const map =
+    new Map();
+
+  existing.forEach(
+    draw => {
+
+      map.set(
+        draw.date,
+        draw
+      );
+
+    }
+  );
+
+  incoming.forEach(
+    draw => {
+
+      try{
+
+        const normalized =
+          normalizeDraw(
+            draw
+          );
+
+        map.set(
+          normalized.date,
+          normalized
+        );
+
+      }catch(error){
+
+        console.warn(
+          "Invalid Worker drawing:",
+          draw
+        );
+
+      }
+
+    }
+  );
+
+  const merged =
+    Array.from(
+      map.values()
+    )
+      .sort(
+        (a,b) =>
+          new Date(b.date) -
+          new Date(a.date)
+      );
+
+  saveHistory(
+    merged
+  );
+
+  return incoming.length;
+
+}
+
+
+/* ---------------------------------------------------------
+   FETCH DATA FROM CLOUDFLARE WORKER
+   --------------------------------------------------------- */
+
+async function updateFromWorker(
+  showMessage = true
+){
+
+  const settings =
+    loadSettings();
+
+  const workerUrl =
+    (
+      settings.workerUrl ||
+      $("workerUrl").value ||
+      ""
+    ).trim();
+
+  if(!workerUrl){
+
+    if(showMessage){
+
+      showToast(
+        "Enter your Worker URL first."
+      );
+
+    }
+
+    return false;
+
+  }
+
+  if(showMessage){
+
+    $("syncStatus").textContent =
+      "Syncing...";
+
+    $("updateMessage").textContent =
+      "Connecting to Worker...";
+
+  }
+
+  try{
+
+    const response =
+      await fetch(
+        workerUrl +
+        (
+          workerUrl.includes("?")
+            ? "&"
+            : "?"
+        ) +
+        "t=" +
+        Date.now(),
+        {
+          method:
+            "GET",
+
+          cache:
+            "no-store",
+
+          headers: {
+
+            "Accept":
+              "application/json"
+
+          }
+
+        }
+      );
+
+    if(
+      !response.ok
+    ){
+
+      throw new Error(
+        "Worker HTTP " +
+        response.status
+      );
+
+    }
+
+    const raw =
+      await response.json();
+
+    const data =
+      normalizeWorkerResponse(
+        raw
+      );
+
+    /*
+      Update jackpot information.
+    */
+
+    updateHeader(
+      data
+    );
+
+    /*
+      Merge latest/history data.
+    */
+
+    const added =
+      mergeWorkerHistory(
+        data.latestDrawings
+      );
+
+    /*
+      Refresh all visible analysis.
+    */
+
+    renderLatest();
+
+    renderStrategyAnalysis();
+
+    renderStatistics();
+
+    $("syncStatus").textContent =
+      "Synced";
+
+    if(showMessage){
+
+      $("updateMessage").textContent =
+        "Update successful. " +
+        added +
+        " drawing record(s) received.";
+
+    }
+
+    return true;
+
+  }catch(error){
+
+    console.error(
+      "Worker update failed:",
+      error
+    );
+
+    $("syncStatus").textContent =
+      "Update failed";
+
+    if(showMessage){
+
+      $("updateMessage").textContent =
+        "Update failed: " +
+        error.message;
+
+      showToast(
+        "Could not update from Worker."
+      );
+
+    }
+
+    return false;
+
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   SAVE AUTOMATIC UPDATE SETTINGS
+   --------------------------------------------------------- */
+
+function saveAutomaticSettings(){
+
+  const settings = {
+
+    workerUrl:
+      (
+        $("workerUrl").value ||
+        ""
+      ).trim(),
+
+    updateOnOpen:
+      $("updateOnOpen").checked
+
+  };
+
+  saveSettings(
+    settings
+  );
+
+  showToast(
+    "Automatic update settings saved."
+  );
+
+}
+
+
+/* ---------------------------------------------------------
+   LOAD SETTINGS INTO UI
+   --------------------------------------------------------- */
+
+function renderSettings(){
+
+  const settings =
+    loadSettings();
+
+  $("workerUrl").value =
+    settings.workerUrl ||
+    "";
+
+  $("updateOnOpen").checked =
+    settings.updateOnOpen !== false;
+
+}
+
+
+/* ---------------------------------------------------------
+   SAVE CURRENT GENERATED TICKET
+   --------------------------------------------------------- */
+
+function saveGeneratedTicket(
+  ticket
+){
+
+  if(!ticket){
+
+    return;
+
+  }
+
+  const saved =
+    loadSaved();
+
+  const item = {
+
+    id:
+      Date.now(),
+
+    white:
+      [...ticket.white],
+
+    super:
+      ticket.super,
+
+    source:
+      ticket.strategy ||
+      "Generated",
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+  saved.unshift(
+    item
+  );
+
+  saveSaved(
+    saved
+  );
+
+  renderSaved();
+
+  showToast(
+    "Ticket saved."
+  );
+
+} /* =========================================================
+    PART 4 — BUTTONS / EVENTS / INITIALIZATION / END
+    ========================================================= */
+
+
+ /* ---------------------------------------------------------
+    GENERATE TICKETS
+    --------------------------------------------------------- */
+
+ $("generateBtn").addEventListener(
+   "click",
+   generateTickets
+ );
+
+
+ /* ---------------------------------------------------------
+    SAVE MANUAL TICKET
+    --------------------------------------------------------- */
+
+ $("saveManualBtn").addEventListener(
+   "click",
+   function(){
+
+     const ticket =
+       getManualTicket();
+
+     if(!ticket){
+
+       return;
+
+     }
+
+     saveTicket(
+       ticket
+     );
+
+     renderSaved();
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    CLEAR MANUAL INPUT
+    --------------------------------------------------------- */
+
+ $("clearManualBtn").addEventListener(
+   "click",
+   clearManual
+ );
+
+
+ /* ---------------------------------------------------------
+    DELETE SAVED TICKET
+    --------------------------------------------------------- */
+
+ $("savedNumbers").addEventListener(
+   "click",
+   function(event){
+
+     const button =
+       event.target.closest(
+         "[data-delete-id]"
+       );
+
+     if(!button){
+
+       return;
+
+     }
+
+     const id =
+       Number(
+         button.dataset.deleteId
+       );
+
+     deleteSaved(
+       id
+     );
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    SAVE GENERATED TICKET
+    --------------------------------------------------------- */
+
+ $("generatedTickets").addEventListener(
+   "click",
+   function(event){
+
+     const button =
+       event.target.closest(
+         "[data-save-index]"
+       );
+
+     if(!button){
+
+       return;
+
+     }
+
+     const index =
+       Number(
+         button.dataset.saveIndex
+       );
+
+     const tickets =
+       window.__generatedTickets ||
+       [];
+
+     if(
+       tickets[index]
+     ){
+
+       saveGeneratedTicket(
+         tickets[index]
+       );
+
+     }
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    LATEST DRAWINGS COUNT
+    --------------------------------------------------------- */
+
+ $("latestCount").addEventListener(
+   "change",
+   function(){
+
+     renderLatest();
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    REFRESH LATEST DRAWINGS
+    --------------------------------------------------------- */
+
+ $("refreshBtn").addEventListener(
+   "click",
+   async function(){
+
+     const settings =
+       loadSettings();
+
+     if(
+       settings.workerUrl
+     ){
+
+       await updateFromWorker(
+         true
+       );
+
+     }else{
+
+       renderLatest();
+
+       showToast(
+         "Latest drawings refreshed from local data."
+       );
+
+     }
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    ANALYSIS WINDOW
+    --------------------------------------------------------- */
+
+ $("analysisWindow").addEventListener(
+   "change",
+   function(){
+
+     renderStrategyAnalysis();
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    ANALYSIS MODE
+    --------------------------------------------------------- */
+
+ $("analysisMode").addEventListener(
+   "change",
+   function(){
+
+     renderStrategyAnalysis();
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    STATISTICS WINDOW
+    --------------------------------------------------------- */
+
+ $("statsWindow").addEventListener(
+   "change",
+   function(){
+
+     renderStatistics();
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    BACKTEST BUTTON
+    --------------------------------------------------------- */
+
+ $("backtestBtn").addEventListener(
+   "click",
+   async function(){
+
+     const button =
+       $("backtestBtn");
+
+     button.disabled =
+       true;
+
+     try{
+
+       await runBacktest();
+
+     }catch(error){
+
+       console.error(
+         "Backtest failed:",
+         error
+       );
+
+       showToast(
+         "Backtest failed: " +
+         error.message
+       );
+
+     }finally{
+
+       button.disabled =
+         false;
+
+     }
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    SAVE AUTOMATIC UPDATE SETTINGS
+    --------------------------------------------------------- */
+
+ $("saveSettingsBtn").addEventListener(
+   "click",
+   function(){
+
+     saveAutomaticSettings();
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    UPDATE NOW
+    --------------------------------------------------------- */
+
+ $("updateNowBtn").addEventListener(
+   "click",
+   async function(){
+
+     const button =
+       $("updateNowBtn");
+
+     button.disabled =
+       true;
+
+     try{
+
+       await updateFromWorker(
+         true
+       );
+
+     }finally{
+
+       button.disabled =
+         false;
+
+     }
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    EXPORT CSV
+    --------------------------------------------------------- */
+
+ $("exportCsvBtn").addEventListener(
+   "click",
+   exportCSV
+ );
+
+
+ /* ---------------------------------------------------------
+    EXPORT JSON
+    --------------------------------------------------------- */
+
+ $("exportJsonBtn").addEventListener(
+   "click",
+   exportJSON
+ );
+
+
+ /* ---------------------------------------------------------
+    IMPORT CSV
+    --------------------------------------------------------- */
+
+ $("csvFile").addEventListener(
+   "change",
+   async function(event){
+
+     const file =
+       event.target.files &&
+       event.target.files[0];
+
+     if(!file){
+
+       return;
+
+     }
+
+     try{
+
+       const text =
+         await file.text();
+
+       const count =
+         importCSVText(
+           text
+         );
+
+       renderLatest();
+
+       renderStrategyAnalysis();
+
+       renderStatistics();
+
+       showToast(
+         count +
+         " drawing(s) imported."
+       );
+
+     }catch(error){
+
+       console.error(
+         "CSV import failed:",
+         error
+       );
+
+       showToast(
+         "CSV import failed: " +
+         error.message
+       );
+
+     }
+
+     /*
+       Allow the same file to be selected
+       again later.
+     */
+
+     event.target.value =
+       "";
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    RESET DATABASE
+    --------------------------------------------------------- */
+
+ $("resetDbBtn").addEventListener(
+   "click",
+   resetDatabase
+ );
+
+
+ /* ---------------------------------------------------------
+    PAGE VISIBILITY / FOREGROUND UPDATE
+    --------------------------------------------------------- */
+
+ let lastForegroundUpdate =
+   0;
+
+
+ document.addEventListener(
+   "visibilitychange",
+   async function(){
+
+     if(
+       document.visibilityState !==
+       "visible"
+     ){
+
+       return;
+
+     }
+
+     const settings =
+       loadSettings();
+
+     if(
+       settings.updateOnOpen === false
+     ){
+
+       return;
+
+     }
+
+     /*
+       Prevent repeated updates when the browser
+       fires visibilitychange several times.
+     */
+
+     const now =
+       Date.now();
+
+     if(
+       now -
+       lastForegroundUpdate <
+       60000
+     ){
+
+       return;
+
+     }
+
+     lastForegroundUpdate =
+       now;
+
+     if(
+       settings.workerUrl
+     ){
+
+       await updateFromWorker(
+         false
+       );
+
+     }
+
+   }
+ );
+
+
+ /* ---------------------------------------------------------
+    INITIALIZE APPLICATION
+    --------------------------------------------------------- */
+
+ async function initializeApp(){
+
+   /*
+     Make sure the initial database exists.
+   */
+
+   const existing =
+     localStorage.getItem(
+       STORAGE_KEY
+     );
+
+   if(!existing){
+
+     saveHistory(
+       SEED_DRAWS
+     );
+
+   }
+
+   /*
+     Load automatic-update settings.
+   */
+
+   renderSettings();
+
+   /*
+     Render local data immediately.
+     This allows the application to work even
+     before the Worker responds.
+   */
+
+   renderLatest();
+
+   renderSaved();
+
+   renderStrategyAnalysis();
+
+   renderStatistics();
+
+   /*
+     Clear backtest progress at startup.
+   */
+
+   if(
+     $("progressArea")
+   ){
+
+     $("progressArea").style.display =
+       "none";
+
+   }
+
+   /*
+     Automatic update when the application opens.
+   */
+
+   const settings =
+     loadSettings();
+
+   if(
+     settings.updateOnOpen !== false &&
+     settings.workerUrl
+   ){
+
+     $("syncStatus").textContent =
+       "Updating...";
+
+     /*
+       Do not block the initial UI.
+     */
+
+     await updateFromWorker(
+       false
+     );
+
+   }else{
+
+     $("syncStatus").textContent =
+       "Local Data";
+
+   }
+
+ }
+
+
+ /* ---------------------------------------------------------
+    START APPLICATION
+    --------------------------------------------------------- */
+
+ document.addEventListener(
+   "DOMContentLoaded",
+   function(){
+
+     initializeApp();
+
+   }
+ );
+
+
+ /* =========================================================
+    END OF JAVASCRIPT
+    ========================================================= */
+
+</script>
+
+</body>
+</html>
