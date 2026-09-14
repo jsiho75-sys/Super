@@ -2,523 +2,432 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0f172a">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SuperLotto Plus AI Lab V6.3.1</title>
+
 <style>
 :root{
- --bg:#0f172a;
- --card:#1e293b;
- --card2:#172033;
- --text:#f1f5f9;
- --muted:#94a3b8;
- --accent:#38bdf8;
- --accent2:#818cf8;
- --success:#34d399;
- --danger:#fb7185;
- --border:#334155;
- --shadow:0 10px 30px rgba(0,0,0,.25);
+--bg:#0f172a;
+--card:#1e293b;
+--card2:#172033;
+--text:#f1f5f9;
+--muted:#94a3b8;
+--accent:#38bdf8;
+--accent2:#818cf8;
+--success:#34d399;
+--danger:#fb7185;
+--border:#334155;
 }
+
 *{box-sizing:border-box}
-html{background:var(--bg)}
+
 body{
- margin:0;
- background:
- radial-gradient(circle at top left,rgba(56,189,248,.08),transparent 35%),
- radial-gradient(circle at top right,rgba(129,140,248,.08),transparent 35%),
- var(--bg);
- color:var(--text);
- font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
- min-height:100vh;
- padding:env(safe-area-inset-top) 12px calc(20px + env(safe-area-inset-bottom));
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+background:var(--bg);
+color:var(--text);
+line-height:1.45;
 }
-.container{max-width:760px;margin:0 auto}
-header{text-align:center;padding:18px 4px 12px}
-h1{
- margin:0;
- font-size:30px;
- font-weight:800;
- background:linear-gradient(90deg,var(--accent),var(--accent2));
- -webkit-background-clip:text;
- background-clip:text;
- color:transparent;
+
+.container{
+max-width:760px;
+margin:auto;
+padding:14px;
 }
-.subtitle{margin-top:5px;color:var(--muted);font-size:13px}
+
+header{
+text-align:center;
+padding:8px 0 14px;
+}
+
+header h1{
+font-size:24px;
+margin:0 0 4px;
+}
+
+header p{
+margin:0;
+color:var(--muted);
+font-size:13px;
+}
+
 .card{
- background:linear-gradient(145deg,rgba(30,41,59,.98),rgba(23,32,51,.98));
- border:1px solid var(--border);
- border-radius:18px;
- padding:16px;
- margin:12px 0;
- box-shadow:var(--shadow);
+background:var(--card);
+border:1px solid var(--border);
+border-radius:14px;
+padding:14px;
+margin-bottom:12px;
+box-shadow:0 4px 14px rgba(0,0,0,.15);
 }
-.card h2{margin:0 0 12px;font-size:18px}
-.card h3{margin:12px 0 8px;font-size:15px}
+
+.section-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
+font-weight:700;
+font-size:16px;
+margin-bottom:10px;
+}
+
+.jackpot-card{
+background:linear-gradient(135deg,var(--card),var(--card2));
+}
+
 .jackpot{
- text-align:center;
- padding:20px 16px;
- background:
- linear-gradient(135deg,rgba(56,189,248,.16),rgba(129,140,248,.18)),
- var(--card);
+font-size:34px;
+font-weight:800;
+color:var(--accent);
 }
-.jackpot-label{
- color:var(--muted);
- font-size:13px;
- text-transform:uppercase;
- letter-spacing:.08em;
+
+.next{
+font-size:13px;
+color:var(--muted);
+margin-top:4px;
 }
-.jackpot-value{font-size:38px;font-weight:900;margin:4px 0}
-.cash{color:var(--success);font-size:15px;font-weight:700}
-.next{color:var(--muted);margin-top:6px;font-size:13px}
-.status{
- margin-top:10px;
- padding:8px 10px;
- border-radius:10px;
- background:rgba(15,23,42,.55);
- color:var(--muted);
- font-size:12px;
+
+.small-btn{
+border:1px solid var(--border);
+background:var(--card2);
+color:var(--text);
+border-radius:8px;
+padding:6px 10px;
+font-size:12px;
+cursor:pointer;
 }
-.status.ok{color:var(--success)}
-.status.error{color:var(--danger)}
-.compact-card{padding:12px 14px}
-.compact-head{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:8px;
- margin-bottom:7px;
+
+.small-btn:hover{
+border-color:var(--accent);
 }
-.compact-head h2{margin:0;font-size:16px}
-.draw-row{
- display:flex;
- align-items:center;
- gap:7px;
- padding:7px 0;
- border-bottom:1px solid rgba(51,65,85,.65);
+
+.draws{
+display:grid;
+gap:8px;
 }
-.draw-row:last-child{border-bottom:0}
+
+.draw{
+background:var(--card2);
+border:1px solid var(--border);
+border-radius:10px;
+padding:9px 10px;
+}
+
 .draw-date{
- width:82px;
- color:var(--muted);
- font-size:11px;
- flex-shrink:0;
+font-size:12px;
+color:var(--muted);
+margin-bottom:6px;
 }
+
 .balls{
- display:flex;
- flex-wrap:wrap;
- gap:4px;
- align-items:center;
+display:flex;
+flex-wrap:wrap;
+gap:6px;
 }
+
 .ball{
- width:29px;
- height:29px;
- border-radius:50%;
- display:inline-flex;
- justify-content:center;
- align-items:center;
- background:#f8fafc;
- color:#0f172a;
- font-weight:800;
- font-size:12px;
- box-shadow:inset 0 -2px 0 rgba(0,0,0,.15);
+width:32px;
+height:32px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#f8fafc;
+color:#0f172a;
+font-weight:800;
+font-size:13px;
 }
+
 .ball.pb{
- background:linear-gradient(135deg,#fb7185,#a855f7);
- color:white;
+background:var(--danger);
+color:white;
 }
-button,select,input{font:inherit}
-button{border:0;cursor:pointer}
-.btn{
- padding:10px 13px;
- border-radius:11px;
- color:white;
- font-weight:700;
- background:linear-gradient(135deg,var(--accent2),var(--accent));
- box-shadow:0 5px 15px rgba(56,189,248,.12);
-}
-.btn.small{padding:7px 10px;font-size:12px}
-.btn.secondary{background:#334155}
-.btn.success{background:linear-gradient(135deg,#059669,var(--success))}
-.btn.danger{background:linear-gradient(135deg,#be123c,var(--danger))}
-.btn:disabled{opacity:.5;cursor:not-allowed}
+
 .controls{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:10px;
+display:grid;
+grid-template-columns:1.25fr .85fr 1.35fr;
+gap:8px;
 }
-.generator-header{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:10px;
- margin-bottom:10px;
+
+label{
+font-size:11px;
+color:var(--muted);
+display:block;
+margin-bottom:4px;
 }
-.generator-header h2{margin:0}
-.generator-btn{
- padding:7px 11px;
- font-size:11px;
- line-height:1.1;
- white-space:nowrap;
-}
-.saved-top{margin-top:10px}
-.manual-entry-wrap{
- margin-top:12px;
- padding-top:10px;
- border-top:1px solid var(--border);
-}
-@media(max-width:520px){
- .generator-header{gap:7px;margin-bottom:8px}
- .generator-header h2{font-size:17px}
- .generator-btn{padding:6px 9px;font-size:10px}
-}
-.generator-controls{
- grid-template-columns:
- minmax(0,1.25fr)
- minmax(0,.85fr)
- minmax(0,1.35fr);
- align-items:end;
-}
-.strategy-window-group{grid-column:auto}
-.manual-entry-head{
- color:var(--muted);
- font-size:12px;
- font-weight:700;
- margin:10px 0 5px;
-}
-.compact-manual-grid{
- grid-template-columns:
- repeat(5,minmax(0,1fr))
- minmax(48px,.75fr);
- gap:5px;
-}
-.compact-manual-grid input{
- min-width:0;
- padding:7px 2px;
- font-size:13px;
-}
-.manual-actions{margin-top:7px}
-.manual-actions .btn{padding:7px 10px;font-size:11px}
-.saved-edit-grid{
- display:grid;
- grid-template-columns:
- repeat(5,minmax(0,1fr))
- minmax(48px,.8fr);
- gap:5px;
- margin-top:8px;
-}
-.saved-edit-grid input{
- width:100%;
- box-sizing:border-box;
- min-width:0;
- text-align:center;
- padding:7px 2px;
- border:1px solid var(--border);
- border-radius:8px;
- background:#1e293b;
- color:white;
- font-weight:700;
-}
-.saved-edit-grid input.pb-edit{border-color:#a855f7}
-.saved-actions .update{
- background:linear-gradient(135deg,#059669,var(--success));
-}
-@media(max-width:520px){
- .generator-controls{
-  grid-template-columns:
-  minmax(0,1.25fr)
-  minmax(0,.85fr)
-  minmax(0,1.35fr);
-  gap:5px;
- }
- .generator-controls select{min-width:0;width:100%}
- .compact-manual-grid,.saved-edit-grid{gap:4px}
- .compact-manual-grid input,
- .saved-edit-grid input{
-  font-size:12px;
-  padding:6px 1px;
- }
-}
-.control-group{
- display:flex;
- flex-direction:column;
- gap:5px;
-}
-.control-group.full{grid-column:1/-1}
-label{color:var(--muted);font-size:12px;font-weight:600}
+
 select,
 input[type="number"],
-input[type="text"],
 input[type="url"]{
- width:100%;
- border:1px solid var(--border);
- background:#0f172a;
- color:var(--text);
- border-radius:10px;
- padding:10px;
- outline:none;
+width:100%;
+background:#0f172a;
+border:1px solid var(--border);
+color:var(--text);
+border-radius:8px;
+padding:8px;
+font-size:13px;
 }
-select:focus,input:focus{border-color:var(--accent)}
-.generate-row{
- display:grid;
- grid-template-columns:1fr auto;
- gap:10px;
- margin-top:12px;
+
+.btn{
+border:0;
+background:var(--accent);
+color:#082f49;
+font-weight:800;
+border-radius:8px;
+padding:9px 12px;
+cursor:pointer;
 }
-.ticket{
- background:#0f172a;
- border:1px solid var(--border);
- border-radius:14px;
- padding:12px;
- margin-top:9px;
+
+.btn.secondary{
+background:var(--card2);
+border:1px solid var(--border);
+color:var(--text);
 }
-.ticket-top{
- display:flex;
- justify-content:space-between;
- align-items:center;
- margin-bottom:9px;
+
+.btn.danger{
+background:var(--danger);
+color:white;
 }
-.ticket-title{font-size:13px;font-weight:800}
-.ticket-actions{display:flex;gap:6px}
-.ticket-actions button{
- font-size:11px;
- padding:6px 8px;
- border-radius:8px;
- background:#334155;
- color:white;
-}
-.ticket-actions .save-btn{
- background:linear-gradient(135deg,#059669,var(--success));
-}
-.ticket-balls{
- display:flex;
- justify-content:center;
- gap:7px;
- flex-wrap:wrap;
-}
-.ticket-balls .ball{
- width:38px;
- height:38px;
- font-size:14px;
-}
-.ticket-balls .ball.pb{
- width:42px;
- height:42px;
- margin-left:5px;
-}
-.manual-grid{
- display:grid;
- grid-template-columns:repeat(5,1fr) 1fr;
- gap:6px;
-}
-.manual-grid input{
- text-align:center;
- padding:9px 3px;
-}
-.saved-ticket{
- background:#0f172a;
- border:1px solid var(--border);
- border-radius:12px;
- padding:11px;
- margin-top:8px;
-}
-.saved-head{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:8px;
-}
-.saved-name{font-weight:800;font-size:13px}
-.saved-meta{
- color:var(--muted);
- font-size:10px;
- margin-top:3px;
-}
-.saved-actions{
- display:flex;
- gap:5px;
- margin-top:8px;
- flex-wrap:wrap;
-}
-.saved-actions button{
- padding:7px 9px;
- border-radius:8px;
- background:#334155;
- color:white;
- font-size:11px;
-}
-.saved-actions .delete{background:#7f1d1d}
-.empty{
- color:var(--muted);
- text-align:center;
- padding:12px 4px;
- font-size:13px;
-}
-.stats-subsection{
- margin-top:14px;
- padding-top:10px;
- border-top:1px solid var(--border);
-}
-.stats-subsection:first-child{
- margin-top:0;
- padding-top:0;
- border-top:0;
-}
-.section-note{
- color:var(--muted);
- font-size:11px;
- line-height:1.5;
-}
-.stat-grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:8px;
-}
-.stat{
- background:#0f172a;
- border:1px solid var(--border);
- border-radius:12px;
- padding:11px;
- text-align:center;
-}
-.stat-value{font-size:20px;font-weight:900}
-.stat-label{
- font-size:10px;
- color:var(--muted);
- margin-top:2px;
-}
-.table-wrap{overflow-x:auto}
-table{
- width:100%;
- border-collapse:collapse;
- font-size:11px;
-}
-th,td{
- padding:8px 5px;
- border-bottom:1px solid var(--border);
- text-align:center;
- white-space:nowrap;
-}
-th{color:var(--accent);font-weight:800}
-.progress{
- height:9px;
- background:#0f172a;
- border-radius:99px;
- overflow:hidden;
- margin:10px 0;
- border:1px solid var(--border);
-}
-.progress-bar{
- width:0%;
- height:100%;
- background:linear-gradient(90deg,var(--accent),var(--accent2));
- transition:width .2s;
-}
+
 .action-row{
- display:flex;
- flex-wrap:wrap;
- gap:7px;
- margin-top:10px;
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:10px;
 }
+
+.generate-row{
+display:flex;
+justify-content:flex-end;
+margin-top:10px;
+}
+
+.generated{
+display:grid;
+gap:8px;
+margin-top:10px;
+}
+
+.ticket{
+background:var(--card2);
+border:1px solid var(--border);
+border-radius:10px;
+padding:9px;
+}
+
+.ticket-header{
+font-size:11px;
+color:var(--muted);
+margin-bottom:6px;
+}
+
+.manual-grid{
+display:grid;
+grid-template-columns:repeat(5,1fr) 1fr;
+gap:6px;
+}
+
+.manual-grid input{
+text-align:center;
+}
+
+.status{
+font-size:12px;
+color:var(--muted);
+margin-top:8px;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+}
+
+.stat{
+background:var(--card2);
+border:1px solid var(--border);
+border-radius:10px;
+padding:10px;
+text-align:center;
+}
+
+.stat-value{
+font-size:21px;
+font-weight:800;
+}
+
+.stat-label{
+font-size:11px;
+color:var(--muted);
+}
+
+.stats-subsection{
+margin-top:12px;
+padding-top:10px;
+border-top:1px solid var(--border);
+}
+
+.stats-subsection h3{
+font-size:13px;
+margin:8px 0;
+}
+
+.section-note{
+font-size:11px;
+color:var(--muted);
+}
+
+.progress{
+height:8px;
+background:#0f172a;
+border-radius:10px;
+overflow:hidden;
+margin-top:8px;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:var(--accent);
+transition:width .2s;
+}
+
+pre{
+white-space:pre-wrap;
+word-break:break-word;
+background:#0b1220;
+border:1px solid var(--border);
+padding:10px;
+border-radius:8px;
+font-size:11px;
+overflow:auto;
+}
+
 .file-label{
- display:inline-flex;
- align-items:center;
- justify-content:center;
- padding:10px 13px;
- border-radius:11px;
- background:#334155;
- color:white;
- font-weight:700;
- font-size:13px;
- cursor:pointer;
+display:inline-flex;
+align-items:center;
+gap:5px;
+padding:9px 12px;
+border:1px solid var(--border);
+border-radius:8px;
+background:var(--card2);
+color:var(--text);
+font-size:13px;
+cursor:pointer;
 }
-.file-label input{display:none}
+
+.file-label input{
+display:none;
+}
+
 .checkbox-row{
- display:flex;
- align-items:center;
- gap:8px;
- margin-top:9px;
- color:var(--muted);
- font-size:12px;
+display:flex;
+align-items:center;
+gap:7px;
+margin-top:10px;
+font-size:12px;
+color:var(--muted);
 }
+
 .checkbox-row input{
- width:18px;
- height:18px;
+width:auto;
 }
+
 footer{
- color:var(--muted);
- text-align:center;
- font-size:10px;
- line-height:1.5;
- padding:10px 8px 20px;
+text-align:center;
+color:var(--muted);
+font-size:11px;
+padding:15px 0 25px;
 }
+
 .toast{
- position:fixed;
- left:50%;
- bottom:calc(22px + env(safe-area-inset-bottom));
- transform:translate(-50%,120px);
- background:#020617;
- border:1px solid var(--border);
- color:white;
- padding:11px 15px;
- border-radius:12px;
- box-shadow:var(--shadow);
- font-size:12px;
- z-index:9999;
- transition:.25s;
- max-width:90%;
- text-align:center;
+position:fixed;
+left:50%;
+bottom:20px;
+transform:translateX(-50%);
+background:#020617;
+border:1px solid var(--border);
+color:var(--text);
+padding:9px 14px;
+border-radius:9px;
+font-size:12px;
+opacity:0;
+pointer-events:none;
+transition:opacity .2s;
+z-index:20;
 }
-.toast.show{transform:translate(-50%,0)}
-.loading{opacity:.65;pointer-events:none}
-@media(max-width:430px){
- .manual-grid{grid-template-columns:repeat(5,1fr)}
- .manual-grid .pb-input{grid-column:1/-1}
- .controls{grid-template-columns:1fr}
- .generator-controls{
-  grid-template-columns:
-  minmax(0,1.2fr)
-  minmax(0,.8fr)
-  minmax(0,1.3fr)!important;
-  gap:4px;
- }
- .generator-controls .control-group{min-width:0}
- .generator-controls label{font-size:10px}
- .generator-controls select{
-  font-size:11px;
-  padding:8px 5px;
- }
- .generate-row{grid-template-columns:1fr}
- .draw-date{width:72px}
- .ball{width:28px;height:28px;font-size:11px}
- .ticket-balls .ball{width:34px;height:34px;font-size:13px}
- .ticket-balls .ball.pb{width:38px;height:38px}
+
+.toast.show{
+opacity:1;
+}
+
+@media(max-width:600px){
+.container{
+padding:10px;
+}
+
+.controls{
+grid-template-columns:1fr 1fr;
+}
+
+.controls>div:last-child{
+grid-column:1/-1;
+}
+
+.manual-grid{
+grid-template-columns:repeat(5,1fr) 1fr;
+}
+
+.jackpot{
+font-size:30px;
+}
 }
 </style>
 </head>
+
 <body>
+
 <div class="container">
 
 <header>
-<h1>SuperLotto Plus AI Lab V6.3.1</h1>
-<div class="subtitle">Version 6.3 • Statistics • Strategies • Backtesting</div>
+<h1>🎱 SuperLotto Plus AI Lab V6.3.1</h1>
+<p>Statistics • Strategies • Backtesting</p>
 </header>
 
-<section class="card jackpot">
-<div class="jackpot-label">Current Estimated Jackpot</div>
-<div id="jackpot" class="jackpot-value">—</div>
-<div id="cashValue" class="cash">Cash Value: —</div>
-<div id="ticketCost" class="next">Ticket Cost: $1 • Next Drawing: —</div>
-<div id="syncStatus" class="status">Waiting for automatic update…</div>
+<!-- Current Estimated Jackpot -->
+<section class="card jackpot-card">
+
+<div class="section-title">
+<span>💰 Current Estimated Jackpot</span>
+<button id="refreshBtn" class="small-btn">Refresh</button>
+</div>
+
+<div class="jackpot">
+<span id="jackpot">—</span>
+</div>
+
+<div class="next">
+<span id="cashValue">Cash Value: —</span>
+&nbsp; • &nbsp;
+<span id="ticketCost">Ticket Cost: $1</span>
+&nbsp; • &nbsp;
+<span id="nextDrawing">Next Drawing: —</span>
+</div>
+
+<div id="syncStatus" class="status">
+Waiting for SuperLotto Plus data…
+</div>
+
 </section>
 
-<section class="card compact-card">
-<div class="compact-head">
-<h2 id="latestTitle">Last 2 Drawings</h2>
-<div style="display:flex;align-items:center;gap:6px;min-width:0">
-<select
-id="latestCount"
-aria-label="Number of latest drawings"
-style="width:auto;min-width:68px;padding:7px 8px;font-size:11px">
+<!-- Last Drawings -->
+<section class="card">
+
+<div class="section-title">
+<span>🎯 Last Drawings</span>
+
+<div style="display:flex;align-items:center;gap:6px">
+
+<select id="latestCount" style="width:auto">
 <option value="2" selected>2</option>
 <option value="3">3</option>
 <option value="4">4</option>
@@ -529,1493 +438,762 @@ style="width:auto;min-width:68px;padding:7px 8px;font-size:11px">
 <option value="9">9</option>
 <option value="10">10</option>
 </select>
-<button class="btn small" id="refreshBtn">↻ Refresh</button>
+
+<button id="refreshBtn2" class="small-btn">↻</button>
+
 </div>
 </div>
-<div id="latestDraws"></div>
+
+<div id="latestDrawings" class="draws"></div>
+
 </section>
 
+<!-- AI Ticket Generator -->
 <section class="card">
-<div class="generator-header">
+
+<div class="section-title">
+<span>🤖 AI Ticket Generator</span>
+
+<button id="generateBtn" class="btn">
+Generate Tickets
+</button>
+
+</div>
+
+<div class="controls">
+
+<div>
+<label for="strategy">Strategy</label>
+
+<select id="strategy">
+<option value="balanced">Balanced</option>
+<option value="hot">Hot Numbers</option>
+<option value="cold">Cold Numbers</option>
+<option value="overdue">Overdue</option>
+<option value="frequency">Frequency</option>
+<option value="random">Random</option>
+<option value="sum">Sum Balanced</option>
+<option value="spread">Spread</option>
+<option value="oddEven">Odd / Even</option>
+<option value="lowHigh">Low / High</option>
+<option value="decade">Decade Balanced</option>
+</select>
+
+</div>
+
+<div>
+<label for="ticketCount">Tickets</label>
+
+<select id="ticketCount">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="5">5</option>
+<option value="10">10</option>
+<option value="20">20</option>
+</select>
+
+</div>
+
+<div>
+<label for="strategyWindow">Strategy Analysis History</label>
+
+<select id="strategyWindow">
+<option value="20">Last 20</option>
+<option value="50">Last 50</option>
+<option value="100" selected>Last 100</option>
+</select>
+</div>
+
+</div>
+
+<div id="generatedTickets" class="generated"></div>
+
+</section> </head> <body> <div class="container"> <header> <h1>SuperLotto Plus AI Lab V6.3.1</h1> <div class="subtitle">Version 6.3 • Statistics • Strategies • Backtesting</div> </header> <section class="card jackpot"> <div class="jackpot-label">Current Estimated Jackpot</div> <div id="jackpot" class="jackpot-value">—</div> <div id="cashValue" class="cash">Cash Value: —</div> <div class="next" id="ticketCost">Ticket Cost: $1 &nbsp; • &nbsp; Next Drawing: —</div> <div id="syncStatus" class="status">Waiting for automatic update…</div> </section> <section class="card compact-card"> <div class="compact-head"> <h2 id="latestTitle">Last 2 Drawings</h2> <div style="display:flex;align-items:center;gap:6px;min-width:0">
+<select id="latestCount" aria-label="Number of latest drawings" style="width:auto;min-width:68px;padding:7px 8px;font-size:11px"> <option value="2" selected>2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> <option value="6">6</option> <option value="7">7</option> <option value="8">8</option> <option value="9">9</option> <option value="10">10</option> </select> <button class="btn small" id="refreshBtn">↻ Refresh</button>
+</div> </div> <div id="latestDraws">
+</div> </section> <section class="card"> <div class="generator-header">
 <h2>🎯 AI Ticket Generator</h2>
 <button class="btn generator-btn" id="generateBtn">Generate Tickets</button>
 </div>
-
-<div class="controls generator-controls">
-
-<div class="control-group">
-<label for="strategy">Strategy</label>
-<select id="strategy">
-<option value="random">Random</option>
-<option value="balanced">Balanced Odd / Even</option>
-<option value="hot">Hot Numbers</option>
-<option value="cold">Cold Numbers</option>
-<option value="hotcold">Hot + Cold Mix</option>
-<option value="spread">Good Spread</option>
-<option value="weighted">Weighted Frequency</option>
-<option value="weightedBalanced" selected>Weighted + Balanced ⭐</option>
-<option value="lowhigh">Low + High Mix</option>
-<option value="recency">Recency</option>
-<option value="hybrid">Hybrid AI</option>
-<option value="overdue">Overdue Numbers</option>
-<option value="decades">Decade Spread</option>
-<option value="sum">Sum Balanced</option>
-<option value="pair">Pair Boost</option>
-</select>
+<div class="controls generator-controls"> <div class="control-group"> <label for="strategy">Strategy</label> <select id="strategy"> <option value="random">Random</option> <option value="balanced">Balanced Odd / Even</option> <option value="hot">Hot Numbers</option> <option value="cold">Cold Numbers</option> <option value="hotcold">Hot + Cold Mix</option> <option value="spread">Good Spread</option> <option value="weighted">Weighted Frequency</option> <option value="weightedBalanced" selected> Weighted + Balanced ⭐ </option> <option value="lowhigh">Low + High Mix</option> <option value="recency">Recency</option> <option value="hybrid">Hybrid AI</option> <option value="overdue">Overdue Numbers</option> <option value="decades">Decade Spread</option> <option value="sum">Sum Balanced</option> <option value="pair">Pair Boost</option> </select> </div> <div class="control-group"> <label for="ticketCount">Number of Tickets</label> <select id="ticketCount"> <option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> <option>6</option> <option>7</option> <option>8</option> <option>9</option> <option>10</option> <option>15</option> <option>20</option> </select> </div> <div class="control-group strategy-window-group"> <label for="strategyWindow">Strategy Analysis History</label> <select id="strategyWindow"> <option value="20">Last 20 drawings</option> <option value="30">Last 30 drawings</option> <option value="50">Last 50 drawings</option> <option value="100" selected>Last 100 drawings</option> <option value="200">Last 200 drawings</option> <option value="500">Last 500 drawings</option> <option value="all">All Available Drawings</option> </select> </div> </div> <div id="generatedTickets">
+</div> </section> <section class="card"> <h2>💾 Saving Numbers</h2> <div class="saved-top"> <div id="savedNumbers">
+</div> </div> <div class="manual-entry-wrap"> <div class="manual-entry-head">Manual Entry</div> <div class="manual-grid compact-manual-grid"> <input id="m1" type="number" min="1" max="47" placeholder="1"> <input id="m2" type="number" min="1" max="47" placeholder="2"> <input id="m3" type="number" min="1" max="47" placeholder="3"> <input id="m4" type="number" min="1" max="47" placeholder="4"> <input id="m5" type="number" min="1" max="47" placeholder="5"> <input id="mpb" class="pb-input" type="number" min="1" max="27" placeholder="PB"> </div> <div class="action-row"> <button class="btn success" id="saveManualBtn"> Save Manual Numbers </button> <button class="btn secondary" id="clearManualBtn"> Clear </button> </div> </div> </section> <section class="card"> <h2>📊 Historical Statistics</h2> <div class="controls"> <div class="control-group"> <label for="statsWindow">Analysis Window</label> <select id="statsWindow"> <option value="20">Last 20</option> <option value="30" selected>Last 30</option> <option value="50">Last 50</option> <option value="100">Last 100</option> <option value="all">All Available</option> </select> </div> <div class="control-group"> <label>Statistics</label> <div class="section-note" style="padding:10px;border:1px solid var(--border);border-radius:10px;background:#0f172a">White Balls + Superball</div> </div> </div> <div id="statsDataInfo" class="section-note" style="margin-top:8px">
 </div>
-
-<div class="control-group">
-<label for="ticketCount">Number of Tickets</label>
-<select id="ticketCount">
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-<option>6</option>
-<option>7</option>
-<option>8</option>
-<option>9</option>
-<option>10</option>
-<option>15</option>
-<option>20</option>
-</select>
+<div id="statsOutput" style="margin-top:12px">
+</div> </section> <section class="card"> <h2>🧪 Walk-Forward Backtesting</h2> <p class="section-note"> Each historical draw is tested using only draws that occurred before it. This prevents future information from leaking into the training data. Results are historical research, not predictions. </p> <div class="controls"> <div class="control-group"> <label for="minTraining">Minimum Training Draws</label> <select id="minTraining"> <option value="10">10</option> <option value="15" selected>15</option> <option value="20">20</option> <option value="30">30</option> <option value="50">50</option> </select> </div> <div class="control-group"> <label for="recencyWindow">Recency Window</label> <select id="recencyWindow"> <option value="10">10</option> <option value="20" selected>20</option> <option value="30">30</option> <option value="60">60</option> <option value="120">120</option> </select> </div> </div> <button class="btn" id="backtestBtn" style="margin-top:12px"> Run Walk-Forward Backtest </button> <div id="progressArea" style="display:none"> <div class="progress"> <div id="progressBar" class="progress-bar">
+</div> </div> <div id="progressText" class="section-note"> Running… </div> </div> <div id="backtestOutput" style="margin-top:12px">
+</div> </section> <section class="card"> <h2>🔄 Automatic Update</h2> <div class="control-group"> <label for="workerUrl"> Cloudflare Worker URL </label> <input id="workerUrl" type="url" placeholder="https://your-worker.workers.dev"> </div> <div class="checkbox-row"> <input type="checkbox" id="updateOnOpen" checked> <label for="updateOnOpen"> Automatically update every time the app opens or returns to foreground </label> </div> <div class="action-row"> <button class="btn" id="saveSettingsBtn"> Save Settings </button> <button class="btn secondary" id="updateNowBtn"> Update Now </button> </div> <div id="updateMessage" class="status"> Automatic updates use your Cloudflare Worker. </div> </section> <section class="card"> <h2>🗄 Data Tools</h2> <div class="action-row"> <button class="btn secondary" id="exportCsvBtn"> Export CSV </button> <button class="btn secondary" id="exportJsonBtn"> Export JSON </button> <label class="file-label"> Import CSV <input id="csvFile" type="file" accept=".csv,text/csv"> </label> </div> <div class="action-row"> <button class="btn danger" id="resetDbBtn"> Reset Historical Database </button> </div> <p class="section-note"> Historical results are stored locally in your browser. Resetting the historical database does not delete your saved numbers. </p> </section> <footer> SuperLotto Plus AI Lab V6<br> For research and entertainment only. No strategy can predict a random Superball drawing or improve the mathematical odds of a ticket. </footer> </div> <div id="toast" class="toast">
+</div><script> "use strict"; const STORAGE_KEY = "superlotto_plus_ai_lab_v6_draws"; const SETTINGS_KEY = "superlotto_plus_ai_lab_v6_settings"; const SAVED_KEY = "superlotto_plus_ai_lab_v6_saved_numbers"; const OLD_STORAGE_KEY = "superlotto_plus_ai_lab_v5_draws"; const OLD_SETTINGS_KEY = "superlotto_plus_ai_lab_v5_settings"; const SEED_DRAWS = [
+  {date:"2026-09-09",white:[9,24,28,34,41],pb:6}
+]; let history = []; let savedNumbers = []; let settings = { workerUrl:"", updateOnOpen:true, strategyWindow:"100", latestCount:"2" }; let lastSyncTime = 0; let updateInProgress = false; const $ = id => document.getElementById(id); function safeGet(key, fallback=null){ try{ const raw = localStorage.getItem(key); if(raw === null) return fallback; return JSON.parse(raw); }catch(e){ return fallback; } } function safeSet(key,value){ try{ localStorage.setItem(key,JSON.stringify(value)); return true; }catch(e){ return false; } } function normalizeDraw(d){ if(!d) return null; const date = String(d.date || d.drawDate || "").slice(0,10); const white = Array.isArray(d.white) ? d.white.map(Number) : Array.isArray(d.numbers) ? d.numbers.slice(0,5).map(Number) : []; const pb = Number( d.pb ?? d.superball ?? d.powerBall ?? d.redBall ); if(!date) return null; if(white.length !== 5) return null; if(white.some(n => !Number.isInteger(n) || n<1 || n>47)) return null; if(new Set(white).size !== 5) return null; if(!Number.isInteger(pb) || pb<1 || pb>27) return null; return { date, white:[...white].sort((a,b)=>a-b), pb }; } function normalizeHistory(arr){ if(!Array.isArray(arr)) return []; const map = new Map(); arr.forEach(d=>{ const n = normalizeDraw(d); if(n) map.set(n.date,n); }); return [...map.values()] .sort((a,b)=>a.date.localeCompare(b.date)); } function loadData(){ let stored = safeGet(STORAGE_KEY,null); if(!stored){ const old = safeGet(OLD_STORAGE_KEY,null); if(Array.isArray(old)){ stored = old; }else if(old && Array.isArray(old.draws)){ stored = old.draws; } } history = normalizeHistory(stored); if(history.length === 0){ history = normalizeHistory(SEED_DRAWS); saveHistory(); } const storedSettings = safeGet(SETTINGS_KEY,null); if(storedSettings && typeof storedSettings === "object"){ settings = { ...settings, ...storedSettings }; }else{ const oldSettings = safeGet(OLD_SETTINGS_KEY,null); if(oldSettings && typeof oldSettings === "object"){ settings = { ...settings, ...oldSettings }; safeSet(SETTINGS_KEY,settings); } } const storedSaved = safeGet(SAVED_KEY,[]); if(Array.isArray(storedSaved)){ savedNumbers = storedSaved; } $("workerUrl").value = settings.workerUrl || ""; $("updateOnOpen").checked = settings.updateOnOpen !== false; if($("strategyWindow")){ $("strategyWindow").value = settings.strategyWindow || "100"; } if($("latestCount")){ $("latestCount").value = settings.latestCount || "2"; } } function saveHistory(){ safeSet(STORAGE_KEY,history); } function saveSaved(){ safeSet(SAVED_KEY,savedNumbers); } function saveSettings(){ settings.workerUrl = $("workerUrl").value.trim(); settings.updateOnOpen = $("updateOnOpen").checked; settings.strategyWindow = $("strategyWindow") ? $("strategyWindow").value : (settings.strategyWindow || "100"); settings.latestCount = $("latestCount") ? $("latestCount").value : (settings.latestCount || "2"); safeSet(SETTINGS_KEY,settings); } function escapeHtml(str){ return String(str) .replaceAll("&","&amp;") .replaceAll("<","&lt;") .replaceAll(">","&gt;") .replaceAll('"',"&quot;") .replaceAll("'","&#039;"); } function formatDate(date){ if(!date) return "—"; const d = new Date(date + "T12:00:00"); if(Number.isNaN(d.getTime())) return date; return d.toLocaleDateString(undefined,{ month:"short", day:"numeric", year:"numeric" }); } function formatDrawingDate(date){ if(!date) return "—"; const raw=String(date).trim(); if(/^(SUN|MON|TUE|WED|THU|FRI|SAT)\b/i.test(raw)) return raw; let d=new Date(raw.includes("T") ? raw : raw+"T12:00:00"); if(Number.isNaN(d.getTime())) d=new Date(raw); if(Number.isNaN(d.getTime())) return raw; return d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric",year:"numeric"}); } function formatMoney(v){ if(v === null || v === undefined || v === "") return "—"; if(typeof v === "number"){ return "$" + v.toLocaleString(); } const s = String(v); if(s.includes("$")) return s; return "$" + s; } function showToast(message){ const t = $("toast"); t.textContent = message; t.classList.add("show"); clearTimeout(showToast.timer); showToast.timer = setTimeout(()=>{ t.classList.remove("show"); },2600); } function randomInt(min,max,rng=Math.random){ return Math.floor(rng()*(max-min+1))+min; } function shuffle(arr,rng=Math.random){ const a = [...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(rng()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; } function sampleUnique(range,count,rng=Math.random){ return shuffle(range,rng).slice(0,count).sort((a,b)=>a-b); } function allWhite(){ return Array.from({length:47},(_,i)=>i+1); } function allPB(){ return Array.from({length:27},(_,i)=>i+1); } function mean(arr){ if(!arr.length) return 0; return arr.reduce((a,b)=>a+b,0)/arr.length; } function median(arr){ if(!arr.length) return 0; const a=[...arr].sort((x,y)=>x-y); const mid=Math.floor(a.length/2); return a.length%2 ? a[mid] : (a[mid-1]+a[mid])/2; } function countsWhite(data){ const c = {}; for(let i=1;i<=47;i++) c[i]=0; data.forEach(d=>{ d.white.forEach(n=>c[n]++); }); return c; } function countsPB(data){ const c = {}; for(let i=1;i<=27;i++) c[i]=0; data.forEach(d=>{ c[d.pb]++; }); return c; } function lastSeenAges(data,maxNum,type="white"){ const ages={}; for(let n=1;n<=maxNum;n++){ ages[n]=data.length+1; } for(let i=data.length-1;i>=0;i--){ const age=data.length-1-i; const nums = type==="pb" ? [data[i].pb] : data[i].white; nums.forEach(n=>{ if(ages[n] > age){ ages[n]=age; } }); } return ages; } function weightedPick(items,weights,rng=Math.random){ let total=0; const safe=weights.map(w=>{ const x=Number(w); return Number.isFinite(x) && x>0 ? x : 0; }); total=safe.reduce((a,b)=>a+b,0); if(total<=0){ return items[randomInt(0,items.length-1,rng)]; } let r=rng()*total; for(let i=0;i<items.length;i++){ r-=safe[i]; if(r<=0){ return items[i]; } } return items[items.length-1]; } function selectWeightedUnique(items,weights,count,rng=Math.random){ const pool=[...items]; const ws=[...weights]; const result=[]; while(result.length<count && pool.length){ const pick=weightedPick(pool,ws,rng); const idx=pool.indexOf(pick); result.push(pick); pool.splice(idx,1); ws.splice(idx,1); } return result.sort((a,b)=>a-b); } function normalizeWeights(weights){ const max=Math.max(...weights,1); return weights.map(w=>w/max); } function getScores(data,strategy){ const c=countsWhite(data); const ages=lastSeenAges(data,47); const freq=allWhite().map(n=>c[n]); const maxFreq=Math.max(...freq,1); const freqScore=n=>{ return (c[n]+1)/(maxFreq+1); }; const recencyScore=n=>{ return Math.exp(-ages[n]/8); }; const overdueScore=n=>{ return ages[n]+1; }; switch(strategy){ case "hot": return allWhite().map(n=>Math.pow(c[n]+1,1.7)); case "cold": return allWhite().map(n=> 1/(c[n]+1) ); case "weighted": return allWhite().map(n=> c[n]+1 ); case "recency": return allWhite().map(n=> recencyScore(n) ); case "hybrid": return allWhite().map(n=> .55*freqScore(n)+ .45*recencyScore(n) ); case "overdue": return allWhite().map(n=> overdueScore(n) ); case "weightedBalanced": return allWhite().map(n=>{ const odd=n%2===1 ? 1.15 : 1; return (c[n]+1)*odd; }); default: return allWhite().map(()=>1); } } function generatePB(strategy,data,rng=Math.random){ if(strategy==="random" || strategy==="balanced" || strategy==="spread" || strategy==="lowhigh" || strategy==="decades" || strategy==="sum"){ return randomInt(1,27,rng); } const nums=allPB(); const c=countsPB(data); const ages=lastSeenAges(data,27,"pb"); let weights; switch(strategy){ case "hot": weights=nums.map(n=>Math.pow(c[n]+1,1.7)); break; case "cold": weights=nums.map(n=>1/(c[n]+1)); break; case "weighted": case "weightedBalanced": weights=nums.map(n=>c[n]+1); break; case "recency": weights=nums.map(n=>Math.exp(-ages[n]/8)); break; case "hybrid": weights=nums.map(n=>{ const max=Math.max(...Object.values(c),1); const f=(c[n]+1)/(max+1); const r=Math.exp(-ages[n]/8); return .55*f+.45*r; }); break; case "overdue": weights=nums.map(n=>ages[n]+1); break; case "hotcold": weights=nums.map(n=>{ return (c[n]+1) * (ages[n]+1)/Math.max(data.length,1); }); break; case "pair": weights=nums.map(n=>c[n]+1); break; default: weights=nums.map(()=>1); } return weightedPick(nums,weights,rng); } function generateBalanced(data,rng){ const odd=allWhite().filter(n=>n%2); const even=allWhite().filter(n=>n%2===0); const oddCount=rng()<.5 ? 2 : 3; return [ ...sampleUnique(odd,oddCount,rng), ...sampleUnique(even,5-oddCount,rng) ].sort((a,b)=>a-b); } function generateSpread(data,rng){ const low=Array.from({length:16},(_,i)=>i+1); const mid=Array.from({length:16},(_,i)=>i+17); const high=Array.from({length:15},(_,i)=>i+33); let result=[ ...sampleUnique(low,1,rng), ...sampleUnique(mid,1,rng), ...sampleUnique(high,1,rng) ]; const remaining=allWhite().filter(n=>!result.includes(n)); result=[ ...result, ...sampleUnique(remaining,2,rng) ]; return result.sort((a,b)=>a-b); } function generateHotCold(data,rng){ const c=countsWhite(data); const sorted=allWhite().sort((a,b)=>c[b]-c[a]); const hotPool=sorted.slice(0,20); const coldPool=sorted.slice(-20); let result=sampleUnique(hotPool,3,rng); const coldCandidates=coldPool.filter(n=>!result.includes(n)); result=[...result,...sampleUnique(coldCandidates,2,rng)]; result=[...new Set(result)]; while(result.length<5){ const n=randomInt(1,47,rng); if(!result.includes(n)) result.push(n); } return result.sort((a,b)=>a-b); } function generateLowHigh(data,rng){ const low=Array.from({length:23},(_,i)=>i+1); const high=Array.from({length:24},(_,i)=>i+24); const lowCount=rng()<.5 ? 2 : 3; return [ ...sampleUnique(low,lowCount,rng), ...sampleUnique(high,5-lowCount,rng) ].sort((a,b)=>a-b); } function generateDecades(data,rng){ const decades=[ [1,10], [11,20], [21,30], [31,40], [41,47] ]; let result=[]; const chosen=shuffle( decades.map((d,i)=>i), rng ).slice(0,5); chosen.forEach(i=>{ result.push( randomInt(decades[i][0],decades[i][1],rng) ); }); return result.sort((a,b)=>a-b); } function generateSumBalanced(data,rng){ const sums=data.map(d=> d.white.reduce((a,b)=>a+b,0) ); const target=median(sums); let best=null; let bestDiff=Infinity; for(let i=0;i<120;i++){ const ticket=sampleUnique(allWhite(),5,rng); const sum=ticket.reduce((a,b)=>a+b,0); const diff=Math.abs(sum-target); if(diff<bestDiff){ best=ticket; bestDiff=diff; } if(diff<=8) break; } return best.sort((a,b)=>a-b); } function generatePairBoost(data,rng){ if(!data.length){ return sampleUnique(allWhite(),5,rng); } const counts=countsWhite(data); const pair={}; data.forEach(d=>{ const nums=d.white; for(let i=0;i<nums.length;i++){ for(let j=i+1;j<nums.length;j++){ const a=nums[i]; const b=nums[j]; const key=a+"-"+b; pair[key]=(pair[key]||0)+1; } } }); let result=[]; const firstPool=allWhite(); const firstWeights=firstPool.map(n=>counts[n]+1); result.push( weightedPick(firstPool,firstWeights,rng) ); while(result.length<5){ const candidates=allWhite() .filter(n=>!result.includes(n)); const weights=candidates.map(n=>{ let score=counts[n]+1; result.forEach(existing=>{ const a=Math.min(existing,n); const b=Math.max(existing,n); score+=2*(pair[a+"-"+b]||0); }); return score; }); result.push( weightedPick(candidates,weights,rng) ); } return result.sort((a,b)=>a-b); } function generateTicket(strategy,data,rng=Math.random){ let white; switch(strategy){ case "random": white=sampleUnique(allWhite(),5,rng); break; case "balanced": white=generateBalanced(data,rng); break; case "hot": white=selectWeightedUnique( allWhite(), getScores(data,"hot"), 5, rng ); break; case "cold": white=selectWeightedUnique( allWhite(), getScores(data,"cold"), 5, rng ); break; case "hotcold": white=generateHotCold(data,rng); break; case "spread": white=generateSpread(data,rng); break; case "weighted": white=selectWeightedUnique( allWhite(), getScores(data,"weighted"), 5, rng ); break; case "weightedBalanced": white=selectWeightedUnique( allWhite(), getScores(data,"weightedBalanced"), 5, rng ); let tries=0; while( tries<40 && !isBalanced(white) ){ white=selectWeightedUnique( allWhite(), getScores(data,"weightedBalanced"), 5, rng ); tries++; } break; case "lowhigh": white=generateLowHigh(data,rng); break; case "recency": white=selectWeightedUnique( allWhite(), getScores(data,"recency"), 5, rng ); break; case "hybrid": white=selectWeightedUnique( allWhite(), getScores(data,"hybrid"), 5, rng ); break; case "overdue": white=selectWeightedUnique( allWhite(), getScores(data,"overdue"), 5, rng ); break; case "decades": white=generateDecades(data,rng); break; case "sum": white=generateSumBalanced(data,rng); break; case "pair": white=generatePairBoost(data,rng); break; default: white=sampleUnique(allWhite(),5,rng); } return { white:white.sort((a,b)=>a-b), pb:generatePB(strategy,data,rng) }; } function isBalanced(white){ const odd=white.filter(n=>n%2).length; return odd===2 || odd===3; } function ballsHtml(white,pb){ return ` <div class="balls"> ${white.map(n=>` <span class="ball">${n}</span> `).join("")} <span class="ball pb">${pb}</span> </div> `; } function renderLatest(){ const target=$("latestDraws"); const count=Math.min(10,Math.max(2,Number($("latestCount")?.value || settings.latestCount || 2))); if($("latestTitle")){ $("latestTitle").textContent=`Last ${count} Drawings`; } const latest=[...history].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,count); if(!latest.length){ target.innerHTML=`<div class="empty">No drawings available.</div>`; return; } target.innerHTML=latest.map(d=>` <div class="draw-row"> <div class="draw-date">${escapeHtml(formatDrawingDate(d.date))}</div> ${ballsHtml(d.white,d.pb)} </div> `).join(""); } function getStatsData(){ const value=$("statsWindow").value; const ordered=[...history].sort((a,b)=>a.date.localeCompare(b.date)); if(value==="all"){ return ordered; } const requested=Number(value); return requested>0 ? ordered.slice(-requested) : ordered; } function renderStatistics(){ const data=getStatsData(); const available=history.length; const selected=$("statsWindow").value; const requested=selected==="all" ? available : Number(selected); const analyzed=data.length; if($("statsDataInfo")){ $("statsDataInfo").innerHTML=selected==="all" ? `<strong>Drawings Analyzed: ${analyzed}</strong> of ${available} available drawings.` : `<strong>Drawings Analyzed: ${analyzed}</strong> (latest ${Math.min(requested,available)} of ${available} available drawings)`; } $("statsOutput").innerHTML=""; if(!data.length){ $("statsOutput").innerHTML=`<div class="empty">No historical data.</div>`; return; } renderWhiteStats(data); renderPBStats(data); }
+function renderWhiteStats(data){ const c=countsWhite(data); const nums=allWhite(); const hot=[...nums].sort((a,b)=>c[b]-c[a]||a-b).slice(0,10); const cold=[...nums].sort((a,b)=>c[a]-c[b]||a-b).slice(0,10); const oddCount=data.map(d=>d.white.filter(n=>n%2).length); const sums=data.map(d=>d.white.reduce((a,b)=>a+b,0)); $("statsOutput").innerHTML+=`<div class="stats-subsection">
+<h3>⚪ White Ball Statistics</h3>
+<div class="stat-grid">
+<div class="stat">
+<div class="stat-value">${Math.round(mean(sums))}</div>
+<div class="stat-label">Average White Sum</div>
 </div>
-
-<div class="control-group strategy-window-group">
-<label for="strategyWindow">Strategy Analysis History</label>
-<select id="strategyWindow">
-<option value="20">Last 20 drawings</option>
-<option value="30">Last 30 drawings</option>
-<option value="50">Last 50 drawings</option>
-<option value="100" selected>Last 100 drawings</option>
-<option value="200">Last 200 drawings</option>
-<option value="500">Last 500 drawings</option>
-<option value="all">All Available Drawings</option>
-</select>
+<div class="stat">
+<div class="stat-value">${mean(oddCount).toFixed(2)}</div>
+<div class="stat-label">Average Odd Balls</div>
 </div>
-
+<div class="stat">
+<div class="stat-value">${Math.round(mean(data.map(d=>d.white.filter(n=>n>=35).length)))}</div>
+<div class="stat-label">Avg High Balls</div>
 </div>
-
-<div id="generatedTickets"></div>
-</section><section class="card">
-  <div class="generator-header">
-    <h2>💾 Saving Numbers</h2>
-
-    <div style="display:flex;gap:6px">
-      <button class="btn small success" id="saveGeneratedBtn">
-        Save Generated
-      </button>
-
-      <button class="btn small secondary" id="clearSavedBtn">
-        Clear
-      </button>
-    </div>
-  </div>
-
-  <div id="savedNumbers"></div>
-
-  <div class="manual-entry-wrap">
-    <div class="manual-entry-head">
-      Manual Entry
-    </div>
-
-    <div class="manual-grid compact-manual-grid">
-
-      <input
-        id="m1"
-        type="number"
-        min="1"
-        max="47"
-        placeholder="1">
-
-      <input
-        id="m2"
-        type="number"
-        min="1"
-        max="47"
-        placeholder="2">
-
-      <input
-        id="m3"
-        type="number"
-        min="1"
-        max="47"
-        placeholder="3">
-
-      <input
-        id="m4"
-        type="number"
-        min="1"
-        max="47"
-        placeholder="4">
-
-      <input
-        id="m5"
-        type="number"
-        min="1"
-        max="47"
-        placeholder="5">
-
-      <input
-        id="mpb"
-        class="pb-input"
-        type="number"
-        min="1"
-        max="27"
-        placeholder="SB">
-    </div>
-
-    <div class="manual-actions">
-      <button
-        class="btn small success"
-        id="saveManualBtn">
-        Save
-      </button>
-    </div>
-  </div>
-</section>
-
-
-<section class="card">
-  <div class="section-title"
-       style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-
-    <span>📈 Historical Statistics</span>
-
-    <button
-      class="btn small secondary"
-      id="refreshStatsBtn">
-      Refresh
-    </button>
-  </div>
-
-  <div id="statsSummary" class="stat-grid"></div>
-
-  <div class="stats-subsection">
-    <h3>🔥 Hot Numbers</h3>
-    <div id="hotNumbers"></div>
-  </div>
-
-  <div class="stats-subsection">
-    <h3>❄️ Cold Numbers</h3>
-    <div id="coldNumbers"></div>
-  </div>
-
-  <div class="stats-subsection">
-    <h3>🔵 White Ball Statistics</h3>
-    <div id="whiteStats"></div>
-  </div>
-
-  <div class="stats-subsection">
-    <h3>🔴 Superball Statistics</h3>
-    <div id="pbStats"></div>
-  </div>
-</section>
-
-
-<section class="card">
-  <div class="section-title">
-    <span>🧪 Walk-Forward Backtesting</span>
-  </div>
-
-  <div class="controls">
-
-    <div class="control-group">
-      <label for="backtestWindow">
-        Training Window
-      </label>
-
-      <select id="backtestWindow">
-        <option value="20">
-          20 Drawings
-        </option>
-
-        <option value="30" selected>
-          30 Drawings
-        </option>
-
-        <option value="50">
-          50 Drawings
-        </option>
-
-        <option value="100">
-          100 Drawings
-        </option>
-      </select>
-    </div>
-
-
-    <div class="control-group">
-      <label for="backtestStrategy">
-        Strategy
-      </label>
-
-      <select id="backtestStrategy">
-
-        <option value="random">
-          Random
-        </option>
-
-        <option value="balanced">
-          Balanced Odd / Even
-        </option>
-
-        <option value="hot">
-          Hot Numbers
-        </option>
-
-        <option value="cold">
-          Cold Numbers
-        </option>
-
-        <option value="hotcold">
-          Hot + Cold Mix
-        </option>
-
-        <option value="spread">
-          Good Spread
-        </option>
-
-        <option value="weighted">
-          Weighted Frequency
-        </option>
-
-        <option value="weightedBalanced">
-          Weighted + Balanced ⭐
-        </option>
-
-        <option value="lowhigh">
-          Low + High Mix
-        </option>
-
-        <option value="recency">
-          Recency
-        </option>
-
-        <option value="hybrid">
-          Hybrid AI
-        </option>
-
-        <option value="overdue">
-          Overdue Numbers
-        </option>
-
-        <option value="decades">
-          Decade Spread
-        </option>
-
-        <option value="sum">
-          Sum Balanced
-        </option>
-
-        <option value="pair">
-          Pair Boost
-        </option>
-
-      </select>
-    </div>
-
-  </div>
-
-  <button
-    class="btn"
-    id="runBacktestBtn"
-    style="margin-top:10px">
-    🧪 Run Backtest
-  </button>
-
-  <div
-    id="backtestResults"
-    style="margin-top:12px">
-    <div class="empty">
-      Select a strategy and run the backtest.
-    </div>
-  </div>
-</section>
-
-
-<section class="card">
-
-  <div class="section-title">
-    <span>🔄 Automatic Update</span>
-  </div>
-
-  <div class="control-group">
-
-    <label for="workerUrl">
-      Cloudflare Worker URL
-    </label>
-
-    <input
-      id="workerUrl"
-      type="url"
-      placeholder="https://your-worker.workers.dev">
-  </div>
-
-
-  <label class="checkbox-row">
-
-    <input
-      id="autoUpdateToggle"
-      type="checkbox"
-      checked>
-
-    <span>
-      Automatically update SuperLotto Plus data when the app opens
-    </span>
-
-  </label>
-
-
-  <div class="action-row">
-
-    <button
-      class="btn"
-      id="updateNowBtn">
-      🔄 Update Now
-    </button>
-
-    <div
-      id="updateStatus"
-      class="status"
-      style="flex:1">
-      Ready
-    </div>
-
-  </div>
-
-</section>
-
-
-<section class="card">
-
-  <div class="section-title">
-    <span>🛠️ Data Tools</span>
-  </div>
-
-  <div class="action-row">
-
-    <button
-      class="btn secondary"
-      id="downloadCsvBtn">
-      📥 Download CSV
-    </button>
-
-    <button
-      class="btn secondary"
-      id="downloadJsonBtn">
-      📥 Download JSON
-    </button>
-
-    <label class="file-label">
-      📤 Import JSON
-
-      <input
-        id="importJsonInput"
-        type="file"
-        accept=".json,application/json">
-    </label>
-
-  </div>
-
-
-  <div class="action-row">
-
-    <button
-      class="btn danger"
-      id="resetDataBtn">
-      ♻️ Reset Historical Database
-    </button>
-
-  </div>
-
-
-  <div class="section-note">
-    Historical results are stored locally in your browser.
-    Resetting the historical database does not delete your
-    saved numbers.
-  </div>
-
-</section>
-
-
-<footer>
-  SuperLotto Plus AI Lab V6.3.1<br>
-  For research and entertainment only.<br>
-  No strategy can predict a random SuperLotto Plus drawing
-  or improve the mathematical odds of a ticket.
-</footer>
-
-
-<div id="toast" class="toast">
-  <span id="toastMessage"></span>
 </div>
-
-
-<script>
-"use strict";
-
-/* ============================================================
-   SUPERLOTTO PLUS AI LAB V6.3.1
-   CORE JAVASCRIPT
-
-   IMPORTANT:
-   This is ONE application only.
-   Do not append another copy of this script.
-   ============================================================ */
-
-
-/* ============================================================
-   1. STORAGE
-   ============================================================ */
-
-const STORAGE_KEY =
-  "superlotto_plus_ai_lab_v6_draws";
-
-const SETTINGS_KEY =
-  "superlotto_plus_ai_lab_v6_settings";
-
-const SAVED_KEY =
-  "superlotto_plus_ai_lab_v6_saved_numbers";
-
-const OLD_STORAGE_KEY =
-  "superlotto_plus_ai_lab_v5_draws";
-
-const OLD_SETTINGS_KEY =
-  "superlotto_plus_ai_lab_v5_settings";
-
-
-/* ============================================================
-   2. GAME RULES
-   ============================================================ */
-
-const WHITE_MAX = 47;
-const PB_MAX = 27;
-const WHITE_COUNT = 5;
-
-const TICKET_COST = "$1";
-
-const GAME_NAME =
-  "SuperLotto Plus";
-
-
-/* ============================================================
-   3. STATE
-   ============================================================ */
-
-let draws = [];
-
-let savedNumbers = [];
-
-let generatedTickets = [];
-
-let settings = {
-  workerUrl: "",
-  autoUpdate: true,
-  latestCount: 2,
-  strategy: "weightedBalanced",
-  ticketCount: 1,
-  strategyWindow: "100"
-};
-
-
-/* ============================================================
-   4. HELPERS
-   ============================================================ */
-
-function $(id){
-  return document.getElementById(id);
-}
-
-
-function showToast(message){
-
-  const toast = $("toast");
-  const messageBox = $("toastMessage");
-
-  if(!toast) return;
-
-  if(messageBox){
-    messageBox.textContent = message;
-  }else{
-    toast.textContent = message;
+<h3>🔥 Hot White Numbers</h3>${numberStatsHtml(hot,c)}<h3>❄️ Cold White Numbers</h3>${numberStatsHtml(cold,c)}</div>`; }
+function numberStatsHtml(nums,c){ return `<div class="balls">${nums.map(n=>`<span class="ball" title="${c[n]} appearances">${n}</span>`).join("")}</div>`; }
+function renderPBStats(data){ const c=countsPB(data); const nums=allPB(); const hot=[...nums].sort((a,b)=>c[b]-c[a]||a-b).slice(0,10); const cold=[...nums].sort((a,b)=>c[a]-c[b]||a-b).slice(0,10); const avg=Math.round(mean(data.map(d=>d.pb))); $("statsOutput").innerHTML+=`<div class="stats-subsection">
+<h3>🔴 Superball Statistics</h3>
+<div class="stat-grid">
+<div class="stat">
+<div class="stat-value">${avg}</div>
+<div class="stat-label">Average Superball</div>
+</div>
+</div>
+<h3>🔥 Hot Superballs</h3>
+<div class="balls">${hot.map(n=>`<span class="ball pb" title="${c[n]} appearances">${n}</span>`).join("")}</div>
+<h3>❄️ Cold Superballs</h3>
+<div class="balls">${cold.map(n=>`<span class="ball pb" title="${c[n]} appearances">${n}</span>`).join("")}</div>
+</div>`; }function getStrategyName(value){
+  const el=$("strategy");
+  if(el){
+    const option=el.querySelector(`option[value="${CSS.escape(value)}"]`);
+    if(option) return option.textContent.trim();
   }
-
-  toast.classList.add("show");
-
-  clearTimeout(showToast.timer);
-
-  showToast.timer =
-    setTimeout(
-      () => toast.classList.remove("show"),
-      2500
-    );
+  return value;
 }
 
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+function getStrategyData(){
+  const value=$("strategyWindow").value;
+  const ordered=[...history].sort((a,b)=>a.date.localeCompare(b.date));
+  if(value==="all") return ordered;
+  const requested=Number(value);
+  return requested>0 ? ordered.slice(-requested) : ordered;
 }
 
+function renderGeneratedTickets(tickets,strategy){
+  const target=$("generatedTickets");
+  if(!target) return;
+  if(!tickets.length){
+    target.innerHTML=`<div class="empty">No tickets generated.</div>`;
+    return;
+  }
+  target.innerHTML=tickets.map((t,i)=>`
+    <div class="generated-ticket">
+      <div class="ticket-title">
+        Ticket ${i+1}
+        <span class="ticket-strategy">${escapeHtml(getStrategyName(strategy))}</span>
+      </div>
+      ${ballsHtml(t.white,t.pb)}
+    </div>
+  `).join("");
+}
 
-function uniqueNumbers(values){
+function generateTickets(){
+  const strategy=$("strategy").value;
+  const count=Math.max(1,Math.min(20,Number($("ticketCount").value)||1));
+  const data=getStrategyData();
+  const tickets=[];
+  for(let i=0;i<count;i++){
+    tickets.push(generateTicket(strategy,data));
+  }
+  renderGeneratedTickets(tickets,strategy);
+  showToast(`${count} ticket${count===1?"":"s"} generated`);
+}
 
-  return [
-    ...new Set(
-      values
-        .map(Number)
-        .filter(Number.isFinite)
-    )
+function renderSavedNumbers(){
+  const target=$("savedNumbers");
+  if(!target) return;
+  if(!savedNumbers.length){
+    target.innerHTML=`<div class="empty">No saved numbers yet.</div>`;
+    return;
+  }
+  target.innerHTML=savedNumbers.map((ticket,index)=>`
+    <div class="saved-ticket">
+      <div class="saved-ticket-head">
+        <strong>Saved ${index+1}</strong>
+        <button class="btn danger small" data-delete-saved="${index}">Delete</button>
+      </div>
+      <div class="saved-edit">
+        ${ticket.white.map((n,i)=>`
+          <input type="number" min="1" max="47"
+                 data-saved-index="${index}"
+                 data-white-index="${i}"
+                 value="${n}">
+        `).join("")}
+        <input class="pb-input" type="number" min="1" max="27"
+               data-saved-index="${index}"
+               data-pb="true"
+               value="${ticket.pb}">
+      </div>
+    </div>
+  `).join("");
+
+  target.querySelectorAll("[data-delete-saved]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const index=Number(btn.dataset.deleteSaved);
+      savedNumbers.splice(index,1);
+      saveSaved();
+      renderSavedNumbers();
+      showToast("Saved numbers deleted");
+    });
+  });
+
+  target.querySelectorAll("[data-saved-index]").forEach(input=>{
+    input.addEventListener("change",()=>{
+      const index=Number(input.dataset.savedIndex);
+      if(!savedNumbers[index]) return;
+
+      if(input.dataset.pb){
+        const value=Number(input.value);
+        if(!Number.isInteger(value)||value<1||value>27){
+          input.value=savedNumbers[index].pb;
+          return;
+        }
+        savedNumbers[index].pb=value;
+      }else{
+        const wi=Number(input.dataset.whiteIndex);
+        const value=Number(input.value);
+        if(!Number.isInteger(value)||value<1||value>47){
+          input.value=savedNumbers[index].white[wi];
+          return;
+        }
+        const copy=[...savedNumbers[index].white];
+        copy[wi]=value;
+        if(new Set(copy).size!==5){
+          input.value=savedNumbers[index].white[wi];
+          showToast("White numbers must be unique");
+          return;
+        }
+        savedNumbers[index].white=copy.sort((a,b)=>a-b);
+      }
+      saveSaved();
+    });
+  });
+}
+
+function readManualNumbers(){
+  const white=[
+    Number($("m1").value),
+    Number($("m2").value),
+    Number($("m3").value),
+    Number($("m4").value),
+    Number($("m5").value)
   ];
-}
+  const pb=Number($("mpb").value);
 
-
-function sortNumbers(values){
-
-  return [...values]
-    .map(Number)
-    .sort((a,b)=>a-b);
-}
-
-
-function randomInt(min,max){
-
-  return Math.floor(
-    Math.random() *
-    (max-min+1)
-  ) + min;
-}
-
-
-function allWhite(){
-
-  return Array.from(
-    {length:WHITE_MAX},
-    (_,i)=>i+1
-  );
-}
-
-
-function allPB(){
-
-  return Array.from(
-    {length:PB_MAX},
-    (_,i)=>i+1
-  );
-}
-
-
-function sampleUnique(pool,count){
-
-  const source = [...pool];
-  const result = [];
-
-  while(
-    source.length &&
-    result.length < count
-  ){
-
-    const index =
-      Math.floor(
-        Math.random()*source.length
-      );
-
-    result.push(
-      source.splice(index,1)[0]
-    );
-  }
-
-  return sortNumbers(result);
-}
-
-
-function clamp(value,min,max){
-
-  return Math.max(
-    min,
-    Math.min(max,value)
-  );
-}
-
-
-/* ============================================================
-   5. DRAW NORMALIZATION
-   ============================================================ */
-
-function normalizeDraw(d){
-
-  if(!d || typeof d !== "object"){
+  if(white.some(n=>!Number.isInteger(n)||n<1||n>47)){
+    showToast("Enter white numbers from 1–47");
     return null;
   }
-
-  let white = [];
-
-  if(Array.isArray(d.white)){
-    white = d.white;
+  if(new Set(white).size!==5){
+    showToast("White numbers must be unique");
+    return null;
   }
-  else if(Array.isArray(d.numbers)){
-    white = d.numbers;
-  }
-  else{
-
-    white = [
-      d.white1,
-      d.white2,
-      d.white3,
-      d.white4,
-      d.white5
-    ];
-  }
-
-  white = uniqueNumbers(white)
-    .filter(
-      n =>
-        n >= 1 &&
-        n <= WHITE_MAX
-    );
-
-  const pb =
-    Number(
-      d.pb ??
-      d.superball ??
-      d.superBall ??
-      d.mega ??
-      d.special
-    );
-
-  if(
-    !d.date ||
-    white.length !== WHITE_COUNT ||
-    !Number.isFinite(pb) ||
-    pb < 1 ||
-    pb > PB_MAX
-  ){
+  if(!Number.isInteger(pb)||pb<1||pb>27){
+    showToast("Enter Superball from 1–27");
     return null;
   }
 
   return {
-    date: String(d.date).slice(0,10),
-    white: sortNumbers(white),
-    pb: Math.round(pb),
-    drawNumber:
-      d.drawNumber ??
-      d.draw ??
-      ""
+    white:white.sort((a,b)=>a-b),
+    pb
   };
 }
 
-
-function normalizeHistory(input){
-
-  if(!Array.isArray(input)){
-    return [];
-  }
-
-  const map = new Map();
-
-  for(const item of input){
-
-    const d =
-      normalizeDraw(item);
-
-    if(!d) continue;
-
-    const key =
-      `${d.date}|${d.white.join(",")}|${d.pb}`;
-
-    map.set(key,d);
-  }
-
-  return [...map.values()]
-    .sort(
-      (a,b)=>
-        new Date(b.date) -
-        new Date(a.date)
-    );
+function clearManual(){
+  ["m1","m2","m3","m4","m5","mpb"].forEach(id=>{
+    if($(id)) $(id).value="";
+  });
 }
 
+function saveManualNumbers(){
+  const ticket=readManualNumbers();
+  if(!ticket) return;
 
-/* ============================================================
-   6. LOCAL DATA
-   ============================================================ */
-
-function loadData(){
-
-  try{
-
-    const stored =
-      localStorage.getItem(
-        STORAGE_KEY
-      );
-
-    if(stored){
-
-      const parsed =
-        JSON.parse(stored);
-
-      draws =
-        normalizeHistory(
-          Array.isArray(parsed)
-            ? parsed
-            : parsed.draws || []
-        );
-    }
-
-  }catch(error){
-
-    console.error(
-      "Unable to load local drawings:",
-      error
-    );
-
-    draws = [];
-  }
-
-
-  try{
-
-    const stored =
-      localStorage.getItem(
-        SAVED_KEY
-      );
-
-    if(stored){
-
-      const parsed =
-        JSON.parse(stored);
-
-      if(Array.isArray(parsed)){
-        savedNumbers = parsed;
-      }
-    }
-
-  }catch(error){
-
-    console.error(
-      "Unable to load saved numbers:",
-      error
-    );
-
-    savedNumbers = [];
-  }
-
-
-  try{
-
-    const stored =
-      localStorage.getItem(
-        SETTINGS_KEY
-      );
-
-    if(stored){
-
-      const parsed =
-        JSON.parse(stored);
-
-      if(
-        parsed &&
-        typeof parsed === "object"
-      ){
-
-        settings = {
-          ...settings,
-          ...parsed
-        };
-      }
-    }
-
-  }catch(error){
-
-    console.error(
-      "Unable to load settings:",
-      error
-    );
-  }
-
-
-  /* ----------------------------------------------------------
-     Migrate old V5 history if V6 history is empty.
-     ---------------------------------------------------------- */
-
-  if(!draws.length){
-
-    try{
-
-      const old =
-        localStorage.getItem(
-          OLD_STORAGE_KEY
-        );
-
-      if(old){
-
-        const parsed =
-          JSON.parse(old);
-
-        const oldDraws =
-          normalizeHistory(
-            Array.isArray(parsed)
-              ? parsed
-              : parsed.draws || []
-          );
-
-        if(oldDraws.length){
-
-          draws = oldDraws;
-
-          saveDraws();
-        }
-      }
-
-    }catch(error){
-
-      console.warn(
-        "V5 migration skipped:",
-        error
-      );
-    }
-  }
-
-
-  applySettingsToUI();
+  savedNumbers.push(ticket);
+  saveSaved();
+  renderSavedNumbers();
+  clearManual();
+  showToast("Numbers saved");
 }
 
-
-function saveDraws(){
-
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(draws)
-  );
+function seededRandom(seed){
+  let t=seed>>>0;
+  return function(){
+    t+=0x6D2B79F5;
+    let x=t;
+    x=Math.imul(x^(x>>>15),x|1);
+    x^=x+Math.imul(x^(x>>>7),x|61);
+    return ((x^(x>>>14))>>>0)/4294967296;
+  };
 }
 
-
-function saveSavedNumbers(){
-
-  localStorage.setItem(
-    SAVED_KEY,
-    JSON.stringify(savedNumbers)
-  );
+function getBacktestData(){
+  return [...history].sort((a,b)=>a.date.localeCompare(b.date));
 }
 
+async function runBacktest(){
+  const data=getBacktestData();
+  const minTraining=Math.max(1,Number($("minTraining").value)||15);
+  const recency=Math.max(1,Number($("recencyWindow").value)||20);
 
-function saveSettings(){
-
-  const workerInput =
-    $("workerUrl");
-
-  const autoToggle =
-    $("autoUpdateToggle");
-
-  if(workerInput){
-    settings.workerUrl =
-      workerInput.value.trim();
-  }
-
-  if(autoToggle){
-    settings.autoUpdate =
-      autoToggle.checked;
-  }
-
-  const latest =
-    $("latestCount");
-
-  if(latest){
-    settings.latestCount =
-      Number(latest.value);
-  }
-
-  const strategy =
-    $("strategy");
-
-  if(strategy){
-    settings.strategy =
-      strategy.value;
-  }
-
-  const ticketCount =
-    $("ticketCount");
-
-  if(ticketCount){
-    settings.ticketCount =
-      Number(ticketCount.value);
-  }
-
-  const strategyWindow =
-    $("strategyWindow");
-
-  if(strategyWindow){
-    settings.strategyWindow =
-      strategyWindow.value;
-  }
-
-  localStorage.setItem(
-    SETTINGS_KEY,
-    JSON.stringify(settings)
-  );
-}
-
-
-function applySettingsToUI(){
-
-  if($("workerUrl")){
-    $("workerUrl").value =
-      settings.workerUrl || "";
-  }
-
-  if($("autoUpdateToggle")){
-    $("autoUpdateToggle").checked =
-      settings.autoUpdate !== false;
-  }
-
-  if($("latestCount")){
-    $("latestCount").value =
-      String(
-        clamp(
-          Number(settings.latestCount) || 2,
-          2,
-          10
-        )
-      );
-  }
-
-  if($("strategy")){
-    $("strategy").value =
-      settings.strategy ||
-      "weightedBalanced";
-  }
-
-  if($("ticketCount")){
-    $("ticketCount").value =
-      String(
-        settings.ticketCount || 1
-      );
-  }
-
-  if($("strategyWindow")){
-    $("strategyWindow").value =
-      String(
-        settings.strategyWindow ||
-        "100"
-      );
-  }
-}
-
-
-/* ============================================================
-   7. BALL DISPLAY
-   ============================================================ */
-
-function ballsHtml(
-  white,
-  pb
-){
-
-  return `
-    <div class="balls">
-      ${white.map(
-        n =>
-          `<span class="ball">${n}</span>`
-      ).join("")}
-
-      <span class="ball pb">
-        ${pb}
-      </span>
-    </div>
-  `;
-}
-
-
-/* ============================================================
-   8. LATEST DRAWINGS
-   ============================================================ */
-
-function renderLatestDrawings(){
-
-  const container =
-    $("latestDraws");
-
-  if(!container) return;
-
-  const count =
-    clamp(
-      Number(
-        $("latestCount")?.value ||
-        settings.latestCount ||
-        2
-      ),
-      2,
-      10
-    );
-
-  const latest =
-    draws.slice(0,count);
-
-  if($("latestTitle")){
-    $("latestTitle").textContent =
-      `Last ${count} Drawings`;
-  }
-
-  if(!latest.length){
-
-    container.innerHTML =
-      `<div class="empty">
-        No drawing data available.
-       </div>`;
-
+  if(data.length<=minTraining){
+    $("backtestOutput").innerHTML=
+      `<div class="empty">Not enough historical drawings for backtesting.</div>`;
     return;
   }
 
-  container.innerHTML =
-    latest.map(
-      d => `
-        <div class="draw-row">
-
-          <div class="draw-date">
-            ${escapeHtml(d.date)}
-          </div>
-
-          ${ballsHtml(
-            d.white,
-            d.pb
-          )}
-
-        </div>
-      `
-    ).join("");
-}
-
-
-/* ============================================================
-   9. FREQUENCY DATA
-   ============================================================ */
-
-function getAnalysisDraws(){
-
-  if(!draws.length){
-    return [];
-  }
-
-  const value =
-    settings.strategyWindow ||
-    $("strategyWindow")?.value ||
-    "100";
-
-  if(value === "all"){
-    return draws;
-  }
-
-  const count =
-    Number(value);
-
-  if(!Number.isFinite(count)){
-    return draws.slice(0,100);
-  }
-
-  return draws.slice(
-    0,
-    Math.max(1,count)
-  );
-}
-
-
-function getWhiteCounts(data){
-
-  const counts =
-    Array(WHITE_MAX+1).fill(0);
-
-  for(const d of data){
-
-    for(const n of d.white){
-
-      if(
-        n >= 1 &&
-        n <= WHITE_MAX
-      ){
-        counts[n]++;
-      }
-    }
-  }
-
-  return counts;
-}
-
-
-function getPBCounts(data){
-
-  const counts =
-    Array(PB_MAX+1).fill(0);
-
-  for(const d of data){
-
-    if(
-      d.pb >= 1 &&
-      d.pb <= PB_MAX
-    ){
-      counts[d.pb]++;
-    }
-  }
-
-  return counts;
-}
-
-
-function getAges(data,max){
-
-  const ages =
-    Array(max+1).fill(
-      data.length
-    );
-
-  for(let i=0;i<data.length;i++){
-
-    const d =
-      data[i];
-
-    for(const n of d.white){
-
-      if(
-        n>=1 &&
-        n<=max
-      ){
-
-        ages[n] =
-          Math.min(
-            ages[n],
-            i
-          );
-      }
-    }
-  }
-
-  return ages;
-}
-
-
-/* ============================================================
-   10. WEIGHTED SELECTION
-   ============================================================ */
-
-function weightedPick(
-  pool,
-  weights,
-  count
-){
-
-  const result = [];
-  const available = [...pool];
-
-  while(
-    result.length < count &&
-    available.length
-  ){
-
-    let total = 0;
-
-    for(const n of available){
-
-      const w =
-        Number(weights[n]) || 0;
-
-      total +=
-        Math.max(.01,w);
-    }
-
-    let target =
-      Math.random()*total;
-
-    let chosen =
-      available[
-        available.length-1
-      ];
-
-    for(const n of available){
-
-      target -=
-        Math.max(
-          .01,
-          Number(weights[n]) || 0
-        );
-
-      if(target <= 0){
-
-        chosen = n;
-        break;
-      }
-    }
-
-    result.push(chosen);
-
-    const index =
-      available.indexOf(chosen);
-
-    if(index>=0){
-      available.splice(index,1);
-    }
-  }
-
-  return sortNumbers(result);
-}
-
-
-/* ============================================================
-   11. BALANCED GENERATION
-   ============================================================ */
-
-function isBalanced(numbers){
-
-  const odd =
-    numbers.filter(
-      n => n % 2
-    ).length;
-
-  const even =
-    numbers.length -
-    odd;
-
-  return (
-    Math.abs(odd-even) <= 1
-  );
-}
-
-
-function generateBalanced(
-  pool,
-  count
-){
-
-  for(let i=0;i<300;i++){
-
-    const ticket =
-      sampleUnique(
-        pool,
-        count
-      );
-
-    if(isBalanced(ticket)){
-      return ticket;
-    }
-  }
-
-  return sampleUnique(
-    pool,
-    count
-  );
-}
-
-
-/* ============================================================
-   12. SPREAD
-   ============================================================ */
-
-function generateSpread(){
-
-  for(let i=0;i<300;i++){
-
-    const ticket =
-      sampleUnique(
-        allWhite(),
-        WHITE_COUNT
-      );
-
-    const low =
-      ticket.filter(
-        n=>n<=16
-      ).length;
-
-    const mid =
-      ticket.filter(
-        n=>n>=17 && n<=32
-      ).length;
-
-    const high =
-      ticket.filter(
-        n=>n>=33
-      ).length;
-
-    if(
-      low>=1 &&
-      mid>=1 &&
-      high>=1
-    ){
-      return ticket;
-    }
-  }
-
-  return sampleUnique(
-    allWhite(),
-    WHITE_COUNT
-  );
-}
-
-
-/* ============================================================
-   13. LOW / HIGH
-   ============================================================ */
-
-function generateLowHigh(){
-
-  for(let i=0;i<300;i++){
-
-    const ticket =
-      sampleUnique(
-        allWhite(),
-        WHITE_COUNT
-      );
-
-    const low =
-      ticket.filter(
-        n=>n<=23
-      ).length;
-
-    const high =
-      ticket.length-low;
-
-    if(
-      low>=2 &&
-      high>=2
-    ){
-      return ticket;
-    }
-  }
-
-  return sampleUnique(
-    allWhite(),
-    WHITE_COUNT
-  );
-}
-
-
-/* ============================================================
-   14. DECADES
-   ============================================================ */
-
-function generateDecades(){
-
-  const groups = [
-    [1,10],
-    [11,20],
-    [21,30],
-    [31,40],
-    [41,47]
+  $("progressArea").style.display="block";
+  $("backtestOutput").innerHTML="";
+  $("progressBar").style.width="0%";
+  $("progressText").textContent="Starting backtest…";
+
+  const strategies=[
+    "random","balanced","hot","cold","hotcold",
+    "spread","weighted","weightedBalanced","lowhigh",
+    "recency","hybrid","overdue","decades","sum","pair"
   ];
 
-  const result = [];
+  const results={};
+  strategies.forEach(s=>{
+    results[s]={
+      whiteHits:0,
+      pbHits:0,
+      totalHits:0,
+      tested:0
+    };
+  });
 
-  for(const group of groups){
+  const total=data.length-minTraining;
 
-    if(result.length>=WHITE_COUNT){
-      break;
+  for(let i=minTraining;i<data.length;i++){
+    const training=data.slice(Math.max(0,i-recency),i);
+    const actual=data[i];
+
+    strategies.forEach((strategy,sIndex)=>{
+      const rng=seededRandom((i+1)*1009+(sIndex+1)*7919);
+      const ticket=generateTicket(strategy,training,rng);
+
+      const whiteHits=ticket.white.filter(n=>actual.white.includes(n)).length;
+      const pbHits=ticket.pb===actual.pb ? 1:0;
+
+      results[strategy].whiteHits+=whiteHits;
+      results[strategy].pbHits+=pbHits;
+      results[strategy].totalHits+=whiteHits+pbHits;
+      results[strategy].tested++;
+    });
+
+    const pct=Math.round(((i-minTraining+1)/total)*100);
+    $("progressBar").style.width=pct+"%";
+    $("progressText").textContent=`Testing draw ${i-minTraining+1} of ${total} (${pct}%)`;
+
+    if(i%10===0){
+      await new Promise(resolve=>setTimeout(resolve,0));
     }
-
-    const [min,max] =
-      group;
-
-    result.push(
-      randomInt(min,max)
-    );
   }
 
-  while(
-    result.length<WHITE_COUNT
-  ){
+  const rows=strategies.map(strategy=>{
+    const r=results[strategy];
+    const avgWhite=r.tested ? (r.whiteHits/r.tested).toFixed(2):"0.00";
+    const pbRate=r.tested ? ((r.pbHits/r.tested)*100).toFixed(1):"0.0";
+    const avgTotal=r.tested ? (r.totalHits/r.tested).toFixed(2):"0.00";
 
-    const n =
-      randomInt(
-        1,
-        WHITE_MAX
-      );
+    return `
+      <tr>
+        <td>${escapeHtml(getStrategyName(strategy))}</td>
+        <td>${avgWhite}</td>
+        <td>${pbRate}%</td>
+        <td>${avgTotal}</td>
+      </tr>
+    `;
+  }).join("");
 
-    if(!result.includes(n)){
-      result.push(n);
-    }
-  }
+  $("backtestOutput").innerHTML=`
+    <div class="section-note">
+      Tested <strong>${total}</strong> historical drawings using
+      up to the previous <strong>${recency}</strong> drawings for training.
+    </div>
+    <div class="table-wrap">
+      <table class="stats-table">
+        <thead>
+          <tr>
+            <th>Strategy</th>
+            <th>Avg White Hits</th>
+            <th>Superball Rate</th>
+            <th>Avg Total Hits</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  `;
 
-  return sortNumbers(
-    uniqueNumbers(result)
-  );
+  $("progressBar").style.width="100%";
+  $("progressText").textContent="Backtest complete";
 }
 
+function updateJackpotInfo(data){
+  if(!data || typeof data!=="object") return;
 
-/* ============================================================
-   15. SUM BALANCED
-   ============================================================ */
-
-function generateSumBalanced(){
-
-  const target =
-    Math.round(
-      (
-        WHITE_MAX *
-        (WHITE_COUNT+1)
-      ) / 2
-    );
-
-  let best =
-    null;
-
-  let bestDiff =
-    Infinity;
-
-  for(let i=0;i<150;i++){
-
-    const ticket =
-      sampleUnique(
-        allWhite(),
-        WHITE_COUNT
-      );
-
-    const sum =
-      ticket.reduce(
-        (a,b)=>a+b,
-        0
-      );
-
-    const diff =
-      Math.abs(
-        sum-target
-      );
-
-    if(diff<bestDiff){
-
-      bestDiff = diff;
-      best = ticket;
-    }
+  if($("jackpot")){
+    $("jackpot").textContent=data.jackpot || "—";
   }
 
-  return best ||
-    sampleUnique(
-      allWhite(),
-      WHITE_COUNT
-    );
-}function renderSaved(){const box=$("savedNumbers");if(!savedNumbers.length){box.innerHTML='<div class="empty">No saved numbers.</div>';return;}box.innerHTML=savedNumbers.map((t,i)=>`<div class="saved-row"><div class="saved-number">${ballsHtml(t.white,t.pb)}</div><button class="small danger" data-delete="${i}">Delete</button></div>`).join("");box.querySelectorAll("[data-delete]").forEach(btn=>{btn.onclick=()=>{savedNumbers.splice(Number(btn.dataset.delete),1);saveSaved();renderSaved();showToast("Saved number deleted.");};});}
-function renderGenerated(){const box=$("generatedTickets");if(!generatedTickets.length){box.innerHTML='<div class="empty">Tap Generate Tickets to create numbers.</div>';return;}box.innerHTML=generatedTickets.map((t,i)=>`<div class="ticket"><div class="ticket-head"><strong>Ticket ${i+1}</strong><button class="small" data-save-ticket="${i}">Save</button></div>${ballsHtml(t.white,t.pb)}</div>`).join("");box.querySelectorAll("[data-save-ticket]").forEach(btn=>{btn.onclick=()=>{const t=generatedTickets[Number(btn.dataset.saveTicket)];savedNumbers.push({white:[...t.white],pb:t.pb});saveSaved();renderSaved();showToast("Ticket saved.");};});}
-function generateTickets(){const strategy=$("strategy").value;const count=Math.max(1,Math.min(20,Number($("ticketCount").value)||1));const data=[...history].sort((a,b)=>a.date.localeCompare(b.date));generatedTickets=[];for(let i=0;i<count;i++){let ticket=generateTicket(strategy,data);let guard=0;while(generatedTickets.some(x=>x.white.join(",")===ticket.white.join(",")&&x.pb===ticket.pb)&&guard<50){ticket=generateTicket(strategy,data);guard++;}generatedTickets.push(ticket);}renderGenerated();showToast(`${count} ticket${count===1?"":"s"} generated.`);}
-function saveManual(){const inputs=["m1","m2","m3","m4","m5"].map(id=>Number($(id).value));const pb=Number($("mpb").value);if(inputs.some(n=>!Number.isInteger(n)||n<1||n>47)){showToast("White balls must be 1–47.");return;}if(new Set(inputs).size!==5){showToast("White balls must be unique.");return;}if(!Number.isInteger(pb)||pb<1||pb>27){showToast("Superball must be 1–27.");return;}const ticket={white:[...inputs].sort((a,b)=>a-b),pb};savedNumbers.push(ticket);saveSaved();renderSaved();["m1","m2","m3","m4","m5","mpb"].forEach(id=>$(id).value="");showToast("Numbers saved.");}
-function clearSaved(){if(!savedNumbers.length){showToast("No saved numbers.");return;}if(confirm("Clear all saved numbers?")){savedNumbers=[];saveSaved();renderSaved();showToast("Saved numbers cleared.");}}
-function updateJackpot(data){if(data.jackpot!==undefined)$("jackpot").textContent=data.jackpot||"—";if(data.cashValue!==undefined)$("cashValue").textContent=data.cashValue||"—";if(data.nextDrawing!==undefined)$("nextDrawing").textContent=data.nextDrawing||"—";if($("ticketCost"))$("ticketCost").textContent="Ticket Cost: $1";$("syncStatus").textContent=`Updated ${new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}`;}
-function setUpdateStatus(message,isError=false){const el=$("updateStatus");if(!el)return;el.textContent=message;el.classList.toggle("error",!!isError);}
-function parseWorkerResponse(payload){if(!payload)return null;let draws=payload.draws;if(!Array.isArray(draws)&&Array.isArray(payload.history))draws=payload.history;if(!Array.isArray(draws))return null;return {draws:normalizeHistory(draws),jackpot:payload.jackpot,cashValue:payload.cashValue,nextDrawing:payload.nextDrawing};}
-async function updateFromWorker(showMessage=true){if(updateInProgress)return;const raw=(settings.workerUrl||"").trim();if(!raw){setUpdateStatus("Enter your Cloudflare Worker URL first.",true);if(showMessage)showToast("Worker URL is missing.");return;}updateInProgress=true;setUpdateStatus("Updating…");try{let url=raw.replace(/\/$/,"");if(!/\/api\/superlotto$/i.test(url)){url+="/api/superlotto";}const response=await fetch(url,{method:"GET",cache:"no-store"});if(!response.ok)throw new Error(`Worker returned HTTP ${response.status}`);const payload=await response.json();const parsed=parseWorkerResponse(payload);if(!parsed||!parsed.draws.length)throw new Error("Worker returned no valid SuperLotto Plus drawings.");history=parsed.draws;saveHistory();updateJackpot(parsed);renderLatest();renderStatistics();renderSaved();lastSyncTime=Date.now();$("syncStatus").textContent=`Synced ${new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}`;setUpdateStatus(`Updated successfully — ${history.length} drawings loaded.`);if(showMessage)showToast(`Updated ${history.length} drawings.`);}catch(err){console.error(err);setUpdateStatus(`Update failed: ${err.message}`,true);if(showMessage)showToast("Update failed. Check Worker URL.");}finally{updateInProgress=false;}}
-function exportCSV(){if(!history.length){showToast("No drawing data to export.");return;}const rows=[["Date","White 1","White 2","White 3","White 4","White 5","Superball"]];[...history].sort((a,b)=>a.date.localeCompare(b.date)).forEach(d=>rows.push([d.date,...d.white,d.pb]));const csv=rows.map(row=>row.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\r\n");const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="superlotto-plus-history.csv";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function exportJSON(){const blob=new Blob([JSON.stringify({game:"SuperLotto Plus",updatedAt:new Date().toISOString(),draws:history},null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="superlotto-plus-history.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function importJSON(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const obj=JSON.parse(reader.result);const imported=normalizeHistory(Array.isArray(obj)?obj:obj.draws);if(!imported.length)throw new Error("No valid drawings found.");history=imported;saveHistory();renderLatest();renderStatistics();showToast(`Imported ${history.length} drawings.`);}catch(e){showToast(`Import failed: ${e.message}`);}};reader.readAsText(file);}
-function resetDatabase(){if(!confirm("Reset all downloaded drawing history?"))return;history=normalizeHistory(SEED_DRAWS);saveHistory();renderLatest();renderStatistics();showToast("Drawing history reset.");}
-function strategyName(value){const option=$("strategy").querySelector(`option[value="${value}"]`);return option?option.textContent:value;}
-function getBacktestWindow(){const value=$("strategyWindow")?.value||"100";if(value==="all")return history.length;return Math.min(history.length,Math.max(10,Number(value)||100));}
-function testTicketAgainstDraw(ticket,draw){const whiteMatches=ticket.white.filter(n=>draw.white.includes(n)).length;const pbMatch=ticket.pb===draw.pb;return {whiteMatches,pbMatch};}
-function backtestStrategy(strategy,draws){if(draws.length<10)return {error:"Not enough historical drawings for backtesting."};const results={drawings:draws.length,tickets:0,whiteHits:0,pbHits:0,threePlus:0,fourPlus:0,fivePlus:0};for(let i=0;i<draws.length-1;i++){const training=draws.slice(0,i+1);const actual=draws[i+1];const ticket=generateTicket(strategy,training,()=>0.5);const r=testTicketAgainstDraw(ticket,actual);results.tickets++;if(r.whiteMatches>0)results.whiteHits+=r.whiteMatches;if(r.pbMatch)results.pbHits++;if(r.whiteMatches>=3)results.threePlus++;if(r.whiteMatches>=4)results.fourPlus++;if(r.whiteMatches===5)results.fivePlus++;}return results;}
-function runBacktest(){const output=$("backtestOutput");const strategy=$("strategy").value;const requested=Math.max(10,Number($("backtestWindow").value)||100);const ordered=[...history].sort((a,b)=>a.date.localeCompare(b.date));const data=ordered.slice(-Math.min(requested,ordered.length));if(data.length<10){output.innerHTML='<div class="empty">Need at least 10 drawings for backtesting.</div>';return;}output.innerHTML='<div class="loading">Running backtest…</div>';setTimeout(()=>{const r=backtestStrategy(strategy,data);output.innerHTML=`<div class="backtest-summary"><div><strong>${strategyName(strategy)}</strong></div><div>Drawings tested: <strong>${r.drawings-1}</strong></div><div>White-ball hits: <strong>${r.whiteHits}</strong></div><div>Superball hits: <strong>${r.pbHits}</strong></div><div>3+ white matches: <strong>${r.threePlus}</strong></div><div>4+ white matches: <strong>${r.fourPlus}</strong></div><div>5 white matches: <strong>${r.fivePlus}</strong></div></div>`;},50);}
-function updateProgress(percent,text){const area=$("progressArea");const bar=$("progressBar");const label=$("progressText");if(area)area.style.display="block";if(bar)bar.style.width=`${Math.max(0,Math.min(100,percent))}%`;if(label)label.textContent=text||"";}
-function clearProgress(){const area=$("progressArea");if(area)area.style.display="none";}
-function renderInitial(){renderLatest();renderSaved();renderStatistics();renderGenerated();$("updateStatus").textContent=history.length?`${history.length} drawings available.`:"No drawing data available.";}
-function init(){loadData();renderInitial();$("generateBtn").addEventListener("click",generateTickets);$("saveManualBtn").addEventListener("click",saveManual);$("clearManualBtn").addEventListener("click",clearSaved);$("refreshBtn").addEventListener("click",renderLatest);$("latestCount").addEventListener("change",()=>{settings.latestCount=$("latestCount").value;saveSettings();renderLatest();});$("statsWindow").addEventListener("change",renderStatistics);$("backtestBtn").addEventListener("click",runBacktest);$("saveSettingsBtn").addEventListener("click",()=>{saveSettings();showToast("Settings saved.");});$("updateNowBtn").addEventListener("click",()=>updateFromWorker(true));$("exportCsvBtn").addEventListener("click",exportCSV);$("exportJsonBtn").addEventListener("click",exportJSON);$("csvFile").addEventListener("change",e=>{const file=e.target.files?.[0];if(file)importJSON(file);e.target.value="";});$("resetDbBtn").addEventListener("click",resetDatabase);$("updateOnOpen").addEventListener("change",()=>{saveSettings();});if(settings.updateOnOpen){setTimeout(()=>updateFromWorker(false),500);}}
-document.addEventListener("DOMContentLoaded",init);
-</script></body>
+  if($("cashValue")){
+    $("cashValue").textContent=
+      "Cash Value: " + (data.cashValue || "—");
+  }
+
+  if($("nextDrawing")){
+    $("nextDrawing").textContent=
+      "Next Drawing: " + (data.nextDrawing || "—");
+  }
+
+  if(data.ticketCost && $("ticketCost")){
+    $("ticketCost").textContent=
+      "Ticket Cost: " + data.ticketCost +
+      "  •  Next Drawing: " + (data.nextDrawing || "—");
+  }
+
+  if(data.updatedAt){
+    lastSyncTime=Date.now();
+    $("syncStatus").textContent=
+      "Updated " + new Date(data.updatedAt).toLocaleString();
+  }
+}
+
+function mergeWorkerDraws(draws){
+  if(!Array.isArray(draws)) return 0;
+
+  const before=history.length;
+  const map=new Map(history.map(d=>[d.date,d]));
+
+  draws.forEach(raw=>{
+    const d=normalizeDraw(raw);
+    if(d) map.set(d.date,d);
+  });
+
+  history=[...map.values()]
+    .sort((a,b)=>a.date.localeCompare(b.date));
+
+  saveHistory();
+  return history.length-before;
+}
+
+async function updateFromWorker(showMessage=true){
+  if(updateInProgress) return;
+
+  const status=$("updateMessage");
+  const raw=(settings.workerUrl || "").trim();
+
+  if(!raw){
+    if(showMessage){
+      status.textContent=
+        "Enter your Cloudflare Worker URL first.";
+      showToast("Worker URL is not set");
+    }
+    return;
+  }
+
+  updateInProgress=true;
+
+  try{
+    status.textContent="Updating SuperLotto Plus data…";
+    $("syncStatus").textContent="Updating…";
+
+    let url=raw.replace(/\/$/,"");
+
+    if(!/\/api\/superlotto$/i.test(url)){
+      url += "/api/superlotto";
+    }
+
+    const response=await fetch(url,{
+      method:"GET",
+      cache:"no-store"
+    });
+
+    if(!response.ok){
+      throw new Error(`Worker returned HTTP ${response.status}`);
+    }
+
+    const data=await response.json();
+
+    if(!data || !Array.isArray(data.draws)){
+      throw new Error("Worker response does not contain drawings");
+    }
+
+    const valid=data.draws
+      .map(normalizeDraw)
+      .filter(Boolean);
+
+    if(!valid.length){
+      throw new Error("Worker returned no valid SuperLotto Plus drawings");
+    }
+
+    updateJackpotInfo(data);
+
+    const added=mergeWorkerDraws(valid);
+
+    renderLatest();
+    renderStatistics();
+    renderSavedNumbers();
+
+    status.textContent=
+      `Update complete. ${history.length} historical drawings available.`;
+
+    $("syncStatus").textContent=
+      `Updated successfully • ${history.length} drawings`;
+
+    if(showMessage){
+      showToast(
+        added>0
+          ? `Updated: ${added} new drawing${added===1?"":"s"}`
+          : "Data is already up to date"
+      );
+    }
+  }catch(error){
+    console.error(error);
+
+    status.textContent=
+      "Update failed: " + error.message;
+
+    $("syncStatus").textContent="Update failed";
+
+    if(showMessage){
+      showToast("Update failed");
+    }
+  }finally{
+    updateInProgress=false;
+  }
+}
+
+function exportCSV(){
+  const rows=[
+    ["Date","White 1","White 2","White 3","White 4","White 5","Superball"]
+  ];
+
+  history.forEach(d=>{
+    rows.push([
+      d.date,
+      ...d.white,
+      d.pb
+    ]);
+  });
+
+  const csv=rows.map(row=>
+    row.map(value=>{
+      const s=String(value??"");
+      return `"${s.replaceAll('"','""')}"`;
+    }).join(",")
+  ).join("\n");
+
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="superlotto-plus-history.csv";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function exportJSON(){
+  const payload={
+    game:"SuperLotto Plus",
+    exportedAt:new Date().toISOString(),
+    draws:history
+  };
+
+  const blob=new Blob(
+    [JSON.stringify(payload,null,2)],
+    {type:"application/json;charset=utf-8"}
+  );
+
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="superlotto-plus-history.json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function importCSV(file){
+  if(!file) return;
+
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    try{
+      const text=String(reader.result||"");
+      const lines=text.split(/\r?\n/).filter(Boolean);
+
+      const imported=[];
+
+      lines.slice(1).forEach(line=>{
+        const parts=line.split(",").map(x=>
+          x.trim().replace(/^"|"$/g,"")
+        );
+
+        if(parts.length<7) return;
+
+        imported.push({
+          date:parts[0],
+          white:[
+            Number(parts[1]),
+            Number(parts[2]),
+            Number(parts[3]),
+            Number(parts[4]),
+            Number(parts[5])
+          ],
+          pb:Number(parts[6])
+        });
+      });
+
+      const valid=imported.map(normalizeDraw).filter(Boolean);
+
+      if(!valid.length){
+        showToast("No valid drawings found in CSV");
+        return;
+      }
+
+      mergeWorkerDraws(valid);
+      renderLatest();
+      renderStatistics();
+
+      showToast(`${valid.length} drawings imported`);
+    }catch(error){
+      console.error(error);
+      showToast("Could not import CSV");
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+function resetDatabase(){
+  const confirmed=confirm(
+    "Reset all historical SuperLotto Plus drawings stored in this browser? Your saved numbers will not be deleted."
+  );
+
+  if(!confirmed) return;
+
+  history=normalizeHistory(SEED_DRAWS);
+  saveHistory();
+
+  renderLatest();
+  renderStatistics();
+
+  $("syncStatus").textContent=
+    "Historical database reset";
+
+  showToast("Historical database reset");
+}
+
+function bindEvents(){
+  $("generateBtn").addEventListener("click",generateTickets);
+
+  $("saveManualBtn").addEventListener(
+    "click",
+    saveManualNumbers
+  );
+
+  $("clearManualBtn").addEventListener(
+    "click",
+    clearManual
+  );
+
+  $("latestCount").addEventListener("change",()=>{
+    settings.latestCount=$("latestCount").value;
+    saveSettings();
+    renderLatest();
+  });
+
+  $("refreshBtn").addEventListener("click",()=>{
+    renderLatest();
+  });
+
+  $("statsWindow").addEventListener(
+    "change",
+    renderStatistics
+  );
+
+  $("strategyWindow").addEventListener("change",()=>{
+    settings.strategyWindow=$("strategyWindow").value;
+    saveSettings();
+  });
+
+  $("backtestBtn").addEventListener(
+    "click",
+    runBacktest
+  );
+
+  $("saveSettingsBtn").addEventListener("click",()=>{
+    saveSettings();
+    showToast("Settings saved");
+  });
+
+  $("updateNowBtn").addEventListener(
+    "click",
+    ()=>updateFromWorker(true)
+  );
+
+  $("exportCsvBtn").addEventListener(
+    "click",
+    exportCSV
+  );
+
+  $("exportJsonBtn").addEventListener(
+    "click",
+    exportJSON
+  );
+
+  $("csvFile").addEventListener("change",event=>{
+    const file=event.target.files?.[0];
+    importCSV(file);
+    event.target.value="";
+  });
+
+  $("resetDbBtn").addEventListener(
+    "click",
+    resetDatabase
+  );
+
+  document.addEventListener("visibilitychange",()=>{
+    if(
+      document.visibilityState==="visible" &&
+      settings.updateOnOpen
+    ){
+      updateFromWorker(false);
+    }
+  });
+}
+
+function initialize(){
+  loadData();
+  renderLatest();
+  renderStatistics();
+  renderSavedNumbers();
+  bindEvents();
+
+  if(settings.updateOnOpen){
+    setTimeout(()=>{
+      updateFromWorker(false);
+    },500);
+  }
+}
+
+if(document.readyState==="loading"){
+  document.addEventListener("DOMContentLoaded",initialize);
+}else{
+  initialize();
+}
+</script>
+</body>
 </html>
