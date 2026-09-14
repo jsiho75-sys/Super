@@ -1,530 +1,232 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SuperLotto Plus AI Lab V6.3.1</title>
-
-<style>
-:root{
---bg:#0f172a;
---card:#1e293b;
---card2:#172033;
---text:#f1f5f9;
---muted:#94a3b8;
---accent:#38bdf8;
---accent2:#818cf8;
---success:#34d399;
---danger:#fb7185;
---border:#334155;
-}
-
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-background:var(--bg);
-color:var(--text);
-line-height:1.45;
-}
-
-.container{
-max-width:760px;
-margin:auto;
-padding:14px;
-}
-
-header{
-text-align:center;
-padding:8px 0 14px;
-}
-
-header h1{
-font-size:24px;
-margin:0 0 4px;
-}
-
-header p{
-margin:0;
-color:var(--muted);
-font-size:13px;
-}
-
-.card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:14px;
-padding:14px;
-margin-bottom:12px;
-box-shadow:0 4px 14px rgba(0,0,0,.15);
-}
-
-.section-title{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:8px;
-font-weight:700;
-font-size:16px;
-margin-bottom:10px;
-}
-
-.jackpot-card{
-background:linear-gradient(135deg,var(--card),var(--card2));
-}
-
-.jackpot{
-font-size:34px;
-font-weight:800;
-color:var(--accent);
-}
-
-.next{
-font-size:13px;
-color:var(--muted);
-margin-top:4px;
-}
-
-.small-btn{
-border:1px solid var(--border);
-background:var(--card2);
-color:var(--text);
-border-radius:8px;
-padding:6px 10px;
-font-size:12px;
-cursor:pointer;
-}
-
-.small-btn:hover{
-border-color:var(--accent);
-}
-
-.draws{
-display:grid;
-gap:8px;
-}
-
-.draw{
-background:var(--card2);
-border:1px solid var(--border);
-border-radius:10px;
-padding:9px 10px;
-}
-
-.draw-date{
-font-size:12px;
-color:var(--muted);
-margin-bottom:6px;
-}
-
-.balls{
-display:flex;
-flex-wrap:wrap;
-gap:6px;
-}
-
-.ball{
-width:32px;
-height:32px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#f8fafc;
-color:#0f172a;
-font-weight:800;
-font-size:13px;
-}
-
-.ball.pb{
-background:var(--danger);
-color:white;
-}
-
-.controls{
-display:grid;
-grid-template-columns:1.25fr .85fr 1.35fr;
-gap:8px;
-}
-
-label{
-font-size:11px;
-color:var(--muted);
-display:block;
-margin-bottom:4px;
-}
-
-select,
-input[type="number"],
-input[type="url"]{
-width:100%;
-background:#0f172a;
-border:1px solid var(--border);
-color:var(--text);
-border-radius:8px;
-padding:8px;
-font-size:13px;
-}
-
-.btn{
-border:0;
-background:var(--accent);
-color:#082f49;
-font-weight:800;
-border-radius:8px;
-padding:9px 12px;
-cursor:pointer;
-}
-
-.btn.secondary{
-background:var(--card2);
-border:1px solid var(--border);
-color:var(--text);
-}
-
-.btn.danger{
-background:var(--danger);
-color:white;
-}
-
-.action-row{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-margin-top:10px;
-}
-
-.generate-row{
-display:flex;
-justify-content:flex-end;
-margin-top:10px;
-}
-
-.generated{
-display:grid;
-gap:8px;
-margin-top:10px;
-}
-
-.ticket{
-background:var(--card2);
-border:1px solid var(--border);
-border-radius:10px;
-padding:9px;
-}
-
-.ticket-header{
-font-size:11px;
-color:var(--muted);
-margin-bottom:6px;
-}
-
-.manual-grid{
-display:grid;
-grid-template-columns:repeat(5,1fr) 1fr;
-gap:6px;
-}
-
-.manual-grid input{
-text-align:center;
-}
-
-.status{
-font-size:12px;
-color:var(--muted);
-margin-top:8px;
-}
-
-.stats-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px;
-}
-
-.stat{
-background:var(--card2);
-border:1px solid var(--border);
-border-radius:10px;
-padding:10px;
-text-align:center;
-}
-
-.stat-value{
-font-size:21px;
-font-weight:800;
-}
-
-.stat-label{
-font-size:11px;
-color:var(--muted);
-}
-
-.stats-subsection{
-margin-top:12px;
-padding-top:10px;
-border-top:1px solid var(--border);
-}
-
-.stats-subsection h3{
-font-size:13px;
-margin:8px 0;
-}
-
-.section-note{
-font-size:11px;
-color:var(--muted);
-}
-
-.progress{
-height:8px;
-background:#0f172a;
-border-radius:10px;
-overflow:hidden;
-margin-top:8px;
-}
-
-.progress-bar{
-height:100%;
-width:0%;
-background:var(--accent);
-transition:width .2s;
-}
-
-pre{
-white-space:pre-wrap;
-word-break:break-word;
-background:#0b1220;
-border:1px solid var(--border);
-padding:10px;
-border-radius:8px;
-font-size:11px;
-overflow:auto;
-}
-
-.file-label{
-display:inline-flex;
-align-items:center;
-gap:5px;
-padding:9px 12px;
-border:1px solid var(--border);
-border-radius:8px;
-background:var(--card2);
-color:var(--text);
-font-size:13px;
-cursor:pointer;
-}
-
-.file-label input{
-display:none;
-}
-
-.checkbox-row{
-display:flex;
-align-items:center;
-gap:7px;
-margin-top:10px;
-font-size:12px;
-color:var(--muted);
-}
-
-.checkbox-row input{
-width:auto;
-}
-
-footer{
-text-align:center;
-color:var(--muted);
-font-size:11px;
-padding:15px 0 25px;
-}
-
-.toast{
-position:fixed;
-left:50%;
-bottom:20px;
-transform:translateX(-50%);
-background:#020617;
-border:1px solid var(--border);
-color:var(--text);
-padding:9px 14px;
-border-radius:9px;
-font-size:12px;
-opacity:0;
-pointer-events:none;
-transition:opacity .2s;
-z-index:20;
-}
-
-.toast.show{
-opacity:1;
-}
-
-@media(max-width:600px){
-.container{
-padding:10px;
-}
-
-.controls{
-grid-template-columns:1fr 1fr;
-}
-
-.controls>div:last-child{
-grid-column:1/-1;
-}
-
-.manual-grid{
-grid-template-columns:repeat(5,1fr) 1fr;
-}
-
-.jackpot{
-font-size:30px;
-}
-}
-</style>
-</head>
-
-<body>
-
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"> <meta name="theme-color" content="#0f172a"> <title>SuperLotto Plus AI Lab V6.3.1</title> <style> :root{ --bg:#0f172a; --card:#1e293b; --card2:#172033; --text:#f1f5f9; --muted:#94a3b8; --accent:#38bdf8; --accent2:#818cf8; --success:#34d399; --danger:#fb7185; --border:#334155; --shadow:0 10px 30px rgba(0,0,0,.25); } *{ box-sizing:border-box; } html{ background:var(--bg); } body{ margin:0; background: radial-gradient(circle at top left,rgba(56,189,248,.08),transparent 35%), radial-gradient(circle at top right,rgba(129,140,248,.08),transparent 35%), var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; min-height:100vh; padding: env(safe-area-inset-top) 12px calc(20px + env(safe-area-inset-bottom)); } .container{ max-width:760px; margin:0 auto; } header{ text-align:center; padding:18px 4px 12px; } h1{ margin:0; font-size:30px; font-weight:800; background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; } .subtitle{ margin-top:5px; color:var(--muted); font-size:13px; } .card{ background:linear-gradient(145deg,rgba(30,41,59,.98),rgba(23,32,51,.98)); border:1px solid var(--border); border-radius:18px; padding:16px; margin:12px 0; box-shadow:var(--shadow); } .card h2{ margin:0 0 12px; font-size:18px; } .card h3{ margin:12px 0 8px; font-size:15px; } .jackpot{ text-align:center; padding:20px 16px; background: linear-gradient(135deg, rgba(56,189,248,.16), rgba(129,140,248,.18)), var(--card); } .jackpot-label{ color:var(--muted); font-size:13px; text-transform:uppercase; letter-spacing:.08em; } .jackpot-value{ font-size:38px; font-weight:900; margin:4px 0; } .cash{ color:var(--success); font-size:15px; font-weight:700; } .next{ color:var(--muted); margin-top:6px; font-size:13px; } .status{ margin-top:10px; padding:8px 10px; border-radius:10px; background:rgba(15,23,42,.55); color:var(--muted); font-size:12px; } .status.ok{ color:var(--success); } .status.error{ color:var(--danger); } .compact-card{ padding:12px 14px; } .compact-head{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:7px; } .compact-head h2{ margin:0; font-size:16px; } .draw-row{ display:flex; align-items:center; gap:7px; padding:7px 0; border-bottom:1px solid rgba(51,65,85,.65); } .draw-row:last-child{ border-bottom:0; } .draw-date{ width:82px; color:var(--muted); font-size:11px; flex-shrink:0; } .balls{ display:flex; flex-wrap:wrap; gap:4px; align-items:center; } .ball{ width:29px; height:29px; border-radius:50%; display:inline-flex; justify-content:center; align-items:center; background:#f8fafc; color:#0f172a; font-weight:800; font-size:12px; box-shadow:inset 0 -2px 0 rgba(0,0,0,.15); } .ball.pb{ background:linear-gradient(135deg,#fb7185,#a855f7); color:white; } button, select, input{ font:inherit; } button{ border:0; cursor:pointer; } .btn{ padding:10px 13px; border-radius:11px; color:white; font-weight:700; background:linear-gradient(135deg,var(--accent2),var(--accent)); box-shadow:0 5px 15px rgba(56,189,248,.12); } .btn.small{ padding:7px 10px; font-size:12px; } .btn.secondary{ background:#334155; } .btn.success{ background:linear-gradient(135deg,#059669,var(--success)); } .btn.danger{ background:linear-gradient(135deg,#be123c,var(--danger)); } .btn:disabled{ opacity:.5; cursor:not-allowed; } .controls{ display:grid; grid-template-columns:1fr 1fr; gap:10px; } .generator-header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;} .generator-header h2{margin:0;} .generator-btn{padding:7px 11px;font-size:11px;line-height:1.1;white-space:nowrap;} .saved-top{margin-top:10px;} .manual-entry-wrap{margin-top:12px;padding-top:10px;border-top:1px solid var(--border);} @media (max-width:520px){ .generator-header{gap:7px;margin-bottom:8px;} .generator-header h2{font-size:17px;} .generator-btn{padding:6px 9px;font-size:10px;} } .generator-controls{ grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr) minmax(0,1.35fr); align-items:end; } .strategy-window-group{ grid-column:auto; } .manual-entry-head{ color:var(--muted); font-size:12px; font-weight:700; margin:10px 0 5px; } .compact-manual-grid{ grid-template-columns:repeat(5,minmax(0,1fr)) minmax(48px,.75fr); gap:5px; } .compact-manual-grid input{ min-width:0; padding:7px 2px; font-size:13px; } .manual-actions{ margin-top:7px; } .manual-actions .btn{ padding:7px 10px; font-size:11px; } .saved-edit-grid{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)) minmax(48px,.8fr); gap:5px; margin-top:8px; } .saved-edit-grid input{ width:100%; box-sizing:border-box; min-width:0; text-align:center; padding:7px 2px; border:1px solid var(--border); border-radius:8px; background:#1e293b; color:white; font-weight:700; } .saved-edit-grid input.pb-edit{ border-color:#a855f7; } .saved-actions .update{ background:linear-gradient(135deg,#059669,var(--success)); } @media (max-width:520px){ .generator-controls{ grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr) minmax(0,1.35fr); gap:5px; } .generator-controls select{ min-width:0; width:100%; } .compact-manual-grid, .saved-edit-grid{ gap:4px; } .compact-manual-grid input, .saved-edit-grid input{ font-size:12px; padding:6px 1px; } } .control-group{ display:flex; flex-direction:column; gap:5px; } .control-group.full{ grid-column:1/-1; } label{ color:var(--muted); font-size:12px; font-weight:600; } select, input[type="number"], input[type="text"], input[type="url"]{ width:100%; border:1px solid var(--border); background:#0f172a; color:var(--text); border-radius:10px; padding:10px; outline:none; } select:focus, input:focus{ border-color:var(--accent); } .generate-row{ display:grid; grid-template-columns:1fr auto; gap:10px; margin-top:12px; } .ticket{ background:#0f172a; border:1px solid var(--border); border-radius:14px; padding:12px; margin-top:9px; } .ticket-top{ display:flex; justify-content:space-between; align-items:center; margin-bottom:9px; } .ticket-title{ font-size:13px; font-weight:800; } .ticket-actions{ display:flex; gap:6px; } .ticket-actions button{ font-size:11px; padding:6px 8px; border-radius:8px; background:#334155; color:white; } .ticket-actions .save-btn{ background:linear-gradient(135deg,#059669,var(--success)); } .ticket-balls{ display:flex; justify-content:center; gap:7px; flex-wrap:wrap; } .ticket-balls .ball{ width:38px; height:38px; font-size:14px; } .ticket-balls .ball.pb{ width:42px; height:42px; margin-left:5px; } .manual-grid{ display:grid; grid-template-columns:repeat(5,1fr) 1fr; gap:6px; } .manual-grid input{ text-align:center; padding:9px 3px; } .saved-ticket{ background:#0f172a; border:1px solid var(--border); border-radius:12px; padding:11px; margin-top:8px; } .saved-head{ display:flex; justify-content:space-between; align-items:center; gap:8px; } .saved-name{ font-weight:800; font-size:13px; } .saved-meta{ color:var(--muted); font-size:10px; margin-top:3px; } .saved-actions{ display:flex; gap:5px; margin-top:8px; flex-wrap:wrap; } .saved-actions button{ padding:7px 9px; border-radius:8px; background:#334155; color:white; font-size:11px; } .saved-actions .delete{ background:#7f1d1d; } .empty{ color:var(--muted); text-align:center; padding:12px 4px; font-size:13px; } .stats-subsection{margin-top:14px;padding-top:10px;border-top:1px solid var(--border);} .stats-subsection:first-child{margin-top:0;padding-top:0;border-top:0;} .section-note{ color:var(--muted); font-size:11px; line-height:1.5; } .stat-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:8px; } .stat{ background:#0f172a; border:1px solid var(--border); border-radius:12px; padding:11px; text-align:center; } .stat-value{ font-size:20px; font-weight:900; } .stat-label{ font-size:10px; color:var(--muted); margin-top:2px; } .table-wrap{ overflow-x:auto; } table{ width:100%; border-collapse:collapse; font-size:11px; } th, td{ padding:8px 5px; border-bottom:1px solid var(--border); text-align:center; white-space:nowrap; } th{ color:var(--accent); font-weight:800; } .progress{ height:9px; background:#0f172a; border-radius:99px; overflow:hidden; margin:10px 0; border:1px solid var(--border); } .progress-bar{ width:0%; height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:width .2s; } .action-row{ display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; } .file-label{ display:inline-flex; align-items:center; justify-content:center; padding:10px 13px; border-radius:11px; background:#334155; color:white; font-weight:700; font-size:13px; cursor:pointer; } .file-label input{ display:none; } .checkbox-row{ display:flex; align-items:center; gap:8px; margin-top:9px; color:var(--muted); font-size:12px; } .checkbox-row input{ width:18px; height:18px; } footer{ color:var(--muted); text-align:center; font-size:10px; line-height:1.5; padding:10px 8px 20px; } .toast{ position:fixed; left:50%; bottom:calc(22px + env(safe-area-inset-bottom)); transform:translate(-50%,120px); background:#020617; border:1px solid var(--border); color:white; padding:11px 15px; border-radius:12px; box-shadow:var(--shadow); font-size:12px; z-index:9999; transition:.25s; max-width:90%; text-align:center; } .toast.show{ transform:translate(-50%,0); } .loading{ opacity:.65; pointer-events:none; } @media(max-width:430px){ .manual-grid{ grid-template-columns:repeat(5,1fr); } .manual-grid .pb-input{ grid-column:1/-1; } .controls{ grid-template-columns:1fr; } .generator-controls{ grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr) minmax(0,1.3fr) !important; gap:4px; } .generator-controls .control-group{min-width:0;} .generator-controls label{font-size:10px;} .generator-controls select{font-size:11px;padding:8px 5px;} .generate-row{ grid-template-columns:1fr; } .draw-date{ width:72px; } .ball{ width:27px; height:27px; } .compact-head{gap:5px;} .compact-head h2{font-size:15px;white-space:nowrap;} #latestCount{min-width:56px !important;padding:6px 4px !important;font-size:10px !important;} .compact-head .btn.small{padding:6px 7px;font-size:10px;} } </style> </head><body>
 <div class="container">
 
 <header>
-<h1>🎱 SuperLotto Plus AI Lab V6.3.1</h1>
-<p>Statistics • Strategies • Backtesting</p>
+  <h1>SuperLotto Plus AI Lab V6.3.1</h1>
+  <div class="subtitle">Historical analysis • AI ticket generation • Backtesting</div>
 </header>
 
-<!-- Current Estimated Jackpot -->
-<section class="card jackpot-card">
-
-<div class="section-title">
-<span>💰 Current Estimated Jackpot</span>
-<button id="refreshBtn" class="small-btn">Refresh</button>
+<div class="card jackpot">
+  <div class="jackpot-label">Current Estimated Jackpot</div>
+  <div id="jackpot" class="jackpot-value">—</div>
+  <div id="cashValue" class="cash">Cash Value: —</div>
+  <div id="ticketCost" class="next">Ticket Cost: $1 • Next Drawing: —</div>
+  <div id="syncStatus" class="status">Waiting for data update…</div>
 </div>
 
-<div class="jackpot">
-<span id="jackpot">—</span>
+<div class="card compact-card">
+  <div class="compact-head">
+    <h2 id="latestTitle">Last 2 Drawings</h2>
+    <select id="latestCount" style="width:auto;min-width:62px;padding:7px 8px;">
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+    <button id="refreshBtn" class="btn small">↻ Refresh</button>
+  </div>
+  <div id="latestDraws"></div>
 </div>
 
-<div class="next">
-<span id="cashValue">Cash Value: —</span>
-&nbsp; • &nbsp;
-<span id="ticketCost">Ticket Cost: $1</span>
-&nbsp; • &nbsp;
-<span id="nextDrawing">Next Drawing: —</span>
+<div class="card">
+  <div class="generator-header">
+    <h2>AI Ticket Generator</h2>
+    <button id="generateBtn" class="btn generator-btn">Generate Tickets</button>
+  </div>
+
+  <div class="controls generator-controls">
+
+    <div class="control-group">
+      <label for="strategy">Strategy</label>
+      <select id="strategy">
+        <option value="random">Random</option>
+        <option value="balanced">Balanced Odd / Even</option>
+        <option value="hot">Hot Numbers</option>
+        <option value="cold">Cold Numbers</option>
+        <option value="hotcold">Hot + Cold Mix</option>
+        <option value="spread">Good Spread</option>
+        <option value="weighted">Weighted Frequency</option>
+        <option value="weightedBalanced">Weighted + Balanced</option>
+        <option value="lowhigh">Low + High Mix</option>
+        <option value="recency">Recency</option>
+        <option value="hybrid">Hybrid AI</option>
+        <option value="overdue">Overdue Numbers</option>
+        <option value="decades">Decade Spread</option>
+        <option value="sum">Sum Balanced</option>
+        <option value="pair">Pair Boost</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="ticketCount">Number of Tickets</label>
+      <select id="ticketCount">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5" selected>5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+
+    <div class="control-group strategy-window-group">
+      <label for="strategyWindow">Strategy Analysis History</label>
+      <select id="strategyWindow">
+        <option value="10">Last 10</option>
+        <option value="25">Last 25</option>
+        <option value="50">Last 50</option>
+        <option value="100" selected>Last 100</option>
+        <option value="all">All Available</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div id="generatedTickets"></div>
 </div>
 
-<div id="syncStatus" class="status">
-Waiting for SuperLotto Plus data…
+<div class="card">
+  <div class="compact-head">
+    <h2>Saving Numbers</h2>
+    <button id="saveManualBtn" class="btn small success">Save</button>
+  </div>
+
+  <div id="savedNumbers" class="saved-top"></div>
+
+  <div class="manual-entry-wrap">
+    <div class="manual-entry-head">Manual Entry</div>
+
+    <div class="compact-manual-grid">
+      <input id="m1" type="number" min="1" max="47" placeholder="1">
+      <input id="m2" type="number" min="1" max="47" placeholder="2">
+      <input id="m3" type="number" min="1" max="47" placeholder="3">
+      <input id="m4" type="number" min="1" max="47" placeholder="4">
+      <input id="m5" type="number" min="1" max="47" placeholder="5">
+      <input id="mpb" type="number" min="1" max="27" placeholder="SB">
+    </div>
+
+    <div class="action-row manual-actions">
+      <button id="clearManualBtn" class="btn small secondary">Clear</button>
+    </div>
+  </div>
 </div>
 
-</section>
+<div class="card">
+  <div class="compact-head">
+    <h2>Historical Statistics</h2>
+    <select id="statsWindow" style="width:auto;min-width:105px;padding:7px 8px;">
+      <option value="20">Last 20</option>
+      <option value="50">Last 50</option>
+      <option value="100" selected>Last 100</option>
+      <option value="all">All Available</option>
+    </select>
+  </div>
 
-<!-- Last Drawings -->
-<section class="card">
-
-<div class="section-title">
-<span>🎯 Last Drawings</span>
-
-<div style="display:flex;align-items:center;gap:6px">
-
-<select id="latestCount" style="width:auto">
-<option value="2" selected>2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-</select>
-
-<button id="refreshBtn2" class="small-btn">↻</button>
-
-</div>
+  <div id="statsDataInfo" class="section-note"></div>
+  <div id="statsOutput"></div>
 </div>
 
-<div id="latestDrawings" class="draws"></div>
+<div class="card">
+  <h2>Strategy Backtesting</h2>
 
-</section>
+  <div class="controls">
+    <div class="control-group">
+      <label for="minTraining">Minimum Training Drawings</label>
+      <select id="minTraining">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30" selected>30</option>
+        <option value="50">50</option>
+      </select>
+    </div>
 
-<!-- AI Ticket Generator -->
-<section class="card">
+    <div class="control-group">
+      <label for="recencyWindow">Recency Window</label>
+      <select id="recencyWindow">
+        <option value="0" selected>All Training Data</option>
+        <option value="10">Last 10</option>
+        <option value="20">Last 20</option>
+        <option value="30">Last 30</option>
+        <option value="50">Last 50</option>
+        <option value="100">Last 100</option>
+      </select>
+    </div>
+  </div>
 
-<div class="section-title">
-<span>🤖 AI Ticket Generator</span>
+  <div class="action-row">
+    <button id="backtestBtn" class="btn">Run Backtest</button>
+  </div>
 
-<button id="generateBtn" class="btn">
-Generate Tickets
-</button>
+  <div id="progressArea" style="display:none;margin-top:10px;">
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+    <div id="progressText" class="section-note"></div>
+  </div>
 
+  <div id="backtestOutput"></div>
 </div>
 
-<div class="controls">
+<div class="card">
+  <h2>Automatic Update</h2>
 
-<div>
-<label for="strategy">Strategy</label>
+  <div class="control-group">
+    <label for="workerUrl">Cloudflare Worker URL</label>
+    <input
+      id="workerUrl"
+      type="url"
+      placeholder="https://your-worker.your-subdomain.workers.dev"
+      autocomplete="off"
+    >
+  </div>
 
-<select id="strategy">
-<option value="balanced">Balanced</option>
-<option value="hot">Hot Numbers</option>
-<option value="cold">Cold Numbers</option>
-<option value="overdue">Overdue</option>
-<option value="frequency">Frequency</option>
-<option value="random">Random</option>
-<option value="sum">Sum Balanced</option>
-<option value="spread">Spread</option>
-<option value="oddEven">Odd / Even</option>
-<option value="lowHigh">Low / High</option>
-<option value="decade">Decade Balanced</option>
-</select>
+  <label class="checkbox-row">
+    <input id="updateOnOpen" type="checkbox" checked>
+    <span>Automatically update when the app opens</span>
+  </label>
 
+  <div class="action-row">
+    <button id="saveSettingsBtn" class="btn small">Save Settings</button>
+    <button id="updateNowBtn" class="btn small success">Update Now</button>
+  </div>
+
+  <div id="updateMessage" class="section-note" style="margin-top:9px;"></div>
 </div>
 
-<div>
-<label for="ticketCount">Tickets</label>
+<div class="card">
+  <h2>Data Tools</h2>
 
-<select id="ticketCount">
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="5">5</option>
-<option value="10">10</option>
-<option value="20">20</option>
-</select>
+  <div class="action-row">
+    <button id="exportCsvBtn" class="btn small">Export CSV</button>
+    <button id="exportJsonBtn" class="btn small">Export JSON</button>
 
+    <label class="file-label">
+      Import CSV
+      <input id="csvFile" type="file" accept=".csv,text/csv">
+    </label>
+
+    <button id="resetDbBtn" class="btn small danger">Reset Database</button>
+  </div>
 </div>
 
-<div>
-<label for="strategyWindow">Strategy Analysis History</label>
-
-<select id="strategyWindow">
-<option value="20">Last 20</option>
-<option value="50">Last 50</option>
-<option value="100" selected>Last 100</option>
-</select>
-</div>
+<footer>
+  SuperLotto Plus AI Lab V6.3.1<br>
+  Historical analysis is for informational purposes only. Lottery outcomes are random.
+</footer>
 
 </div>
-
-<div id="generatedTickets" class="generated"></div>
-
-</section> </head> <body> <div class="container"> <header> <h1>SuperLotto Plus AI Lab V6.3.1</h1> <div class="subtitle">Version 6.3 • Statistics • Strategies • Backtesting</div> </header> <section class="card jackpot"> <div class="jackpot-label">Current Estimated Jackpot</div> <div id="jackpot" class="jackpot-value">—</div> <div id="cashValue" class="cash">Cash Value: —</div> <div class="next" id="ticketCost">Ticket Cost: $1 &nbsp; • &nbsp; Next Drawing: —</div> <div id="syncStatus" class="status">Waiting for automatic update…</div> </section> <section class="card compact-card"> <div class="compact-head"> <h2 id="latestTitle">Last 2 Drawings</h2> <div style="display:flex;align-items:center;gap:6px;min-width:0">
-<select id="latestCount" aria-label="Number of latest drawings" style="width:auto;min-width:68px;padding:7px 8px;font-size:11px"> <option value="2" selected>2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> <option value="6">6</option> <option value="7">7</option> <option value="8">8</option> <option value="9">9</option> <option value="10">10</option> </select> <button class="btn small" id="refreshBtn">↻ Refresh</button>
-</div> </div> <div id="latestDraws">
-</div> </section> <section class="card"> <div class="generator-header">
-<h2>🎯 AI Ticket Generator</h2>
-<button class="btn generator-btn" id="generateBtn">Generate Tickets</button>
-</div>
-<div class="controls generator-controls"> <div class="control-group"> <label for="strategy">Strategy</label> <select id="strategy"> <option value="random">Random</option> <option value="balanced">Balanced Odd / Even</option> <option value="hot">Hot Numbers</option> <option value="cold">Cold Numbers</option> <option value="hotcold">Hot + Cold Mix</option> <option value="spread">Good Spread</option> <option value="weighted">Weighted Frequency</option> <option value="weightedBalanced" selected> Weighted + Balanced ⭐ </option> <option value="lowhigh">Low + High Mix</option> <option value="recency">Recency</option> <option value="hybrid">Hybrid AI</option> <option value="overdue">Overdue Numbers</option> <option value="decades">Decade Spread</option> <option value="sum">Sum Balanced</option> <option value="pair">Pair Boost</option> </select> </div> <div class="control-group"> <label for="ticketCount">Number of Tickets</label> <select id="ticketCount"> <option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> <option>6</option> <option>7</option> <option>8</option> <option>9</option> <option>10</option> <option>15</option> <option>20</option> </select> </div> <div class="control-group strategy-window-group"> <label for="strategyWindow">Strategy Analysis History</label> <select id="strategyWindow"> <option value="20">Last 20 drawings</option> <option value="30">Last 30 drawings</option> <option value="50">Last 50 drawings</option> <option value="100" selected>Last 100 drawings</option> <option value="200">Last 200 drawings</option> <option value="500">Last 500 drawings</option> <option value="all">All Available Drawings</option> </select> </div> </div> <div id="generatedTickets">
-</div> </section> <section class="card"> <h2>💾 Saving Numbers</h2> <div class="saved-top"> <div id="savedNumbers">
-</div> </div> <div class="manual-entry-wrap"> <div class="manual-entry-head">Manual Entry</div> <div class="manual-grid compact-manual-grid"> <input id="m1" type="number" min="1" max="47" placeholder="1"> <input id="m2" type="number" min="1" max="47" placeholder="2"> <input id="m3" type="number" min="1" max="47" placeholder="3"> <input id="m4" type="number" min="1" max="47" placeholder="4"> <input id="m5" type="number" min="1" max="47" placeholder="5"> <input id="mpb" class="pb-input" type="number" min="1" max="27" placeholder="PB"> </div> <div class="action-row"> <button class="btn success" id="saveManualBtn"> Save Manual Numbers </button> <button class="btn secondary" id="clearManualBtn"> Clear </button> </div> </div> </section> <section class="card"> <h2>📊 Historical Statistics</h2> <div class="controls"> <div class="control-group"> <label for="statsWindow">Analysis Window</label> <select id="statsWindow"> <option value="20">Last 20</option> <option value="30" selected>Last 30</option> <option value="50">Last 50</option> <option value="100">Last 100</option> <option value="all">All Available</option> </select> </div> <div class="control-group"> <label>Statistics</label> <div class="section-note" style="padding:10px;border:1px solid var(--border);border-radius:10px;background:#0f172a">White Balls + Superball</div> </div> </div> <div id="statsDataInfo" class="section-note" style="margin-top:8px">
-</div>
-<div id="statsOutput" style="margin-top:12px">
-</div> </section> <section class="card"> <h2>🧪 Walk-Forward Backtesting</h2> <p class="section-note"> Each historical draw is tested using only draws that occurred before it. This prevents future information from leaking into the training data. Results are historical research, not predictions. </p> <div class="controls"> <div class="control-group"> <label for="minTraining">Minimum Training Draws</label> <select id="minTraining"> <option value="10">10</option> <option value="15" selected>15</option> <option value="20">20</option> <option value="30">30</option> <option value="50">50</option> </select> </div> <div class="control-group"> <label for="recencyWindow">Recency Window</label> <select id="recencyWindow"> <option value="10">10</option> <option value="20" selected>20</option> <option value="30">30</option> <option value="60">60</option> <option value="120">120</option> </select> </div> </div> <button class="btn" id="backtestBtn" style="margin-top:12px"> Run Walk-Forward Backtest </button> <div id="progressArea" style="display:none"> <div class="progress"> <div id="progressBar" class="progress-bar">
-</div> </div> <div id="progressText" class="section-note"> Running… </div> </div> <div id="backtestOutput" style="margin-top:12px">
-</div> </section> <section class="card"> <h2>🔄 Automatic Update</h2> <div class="control-group"> <label for="workerUrl"> Cloudflare Worker URL </label> <input id="workerUrl" type="url" placeholder="https://your-worker.workers.dev"> </div> <div class="checkbox-row"> <input type="checkbox" id="updateOnOpen" checked> <label for="updateOnOpen"> Automatically update every time the app opens or returns to foreground </label> </div> <div class="action-row"> <button class="btn" id="saveSettingsBtn"> Save Settings </button> <button class="btn secondary" id="updateNowBtn"> Update Now </button> </div> <div id="updateMessage" class="status"> Automatic updates use your Cloudflare Worker. </div> </section> <section class="card"> <h2>🗄 Data Tools</h2> <div class="action-row"> <button class="btn secondary" id="exportCsvBtn"> Export CSV </button> <button class="btn secondary" id="exportJsonBtn"> Export JSON </button> <label class="file-label"> Import CSV <input id="csvFile" type="file" accept=".csv,text/csv"> </label> </div> <div class="action-row"> <button class="btn danger" id="resetDbBtn"> Reset Historical Database </button> </div> <p class="section-note"> Historical results are stored locally in your browser. Resetting the historical database does not delete your saved numbers. </p> </section> <footer> SuperLotto Plus AI Lab V6<br> For research and entertainment only. No strategy can predict a random Superball drawing or improve the mathematical odds of a ticket. </footer> </div> <div id="toast" class="toast">
-</div><script> "use strict"; const STORAGE_KEY = "superlotto_plus_ai_lab_v6_draws"; const SETTINGS_KEY = "superlotto_plus_ai_lab_v6_settings"; const SAVED_KEY = "superlotto_plus_ai_lab_v6_saved_numbers"; const OLD_STORAGE_KEY = "superlotto_plus_ai_lab_v5_draws"; const OLD_SETTINGS_KEY = "superlotto_plus_ai_lab_v5_settings"; const SEED_DRAWS = [
+<div id="toast" class="toast"></div><script> "use strict"; const STORAGE_KEY = "superlotto_plus_ai_lab_v6_draws"; const SETTINGS_KEY = "superlotto_plus_ai_lab_v6_settings"; const SAVED_KEY = "superlotto_plus_ai_lab_v6_saved_numbers"; const OLD_STORAGE_KEY = "superlotto_plus_ai_lab_v5_draws"; const OLD_SETTINGS_KEY = "superlotto_plus_ai_lab_v5_settings"; const SEED_DRAWS = [
   {date:"2026-09-09",white:[9,24,28,34,41],pb:6}
 ]; let history = []; let savedNumbers = []; let settings = { workerUrl:"", updateOnOpen:true, strategyWindow:"100", latestCount:"2" }; let lastSyncTime = 0; let updateInProgress = false; const $ = id => document.getElementById(id); function safeGet(key, fallback=null){ try{ const raw = localStorage.getItem(key); if(raw === null) return fallback; return JSON.parse(raw); }catch(e){ return fallback; } } function safeSet(key,value){ try{ localStorage.setItem(key,JSON.stringify(value)); return true; }catch(e){ return false; } } function normalizeDraw(d){ if(!d) return null; const date = String(d.date || d.drawDate || "").slice(0,10); const white = Array.isArray(d.white) ? d.white.map(Number) : Array.isArray(d.numbers) ? d.numbers.slice(0,5).map(Number) : []; const pb = Number( d.pb ?? d.superball ?? d.powerBall ?? d.redBall ); if(!date) return null; if(white.length !== 5) return null; if(white.some(n => !Number.isInteger(n) || n<1 || n>47)) return null; if(new Set(white).size !== 5) return null; if(!Number.isInteger(pb) || pb<1 || pb>27) return null; return { date, white:[...white].sort((a,b)=>a-b), pb }; } function normalizeHistory(arr){ if(!Array.isArray(arr)) return []; const map = new Map(); arr.forEach(d=>{ const n = normalizeDraw(d); if(n) map.set(n.date,n); }); return [...map.values()] .sort((a,b)=>a.date.localeCompare(b.date)); } function loadData(){ let stored = safeGet(STORAGE_KEY,null); if(!stored){ const old = safeGet(OLD_STORAGE_KEY,null); if(Array.isArray(old)){ stored = old; }else if(old && Array.isArray(old.draws)){ stored = old.draws; } } history = normalizeHistory(stored); if(history.length === 0){ history = normalizeHistory(SEED_DRAWS); saveHistory(); } const storedSettings = safeGet(SETTINGS_KEY,null); if(storedSettings && typeof storedSettings === "object"){ settings = { ...settings, ...storedSettings }; }else{ const oldSettings = safeGet(OLD_SETTINGS_KEY,null); if(oldSettings && typeof oldSettings === "object"){ settings = { ...settings, ...oldSettings }; safeSet(SETTINGS_KEY,settings); } } const storedSaved = safeGet(SAVED_KEY,[]); if(Array.isArray(storedSaved)){ savedNumbers = storedSaved; } $("workerUrl").value = settings.workerUrl || ""; $("updateOnOpen").checked = settings.updateOnOpen !== false; if($("strategyWindow")){ $("strategyWindow").value = settings.strategyWindow || "100"; } if($("latestCount")){ $("latestCount").value = settings.latestCount || "2"; } } function saveHistory(){ safeSet(STORAGE_KEY,history); } function saveSaved(){ safeSet(SAVED_KEY,savedNumbers); } function saveSettings(){ settings.workerUrl = $("workerUrl").value.trim(); settings.updateOnOpen = $("updateOnOpen").checked; settings.strategyWindow = $("strategyWindow") ? $("strategyWindow").value : (settings.strategyWindow || "100"); settings.latestCount = $("latestCount") ? $("latestCount").value : (settings.latestCount || "2"); safeSet(SETTINGS_KEY,settings); } function escapeHtml(str){ return String(str) .replaceAll("&","&amp;") .replaceAll("<","&lt;") .replaceAll(">","&gt;") .replaceAll('"',"&quot;") .replaceAll("'","&#039;"); } function formatDate(date){ if(!date) return "—"; const d = new Date(date + "T12:00:00"); if(Number.isNaN(d.getTime())) return date; return d.toLocaleDateString(undefined,{ month:"short", day:"numeric", year:"numeric" }); } function formatDrawingDate(date){ if(!date) return "—"; const raw=String(date).trim(); if(/^(SUN|MON|TUE|WED|THU|FRI|SAT)\b/i.test(raw)) return raw; let d=new Date(raw.includes("T") ? raw : raw+"T12:00:00"); if(Number.isNaN(d.getTime())) d=new Date(raw); if(Number.isNaN(d.getTime())) return raw; return d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric",year:"numeric"}); } function formatMoney(v){ if(v === null || v === undefined || v === "") return "—"; if(typeof v === "number"){ return "$" + v.toLocaleString(); } const s = String(v); if(s.includes("$")) return s; return "$" + s; } function showToast(message){ const t = $("toast"); t.textContent = message; t.classList.add("show"); clearTimeout(showToast.timer); showToast.timer = setTimeout(()=>{ t.classList.remove("show"); },2600); } function randomInt(min,max,rng=Math.random){ return Math.floor(rng()*(max-min+1))+min; } function shuffle(arr,rng=Math.random){ const a = [...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(rng()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; } function sampleUnique(range,count,rng=Math.random){ return shuffle(range,rng).slice(0,count).sort((a,b)=>a-b); } function allWhite(){ return Array.from({length:47},(_,i)=>i+1); } function allPB(){ return Array.from({length:27},(_,i)=>i+1); } function mean(arr){ if(!arr.length) return 0; return arr.reduce((a,b)=>a+b,0)/arr.length; } function median(arr){ if(!arr.length) return 0; const a=[...arr].sort((x,y)=>x-y); const mid=Math.floor(a.length/2); return a.length%2 ? a[mid] : (a[mid-1]+a[mid])/2; } function countsWhite(data){ const c = {}; for(let i=1;i<=47;i++) c[i]=0; data.forEach(d=>{ d.white.forEach(n=>c[n]++); }); return c; } function countsPB(data){ const c = {}; for(let i=1;i<=27;i++) c[i]=0; data.forEach(d=>{ c[d.pb]++; }); return c; } function lastSeenAges(data,maxNum,type="white"){ const ages={}; for(let n=1;n<=maxNum;n++){ ages[n]=data.length+1; } for(let i=data.length-1;i>=0;i--){ const age=data.length-1-i; const nums = type==="pb" ? [data[i].pb] : data[i].white; nums.forEach(n=>{ if(ages[n] > age){ ages[n]=age; } }); } return ages; } function weightedPick(items,weights,rng=Math.random){ let total=0; const safe=weights.map(w=>{ const x=Number(w); return Number.isFinite(x) && x>0 ? x : 0; }); total=safe.reduce((a,b)=>a+b,0); if(total<=0){ return items[randomInt(0,items.length-1,rng)]; } let r=rng()*total; for(let i=0;i<items.length;i++){ r-=safe[i]; if(r<=0){ return items[i]; } } return items[items.length-1]; } function selectWeightedUnique(items,weights,count,rng=Math.random){ const pool=[...items]; const ws=[...weights]; const result=[]; while(result.length<count && pool.length){ const pick=weightedPick(pool,ws,rng); const idx=pool.indexOf(pick); result.push(pick); pool.splice(idx,1); ws.splice(idx,1); } return result.sort((a,b)=>a-b); } function normalizeWeights(weights){ const max=Math.max(...weights,1); return weights.map(w=>w/max); } function getScores(data,strategy){ const c=countsWhite(data); const ages=lastSeenAges(data,47); const freq=allWhite().map(n=>c[n]); const maxFreq=Math.max(...freq,1); const freqScore=n=>{ return (c[n]+1)/(maxFreq+1); }; const recencyScore=n=>{ return Math.exp(-ages[n]/8); }; const overdueScore=n=>{ return ages[n]+1; }; switch(strategy){ case "hot": return allWhite().map(n=>Math.pow(c[n]+1,1.7)); case "cold": return allWhite().map(n=> 1/(c[n]+1) ); case "weighted": return allWhite().map(n=> c[n]+1 ); case "recency": return allWhite().map(n=> recencyScore(n) ); case "hybrid": return allWhite().map(n=> .55*freqScore(n)+ .45*recencyScore(n) ); case "overdue": return allWhite().map(n=> overdueScore(n) ); case "weightedBalanced": return allWhite().map(n=>{ const odd=n%2===1 ? 1.15 : 1; return (c[n]+1)*odd; }); default: return allWhite().map(()=>1); } } function generatePB(strategy,data,rng=Math.random){ if(strategy==="random" || strategy==="balanced" || strategy==="spread" || strategy==="lowhigh" || strategy==="decades" || strategy==="sum"){ return randomInt(1,27,rng); } const nums=allPB(); const c=countsPB(data); const ages=lastSeenAges(data,27,"pb"); let weights; switch(strategy){ case "hot": weights=nums.map(n=>Math.pow(c[n]+1,1.7)); break; case "cold": weights=nums.map(n=>1/(c[n]+1)); break; case "weighted": case "weightedBalanced": weights=nums.map(n=>c[n]+1); break; case "recency": weights=nums.map(n=>Math.exp(-ages[n]/8)); break; case "hybrid": weights=nums.map(n=>{ const max=Math.max(...Object.values(c),1); const f=(c[n]+1)/(max+1); const r=Math.exp(-ages[n]/8); return .55*f+.45*r; }); break; case "overdue": weights=nums.map(n=>ages[n]+1); break; case "hotcold": weights=nums.map(n=>{ return (c[n]+1) * (ages[n]+1)/Math.max(data.length,1); }); break; case "pair": weights=nums.map(n=>c[n]+1); break; default: weights=nums.map(()=>1); } return weightedPick(nums,weights,rng); } function generateBalanced(data,rng){ const odd=allWhite().filter(n=>n%2); const even=allWhite().filter(n=>n%2===0); const oddCount=rng()<.5 ? 2 : 3; return [ ...sampleUnique(odd,oddCount,rng), ...sampleUnique(even,5-oddCount,rng) ].sort((a,b)=>a-b); } function generateSpread(data,rng){ const low=Array.from({length:16},(_,i)=>i+1); const mid=Array.from({length:16},(_,i)=>i+17); const high=Array.from({length:15},(_,i)=>i+33); let result=[ ...sampleUnique(low,1,rng), ...sampleUnique(mid,1,rng), ...sampleUnique(high,1,rng) ]; const remaining=allWhite().filter(n=>!result.includes(n)); result=[ ...result, ...sampleUnique(remaining,2,rng) ]; return result.sort((a,b)=>a-b); } function generateHotCold(data,rng){ const c=countsWhite(data); const sorted=allWhite().sort((a,b)=>c[b]-c[a]); const hotPool=sorted.slice(0,20); const coldPool=sorted.slice(-20); let result=sampleUnique(hotPool,3,rng); const coldCandidates=coldPool.filter(n=>!result.includes(n)); result=[...result,...sampleUnique(coldCandidates,2,rng)]; result=[...new Set(result)]; while(result.length<5){ const n=randomInt(1,47,rng); if(!result.includes(n)) result.push(n); } return result.sort((a,b)=>a-b); } function generateLowHigh(data,rng){ const low=Array.from({length:23},(_,i)=>i+1); const high=Array.from({length:24},(_,i)=>i+24); const lowCount=rng()<.5 ? 2 : 3; return [ ...sampleUnique(low,lowCount,rng), ...sampleUnique(high,5-lowCount,rng) ].sort((a,b)=>a-b); } function generateDecades(data,rng){ const decades=[ [1,10], [11,20], [21,30], [31,40], [41,47] ]; let result=[]; const chosen=shuffle( decades.map((d,i)=>i), rng ).slice(0,5); chosen.forEach(i=>{ result.push( randomInt(decades[i][0],decades[i][1],rng) ); }); return result.sort((a,b)=>a-b); } function generateSumBalanced(data,rng){ const sums=data.map(d=> d.white.reduce((a,b)=>a+b,0) ); const target=median(sums); let best=null; let bestDiff=Infinity; for(let i=0;i<120;i++){ const ticket=sampleUnique(allWhite(),5,rng); const sum=ticket.reduce((a,b)=>a+b,0); const diff=Math.abs(sum-target); if(diff<bestDiff){ best=ticket; bestDiff=diff; } if(diff<=8) break; } return best.sort((a,b)=>a-b); } function generatePairBoost(data,rng){ if(!data.length){ return sampleUnique(allWhite(),5,rng); } const counts=countsWhite(data); const pair={}; data.forEach(d=>{ const nums=d.white; for(let i=0;i<nums.length;i++){ for(let j=i+1;j<nums.length;j++){ const a=nums[i]; const b=nums[j]; const key=a+"-"+b; pair[key]=(pair[key]||0)+1; } } }); let result=[]; const firstPool=allWhite(); const firstWeights=firstPool.map(n=>counts[n]+1); result.push( weightedPick(firstPool,firstWeights,rng) ); while(result.length<5){ const candidates=allWhite() .filter(n=>!result.includes(n)); const weights=candidates.map(n=>{ let score=counts[n]+1; result.forEach(existing=>{ const a=Math.min(existing,n); const b=Math.max(existing,n); score+=2*(pair[a+"-"+b]||0); }); return score; }); result.push( weightedPick(candidates,weights,rng) ); } return result.sort((a,b)=>a-b); } function generateTicket(strategy,data,rng=Math.random){ let white; switch(strategy){ case "random": white=sampleUnique(allWhite(),5,rng); break; case "balanced": white=generateBalanced(data,rng); break; case "hot": white=selectWeightedUnique( allWhite(), getScores(data,"hot"), 5, rng ); break; case "cold": white=selectWeightedUnique( allWhite(), getScores(data,"cold"), 5, rng ); break; case "hotcold": white=generateHotCold(data,rng); break; case "spread": white=generateSpread(data,rng); break; case "weighted": white=selectWeightedUnique( allWhite(), getScores(data,"weighted"), 5, rng ); break; case "weightedBalanced": white=selectWeightedUnique( allWhite(), getScores(data,"weightedBalanced"), 5, rng ); let tries=0; while( tries<40 && !isBalanced(white) ){ white=selectWeightedUnique( allWhite(), getScores(data,"weightedBalanced"), 5, rng ); tries++; } break; case "lowhigh": white=generateLowHigh(data,rng); break; case "recency": white=selectWeightedUnique( allWhite(), getScores(data,"recency"), 5, rng ); break; case "hybrid": white=selectWeightedUnique( allWhite(), getScores(data,"hybrid"), 5, rng ); break; case "overdue": white=selectWeightedUnique( allWhite(), getScores(data,"overdue"), 5, rng ); break; case "decades": white=generateDecades(data,rng); break; case "sum": white=generateSumBalanced(data,rng); break; case "pair": white=generatePairBoost(data,rng); break; default: white=sampleUnique(allWhite(),5,rng); } return { white:white.sort((a,b)=>a-b), pb:generatePB(strategy,data,rng) }; } function isBalanced(white){ const odd=white.filter(n=>n%2).length; return odd===2 || odd===3; } function ballsHtml(white,pb){ return ` <div class="balls"> ${white.map(n=>` <span class="ball">${n}</span> `).join("")} <span class="ball pb">${pb}</span> </div> `; } function renderLatest(){ const target=$("latestDraws"); const count=Math.min(10,Math.max(2,Number($("latestCount")?.value || settings.latestCount || 2))); if($("latestTitle")){ $("latestTitle").textContent=`Last ${count} Drawings`; } const latest=[...history].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,count); if(!latest.length){ target.innerHTML=`<div class="empty">No drawings available.</div>`; return; } target.innerHTML=latest.map(d=>` <div class="draw-row"> <div class="draw-date">${escapeHtml(formatDrawingDate(d.date))}</div> ${ballsHtml(d.white,d.pb)} </div> `).join(""); } function getStatsData(){ const value=$("statsWindow").value; const ordered=[...history].sort((a,b)=>a.date.localeCompare(b.date)); if(value==="all"){ return ordered; } const requested=Number(value); return requested>0 ? ordered.slice(-requested) : ordered; } function renderStatistics(){ const data=getStatsData(); const available=history.length; const selected=$("statsWindow").value; const requested=selected==="all" ? available : Number(selected); const analyzed=data.length; if($("statsDataInfo")){ $("statsDataInfo").innerHTML=selected==="all" ? `<strong>Drawings Analyzed: ${analyzed}</strong> of ${available} available drawings.` : `<strong>Drawings Analyzed: ${analyzed}</strong> (latest ${Math.min(requested,available)} of ${available} available drawings)`; } $("statsOutput").innerHTML=""; if(!data.length){ $("statsOutput").innerHTML=`<div class="empty">No historical data.</div>`; return; } renderWhiteStats(data); renderPBStats(data); }
 function renderWhiteStats(data){ const c=countsWhite(data); const nums=allWhite(); const hot=[...nums].sort((a,b)=>c[b]-c[a]||a-b).slice(0,10); const cold=[...nums].sort((a,b)=>c[a]-c[b]||a-b).slice(0,10); const oddCount=data.map(d=>d.white.filter(n=>n%2).length); const sums=data.map(d=>d.white.reduce((a,b)=>a+b,0)); $("statsOutput").innerHTML+=`<div class="stats-subsection">
@@ -557,354 +259,118 @@ function renderPBStats(data){ const c=countsPB(data); const nums=allPB(); const 
 <div class="balls">${hot.map(n=>`<span class="ball pb" title="${c[n]} appearances">${n}</span>`).join("")}</div>
 <h3>❄️ Cold Superballs</h3>
 <div class="balls">${cold.map(n=>`<span class="ball pb" title="${c[n]} appearances">${n}</span>`).join("")}</div>
-</div>`; }function getStrategyName(value){
-  const el=$("strategy");
-  if(el){
-    const option=el.querySelector(`option[value="${CSS.escape(value)}"]`);
-    if(option) return option.textContent.trim();
-  }
-  return value;
+</div>`; }function strategyName(key){
+  const names={
+    random:"Random",
+    balanced:"Balanced Odd/Even",
+    hot:"Hot Numbers",
+    cold:"Cold Numbers",
+    hotcold:"Hot + Cold",
+    spread:"Spread Across Ranges",
+    weighted:"Frequency Weighted",
+    weightedBalanced:"Weighted + Balanced",
+    lowhigh:"Low/High Balanced",
+    recency:"Recent Trend",
+    hybrid:"Hybrid Frequency + Recency",
+    overdue:"Overdue Numbers",
+    decades:"Decade Spread",
+    sum:"Sum Balanced",
+    pair:"Pair Boost"
+  };
+  return names[key] || key;
 }
 
-function getStrategyData(){
-  const value=$("strategyWindow").value;
-  const ordered=[...history].sort((a,b)=>a.date.localeCompare(b.date));
-  if(value==="all") return ordered;
-  const requested=Number(value);
-  return requested>0 ? ordered.slice(-requested) : ordered;
-}
-
-function renderGeneratedTickets(tickets,strategy){
-  const target=$("generatedTickets");
-  if(!target) return;
-  if(!tickets.length){
-    target.innerHTML=`<div class="empty">No tickets generated.</div>`;
-    return;
+function renderGenerator(){
+  const strategy=$("strategy").value;
+  const count=Math.min(20,Math.max(1,Number($("ticketCount").value||1)));
+  const windowValue=$("strategyWindow").value;
+  let data=[...history].sort((a,b)=>a.date.localeCompare(b.date));
+  if(windowValue!=="all"){
+    data=data.slice(-Number(windowValue));
   }
-  target.innerHTML=tickets.map((t,i)=>`
-    <div class="generated-ticket">
-      <div class="ticket-title">
-        Ticket ${i+1}
-        <span class="ticket-strategy">${escapeHtml(getStrategyName(strategy))}</span>
-      </div>
+  if(!data.length) data=[...SEED_DRAWS];
+
+  const tickets=[];
+  const seen=new Set();
+  let guard=0;
+
+  while(tickets.length<count && guard<500){
+    guard++;
+    const ticket=generateTicket(strategy,data);
+    const key=ticket.white.join("-")+"-"+ticket.pb;
+    if(!seen.has(key)){
+      seen.add(key);
+      tickets.push(ticket);
+    }
+  }
+
+  $("generatedTickets").innerHTML=tickets.map((t,i)=>`
+    <div class="ticket">
+      <div class="ticket-title">Ticket ${i+1}</div>
       ${ballsHtml(t.white,t.pb)}
     </div>
   `).join("");
 }
 
-function generateTickets(){
-  const strategy=$("strategy").value;
-  const count=Math.max(1,Math.min(20,Number($("ticketCount").value)||1));
-  const data=getStrategyData();
-  const tickets=[];
-  for(let i=0;i<count;i++){
-    tickets.push(generateTicket(strategy,data));
-  }
-  renderGeneratedTickets(tickets,strategy);
-  showToast(`${count} ticket${count===1?"":"s"} generated`);
-}
-
-function renderSavedNumbers(){
+function renderSaved(){
   const target=$("savedNumbers");
-  if(!target) return;
   if(!savedNumbers.length){
-    target.innerHTML=`<div class="empty">No saved numbers yet.</div>`;
+    target.innerHTML=`<div class="empty">No saved numbers.</div>`;
     return;
   }
-  target.innerHTML=savedNumbers.map((ticket,index)=>`
-    <div class="saved-ticket">
-      <div class="saved-ticket-head">
-        <strong>Saved ${index+1}</strong>
-        <button class="btn danger small" data-delete-saved="${index}">Delete</button>
-      </div>
+
+  target.innerHTML=savedNumbers.map((s,i)=>`
+    <div class="saved-row">
+      <div class="saved-label">Saved ${i+1}</div>
       <div class="saved-edit">
-        ${ticket.white.map((n,i)=>`
-          <input type="number" min="1" max="47"
-                 data-saved-index="${index}"
-                 data-white-index="${i}"
-                 value="${n}">
+        ${s.white.map((n,j)=>`
+          <input
+            class="saved-input"
+            data-save="${i}"
+            data-white="${j}"
+            type="number"
+            min="1"
+            max="47"
+            value="${n}"
+          >
         `).join("")}
-        <input class="pb-input" type="number" min="1" max="27"
-               data-saved-index="${index}"
-               data-pb="true"
-               value="${ticket.pb}">
+        <input
+          class="saved-input special"
+          data-save="${i}"
+          data-pb="1"
+          type="number"
+          min="1"
+          max="27"
+          value="${s.pb}"
+        >
+        <button class="btn small danger" data-delete-save="${i}">Delete</button>
       </div>
     </div>
   `).join("");
-
-  target.querySelectorAll("[data-delete-saved]").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      const index=Number(btn.dataset.deleteSaved);
-      savedNumbers.splice(index,1);
-      saveSaved();
-      renderSavedNumbers();
-      showToast("Saved numbers deleted");
-    });
-  });
-
-  target.querySelectorAll("[data-saved-index]").forEach(input=>{
-    input.addEventListener("change",()=>{
-      const index=Number(input.dataset.savedIndex);
-      if(!savedNumbers[index]) return;
-
-      if(input.dataset.pb){
-        const value=Number(input.value);
-        if(!Number.isInteger(value)||value<1||value>27){
-          input.value=savedNumbers[index].pb;
-          return;
-        }
-        savedNumbers[index].pb=value;
-      }else{
-        const wi=Number(input.dataset.whiteIndex);
-        const value=Number(input.value);
-        if(!Number.isInteger(value)||value<1||value>47){
-          input.value=savedNumbers[index].white[wi];
-          return;
-        }
-        const copy=[...savedNumbers[index].white];
-        copy[wi]=value;
-        if(new Set(copy).size!==5){
-          input.value=savedNumbers[index].white[wi];
-          showToast("White numbers must be unique");
-          return;
-        }
-        savedNumbers[index].white=copy.sort((a,b)=>a-b);
-      }
-      saveSaved();
-    });
-  });
 }
 
-function readManualNumbers(){
-  const white=[
-    Number($("m1").value),
-    Number($("m2").value),
-    Number($("m3").value),
-    Number($("m4").value),
-    Number($("m5").value)
-  ];
-  const pb=Number($("mpb").value);
-
-  if(white.some(n=>!Number.isInteger(n)||n<1||n>47)){
-    showToast("Enter white numbers from 1–47");
-    return null;
-  }
-  if(new Set(white).size!==5){
-    showToast("White numbers must be unique");
-    return null;
-  }
-  if(!Number.isInteger(pb)||pb<1||pb>27){
-    showToast("Enter Superball from 1–27");
-    return null;
-  }
-
-  return {
-    white:white.sort((a,b)=>a-b),
-    pb
-  };
+function renderAll(){
+  renderLatest();
+  renderGenerator();
+  renderSaved();
+  renderStatistics();
 }
 
-function clearManual(){
-  ["m1","m2","m3","m4","m5","mpb"].forEach(id=>{
-    if($(id)) $(id).value="";
-  });
-}
-
-function saveManualNumbers(){
-  const ticket=readManualNumbers();
-  if(!ticket) return;
-
-  savedNumbers.push(ticket);
-  saveSaved();
-  renderSavedNumbers();
-  clearManual();
-  showToast("Numbers saved");
-}
-
-function seededRandom(seed){
-  let t=seed>>>0;
-  return function(){
-    t+=0x6D2B79F5;
-    let x=t;
-    x=Math.imul(x^(x>>>15),x|1);
-    x^=x+Math.imul(x^(x>>>7),x|61);
-    return ((x^(x>>>14))>>>0)/4294967296;
-  };
-}
-
-function getBacktestData(){
-  return [...history].sort((a,b)=>a.date.localeCompare(b.date));
-}
-
-async function runBacktest(){
-  const data=getBacktestData();
-  const minTraining=Math.max(1,Number($("minTraining").value)||15);
-  const recency=Math.max(1,Number($("recencyWindow").value)||20);
-
-  if(data.length<=minTraining){
-    $("backtestOutput").innerHTML=
-      `<div class="empty">Not enough historical drawings for backtesting.</div>`;
-    return;
-  }
-
-  $("progressArea").style.display="block";
-  $("backtestOutput").innerHTML="";
-  $("progressBar").style.width="0%";
-  $("progressText").textContent="Starting backtest…";
-
-  const strategies=[
-    "random","balanced","hot","cold","hotcold",
-    "spread","weighted","weightedBalanced","lowhigh",
-    "recency","hybrid","overdue","decades","sum","pair"
-  ];
-
-  const results={};
-  strategies.forEach(s=>{
-    results[s]={
-      whiteHits:0,
-      pbHits:0,
-      totalHits:0,
-      tested:0
-    };
-  });
-
-  const total=data.length-minTraining;
-
-  for(let i=minTraining;i<data.length;i++){
-    const training=data.slice(Math.max(0,i-recency),i);
-    const actual=data[i];
-
-    strategies.forEach((strategy,sIndex)=>{
-      const rng=seededRandom((i+1)*1009+(sIndex+1)*7919);
-      const ticket=generateTicket(strategy,training,rng);
-
-      const whiteHits=ticket.white.filter(n=>actual.white.includes(n)).length;
-      const pbHits=ticket.pb===actual.pb ? 1:0;
-
-      results[strategy].whiteHits+=whiteHits;
-      results[strategy].pbHits+=pbHits;
-      results[strategy].totalHits+=whiteHits+pbHits;
-      results[strategy].tested++;
-    });
-
-    const pct=Math.round(((i-minTraining+1)/total)*100);
-    $("progressBar").style.width=pct+"%";
-    $("progressText").textContent=`Testing draw ${i-minTraining+1} of ${total} (${pct}%)`;
-
-    if(i%10===0){
-      await new Promise(resolve=>setTimeout(resolve,0));
-    }
-  }
-
-  const rows=strategies.map(strategy=>{
-    const r=results[strategy];
-    const avgWhite=r.tested ? (r.whiteHits/r.tested).toFixed(2):"0.00";
-    const pbRate=r.tested ? ((r.pbHits/r.tested)*100).toFixed(1):"0.0";
-    const avgTotal=r.tested ? (r.totalHits/r.tested).toFixed(2):"0.00";
-
-    return `
-      <tr>
-        <td>${escapeHtml(getStrategyName(strategy))}</td>
-        <td>${avgWhite}</td>
-        <td>${pbRate}%</td>
-        <td>${avgTotal}</td>
-      </tr>
-    `;
-  }).join("");
-
-  $("backtestOutput").innerHTML=`
-    <div class="section-note">
-      Tested <strong>${total}</strong> historical drawings using
-      up to the previous <strong>${recency}</strong> drawings for training.
-    </div>
-    <div class="table-wrap">
-      <table class="stats-table">
-        <thead>
-          <tr>
-            <th>Strategy</th>
-            <th>Avg White Hits</th>
-            <th>Superball Rate</th>
-            <th>Avg Total Hits</th>
-          </tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </div>
-  `;
-
-  $("progressBar").style.width="100%";
-  $("progressText").textContent="Backtest complete";
-}
-
-function updateJackpotInfo(data){
-  if(!data || typeof data!=="object") return;
-
-  if($("jackpot")){
-    $("jackpot").textContent=data.jackpot || "—";
-  }
-
-  if($("cashValue")){
-    $("cashValue").textContent=
-      "Cash Value: " + (data.cashValue || "—");
-  }
-
-  if($("nextDrawing")){
-    $("nextDrawing").textContent=
-      "Next Drawing: " + (data.nextDrawing || "—");
-  }
-
-  if(data.ticketCost && $("ticketCost")){
-    $("ticketCost").textContent=
-      "Ticket Cost: " + data.ticketCost +
-      "  •  Next Drawing: " + (data.nextDrawing || "—");
-  }
-
-  if(data.updatedAt){
-    lastSyncTime=Date.now();
-    $("syncStatus").textContent=
-      "Updated " + new Date(data.updatedAt).toLocaleString();
-  }
-}
-
-function mergeWorkerDraws(draws){
-  if(!Array.isArray(draws)) return 0;
-
-  const before=history.length;
-  const map=new Map(history.map(d=>[d.date,d]));
-
-  draws.forEach(raw=>{
-    const d=normalizeDraw(raw);
-    if(d) map.set(d.date,d);
-  });
-
-  history=[...map.values()]
-    .sort((a,b)=>a.date.localeCompare(b.date));
-
-  saveHistory();
-  return history.length-before;
-}
-
-async function updateFromWorker(showMessage=true){
+async function updateFromWorker(){
   if(updateInProgress) return;
 
-  const status=$("updateMessage");
   const raw=(settings.workerUrl || "").trim();
-
   if(!raw){
-    if(showMessage){
-      status.textContent=
-        "Enter your Cloudflare Worker URL first.";
-      showToast("Worker URL is not set");
-    }
+    $("syncStatus").textContent="Worker URL not configured";
+    $("updateMessage").textContent="Enter your deployed Cloudflare Worker URL first.";
     return;
   }
 
   updateInProgress=true;
+  $("syncStatus").textContent="Updating…";
+  $("updateMessage").textContent="Fetching official SuperLotto Plus data…";
 
   try{
-    status.textContent="Updating SuperLotto Plus data…";
-    $("syncStatus").textContent="Updating…";
-
     let url=raw.replace(/\/$/,"");
 
     if(!/\/api\/superlotto$/i.test(url)){
@@ -920,86 +386,59 @@ async function updateFromWorker(showMessage=true){
       throw new Error(`Worker returned HTTP ${response.status}`);
     }
 
-    const data=await response.json();
+    const payload=await response.json();
 
-    if(!data || !Array.isArray(data.draws)){
-      throw new Error("Worker response does not contain drawings");
+    if(!payload || !Array.isArray(payload.draws)){
+      throw new Error("Worker response does not contain a valid draws array.");
     }
 
-    const valid=data.draws
-      .map(normalizeDraw)
-      .filter(Boolean);
+    const normalized=normalizeHistory(payload.draws);
 
-    if(!valid.length){
-      throw new Error("Worker returned no valid SuperLotto Plus drawings");
+    if(!normalized.length){
+      throw new Error("No valid SuperLotto Plus drawings were returned by the Worker.");
     }
 
-    updateJackpotInfo(data);
+    history=normalized;
+    saveHistory();
 
-    const added=mergeWorkerDraws(valid);
+    if(payload.jackpot!==undefined && payload.jackpot!==null){
+      $("jackpot").textContent=payload.jackpot;
+    }
 
-    renderLatest();
-    renderStatistics();
-    renderSavedNumbers();
+    if(payload.cashValue!==undefined && payload.cashValue!==null){
+      $("cashValue").textContent="Cash Value: "+formatMoney(payload.cashValue);
+    }
 
-    status.textContent=
-      `Update complete. ${history.length} historical drawings available.`;
+    if(payload.nextDrawing){
+      $("nextDrawing").textContent=formatDrawingDate(payload.nextDrawing);
+    }
+
+    if(payload.ticketCost){
+      $("ticketCost").innerHTML=
+        `Ticket Cost: ${escapeHtml(payload.ticketCost)} &nbsp; • &nbsp; Next Drawing: ${escapeHtml(formatDrawingDate(payload.nextDrawing || ""))}`;
+    }
+
+    lastSyncTime=Date.now();
+
+    const timestamp=new Date().toLocaleString();
 
     $("syncStatus").textContent=
-      `Updated successfully • ${history.length} drawings`;
+      `Updated ${timestamp} • ${history.length} drawings`;
 
-    if(showMessage){
-      showToast(
-        added>0
-          ? `Updated: ${added} new drawing${added===1?"":"s"}`
-          : "Data is already up to date"
-      );
-    }
+    $("updateMessage").textContent=
+      `Successfully loaded ${history.length} SuperLotto Plus drawings.`;
+
+    renderAll();
+    showToast(`Updated ${history.length} drawings`);
   }catch(error){
     console.error(error);
 
-    status.textContent=
-      "Update failed: " + error.message;
-
     $("syncStatus").textContent="Update failed";
-
-    if(showMessage){
-      showToast("Update failed");
-    }
+    $("updateMessage").textContent=error.message || "Unable to update data.";
+    showToast("Update failed");
   }finally{
     updateInProgress=false;
   }
-}
-
-function exportCSV(){
-  const rows=[
-    ["Date","White 1","White 2","White 3","White 4","White 5","Superball"]
-  ];
-
-  history.forEach(d=>{
-    rows.push([
-      d.date,
-      ...d.white,
-      d.pb
-    ]);
-  });
-
-  const csv=rows.map(row=>
-    row.map(value=>{
-      const s=String(value??"");
-      return `"${s.replaceAll('"','""')}"`;
-    }).join(",")
-  ).join("\n");
-
-  const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download="superlotto-plus-history.csv";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
 }
 
 function exportJSON(){
@@ -1011,7 +450,7 @@ function exportJSON(){
 
   const blob=new Blob(
     [JSON.stringify(payload,null,2)],
-    {type:"application/json;charset=utf-8"}
+    {type:"application/json"}
   );
 
   const url=URL.createObjectURL(blob);
@@ -1024,176 +463,374 @@ function exportJSON(){
   URL.revokeObjectURL(url);
 }
 
-function importCSV(file){
-  if(!file) return;
+function exportCSV(){
+  const rows=[
+    ["Date","White 1","White 2","White 3","White 4","White 5","Superball"]
+  ];
 
-  const reader=new FileReader();
+  [...history]
+    .sort((a,b)=>a.date.localeCompare(b.date))
+    .forEach(d=>{
+      rows.push([
+        d.date,
+        ...d.white,
+        d.pb
+      ]);
+    });
 
-  reader.onload=()=>{
-    try{
-      const text=String(reader.result||"");
-      const lines=text.split(/\r?\n/).filter(Boolean);
+  const csv=rows.map(row=>
+    row.map(value=>{
+      const text=String(value);
+      return /[",\n]/.test(text)
+        ? `"${text.replaceAll('"','""')}"`
+        : text;
+    }).join(",")
+  ).join("\n");
 
-      const imported=[];
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="superlotto-plus-history.csv";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
 
-      lines.slice(1).forEach(line=>{
-        const parts=line.split(",").map(x=>
-          x.trim().replace(/^"|"$/g,"")
-        );
+function saveManual(){
+  const inputs=[
+    $("m1"),$("m2"),$("m3"),$("m4"),$("m5")
+  ];
 
-        if(parts.length<7) return;
+  const white=inputs.map(input=>Number(input.value));
+  const pb=Number($("mpb").value);
 
-        imported.push({
-          date:parts[0],
-          white:[
-            Number(parts[1]),
-            Number(parts[2]),
-            Number(parts[3]),
-            Number(parts[4]),
-            Number(parts[5])
-          ],
-          pb:Number(parts[6])
-        });
-      });
+  if(
+    white.some(n=>!Number.isInteger(n)||n<1||n>47) ||
+    new Set(white).size!==5
+  ){
+    showToast("Enter 5 unique white numbers from 1–47.");
+    return;
+  }
 
-      const valid=imported.map(normalizeDraw).filter(Boolean);
+  if(!Number.isInteger(pb)||pb<1||pb>27){
+    showToast("Enter a Superball from 1–27.");
+    return;
+  }
 
-      if(!valid.length){
-        showToast("No valid drawings found in CSV");
-        return;
-      }
+  savedNumbers.push({
+    white:[...white].sort((a,b)=>a-b),
+    pb
+  });
 
-      mergeWorkerDraws(valid);
-      renderLatest();
-      renderStatistics();
+  saveSaved();
+  renderSaved();
 
-      showToast(`${valid.length} drawings imported`);
-    }catch(error){
-      console.error(error);
-      showToast("Could not import CSV");
+  inputs.forEach(input=>input.value="");
+  $("mpb").value="";
+
+  showToast("Numbers saved");
+}
+
+function clearManual(){
+  ["m1","m2","m3","m4","m5","mpb"].forEach(id=>{
+    $(id).value="";
+  });
+}
+
+function handleSavedInput(event){
+  const input=event.target;
+
+  if(!input.matches(".saved-input")) return;
+
+  const index=Number(input.dataset.save);
+
+  if(!savedNumbers[index]) return;
+
+  if(input.dataset.pb){
+    const value=Number(input.value);
+
+    if(Number.isInteger(value)&&value>=1&&value<=27){
+      savedNumbers[index].pb=value;
     }
-  };
+  }else{
+    const position=Number(input.dataset.white);
+    const value=Number(input.value);
 
-  reader.readAsText(file);
+    if(
+      Number.isInteger(value)&&
+      value>=1&&
+      value<=47
+    ){
+      savedNumbers[index].white[position]=value;
+      savedNumbers[index].white.sort((a,b)=>a-b);
+    }
+  }
+
+  saveSaved();
+}
+
+function deleteSaved(index){
+  if(index<0||index>=savedNumbers.length) return;
+
+  savedNumbers.splice(index,1);
+  saveSaved();
+  renderSaved();
+  showToast("Saved numbers deleted");
+}
+
+function backtestTicket(strategy,data){
+  return generateTicket(strategy,data);
+}
+
+function runBacktest(){
+  const minTraining=Math.max(
+    10,
+    Number($("minTraining").value||50)
+  );
+
+  const recencyValue=$("recencyWindow").value;
+
+  let data=[...history]
+    .sort((a,b)=>a.date.localeCompare(b.date));
+
+  if(data.length<=minTraining){
+    $("backtestOutput").innerHTML=
+      `<div class="empty">Not enough historical drawings for backtesting.</div>`;
+    return;
+  }
+
+  let results=[];
+  let correct=0;
+  let total=0;
+
+  $("progressArea").style.display="block";
+  $("progressBar").style.width="0%";
+  $("progressText").textContent="Starting backtest…";
+
+  const maxTests=data.length-minTraining;
+
+  for(let i=minTraining;i<data.length;i++){
+    let training=data.slice(0,i);
+
+    if(recencyValue!=="all"){
+      training=training.slice(-Number(recencyValue));
+    }
+
+    const actual=data[i];
+    const ticket=backtestTicket(
+      $("strategy").value,
+      training
+    );
+
+    const whiteHits=ticket.white.filter(
+      n=>actual.white.includes(n)
+    ).length;
+
+    const pbHit=ticket.pb===actual.pb;
+
+    if(whiteHits>0||pbHit){
+      correct++;
+    }
+
+    total++;
+
+    results.push({
+      date:actual.date,
+      ticket,
+      whiteHits,
+      pbHit
+    });
+
+    const pct=Math.round(
+      ((i-minTraining+1)/maxTests)*100
+    );
+
+    $("progressBar").style.width=pct+"%";
+    $("progressText").textContent=
+      `Testing ${i-minTraining+1} of ${maxTests} (${pct}%)`;
+  }
+
+  const avgWhiteHits=mean(
+    results.map(r=>r.whiteHits)
+  );
+
+  const pbHits=results.filter(r=>r.pbHit).length;
+
+  $("backtestOutput").innerHTML=`
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-value">${total}</div>
+        <div class="stat-label">Drawings Tested</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">${avgWhiteHits.toFixed(2)}</div>
+        <div class="stat-label">Avg White Hits</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">${pbHits}</div>
+        <div class="stat-label">Superball Hits</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">${((correct/Math.max(total,1))*100).toFixed(1)}%</div>
+        <div class="stat-label">Any Hit Rate</div>
+      </div>
+    </div>
+    <div class="backtest-note">
+      Strategy: <strong>${escapeHtml(strategyName($("strategy").value))}</strong>
+      • Training: <strong>${minTraining}</strong>
+      • Tests: <strong>${total}</strong>
+    </div>
+  `;
+
+  $("progressText").textContent=
+    `Backtest complete • ${total} drawings tested`;
+
+  $("progressBar").style.width="100%";
 }
 
 function resetDatabase(){
-  const confirmed=confirm(
-    "Reset all historical SuperLotto Plus drawings stored in this browser? Your saved numbers will not be deleted."
-  );
+  if(!confirm(
+    "Reset all locally stored SuperLotto Plus history and saved numbers?"
+  )){
+    return;
+  }
 
-  if(!confirmed) return;
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(SAVED_KEY);
 
   history=normalizeHistory(SEED_DRAWS);
-  saveHistory();
+  savedNumbers=[];
 
-  renderLatest();
-  renderStatistics();
+  saveHistory();
+  saveSaved();
+
+  renderAll();
+
+  $("jackpot").textContent="—";
+  $("cashValue").textContent="Cash Value: —";
+  $("ticketCost").innerHTML=
+    "Ticket Cost: $1 &nbsp; • &nbsp; Next Drawing: —";
 
   $("syncStatus").textContent=
-    "Historical database reset";
+    "Local data reset";
 
-  showToast("Historical database reset");
+  $("updateMessage").textContent=
+    "Local history reset. Use Update Now to retrieve official data.";
+
+  showToast("Database reset");
 }
 
-function bindEvents(){
-  $("generateBtn").addEventListener("click",generateTickets);
+$("generateBtn").addEventListener("click",renderGenerator);
 
-  $("saveManualBtn").addEventListener(
-    "click",
-    saveManualNumbers
-  );
-
-  $("clearManualBtn").addEventListener(
-    "click",
-    clearManual
-  );
-
-  $("latestCount").addEventListener("change",()=>{
-    settings.latestCount=$("latestCount").value;
-    saveSettings();
-    renderLatest();
-  });
-
-  $("refreshBtn").addEventListener("click",()=>{
-    renderLatest();
-  });
-
-  $("statsWindow").addEventListener(
-    "change",
-    renderStatistics
-  );
-
-  $("strategyWindow").addEventListener("change",()=>{
-    settings.strategyWindow=$("strategyWindow").value;
-    saveSettings();
-  });
-
-  $("backtestBtn").addEventListener(
-    "click",
-    runBacktest
-  );
-
-  $("saveSettingsBtn").addEventListener("click",()=>{
-    saveSettings();
-    showToast("Settings saved");
-  });
-
-  $("updateNowBtn").addEventListener(
-    "click",
-    ()=>updateFromWorker(true)
-  );
-
-  $("exportCsvBtn").addEventListener(
-    "click",
-    exportCSV
-  );
-
-  $("exportJsonBtn").addEventListener(
-    "click",
-    exportJSON
-  );
-
-  $("csvFile").addEventListener("change",event=>{
-    const file=event.target.files?.[0];
-    importCSV(file);
-    event.target.value="";
-  });
-
-  $("resetDbBtn").addEventListener(
-    "click",
-    resetDatabase
-  );
-
-  document.addEventListener("visibilitychange",()=>{
-    if(
-      document.visibilityState==="visible" &&
-      settings.updateOnOpen
-    ){
-      updateFromWorker(false);
-    }
-  });
-}
-
-function initialize(){
-  loadData();
+$("latestCount").addEventListener("change",()=>{
+  settings.latestCount=$("latestCount").value;
+  saveSettings();
   renderLatest();
-  renderStatistics();
-  renderSavedNumbers();
-  bindEvents();
+});
 
-  if(settings.updateOnOpen){
-    setTimeout(()=>{
-      updateFromWorker(false);
-    },500);
+$("refreshBtn").addEventListener("click",()=>{
+  renderLatest();
+});
+
+$("strategyWindow").addEventListener("change",()=>{
+  settings.strategyWindow=$("strategyWindow").value;
+  saveSettings();
+});
+
+$("statsWindow").addEventListener("change",renderStatistics);
+
+$("saveManualBtn").addEventListener("click",saveManual);
+
+$("clearManualBtn").addEventListener("click",clearManual);
+
+$("savedNumbers").addEventListener("change",handleSavedInput);
+
+$("savedNumbers").addEventListener("click",event=>{
+  const button=event.target.closest("[data-delete-save]");
+  if(!button) return;
+
+  deleteSaved(Number(button.dataset.deleteSave));
+});
+
+$("backtestBtn").addEventListener("click",runBacktest);
+
+$("saveSettingsBtn").addEventListener("click",()=>{
+  saveSettings();
+  showToast("Settings saved");
+});
+
+$("updateNowBtn").addEventListener("click",()=>{
+  saveSettings();
+  updateFromWorker();
+});
+
+$("exportCsvBtn").addEventListener("click",exportCSV);
+
+$("exportJsonBtn").addEventListener("click",exportJSON);
+
+$("csvFile").addEventListener("change",async event=>{
+  const file=event.target.files?.[0];
+
+  if(!file) return;
+
+  try{
+    const text=await file.text();
+    const lines=text.trim().split(/\r?\n/);
+
+    const imported=[];
+
+    for(let i=1;i<lines.length;i++){
+      const parts=lines[i].split(",");
+
+      if(parts.length<7) continue;
+
+      const draw=normalizeDraw({
+        date:parts[0],
+        white:parts.slice(1,6).map(Number),
+        pb:Number(parts[6])
+      });
+
+      if(draw) imported.push(draw);
+    }
+
+    if(imported.length){
+      history=normalizeHistory([
+        ...history,
+        ...imported
+      ]);
+
+      saveHistory();
+      renderAll();
+
+      showToast(`Imported ${imported.length} drawings`);
+    }else{
+      showToast("No valid drawings found in CSV");
+    }
+  }catch(error){
+    console.error(error);
+    showToast("CSV import failed");
   }
-}
 
-if(document.readyState==="loading"){
-  document.addEventListener("DOMContentLoaded",initialize);
-}else{
-  initialize();
-}
+  event.target.value="";
+});
+
+$("resetDbBtn").addEventListener("click",resetDatabase);
+
+$("updateOnOpen").addEventListener("change",()=>{
+  settings.updateOnOpen=$("updateOnOpen").checked;
+  saveSettings();
+});
+
+window.addEventListener("load",async()=>{
+  loadData();
+  renderAll();
+
+  if(settings.updateOnOpen && settings.workerUrl){
+    await updateFromWorker();
+  }
+});
 </script>
 </body>
 </html>
