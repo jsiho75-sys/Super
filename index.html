@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f172a">
-
 <title>SuperLotto Plus AI Lab V6.3.1</title>
-
 <style>
 :root{
  --bg:#0f172a;
@@ -21,15 +19,8 @@
  --border:#334155;
  --shadow:0 10px 30px rgba(0,0,0,.25);
 }
-
-*{
- box-sizing:border-box;
-}
-
-html{
- background:var(--bg);
-}
-
+*{box-sizing:border-box}
+html{background:var(--bg)}
 body{
  margin:0;
  background:
@@ -41,17 +32,8 @@ body{
  min-height:100vh;
  padding:env(safe-area-inset-top) 12px calc(20px + env(safe-area-inset-bottom));
 }
-
-.container{
- max-width:760px;
- margin:0 auto;
-}
-
-header{
- text-align:center;
- padding:18px 4px 12px;
-}
-
+.container{max-width:760px;margin:0 auto}
+header{text-align:center;padding:18px 4px 12px}
 h1{
  margin:0;
  font-size:30px;
@@ -61,13 +43,7 @@ h1{
  background-clip:text;
  color:transparent;
 }
-
-.subtitle{
- margin-top:5px;
- color:var(--muted);
- font-size:13px;
-}
-
+.subtitle{margin-top:5px;color:var(--muted);font-size:13px}
 .card{
  background:linear-gradient(145deg,rgba(30,41,59,.98),rgba(23,32,51,.98));
  border:1px solid var(--border);
@@ -76,17 +52,8 @@ h1{
  margin:12px 0;
  box-shadow:var(--shadow);
 }
-
-.card h2{
- margin:0 0 12px;
- font-size:18px;
-}
-
-.card h3{
- margin:12px 0 8px;
- font-size:15px;
-}
-
+.card h2{margin:0 0 12px;font-size:18px}
+.card h3{margin:12px 0 8px;font-size:15px}
 .jackpot{
  text-align:center;
  padding:20px 16px;
@@ -94,32 +61,15 @@ h1{
  linear-gradient(135deg,rgba(56,189,248,.16),rgba(129,140,248,.18)),
  var(--card);
 }
-
 .jackpot-label{
  color:var(--muted);
  font-size:13px;
  text-transform:uppercase;
  letter-spacing:.08em;
 }
-
-.jackpot-value{
- font-size:38px;
- font-weight:900;
- margin:4px 0;
-}
-
-.cash{
- color:var(--success);
- font-size:15px;
- font-weight:700;
-}
-
-.next{
- color:var(--muted);
- margin-top:6px;
- font-size:13px;
-}
-
+.jackpot-value{font-size:38px;font-weight:900;margin:4px 0}
+.cash{color:var(--success);font-size:15px;font-weight:700}
+.next{color:var(--muted);margin-top:6px;font-size:13px}
 .status{
  margin-top:10px;
  padding:8px 10px;
@@ -128,19 +78,9 @@ h1{
  color:var(--muted);
  font-size:12px;
 }
-
-.status.ok{
- color:var(--success);
-}
-
-.status.error{
- color:var(--danger);
-}
-
-.compact-card{
- padding:12px 14px;
-}
-
+.status.ok{color:var(--success)}
+.status.error{color:var(--danger)}
+.compact-card{padding:12px 14px}
 .compact-head{
  display:flex;
  justify-content:space-between;
@@ -148,12 +88,7 @@ h1{
  gap:8px;
  margin-bottom:7px;
 }
-
-.compact-head h2{
- margin:0;
- font-size:16px;
-}
-
+.compact-head h2{margin:0;font-size:16px}
 .draw-row{
  display:flex;
  align-items:center;
@@ -161,25 +96,19 @@ h1{
  padding:7px 0;
  border-bottom:1px solid rgba(51,65,85,.65);
 }
-
-.draw-row:last-child{
- border-bottom:0;
-}
-
+.draw-row:last-child{border-bottom:0}
 .draw-date{
  width:82px;
  color:var(--muted);
  font-size:11px;
  flex-shrink:0;
 }
-
 .balls{
  display:flex;
  flex-wrap:wrap;
  gap:4px;
  align-items:center;
 }
-
 .ball{
  width:29px;
  height:29px;
@@ -193,23 +122,12 @@ h1{
  font-size:12px;
  box-shadow:inset 0 -2px 0 rgba(0,0,0,.15);
 }
-
 .ball.pb{
  background:linear-gradient(135deg,#fb7185,#a855f7);
  color:white;
 }
-
-button,
-select,
-input{
- font:inherit;
-}
-
-button{
- border:0;
- cursor:pointer;
-}
-
+button,select,input{font:inherit}
+button{border:0;cursor:pointer}
 .btn{
  padding:10px 13px;
  border-radius:11px;
@@ -218,35 +136,16 @@ button{
  background:linear-gradient(135deg,var(--accent2),var(--accent));
  box-shadow:0 5px 15px rgba(56,189,248,.12);
 }
-
-.btn.small{
- padding:7px 10px;
- font-size:12px;
-}
-
-.btn.secondary{
- background:#334155;
-}
-
-.btn.success{
- background:linear-gradient(135deg,#059669,var(--success));
-}
-
-.btn.danger{
- background:linear-gradient(135deg,#be123c,var(--danger));
-}
-
-.btn:disabled{
- opacity:.5;
- cursor:not-allowed;
-}
-
+.btn.small{padding:7px 10px;font-size:12px}
+.btn.secondary{background:#334155}
+.btn.success{background:linear-gradient(135deg,#059669,var(--success))}
+.btn.danger{background:linear-gradient(135deg,#be123c,var(--danger))}
+.btn:disabled{opacity:.5;cursor:not-allowed}
 .controls{
  display:grid;
  grid-template-columns:1fr 1fr;
  gap:10px;
 }
-
 .generator-header{
  display:flex;
  align-items:center;
@@ -254,87 +153,59 @@ button{
  gap:10px;
  margin-bottom:10px;
 }
-
-.generator-header h2{
- margin:0;
-}
-
+.generator-header h2{margin:0}
 .generator-btn{
  padding:7px 11px;
  font-size:11px;
  line-height:1.1;
  white-space:nowrap;
 }
-
-.saved-top{
- margin-top:10px;
-}
-
+.saved-top{margin-top:10px}
 .manual-entry-wrap{
  margin-top:12px;
  padding-top:10px;
  border-top:1px solid var(--border);
 }
-
 @media(max-width:520px){
- .generator-header{
-  gap:7px;
-  margin-bottom:8px;
- }
-
- .generator-header h2{
-  font-size:17px;
- }
-
- .generator-btn{
-  padding:6px 9px;
-  font-size:10px;
- }
+ .generator-header{gap:7px;margin-bottom:8px}
+ .generator-header h2{font-size:17px}
+ .generator-btn{padding:6px 9px;font-size:10px}
 }
-
 .generator-controls{
- grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr) minmax(0,1.35fr);
+ grid-template-columns:
+ minmax(0,1.25fr)
+ minmax(0,.85fr)
+ minmax(0,1.35fr);
  align-items:end;
 }
-
-.strategy-window-group{
- grid-column:auto;
-}
-
+.strategy-window-group{grid-column:auto}
 .manual-entry-head{
  color:var(--muted);
  font-size:12px;
  font-weight:700;
  margin:10px 0 5px;
 }
-
 .compact-manual-grid{
- grid-template-columns:repeat(5,minmax(0,1fr)) minmax(48px,.75fr);
+ grid-template-columns:
+ repeat(5,minmax(0,1fr))
+ minmax(48px,.75fr);
  gap:5px;
 }
-
 .compact-manual-grid input{
  min-width:0;
  padding:7px 2px;
  font-size:13px;
 }
-
-.manual-actions{
- margin-top:7px;
-}
-
-.manual-actions .btn{
- padding:7px 10px;
- font-size:11px;
-}
-
+.manual-actions{margin-top:7px}
+.manual-actions .btn{padding:7px 10px;font-size:11px}
 .saved-edit-grid{
  display:grid;
- grid-template-columns:repeat(5,minmax(0,1fr)) minmax(48px,.8fr);
+ grid-template-columns:
+ repeat(5,minmax(0,1fr))
+ minmax(48px,.8fr);
  gap:5px;
  margin-top:8px;
 }
-
 .saved-edit-grid input{
  width:100%;
  box-sizing:border-box;
@@ -347,54 +218,33 @@ button{
  color:white;
  font-weight:700;
 }
-
-.saved-edit-grid input.pb-edit{
- border-color:#a855f7;
-}
-
+.saved-edit-grid input.pb-edit{border-color:#a855f7}
 .saved-actions .update{
  background:linear-gradient(135deg,#059669,var(--success));
 }
-
 @media(max-width:520px){
  .generator-controls{
-  grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr) minmax(0,1.35fr);
+  grid-template-columns:
+  minmax(0,1.25fr)
+  minmax(0,.85fr)
+  minmax(0,1.35fr);
   gap:5px;
  }
-
- .generator-controls select{
-  min-width:0;
-  width:100%;
- }
-
- .compact-manual-grid,
- .saved-edit-grid{
-  gap:4px;
- }
-
+ .generator-controls select{min-width:0;width:100%}
+ .compact-manual-grid,.saved-edit-grid{gap:4px}
  .compact-manual-grid input,
  .saved-edit-grid input{
   font-size:12px;
   padding:6px 1px;
  }
 }
-
 .control-group{
  display:flex;
  flex-direction:column;
  gap:5px;
 }
-
-.control-group.full{
- grid-column:1/-1;
-}
-
-label{
- color:var(--muted);
- font-size:12px;
- font-weight:600;
-}
-
+.control-group.full{grid-column:1/-1}
+label{color:var(--muted);font-size:12px;font-weight:600}
 select,
 input[type="number"],
 input[type="text"],
@@ -407,19 +257,13 @@ input[type="url"]{
  padding:10px;
  outline:none;
 }
-
-select:focus,
-input:focus{
- border-color:var(--accent);
-}
-
+select:focus,input:focus{border-color:var(--accent)}
 .generate-row{
  display:grid;
  grid-template-columns:1fr auto;
  gap:10px;
  margin-top:12px;
 }
-
 .ticket{
  background:#0f172a;
  border:1px solid var(--border);
@@ -427,24 +271,14 @@ input:focus{
  padding:12px;
  margin-top:9px;
 }
-
 .ticket-top{
  display:flex;
  justify-content:space-between;
  align-items:center;
  margin-bottom:9px;
 }
-
-.ticket-title{
- font-size:13px;
- font-weight:800;
-}
-
-.ticket-actions{
- display:flex;
- gap:6px;
-}
-
+.ticket-title{font-size:13px;font-weight:800}
+.ticket-actions{display:flex;gap:6px}
 .ticket-actions button{
  font-size:11px;
  padding:6px 8px;
@@ -452,41 +286,34 @@ input:focus{
  background:#334155;
  color:white;
 }
-
 .ticket-actions .save-btn{
  background:linear-gradient(135deg,#059669,var(--success));
 }
-
 .ticket-balls{
  display:flex;
  justify-content:center;
  gap:7px;
  flex-wrap:wrap;
 }
-
 .ticket-balls .ball{
  width:38px;
  height:38px;
  font-size:14px;
 }
-
 .ticket-balls .ball.pb{
  width:42px;
  height:42px;
  margin-left:5px;
 }
-
 .manual-grid{
  display:grid;
  grid-template-columns:repeat(5,1fr) 1fr;
  gap:6px;
 }
-
 .manual-grid input{
  text-align:center;
  padding:9px 3px;
 }
-
 .saved-ticket{
  background:#0f172a;
  border:1px solid var(--border);
@@ -494,32 +321,24 @@ input:focus{
  padding:11px;
  margin-top:8px;
 }
-
 .saved-head{
  display:flex;
  justify-content:space-between;
  align-items:center;
  gap:8px;
 }
-
-.saved-name{
- font-weight:800;
- font-size:13px;
-}
-
+.saved-name{font-weight:800;font-size:13px}
 .saved-meta{
  color:var(--muted);
  font-size:10px;
  margin-top:3px;
 }
-
 .saved-actions{
  display:flex;
  gap:5px;
  margin-top:8px;
  flex-wrap:wrap;
 }
-
 .saved-actions button{
  padding:7px 9px;
  border-radius:8px;
@@ -527,42 +346,33 @@ input:focus{
  color:white;
  font-size:11px;
 }
-
-.saved-actions .delete{
- background:#7f1d1d;
-}
-
+.saved-actions .delete{background:#7f1d1d}
 .empty{
  color:var(--muted);
  text-align:center;
  padding:12px 4px;
  font-size:13px;
 }
-
 .stats-subsection{
  margin-top:14px;
  padding-top:10px;
  border-top:1px solid var(--border);
 }
-
 .stats-subsection:first-child{
  margin-top:0;
  padding-top:0;
  border-top:0;
 }
-
 .section-note{
  color:var(--muted);
  font-size:11px;
  line-height:1.5;
 }
-
 .stat-grid{
  display:grid;
  grid-template-columns:repeat(2,1fr);
  gap:8px;
 }
-
 .stat{
  background:#0f172a;
  border:1px solid var(--border);
@@ -570,41 +380,25 @@ input:focus{
  padding:11px;
  text-align:center;
 }
-
-.stat-value{
- font-size:20px;
- font-weight:900;
-}
-
+.stat-value{font-size:20px;font-weight:900}
 .stat-label{
  font-size:10px;
  color:var(--muted);
  margin-top:2px;
 }
-
-.table-wrap{
- overflow-x:auto;
-}
-
+.table-wrap{overflow-x:auto}
 table{
  width:100%;
  border-collapse:collapse;
  font-size:11px;
 }
-
-th,
-td{
+th,td{
  padding:8px 5px;
  border-bottom:1px solid var(--border);
  text-align:center;
  white-space:nowrap;
 }
-
-th{
- color:var(--accent);
- font-weight:800;
-}
-
+th{color:var(--accent);font-weight:800}
 .progress{
  height:9px;
  background:#0f172a;
@@ -613,21 +407,18 @@ th{
  margin:10px 0;
  border:1px solid var(--border);
 }
-
 .progress-bar{
  width:0%;
  height:100%;
  background:linear-gradient(90deg,var(--accent),var(--accent2));
  transition:width .2s;
 }
-
 .action-row{
  display:flex;
  flex-wrap:wrap;
  gap:7px;
  margin-top:10px;
 }
-
 .file-label{
  display:inline-flex;
  align-items:center;
@@ -640,11 +431,7 @@ th{
  font-size:13px;
  cursor:pointer;
 }
-
-.file-label input{
- display:none;
-}
-
+.file-label input{display:none}
 .checkbox-row{
  display:flex;
  align-items:center;
@@ -653,12 +440,10 @@ th{
  color:var(--muted);
  font-size:12px;
 }
-
 .checkbox-row input{
  width:18px;
  height:18px;
 }
-
 footer{
  color:var(--muted);
  text-align:center;
@@ -666,7 +451,6 @@ footer{
  line-height:1.5;
  padding:10px 8px 20px;
 }
-
 .toast{
  position:fixed;
  left:50%;
@@ -684,85 +468,34 @@ footer{
  max-width:90%;
  text-align:center;
 }
-
-.toast.show{
- transform:translate(-50%,0);
-}
-
-.loading{
- opacity:.65;
- pointer-events:none;
-}
-
+.toast.show{transform:translate(-50%,0)}
+.loading{opacity:.65;pointer-events:none}
 @media(max-width:430px){
- .manual-grid{
-  grid-template-columns:repeat(5,1fr);
- }
-
- .manual-grid .pb-input{
-  grid-column:1/-1;
- }
-
- .controls{
-  grid-template-columns:1fr;
- }
-
+ .manual-grid{grid-template-columns:repeat(5,1fr)}
+ .manual-grid .pb-input{grid-column:1/-1}
+ .controls{grid-template-columns:1fr}
  .generator-controls{
-  grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr) minmax(0,1.3fr) !important;
+  grid-template-columns:
+  minmax(0,1.2fr)
+  minmax(0,.8fr)
+  minmax(0,1.3fr)!important;
   gap:4px;
  }
-
- .generator-controls .control-group{
-  min-width:0;
- }
-
- .generator-controls label{
-  font-size:10px;
- }
-
+ .generator-controls .control-group{min-width:0}
+ .generator-controls label{font-size:10px}
  .generator-controls select{
   font-size:11px;
   padding:8px 5px;
  }
-
- .generate-row{
-  grid-template-columns:1fr;
- }
-
- .draw-date{
-  width:72px;
- }
-
- .ball{
-  width:27px;
-  height:27px;
- }
-
- .compact-head{
-  gap:5px;
- }
-
- .compact-head h2{
-  font-size:15px;
-  white-space:nowrap;
- }
-
- #latestCount{
-  min-width:56px !important;
-  padding:6px 4px !important;
-  font-size:10px !important;
- }
-
- .compact-head .btn.small{
-  padding:6px 7px;
-  font-size:10px;
- }
+ .generate-row{grid-template-columns:1fr}
+ .draw-date{width:72px}
+ .ball{width:28px;height:28px;font-size:11px}
+ .ticket-balls .ball{width:34px;height:34px;font-size:13px}
+ .ticket-balls .ball.pb{width:38px;height:38px}
 }
 </style>
 </head>
-
 <body>
-
 <div class="container">
 
 <header>
@@ -771,34 +504,21 @@ footer{
 </header>
 
 <section class="card jackpot">
-
 <div class="jackpot-label">Current Estimated Jackpot</div>
-
 <div id="jackpot" class="jackpot-value">—</div>
-
 <div id="cashValue" class="cash">Cash Value: —</div>
-
-<div id="nextDrawing" class="next">Next Drawing: —</div>
-
-<div id="syncStatus" class="status">
-Waiting for automatic update…
-</div>
-
+<div id="ticketCost" class="next">Ticket Cost: $1 • Next Drawing: —</div>
+<div id="syncStatus" class="status">Waiting for automatic update…</div>
 </section>
 
 <section class="card compact-card">
-
 <div class="compact-head">
-
 <h2 id="latestTitle">Last 2 Drawings</h2>
-
 <div style="display:flex;align-items:center;gap:6px;min-width:0">
-
 <select
 id="latestCount"
 aria-label="Number of latest drawings"
 style="width:auto;min-width:68px;padding:7px 8px;font-size:11px">
-
 <option value="2" selected>2</option>
 <option value="3">3</option>
 <option value="4">4</option>
@@ -808,106 +528,45 @@ style="width:auto;min-width:68px;padding:7px 8px;font-size:11px">
 <option value="8">8</option>
 <option value="9">9</option>
 <option value="10">10</option>
-
 </select>
-
 <button class="btn small" id="refreshBtn">↻ Refresh</button>
-
 </div>
 </div>
-
 <div id="latestDraws"></div>
-
 </section>
 
 <section class="card">
-
 <div class="generator-header">
-
 <h2>🎯 AI Ticket Generator</h2>
-
-<button class="btn generator-btn" id="generateBtn">
-Generate Tickets
-</button>
-
+<button class="btn generator-btn" id="generateBtn">Generate Tickets</button>
 </div>
 
 <div class="controls generator-controls">
 
 <div class="control-group">
-
 <label for="strategy">Strategy</label>
-
 <select id="strategy">
-
 <option value="random">Random</option>
-
-<option value="balanced">
-Balanced Odd / Even
-</option>
-
-<option value="hot">
-Hot Numbers
-</option>
-
-<option value="cold">
-Cold Numbers
-</option>
-
-<option value="hotcold">
-Hot + Cold Mix
-</option>
-
-<option value="spread">
-Good Spread
-</option>
-
-<option value="weighted">
-Weighted Frequency
-</option>
-
-<option value="weightedBalanced" selected>
-Weighted + Balanced ⭐
-</option>
-
-<option value="lowhigh">
-Low + High Mix
-</option>
-
-<option value="recency">
-Recency
-</option>
-
-<option value="hybrid">
-Hybrid AI
-</option>
-
-<option value="overdue">
-Overdue Numbers
-</option>
-
-<option value="decades">
-Decade Spread
-</option>
-
-<option value="sum">
-Sum Balanced
-</option>
-
-<option value="pair">
-Pair Boost
-</option>
-
+<option value="balanced">Balanced Odd / Even</option>
+<option value="hot">Hot Numbers</option>
+<option value="cold">Cold Numbers</option>
+<option value="hotcold">Hot + Cold Mix</option>
+<option value="spread">Good Spread</option>
+<option value="weighted">Weighted Frequency</option>
+<option value="weightedBalanced" selected>Weighted + Balanced ⭐</option>
+<option value="lowhigh">Low + High Mix</option>
+<option value="recency">Recency</option>
+<option value="hybrid">Hybrid AI</option>
+<option value="overdue">Overdue Numbers</option>
+<option value="decades">Decade Spread</option>
+<option value="sum">Sum Balanced</option>
+<option value="pair">Pair Boost</option>
 </select>
-
 </div>
 
 <div class="control-group">
-
 <label for="ticketCount">Number of Tickets</label>
-
 <select id="ticketCount">
-
 <option>1</option>
 <option>2</option>
 <option>3</option>
@@ -920,19 +579,12 @@ Pair Boost
 <option>10</option>
 <option>15</option>
 <option>20</option>
-
 </select>
-
 </div>
 
 <div class="control-group strategy-window-group">
-
-<label for="strategyWindow">
-Strategy Analysis History
-</label>
-
+<label for="strategyWindow">Strategy Analysis History</label>
 <select id="strategyWindow">
-
 <option value="20">Last 20 drawings</option>
 <option value="30">Last 30 drawings</option>
 <option value="50">Last 50 drawings</option>
@@ -940,3061 +592,382 @@ Strategy Analysis History
 <option value="200">Last 200 drawings</option>
 <option value="500">Last 500 drawings</option>
 <option value="all">All Available Drawings</option>
-
 </select>
-
 </div>
 
 </div>
 
 <div id="generatedTickets"></div>
+</section><section class="card">
+  <div class="generator-header">
+    <h2>💾 Saving Numbers</h2>
 
+    <div style="display:flex;gap:6px">
+      <button class="btn small success" id="saveGeneratedBtn">
+        Save Generated
+      </button>
+
+      <button class="btn small secondary" id="clearSavedBtn">
+        Clear
+      </button>
+    </div>
+  </div>
+
+  <div id="savedNumbers"></div>
+
+  <div class="manual-entry-wrap">
+    <div class="manual-entry-head">
+      Manual Entry
+    </div>
+
+    <div class="manual-grid compact-manual-grid">
+
+      <input
+        id="m1"
+        type="number"
+        min="1"
+        max="47"
+        placeholder="1">
+
+      <input
+        id="m2"
+        type="number"
+        min="1"
+        max="47"
+        placeholder="2">
+
+      <input
+        id="m3"
+        type="number"
+        min="1"
+        max="47"
+        placeholder="3">
+
+      <input
+        id="m4"
+        type="number"
+        min="1"
+        max="47"
+        placeholder="4">
+
+      <input
+        id="m5"
+        type="number"
+        min="1"
+        max="47"
+        placeholder="5">
+
+      <input
+        id="mpb"
+        class="pb-input"
+        type="number"
+        min="1"
+        max="27"
+        placeholder="SB">
+    </div>
+
+    <div class="manual-actions">
+      <button
+        class="btn small success"
+        id="saveManualBtn">
+        Save
+      </button>
+    </div>
+  </div>
 </section>
+
+
+<section class="card">
+  <div class="section-title"
+       style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+
+    <span>📈 Historical Statistics</span>
+
+    <button
+      class="btn small secondary"
+      id="refreshStatsBtn">
+      Refresh
+    </button>
+  </div>
+
+  <div id="statsSummary" class="stat-grid"></div>
+
+  <div class="stats-subsection">
+    <h3>🔥 Hot Numbers</h3>
+    <div id="hotNumbers"></div>
+  </div>
+
+  <div class="stats-subsection">
+    <h3>❄️ Cold Numbers</h3>
+    <div id="coldNumbers"></div>
+  </div>
+
+  <div class="stats-subsection">
+    <h3>🔵 White Ball Statistics</h3>
+    <div id="whiteStats"></div>
+  </div>
+
+  <div class="stats-subsection">
+    <h3>🔴 Superball Statistics</h3>
+    <div id="pbStats"></div>
+  </div>
+</section>
+
+
+<section class="card">
+  <div class="section-title">
+    <span>🧪 Walk-Forward Backtesting</span>
+  </div>
+
+  <div class="controls">
+
+    <div class="control-group">
+      <label for="backtestWindow">
+        Training Window
+      </label>
+
+      <select id="backtestWindow">
+        <option value="20">
+          20 Drawings
+        </option>
+
+        <option value="30" selected>
+          30 Drawings
+        </option>
+
+        <option value="50">
+          50 Drawings
+        </option>
+
+        <option value="100">
+          100 Drawings
+        </option>
+      </select>
+    </div>
+
+
+    <div class="control-group">
+      <label for="backtestStrategy">
+        Strategy
+      </label>
+
+      <select id="backtestStrategy">
+
+        <option value="random">
+          Random
+        </option>
+
+        <option value="balanced">
+          Balanced Odd / Even
+        </option>
+
+        <option value="hot">
+          Hot Numbers
+        </option>
+
+        <option value="cold">
+          Cold Numbers
+        </option>
+
+        <option value="hotcold">
+          Hot + Cold Mix
+        </option>
+
+        <option value="spread">
+          Good Spread
+        </option>
+
+        <option value="weighted">
+          Weighted Frequency
+        </option>
+
+        <option value="weightedBalanced">
+          Weighted + Balanced ⭐
+        </option>
+
+        <option value="lowhigh">
+          Low + High Mix
+        </option>
+
+        <option value="recency">
+          Recency
+        </option>
+
+        <option value="hybrid">
+          Hybrid AI
+        </option>
+
+        <option value="overdue">
+          Overdue Numbers
+        </option>
+
+        <option value="decades">
+          Decade Spread
+        </option>
+
+        <option value="sum">
+          Sum Balanced
+        </option>
+
+        <option value="pair">
+          Pair Boost
+        </option>
+
+      </select>
+    </div>
+
+  </div>
+
+  <button
+    class="btn"
+    id="runBacktestBtn"
+    style="margin-top:10px">
+    🧪 Run Backtest
+  </button>
+
+  <div
+    id="backtestResults"
+    style="margin-top:12px">
+    <div class="empty">
+      Select a strategy and run the backtest.
+    </div>
+  </div>
+</section>
+
 
 <section class="card">
 
-<h2>💾 Saving Numbers</h2>
+  <div class="section-title">
+    <span>🔄 Automatic Update</span>
+  </div>
 
-<div class="saved-top">
-<div id="savedNumbers"></div>
-</div>
+  <div class="control-group">
 
-<div class="manual-entry-wrap">
+    <label for="workerUrl">
+      Cloudflare Worker URL
+    </label>
 
-<div class="manual-entry-head">
-Manual Entry
-</div>
+    <input
+      id="workerUrl"
+      type="url"
+      placeholder="https://your-worker.workers.dev">
+  </div>
 
-<div class="manual-grid compact-manual-grid">
 
-<input id="m1"
-type="number"
-min="1"
-max="47"
-placeholder="1">
+  <label class="checkbox-row">
 
-<input id="m2"
-type="number"
-min="1"
-max="47"
-placeholder="2">
+    <input
+      id="autoUpdateToggle"
+      type="checkbox"
+      checked>
 
-<input id="m3"
-type="number"
-min="1"
-max="47"
-placeholder="3">
+    <span>
+      Automatically update SuperLotto Plus data when the app opens
+    </span>
 
-<input id="m4"
-type="number"
-min="1"
-max="47"
-placeholder="4">
+  </label>
 
-<input id="m5"
-type="number"
-min="1"
-max="47"
-placeholder="5">
 
-<input id="mpb"
-class="pb-input"
-type="number"
-min="1"
-max="27"
-placeholder="SB">
+  <div class="action-row">
 
-</div>
+    <button
+      class="btn"
+      id="updateNowBtn">
+      🔄 Update Now
+    </button>
 
-<div class="action-row">
+    <div
+      id="updateStatus"
+      class="status"
+      style="flex:1">
+      Ready
+    </div>
 
-<button class="btn success" id="saveManualBtn">
-Save Manual Numbers
-</button>
-
-<button class="btn secondary" id="clearManualBtn">
-Clear
-</button>
-
-</div>
-
-</div>
+  </div>
 
 </section>
+
 
 <section class="card">
 
-<h2>📊 Historical Statistics</h2>
+  <div class="section-title">
+    <span>🛠️ Data Tools</span>
+  </div>
 
-<div class="controls">
+  <div class="action-row">
 
-<div class="control-group">
+    <button
+      class="btn secondary"
+      id="downloadCsvBtn">
+      📥 Download CSV
+    </button>
 
-<label for="statsWindow">
-Analysis Window
-</label>
+    <button
+      class="btn secondary"
+      id="downloadJsonBtn">
+      📥 Download JSON
+    </button>
 
-<select id="statsWindow">
+    <label class="file-label">
+      📤 Import JSON
 
-<option value="20">Last 20</option>
-<option value="30" selected>Last 30</option>
-<option value="50">Last 50</option>
-<option value="100">Last 100</option>
-<option value="all">All Available</option>
+      <input
+        id="importJsonInput"
+        type="file"
+        accept=".json,application/json">
+    </label>
 
-</select>
+  </div>
 
-</div>
 
-<div class="control-group">
+  <div class="action-row">
 
-<label>Statistics</label>
+    <button
+      class="btn danger"
+      id="resetDataBtn">
+      ♻️ Reset Historical Database
+    </button>
 
-<div
-class="section-note"
-style="padding:10px;border:1px solid var(--border);border-radius:10px;background:#0f172a">
+  </div>
 
-White Balls + Superball
 
-</div>
-
-</div>
-
-</div>
-
-<div
-id="statsDataInfo"
-class="section-note"
-style="margin-top:8px">
-</div>
-
-<div
-id="statsOutput"
-style="margin-top:12px">
-</div>
+  <div class="section-note">
+    Historical results are stored locally in your browser.
+    Resetting the historical database does not delete your
+    saved numbers.
+  </div>
 
 </section>
 
-<section class="card">
-
-<h2>🧪 Walk-Forward Backtesting</h2>
-
-<p class="section-note">
-
-Each historical draw is tested using only draws that occurred before it.
-This prevents future information from leaking into the training data.
-Results are historical research, not predictions.
-
-</p>
-
-<div class="controls">
-
-<div class="control-group">
-
-<label for="minTraining">
-Minimum Training Draws
-</label>
-
-<select id="minTraining">
-
-<option value="10">10</option>
-<option value="15" selected>15</option>
-<option value="20">20</option>
-<option value="30">30</option>
-<option value="50">50</option>
-
-</select>
-
-</div>
-
-<div class="control-group">
-
-<label for="recencyWindow">
-Recency Window
-</label>
-
-<select id="recencyWindow">
-
-<option value="10">10</option>
-<option value="20" selected>20</option>
-<option value="30">30</option>
-<option value="60">60</option>
-<option value="120">120</option>
-
-</select>
-
-</div>
-
-</div>
-
-<button
-class="btn"
-id="backtestBtn"
-style="margin-top:12px">
-
-Run Walk-Forward Backtest
-
-</button>
-
-<div id="progressArea" style="display:none">
-
-<div class="progress">
-
-<div
-id="progressBar"
-class="progress-bar">
-</div>
-
-</div>
-
-<div
-id="progressText"
-class="section-note">
-
-Running…
-
-</div>
-
-</div>
-
-<div
-id="backtestOutput"
-style="margin-top:12px">
-</div>
-
-</section>
-
-<section class="card">
-
-<h2>🔄 Automatic Update</h2>
-
-<div class="control-group">
-
-<label for="workerUrl">
-Cloudflare Worker URL
-</label>
-
-<input
-id="workerUrl"
-type="url"
-placeholder="https://your-worker.workers.dev">
-
-</div>
-
-<div class="checkbox-row">
-
-<input
-type="checkbox"
-id="updateOnOpen"
-checked>
-
-<label for="updateOnOpen">
-
-Automatically update every time the app opens or returns to foreground
-
-</label>
-
-</div>
-
-<div class="action-row">
-
-<button
-class="btn"
-id="saveSettingsBtn">
-
-Save Settings
-
-</button>
-
-<button
-class="btn secondary"
-id="updateNowBtn">
-
-Update Now
-
-</button>
-
-</div>
-
-<div id="updateMessage" class="status">
-
-Automatic updates use your Cloudflare Worker.
-
-</div>
-
-</section>
-
-<section class="card">
-
-<h2>🗄 Data Tools</h2>
-
-<div class="action-row">
-
-<button
-class="btn secondary"
-id="exportCsvBtn">
-
-Export CSV
-
-</button>
-
-<button
-class="btn secondary"
-id="exportJsonBtn">
-
-Export JSON
-
-</button>
-
-<label class="file-label">
-
-Import CSV
-
-<input
-id="csvFile"
-type="file"
-accept=".csv,text/csv">
-
-</label>
-
-</div>
-
-<div class="action-row">
-
-<button
-class="btn danger"
-id="resetDbBtn">
-
-Reset Historical Database
-
-</button>
-
-</div>
-
-<p class="section-note">
-
-Historical results are stored locally in your browser.
-Resetting the historical database does not delete your saved numbers.
-
-</p>
-
-</section>
 
 <footer>
-
-SuperLotto Plus AI Lab V6<br>
-
-For research and entertainment only.
-No strategy can predict a random SuperLotto Plus drawing or improve the mathematical odds of a ticket.
-
+  SuperLotto Plus AI Lab V6.3.1<br>
+  For research and entertainment only.<br>
+  No strategy can predict a random SuperLotto Plus drawing
+  or improve the mathematical odds of a ticket.
 </footer>
 
+
+<div id="toast" class="toast">
+  <span id="toastMessage"></span>
 </div>
 
-<div id="toast" class="toast"></div>
 
 <script>
-
 "use strict";
-
-/* =========================================================
-   SUPERLOTTO PLUS V6.3.1
-   Clone of Powerball AI Lab V6.3.1
-   Game Rules:
-   White Balls: 1–47
-   Superball:   1–27
-
-   Internal "pb" naming is intentionally retained so the
-   Worker can use the same data structure as Powerball:
-   { date, white:[...], pb:6 }
-   ========================================================= */
-
-const STORAGE_KEY =
-"superlotto_plus_ai_lab_v6_draws";
-
-const SETTINGS_KEY =
-"superlotto_plus_ai_lab_v6_settings";
-
-const SAVED_KEY =
-"superlotto_plus_ai_lab_v6_saved_numbers";
-
-const OLD_STORAGE_KEY =
-"superlotto_plus_ai_lab_v5_draws";
-
-const OLD_SETTINGS_KEY =
-"superlotto_plus_ai_lab_v5_settings";
-
-
-/*
- Confirmed official SuperLotto Plus seed draw.
- Additional historical drawings will be merged automatically
- from the Cloudflare Worker.
-*/
-const SEED_DRAWS = [
-
-{
- date:"2026-09-09",
- white:[9,24,28,34,41],
- pb:6
-}
-
-];
-
-
-let history = [];
-
-let savedNumbers = [];
-
-let settings = {
- workerUrl:"",
- updateOnOpen:true,
- strategyWindow:"100",
- latestCount:"2"
-};
-
-let lastSyncTime = 0;
-
-let updateInProgress = false;
-
-const $ = id => document.getElementById(id);
-
-
-function safeGet(key,fallback=null){
-
- try{
-
-  const raw=localStorage.getItem(key);
-
-  if(raw===null) return fallback;
-
-  return JSON.parse(raw);
-
- }catch(e){
-
-  return fallback;
-
- }
-
-}
-
-
-function safeSet(key,value){
-
- try{
-
-  localStorage.setItem(
-   key,
-   JSON.stringify(value)
-  );
-
-  return true;
-
- }catch(e){
-
-  return false;
-
- }
-
-}
-
-
-function normalizeDraw(d){
-
- if(!d) return null;
-
- const date=String(
-  d.date ||
-  d.drawDate ||
-  ""
- ).slice(0,10);
-
- const white=Array.isArray(d.white)
-  ? d.white.map(Number)
-  : Array.isArray(d.numbers)
-  ? d.numbers.slice(0,5).map(Number)
-  : [];
-
- const pb=Number(
-  d.pb ??
-  d.superball ??
-  d.superBall ??
-  d.powerball ??
-  d.powerBall ??
-  d.redBall
- );
-
- if(!date) return null;
-
- if(white.length!==5) return null;
-
- if(
-  white.some(
-   n=>!Number.isInteger(n)||n<1||n>47
-  )
- ) return null;
-
- if(new Set(white).size!==5) return null;
-
- if(
-  !Number.isInteger(pb)||
-  pb<1||
-  pb>27
- ) return null;
-
- return {
-  date,
-  white:[...white].sort((a,b)=>a-b),
-  pb
- };
-
-}
-
-
-function normalizeHistory(arr){
-
- if(!Array.isArray(arr)) return [];
-
- const map=new Map();
-
- arr.forEach(d=>{
-
-  const n=normalizeDraw(d);
-
-  if(n) map.set(n.date,n);
-
- });
-
- return [
-  ...map.values()
- ].sort(
-  (a,b)=>a.date.localeCompare(b.date)
- );
-
-}
-
-
-function loadData(){
-
- let stored=safeGet(
-  STORAGE_KEY,
-  null
- );
-
- if(!stored){
-
-  const old=safeGet(
-   OLD_STORAGE_KEY,
-   null
-  );
-
-  if(Array.isArray(old)){
-
-   stored=old;
-
-  }else if(
-   old &&
-   Array.isArray(old.draws)
-  ){
-
-   stored=old.draws;
-
-  }
-
- }
-
- history=normalizeHistory(stored);
-
- if(history.length===0){
-
-  history=normalizeHistory(
-   SEED_DRAWS
-  );
-
-  saveHistory();
-
- }
-
- const storedSettings=
-  safeGet(
-   SETTINGS_KEY,
-   null
-  );
-
- if(
-  storedSettings &&
-  typeof storedSettings==="object"
- ){
-
-  settings={
-   ...settings,
-   ...storedSettings
-  };
-
- }else{
-
-  const oldSettings=
-   safeGet(
-    OLD_SETTINGS_KEY,
-    null
-   );
-
-  if(
-   oldSettings &&
-   typeof oldSettings==="object"
-  ){
-
-   settings={
-    ...settings,
-    ...oldSettings
-   };
-
-   safeSet(
-    SETTINGS_KEY,
-    settings
-   );
-
-  }
-
- }
-
- const storedSaved=
-  safeGet(
-   SAVED_KEY,
-   []
-  );
-
- if(Array.isArray(storedSaved)){
-
-  savedNumbers=storedSaved;
-
- }
-
- $("workerUrl").value=
-  settings.workerUrl || "";
-
- $("updateOnOpen").checked=
-  settings.updateOnOpen!==false;
-
- if($("strategyWindow")){
-
-  $("strategyWindow").value=
-   settings.strategyWindow || "100";
-
- }
-
- if($("latestCount")){
-
-  $("latestCount").value=
-   settings.latestCount || "2";
-
- }
-
-}
-
-
-function saveHistory(){
-
- safeSet(
-  STORAGE_KEY,
-  history
- );
-
-}
-
-
-function saveSaved(){
-
- safeSet(
-  SAVED_KEY,
-  savedNumbers
- );
-
-}
-
-
-function saveSettings(){
-
- settings.workerUrl=
-  $("workerUrl").value.trim();
-
- settings.updateOnOpen=
-  $("updateOnOpen").checked;
-
- settings.strategyWindow=
-  $("strategyWindow")
-   ? $("strategyWindow").value
-   : (
-      settings.strategyWindow ||
-      "100"
-     );
-
- settings.latestCount=
-  $("latestCount")
-   ? $("latestCount").value
-   : (
-      settings.latestCount ||
-      "2"
-     );
-
- safeSet(
-  SETTINGS_KEY,
-  settings
- );
-
-}
-
-
-function escapeHtml(str){
-
- return String(str)
-
-  .replaceAll("&","&amp;")
-  .replaceAll("<","&lt;")
-  .replaceAll(">","&gt;")
-  .replaceAll('"',"&quot;")
-  .replaceAll("'","&#039;");
-
-}
-
-
-function formatDate(date){
-
- if(!date) return "—";
-
- const d=
-  new Date(date+"T12:00:00");
-
- if(Number.isNaN(d.getTime()))
-  return date;
-
- return d.toLocaleDateString(
-  undefined,
-  {
-   month:"short",
-   day:"numeric",
-   year:"numeric"
-  }
- );
-
-}
-
-
-function formatDrawingDate(date){
-
- if(!date) return "—";
-
- const raw=String(date).trim();
-
- if(
-  /^(SUN|MON|TUE|WED|THU|FRI|SAT)\b/i
-  .test(raw)
- ){
-
-  return raw;
-
- }
-
- let d=new Date(
-  raw.includes("T")
-   ? raw
-   : raw+"T12:00:00"
- );
-
- if(Number.isNaN(d.getTime()))
-  d=new Date(raw);
-
- if(Number.isNaN(d.getTime()))
-  return raw;
-
- return d.toLocaleDateString(
-  undefined,
-  {
-   weekday:"short",
-   month:"short",
-   day:"numeric",
-   year:"numeric"
-  }
- );
-
-}
-
-
-function formatMoney(v){
-
- if(
-  v===null ||
-  v===undefined ||
-  v===""
- ){
-
-  return "—";
-
- }
-
- if(typeof v==="number"){
-
-  return "$"+v.toLocaleString();
-
- }
-
- const s=String(v);
-
- if(s.includes("$"))
-  return s;
-
- return "$"+s;
-
-}
-
-
-function showToast(message){
-
- const t=$("toast");
-
- t.textContent=message;
-
- t.classList.add("show");
-
- clearTimeout(
-  showToast.timer
- );
-
- showToast.timer=setTimeout(
-  ()=>{
-   t.classList.remove("show");
-  },
-  2600
- );
-
-}
-
-
-function randomInt(
- min,
- max,
- rng=Math.random
-){
-
- return Math.floor(
-  rng()*(max-min+1)
- )+min;
-
-}
-
-
-function shuffle(
- arr,
- rng=Math.random
-){
-
- const a=[...arr];
-
- for(
-  let i=a.length-1;
-  i>0;
-  i--
- ){
-
-  const j=Math.floor(
-   rng()*(i+1)
-  );
-
-  [a[i],a[j]]=
-   [a[j],a[i]];
-
- }
-
- return a;
-
-}
-
-
-function sampleUnique(
- range,
- count,
- rng=Math.random
-){
-
- return shuffle(
-  range,
-  rng
- )
- .slice(0,count)
- .sort(
-  (a,b)=>a-b
- );
-
-}
-
-
-/* SUPERLOTTO PLUS: 1–47 */
-
-function allWhite(){
-
- return Array.from(
-  {length:47},
-  (_,i)=>i+1
- );
-
-}
-
-
-/* SUPERLOTTO PLUS SUPERBALL: 1–27 */
-
-function allPB(){
-
- return Array.from(
-  {length:27},
-  (_,i)=>i+1
- );
-
-}
-
-
-function mean(arr){
-
- if(!arr.length) return 0;
-
- return arr.reduce(
-  (a,b)=>a+b,
-  0
- )/arr.length;
-
-}
-
-
-function median(arr){
-
- if(!arr.length) return 0;
-
- const a=[...arr].sort(
-  (x,y)=>x-y
- );
-
- const mid=Math.floor(
-  a.length/2
- );
-
- return a.length%2
-  ? a[mid]
-  : (a[mid-1]+a[mid])/2;
-
-}
-
-
-function countsWhite(data){
-
- const c={};
-
- for(let i=1;i<=47;i++)
-  c[i]=0;
-
- data.forEach(d=>{
-
-  d.white.forEach(
-   n=>c[n]++
-  );
-
- });
-
- return c;
-
-}
-
-
-function countsPB(data){
-
- const c={};
-
- for(let i=1;i<=27;i++)
-  c[i]=0;
-
- data.forEach(d=>{
-
-  c[d.pb]++;
-
- });
-
- return c;
-
-}
-
-
-function lastSeenAges(
- data,
- maxNum,
- type="white"
-){
-
- const ages={};
-
- for(
-  let n=1;
-  n<=maxNum;
-  n++
- ){
-
-  ages[n]=data.length+1;
-
- }
-
- for(
-  let i=data.length-1;
-  i>=0;
-  i--
- ){
-
-  const age=
-   data.length-1-i;
-
-  const nums=
-   type==="pb"
-    ? [data[i].pb]
-    : data[i].white;
-
-  nums.forEach(n=>{
-
-   if(ages[n]>age){
-
-    ages[n]=age;
-
-   }
-
-  });
-
- }
-
- return ages;
-
-}
-
-
-function weightedPick(
- items,
- weights,
- rng=Math.random
-){
-
- let total=0;
-
- const safe=weights.map(
-  w=>{
-   const x=Number(w);
-
-   return Number.isFinite(x)&&x>0
-    ? x
-    : 0;
-  }
- );
-
- total=safe.reduce(
-  (a,b)=>a+b,
-  0
- );
-
- if(total<=0){
-
-  return items[
-   randomInt(
-    0,
-    items.length-1,
-    rng
-   )
-  ];
-
- }
-
- let r=rng()*total;
-
- for(
-  let i=0;
-  i<items.length;
-  i++
- ){
-
-  r-=safe[i];
-
-  if(r<=0){
-
-   return items[i];
-
-  }
-
- }
-
- return items[
-  items.length-1
- ];
-
-}
-
-
-function selectWeightedUnique(
- items,
- weights,
- count,
- rng=Math.random
-){
-
- const pool=[...items];
-
- const ws=[...weights];
-
- const result=[];
-
- while(
-  result.length<count &&
-  pool.length
- ){
-
-  const pick=
-   weightedPick(
-    pool,
-    ws,
-    rng
-   );
-
-  const idx=
-   pool.indexOf(pick);
-
-  result.push(pick);
-
-  pool.splice(idx,1);
-
-  ws.splice(idx,1);
-
- }
-
- return result.sort(
-  (a,b)=>a-b
- );
-
-}
-
-
-function normalizeWeights(weights){
-
- const max=Math.max(
-  ...weights,
-  1
- );
-
- return weights.map(
-  w=>w/max
- );
-
-}
-
-
-function getScores(
- data,
- strategy
-){
-
- const c=countsWhite(data);
-
- const ages=
-  lastSeenAges(
-   data,
-   47
-  );
-
- const freq=
-  allWhite().map(
-   n=>c[n]
-  );
-
- const maxFreq=
-  Math.max(
-   ...freq,
-   1
-  );
-
- const freqScore=n=>{
-
-  return (
-   (c[n]+1)/
-   (maxFreq+1)
-  );
-
- };
-
- const recencyScore=n=>{
-
-  return Math.exp(
-   -ages[n]/8
-  );
-
- };
-
- const overdueScore=n=>{
-
-  return ages[n]+1;
-
- };
-
- switch(strategy){
-
-  case "hot":
-
-   return allWhite().map(
-    n=>Math.pow(
-     c[n]+1,
-     1.7
-    )
-   );
-
-  case "cold":
-
-   return allWhite().map(
-    n=>1/(c[n]+1)
-   );
-
-  case "weighted":
-
-   return allWhite().map(
-    n=>c[n]+1
-   );
-
-  case "recency":
-
-   return allWhite().map(
-    n=>recencyScore(n)
-   );
-
-  case "hybrid":
-
-   return allWhite().map(
-    n=>
-     .55*freqScore(n)+
-     .45*recencyScore(n)
-   );
-
-  case "overdue":
-
-   return allWhite().map(
-    n=>overdueScore(n)
-   );
-
-  case "weightedBalanced":
-
-   return allWhite().map(
-    n=>{
-
-     const odd=
-      n%2===1
-       ? 1.15
-       : 1;
-
-     return (
-      (c[n]+1)*odd
-     );
-
-    }
-   );
-
-  default:
-
-   return allWhite().map(
-    ()=>1
-   );
-
- }
-
-}
-
-
-/*
- Superball generation.
- Same Powerball V6.3.1 logic,
- changed only from 1–26 to 1–27.
-*/
-
-function generatePB(
- strategy,
- data,
- rng=Math.random
-){
-
- if(
-  strategy==="random" ||
-  strategy==="balanced" ||
-  strategy==="spread" ||
-  strategy==="lowhigh" ||
-  strategy==="decades" ||
-  strategy==="sum"
- ){
-
-  return randomInt(
-   1,
-   27,
-   rng
-  );
-
- }
-
- const nums=allPB();
-
- const c=countsPB(data);
-
- const ages=
-  lastSeenAges(
-   data,
-   27,
-   "pb"
-  );
-
- let weights;
-
- switch(strategy){
-
-  case "hot":
-
-   weights=nums.map(
-    n=>Math.pow(
-     c[n]+1,
-     1.7
-    )
-   );
-
-   break;
-
-  case "cold":
-
-   weights=nums.map(
-    n=>1/(c[n]+1)
-   );
-
-   break;
-
-  case "weighted":
-
-  case "weightedBalanced":
-
-   weights=nums.map(
-    n=>c[n]+1
-   );
-
-   break;
-
-  case "recency":
-
-   weights=nums.map(
-    n=>Math.exp(
-     -ages[n]/8
-    )
-   );
-
-   break;
-
-  case "hybrid":
-
-   weights=nums.map(
-    n=>{
-
-     const max=
-      Math.max(
-       ...Object.values(c),
-       1
-      );
-
-     const f=
-      (c[n]+1)/
-      (max+1);
-
-     const r=
-      Math.exp(
-       -ages[n]/8
-      );
-
-     return .55*f+.45*r;
-
-    }
-   );
-
-   break;
-
-  case "overdue":
-
-   weights=nums.map(
-    n=>ages[n]+1
-   );
-
-   break;
-
-  case "hotcold":
-
-   weights=nums.map(
-    n=>
-     (c[n]+1)*
-     (ages[n]+1)/
-     Math.max(
-      data.length,
-      1
-     )
-   );
-
-   break;
-
-  case "pair":
-
-   weights=nums.map(
-    n=>c[n]+1
-   );
-
-   break;
-
-  default:
-
-   weights=nums.map(
-    ()=>1
-   );
-
- }
-
- return weightedPick(
-  nums,
-  weights,
-  rng
- );
-
-}
-
-
-function generateBalanced(
- data,
- rng
-){
-
- const odd=
-  allWhite().filter(
-   n=>n%2
-  );
-
- const even=
-  allWhite().filter(
-   n=>n%2===0
-  );
-
- const oddCount=
-  rng()<.5
-   ? 2
-   : 3;
-
- return [
-
-  ...sampleUnique(
-   odd,
-   oddCount,
-   rng
-  ),
-
-  ...sampleUnique(
-   even,
-   5-oddCount,
-   rng
-  )
-
- ].sort(
-  (a,b)=>a-b
- );
-
-}
-
-
-/*
- SuperLotto Plus has 47 white numbers.
-
- To preserve the Powerball "Good Spread"
- strategy structure, the 47 numbers are divided
- into three broad ranges:
-
- Low  = 1–16
- Mid  = 17–32
- High = 33–47
-*/
-
-function generateSpread(
- data,
- rng
-){
-
- const low=
-  Array.from(
-   {length:16},
-   (_,i)=>i+1
-  );
-
- const mid=
-  Array.from(
-   {length:16},
-   (_,i)=>i+17
-  );
-
- const high=
-  Array.from(
-   {length:15},
-   (_,i)=>i+33
-  );
-
- let result=[
-
-  ...sampleUnique(
-   low,
-   1,
-   rng
-  ),
-
-  ...sampleUnique(
-   mid,
-   1,
-   rng
-  ),
-
-  ...sampleUnique(
-   high,
-   1,
-   rng
-  )
-
- ];
-
- const remaining=
-  allWhite().filter(
-   n=>!result.includes(n)
-  );
-
- result=[
-  ...result,
-  ...sampleUnique(
-   remaining,
-   2,
-   rng
-  )
- ];
-
- return result.sort(
-  (a,b)=>a-b
- );
-
-}
-
-
-function generateHotCold(
- data,
- rng
-){
-
- const c=countsWhite(data);
-
- const sorted=
-  allWhite().sort(
-   (a,b)=>
-    c[b]-c[a]||
-    a-b
-  );
-
- const hotPool=
-  sorted.slice(0,20);
-
- const coldPool=
-  sorted.slice(-20);
-
- let result=
-  sampleUnique(
-   hotPool,
-   3,
-   rng
-  );
-
- const coldCandidates=
-  coldPool.filter(
-   n=>!result.includes(n)
-  );
-
- result=[
-  ...result,
-  ...sampleUnique(
-   coldCandidates,
-   2,
-   rng
-  )
- ];
-
- result=[
-  ...new Set(result)
- ];
-
- while(result.length<5){
-
-  const n=randomInt(
-   1,
-   47,
-   rng
-  );
-
-  if(!result.includes(n))
-   result.push(n);
-
- }
-
- return result.sort(
-  (a,b)=>a-b
- );
-
-}
-
-
-function generateLowHigh(
- data,
- rng
-){
-
- const low=
-  Array.from(
-   {length:23},
-   (_,i)=>i+1
-  );
-
- const high=
-  Array.from(
-   {length:24},
-   (_,i)=>i+24
-  );
-
- const lowCount=
-  rng()<.5
-   ? 2
-   : 3;
-
- return [
-
-  ...sampleUnique(
-   low,
-   lowCount,
-   rng
-  ),
-
-  ...sampleUnique(
-   high,
-   5-lowCount,
-   rng
-  )
-
- ].sort(
-  (a,b)=>a-b
- );
-
-}
-
-
-/*
- SuperLotto Plus Decade Spread.
-
- 47 numbers are divided into:
-
- 1–10
- 11–20
- 21–30
- 31–40
- 41–47
-
- There are exactly five groups,
- so one number is selected from each.
-*/
-
-function generateDecades(
- data,
- rng
-){
-
- const decades=[
-
-  [1,10],
-
-  [11,20],
-
-  [21,30],
-
-  [31,40],
-
-  [41,47]
-
- ];
-
- let result=[];
-
- const chosen=
-  shuffle(
-   decades.map(
-    (d,i)=>i
-   ),
-   rng
-  ).slice(
-   0,
-   5
-  );
-
- chosen.forEach(i=>{
-
-  result.push(
-   randomInt(
-    decades[i][0],
-    decades[i][1],
-    rng
-   )
-  );
-
- });
-
- return result.sort(
-  (a,b)=>a-b
- );
-
-}
-
-
-function generateSumBalanced(
- data,
- rng
-){
-
- const sums=
-  data.map(
-   d=>
-    d.white.reduce(
-     (a,b)=>a+b,
-     0
-    )
-  );
-
- const target=
-  median(sums);
-
- let best=null;
-
- let bestDiff=Infinity;
-
- for(let i=0;i<120;i++){
-
-  const ticket=
-   sampleUnique(
-    allWhite(),
-    5,
-    rng
-   );
-
-  const sum=
-   ticket.reduce(
-    (a,b)=>a+b,
-    0
-   );
-
-  const diff=
-   Math.abs(
-    sum-target
-   );
-
-  if(diff<bestDiff){
-
-   best=ticket;
-
-   bestDiff=diff;
-
-  }
-
-  if(diff<=8)
-   break;
-
- }
-
- return best.sort(
-  (a,b)=>a-b
- );
-
-}
-
-
-function generatePairBoost(
- data,
- rng
-){
-
- if(!data.length){
-
-  return sampleUnique(
-   allWhite(),
-   5,
-   rng
-  );
-
- }
-
- const counts=
-  countsWhite(data);
-
- const pair={};
-
- data.forEach(d=>{
-
-  const nums=d.white;
-
-  for(
-   let i=0;
-   i<nums.length;
-   i++
-  ){
-
-   for(
-    let j=i+1;
-    j<nums.length;
-    j++
-   ){
-
-    const a=nums[i];
-
-    const b=nums[j];
-
-    const key=
-     a+"-"+b;
-
-    pair[key]=
-     (pair[key]||0)+1;
-
-   }
-
-  }
-
- });
-
- let result=[];
-
- const firstPool=
-  allWhite();
-
- const firstWeights=
-  firstPool.map(
-   n=>counts[n]+1
-  );
-
- result.push(
-  weightedPick(
-   firstPool,
-   firstWeights,
-   rng
-  )
- );
-
- while(result.length<5){
-
-  const candidates=
-   allWhite()
-   .filter(
-    n=>!result.includes(n)
-   );
-
-  const weights=
-   candidates.map(n=>{
-
-    let score=
-     counts[n]+1;
-
-    result.forEach(
-     existing=>{
-
-      const a=
-       Math.min(
-        existing,
-        n
-       );
-
-      const b=
-       Math.max(
-        existing,
-        n
-       );
-
-      score+=
-       2*
-       (
-        pair[
-         a+"-"+b
-        ]||0
-       );
-
-     }
-    );
-
-    return score;
-
-   });
-
-  result.push(
-   weightedPick(
-    candidates,
-    weights,
-    rng
-   )
-  );
-
- }
-
- return result.sort(
-  (a,b)=>a-b
- );
-
-}
-
-
-function generateTicket(
- strategy,
- data,
- rng=Math.random
-){
-
- let white;
-
- switch(strategy){
-
-  case "random":
-
-   white=
-    sampleUnique(
-     allWhite(),
-     5,
-     rng
-    );
-
-   break;
-
-  case "balanced":
-
-   white=
-    generateBalanced(
-     data,
-     rng
-    );
-
-   break;
-
-  case "hot":
-
-   white=
-    selectWeightedUnique(
-     allWhite(),
-     getScores(
-      data,
-      "hot"
-     ),
-     5,
-     rng
-    );
-
-   break;
-
-  case "cold":
-
-   white=
-    selectWeightedUnique(
-     allWhite(),
-     getScores(
-      data,
-      "cold"
-     ),
-     5,
-     rng
-    );
-
-   break;
-
-  case "hotcold":
-
-   white=
-    generateHotCold(
-     data,
-     rng
-    );
-
-   break;
-
-  case "spread":
-
-   white=
-    generateSpread(
-     data,
-     rng
-    );
-
-   break;
-
-  case "weighted":
-
-   white=
-    selectWeightedUnique(
-     allWhite(),
-     getScores(
-      data,
-      "weighted"
-     ),
-     5,
-     rng
-    );
-
-   break;
-
-  case "weightedBalanced":
-
-   white=
-    selectWeightedUnique(
-     allWhite(),
-     getScores(
-      data,
-      "weightedBalanced"
-     ),
-     5,
-     rng
-    );
-
-   let tries=0;
-
-   while(
-    tries<40 &&
-    !isBalanced(white)
-   ){
-
-    white=
-     selectWeightedUnique(
-      allWhite(),
-      getScores(
-       data,
-       "weightedBalanced"
-      ),
-      5,
-      rng
-     );
-
-    tries++;
-
-   }
-
-   break;
-
-  case "lowhigh":
-
-   white=
-    generateLowHigh(
-     data,
-     rng
-    );
-
-   break;
-
-  case "recency":
-
-   white=
-    selectWeightedUnique(
-     allWhite(),
-     getScores(
-      data,
-      "recency"
-     ),
-     5,
-     rng
-    );
-
-   break;
-
-  case "hybrid":
-
-   white=
-    selectWeightedUnique(
-     allWhite(),
-     getScores(
-      data,
-      "hybrid"
-     ),
-     5,
-     rng
-    );
-
-   break;
-
-  case "overdue":
-
-   white=
-    selectWeightedUnique(
-     allWhite(),
-     getScores(
-      data,
-      "overdue"
-     ),
-     5,
-     rng
-    );
-
-   break;
-
-  case "decades":
-
-   white=
-    generateDecades(
-     data,
-     rng
-    );
-
-   break;
-
-  case "sum":
-
-   white=
-    generateSumBalanced(
-     data,
-     rng
-    );
-
-   break;
-
-  case "pair":
-
-   white=
-    generatePairBoost(
-     data,
-     rng
-    );
-
-   break;
-
-  default:
-
-   white=
-    sampleUnique(
-     allWhite(),
-     5,
-     rng
-    );
-
- }
-
- return {
-
-  white:white.sort(
-   (a,b)=>a-b
-  ),
-
-  pb:generatePB(
-   strategy,
-   data,
-   rng
-  )
-
- };
-
-}
-
-
-function isBalanced(white){
-
- const odd=
-  white.filter(
-   n=>n%2
-  ).length;
-
- return odd===2 || odd===3;
-
-}
-
-
-function ballsHtml(
- white,
- pb
-){
-
- return `
- <div class="balls">
-
- ${white.map(
-  n=>
-   `<span class="ball">${n}</span>`
- ).join("")}
-
- <span class="ball pb">${pb}</span>
-
- </div>
- `;
-
-}
-
-
-function renderLatest(){
-
- const target=
-  $("latestDraws");
-
- const count=
-  Math.min(
-   10,
-   Math.max(
-    2,
-    Number(
-     $("latestCount")?.value ||
-     settings.latestCount ||
-     2
-    )
-   )
-  );
-
- if($("latestTitle")){
-
-  $("latestTitle").textContent=
-   `Last ${count} Drawings`;
-
- }
-
- const latest=
-  [...history]
-  .sort(
-   (a,b)=>
-    b.date.localeCompare(
-     a.date
-    )
-  )
-  .slice(
-   0,
-   count
-  );
-
- if(!latest.length){
-
-  target.innerHTML=
-   `<div class="empty">
-    No drawings available.
-   </div>`;
-
-  return;
-
- }
-
- target.innerHTML=
-  latest.map(
-   d=>
-    `
-    <div class="draw-row">
-
-    <div class="draw-date">
-    ${escapeHtml(
-     formatDrawingDate(d.date)
-    )}
-    </div>
-
-    ${ballsHtml(
-     d.white,
-     d.pb
-    )}
-
-    </div>
-    `
-  ).join("");
-
-}
-
-
-function getStatsData(){
-
- const value=
-  $("statsWindow").value;
-
- const ordered=
-  [...history].sort(
-   (a,b)=>
-    a.date.localeCompare(
-     b.date
-    )
-  );
-
- if(value==="all")
-  return ordered;
-
- const requested=
-  Number(value);
-
- return requested>0
-  ? ordered.slice(-requested)
-  : ordered;
-
-}
-
-
-function renderStatistics(){
-
- const data=
-  getStatsData();
-
- const available=
-  history.length;
-
- const selected=
-  $("statsWindow").value;
-
- const requested=
-  selected==="all"
-   ? available
-   : Number(selected);
-
- const analyzed=
-  data.length;
-
- if($("statsDataInfo")){
-
-  $("statsDataInfo").innerHTML=
-   selected==="all"
-
-   ? `<strong>
-      Drawings Analyzed: ${analyzed}
-      </strong>
-      of ${available}
-      available drawings.`
-
-   : `<strong>
-      Drawings Analyzed: ${analyzed}
-      </strong>
-      (latest ${Math.min(
-       requested,
-       available
-      )} of ${available}
-      available drawings)`;
-
- }
-
- $("statsOutput").innerHTML="";
-
- if(!data.length){
-
-  $("statsOutput").innerHTML=
-   `<div class="empty">
-    No historical data.
-   </div>`;
-
-  return;
-
- }
-
- renderWhiteStats(data);
-
- renderPBStats(data);
-
-}
-
-
-function renderWhiteStats(data){
-
- const c=
-  countsWhite(data);
-
- const nums=
-  allWhite();
-
- const hot=
-  [...nums]
-  .sort(
-   (a,b)=>
-    c[b]-c[a]||
-    a-b
-  )
-  .slice(
-   0,
-   10
-  );
-
- const cold=
-  [...nums]
-  .sort(
-   (a,b)=>
-    c[a]-c[b]||
-    a-b
-  )
-  .slice(
-   0,
-   10
-  );
-
- const oddCount=
-  data.map(
-   d=>
-    d.white.filter(
-     n=>n%2
-    ).length
-  );
-
- const sums=
-  data.map(
-   d=>
-    d.white.reduce(
-     (a,b)=>a+b,
-     0
-    )
-  );
-
- $("statsOutput").innerHTML+=`
-
- <div class="stats-subsection">
-
- <h3>⚪ White Ball Statistics</h3>
-
- <div class="stat-grid">
-
- <div class="stat">
-
- <div class="stat-value">
- ${Math.round(mean(sums))}
- </div>
-
- <div class="stat-label">
- Average White Sum
- </div>
-
- </div>
-
- <div class="stat">
-
- <div class="stat-value">
- ${mean(oddCount).toFixed(2)}
- </div>
-
- <div class="stat-label">
- Average Odd Balls
- </div>
-
- </div>
-
- <div class="stat">
-
- <div class="stat-value">
- ${Math.round(
-   mean(
-    data.map(
-     d=>
-      d.white.filter(
-       n=>n>=24
-      ).length
-    )
-   )
-  )}
- </div>
-
- <div class="stat-label">
- Avg High Balls
- </div>
-
- </div>
-
- </div>
-
- <h3>🔥 Hot White Numbers</h3>
-
- ${numberStatsHtml(
-  hot,
-  c
- )}
-
- <h3>❄️ Cold White Numbers</h3>
-
- ${numberStatsHtml(
-  cold,
-  c
- )}
-
- </div>
-
- `;
-
-}
-
-
-function numberStatsHtml(
- nums,
- c
-){
-
- return `
-
- <div class="balls">
-
- ${nums.map(
-  n=>
-   `<span
-    class="ball"
-    title="${c[n]} appearances">
-    ${n}
-   </span>`
- ).join("")}
-
- </div>
-
- `;
-
-}
-
-
-function renderPBStats(data){
-
- const c=
-  countsPB(data);
-
- const nums=
-  allPB();
-
- const hot=
-  [...nums]
-  .sort(
-   (a,b)=>
-    c[b]-c[a]||
-    a-b
-  )
-  .slice(
-   0,
-   10
-  );
-
- const cold=
-  [...nums]
-  .sort(
-   (a,b)=>
-    c[a]-c[b]||
-    a-b
-  )
-  .slice(
-   0,
-   10
-  );
-
- const avg=
-  Math.round(
-   mean(
-    data.map(
-     d=>d.pb
-    )
-   )
-  );
-
- $("statsOutput").innerHTML+=`
-
- <div class="stats-subsection">
-
- <h3>🔴 Superball Statistics</h3>
-
- <div class="stat-grid">
-
- <div class="stat">
-
- <div class="stat-value">
- ${avg}
- </div>
-
- <div class="stat-label">
- Average Superball
- </div>
-
- </div>
-
- </div>
-
- <h3>🔥 Hot Superballs</h3>
-
- <div class="balls">
-
- ${hot.map(
-  n=>
-   `<span
-    class="ball pb"
-    title="${c[n]} appearances">
-    ${n}
-   </span>`
- ).join("")}
-
- </div>
-
- <h3>❄️ Cold Superballs</h3>
-
- <div class="balls">
-
- ${cold.map(
-  n=>
-   `<span
-    class="ball pb"
-    title="${c[n]} appearances">
-    ${n}
-   </span>`
- ).join("")}
-
- </div>
-
- </div>
-
- `;
-
-}<!-- =========================
-     PART 2 OF 4
-     SuperLotto Plus AI Lab V6.3.1
-     ========================= -->
-
-      <!-- Current Estimated Jackpot -->
-      <section class="card jackpot-card">
-        <div class="section-title">
-          <span>💰 Current Estimated Jackpot</span>
-          <button id="refreshJackpotBtn" class="small-btn">Refresh</button>
-        </div>
-
-        <div class="jackpot-main">
-          <div>
-            <div id="jackpotAmount" class="jackpot-amount">Loading...</div>
-            <div class="jackpot-label">Estimated Jackpot</div>
-          </div>
-
-          <div class="cash-box">
-            <div id="cashValue" class="cash-value">—</div>
-            <div class="jackpot-label">Cash Value</div>
-          </div>
-        </div>
-
-        <div id="jackpotMeta" class="muted">
-          Updating SuperLotto Plus data…
-        </div>
-      </section>
-
-
-      <!-- Last 2 Drawings -->
-      <section class="card">
-        <div class="section-title">
-          <span>🎯 Last Drawings</span>
-
-          <div class="inline-controls">
-            <select id="drawCountSelect">
-              <option value="2" selected>2 Drawings</option>
-              <option value="3">3 Drawings</option>
-              <option value="4">4 Drawings</option>
-              <option value="5">5 Drawings</option>
-              <option value="6">6 Drawings</option>
-              <option value="7">7 Drawings</option>
-              <option value="8">8 Drawings</option>
-              <option value="9">9 Drawings</option>
-              <option value="10">10 Drawings</option>
-            </select>
-
-            <button id="refreshDrawingsBtn" class="small-btn">
-              Refresh
-            </button>
-          </div>
-        </div>
-
-        <div id="latestDrawings" class="drawings-list"></div>
-      </section>
-
-
-      <!-- AI Ticket Generator -->
-      <section class="card">
-        <div class="section-title">
-          <span>🤖 AI Ticket Generator</span>
-        </div>
-
-        <div class="generator-controls">
-
-          <div class="control-group">
-            <label for="strategySelect">Strategy</label>
-
-            <select id="strategySelect">
-              <option value="random">Random</option>
-              <option value="balanced">Balanced Odd / Even</option>
-              <option value="hot">Hot Numbers</option>
-              <option value="cold">Cold Numbers</option>
-              <option value="hotcold">Hot + Cold Mix</option>
-              <option value="spread">Good Spread</option>
-              <option value="weighted">Weighted Frequency</option>
-              <option value="weightedBalanced">
-                Weighted + Balanced ⭐
-              </option>
-              <option value="lowhigh">Low + High Mix</option>
-              <option value="recency">Recency</option>
-              <option value="hybrid">Hybrid AI</option>
-              <option value="overdue">Overdue Numbers</option>
-              <option value="decades">Decade Spread</option>
-              <option value="sum">Sum Balanced</option>
-              <option value="pair">Pair Boost</option>
-            </select>
-          </div>
-
-
-          <div class="control-group">
-            <label for="ticketCountSelect">Number of Tickets</label>
-
-            <select id="ticketCountSelect">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-            </select>
-          </div>
-
-
-          <button id="generateBtn" class="primary-btn">
-            🎲 Generate Tickets
-          </button>
-        </div>
-
-
-        <div id="generatedTickets" class="tickets-container"></div>
-      </section>
-
-
-      <!-- Strategy Analysis History -->
-      <section class="card">
-        <div class="section-title">
-          <span>📊 Strategy Analysis History</span>
-
-          <select id="analysisHistorySelect">
-            <option value="20">20 Drawings</option>
-            <option value="30">30 Drawings</option>
-            <option value="50">50 Drawings</option>
-            <option value="100" selected>100 Drawings</option>
-            <option value="200">200 Drawings</option>
-            <option value="500">500 Drawings</option>
-            <option value="all">All</option>
-          </select>
-        </div>
-
-        <div id="strategyAnalysis" class="analysis-box">
-          <div class="muted">
-            Generate tickets to see strategy analysis.
-          </div>
-        </div>
-      </section>
-
-
-      <!-- Saving Numbers -->
-      <section class="card">
-        <div class="section-title">
-          <span>💾 Saving Numbers</span>
-        </div>
-
-        <div class="saving-description">
-          Save generated SuperLotto Plus numbers or manually enter your
-          own numbers for future reference.
-        </div>
-
-        <div class="save-controls">
-
-          <button id="saveGeneratedBtn" class="primary-btn">
-            💾 Save Generated
-          </button>
-
-          <button id="clearSavedBtn" class="small-btn danger-btn">
-            Clear Saved
-          </button>
-        </div>
-
-
-        <div class="manual-entry">
-          <div class="manual-title">
-            Enter Your Own Numbers
-          </div>
-
-          <div class="manual-inputs">
-
-            <input
-              id="m1"
-              type="number"
-              min="1"
-              max="47"
-              placeholder="1"
-            >
-
-            <input
-              id="m2"
-              type="number"
-              min="1"
-              max="47"
-              placeholder="2"
-            >
-
-            <input
-              id="m3"
-              type="number"
-              min="1"
-              max="47"
-              placeholder="3"
-            >
-
-            <input
-              id="m4"
-              type="number"
-              min="1"
-              max="47"
-              placeholder="4"
-            >
-
-            <input
-              id="m5"
-              type="number"
-              min="1"
-              max="47"
-              placeholder="5"
-            >
-
-            <input
-              id="mpb"
-              class="pb-input"
-              type="number"
-              min="1"
-              max="27"
-              placeholder="Superball"
-            >
-
-          </div>
-
-          <button id="saveManualBtn" class="primary-btn">
-            Save Manual Numbers
-          </button>
-        </div>
-
-
-        <div id="savedNumbers" class="saved-list"></div>
-      </section>
-
-
-      <!-- Historical Statistics -->
-      <section class="card">
-        <div class="section-title">
-          <span>📈 Historical Statistics</span>
-
-          <button id="refreshStatsBtn" class="small-btn">
-            Refresh
-          </button>
-        </div>
-
-
-        <div class="stats-grid">
-
-          <div class="stat-card">
-            <div class="stat-title">
-              🔵 White Ball Statistics
-            </div>
-
-            <div id="whiteStats"></div>
-          </div>
-
-
-          <div class="stat-card">
-            <div class="stat-title">
-              🔴 Superball Statistics
-            </div>
-
-            <div id="pbStats"></div>
-          </div>
-
-        </div>
-      </section>
-
-
-      <!-- Walk-Forward Backtesting -->
-      <section class="card">
-        <div class="section-title">
-          <span>🧪 Walk-Forward Backtesting</span>
-        </div>
-
-        <div class="backtest-controls">
-
-          <div class="control-group">
-            <label for="backtestWindow">
-              Training Window
-            </label>
-
-            <select id="backtestWindow">
-              <option value="20">20 Drawings</option>
-              <option value="30" selected>30 Drawings</option>
-              <option value="50">50 Drawings</option>
-              <option value="100">100 Drawings</option>
-            </select>
-          </div>
-
-
-          <div class="control-group">
-            <label for="backtestStrategy">
-              Strategy
-            </label>
-
-            <select id="backtestStrategy">
-              <option value="random">Random</option>
-              <option value="balanced">Balanced Odd / Even</option>
-              <option value="hot">Hot Numbers</option>
-              <option value="cold">Cold Numbers</option>
-              <option value="hotcold">Hot + Cold Mix</option>
-              <option value="spread">Good Spread</option>
-              <option value="weighted">Weighted Frequency</option>
-              <option value="weightedBalanced">
-                Weighted + Balanced ⭐
-              </option>
-              <option value="lowhigh">Low + High Mix</option>
-              <option value="recency">Recency</option>
-              <option value="hybrid">Hybrid AI</option>
-              <option value="overdue">Overdue Numbers</option>
-              <option value="decades">Decade Spread</option>
-              <option value="sum">Sum Balanced</option>
-              <option value="pair">Pair Boost</option>
-            </select>
-          </div>
-
-
-          <button id="runBacktestBtn" class="primary-btn">
-            🧪 Run Backtest
-          </button>
-
-        </div>
-
-
-        <div id="backtestResults" class="backtest-results">
-          <div class="muted">
-            Select a strategy and run the backtest.
-          </div>
-        </div>
-      </section>
-
-
-      <!-- Automatic Update -->
-      <section class="card">
-        <div class="section-title">
-          <span>🔄 Automatic Update</span>
-        </div>
-
-        <div class="auto-update-row">
-
-          <div>
-            <div class="auto-update-title">
-              Automatically update SuperLotto Plus data
-            </div>
-
-            <div class="muted">
-              The app checks for new official drawing data whenever
-              the app is opened.
-            </div>
-          </div>
-
-          <label class="switch">
-            <input
-              type="checkbox"
-              id="autoUpdateToggle"
-              checked
-            >
-            <span class="slider"></span>
-          </label>
-
-        </div>
-
-
-        <div class="auto-update-actions">
-          <button id="updateNowBtn" class="primary-btn">
-            🔄 Update Now
-          </button>
-
-          <div id="updateStatus" class="muted">
-            Ready
-          </div>
-        </div>
-      </section>
-
-
-      <!-- Data Tools -->
-      <section class="card">
-        <div class="section-title">
-          <span>🛠️ Data Tools</span>
-        </div>
-
-        <div class="data-tools-grid">
-
-          <button id="downloadCsvBtn" class="tool-btn">
-            📥 Download CSV
-          </button>
-
-          <button id="downloadJsonBtn" class="tool-btn">
-            📥 Download JSON
-          </button>
-
-          <label class="tool-btn file-label">
-            📤 Import JSON
-            <input
-              id="importJsonInput"
-              type="file"
-              accept=".json,application/json"
-              hidden
-            >
-          </label>
-
-          <button id="resetDataBtn" class="tool-btn danger-btn">
-            ♻️ Reset Database
-          </button>
-
-        </div>
-
-        <div class="data-info">
-          <div>
-            <strong>Game:</strong>
-            SuperLotto Plus
-          </div>
-
-          <div>
-            <strong>White Balls:</strong>
-            1–47
-          </div>
-
-          <div>
-            <strong>Superball:</strong>
-            1–27
-          </div>
-
-          <div>
-            <strong>Drawings:</strong>
-            Wednesday & Saturday
-          </div>
-        </div>
-      </section>
-
-
-      <!-- Footer -->
-      <footer class="footer">
-        <div>
-          SuperLotto Plus AI Lab V6
-        </div>
-
-        <div class="footer-sub">
-          Statistics • Strategies • Backtesting
-        </div>
-      </footer>
-
-    </main>
-
-
-    <!-- Toast -->
-    <div id="toast" class="toast">
-      <span id="toastMessage"></span>
-    </div>
-
-
-<script>
 
 /* ============================================================
    SUPERLOTTO PLUS AI LAB V6.3.1
-   JAVASCRIPT
+   CORE JAVASCRIPT
+
+   IMPORTANT:
+   This is ONE application only.
+   Do not append another copy of this script.
    ============================================================ */
 
 
 /* ============================================================
-   1. STORAGE KEYS
+   1. STORAGE
    ============================================================ */
 
 const STORAGE_KEY =
@@ -4014,77 +987,161 @@ const OLD_SETTINGS_KEY =
 
 
 /* ============================================================
-   2. SEED DATA
+   2. GAME RULES
    ============================================================ */
 
-/*
-  This seed contains only a verified SuperLotto Plus drawing.
-  The Worker can add the rest of the official history.
-*/
+const WHITE_MAX = 47;
+const PB_MAX = 27;
+const WHITE_COUNT = 5;
 
-const SEED_DRAWS = [
-  {
-    date: "2026-09-09",
-    white: [9, 24, 28, 34, 41],
-    pb: 6
-  }
-];
+const TICKET_COST = "$1";
+
+const GAME_NAME =
+  "SuperLotto Plus";
 
 
 /* ============================================================
-   3. APPLICATION STATE
+   3. STATE
    ============================================================ */
 
 let draws = [];
+
 let savedNumbers = [];
+
 let generatedTickets = [];
 
 let settings = {
+  workerUrl: "",
   autoUpdate: true,
-  analysisHistory: 100,
-  drawCount: 2,
-  strategy: "random",
-  ticketCount: 1
+  latestCount: 2,
+  strategy: "weightedBalanced",
+  ticketCount: 1,
+  strategyWindow: "100"
 };
 
 
 /* ============================================================
-   4. BASIC HELPERS
+   4. HELPERS
    ============================================================ */
 
-function $(id) {
+function $(id){
   return document.getElementById(id);
 }
 
 
-function safeGet(key, fallback) {
-  try {
-    const value = localStorage.getItem(key);
+function showToast(message){
 
-    if (value === null) {
-      return fallback;
-    }
+  const toast = $("toast");
+  const messageBox = $("toastMessage");
 
-    return JSON.parse(value);
+  if(!toast) return;
 
-  } catch (e) {
-    return fallback;
+  if(messageBox){
+    messageBox.textContent = message;
+  }else{
+    toast.textContent = message;
   }
+
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+
+  showToast.timer =
+    setTimeout(
+      () => toast.classList.remove("show"),
+      2500
+    );
 }
 
 
-function safeSet(key, value) {
-  try {
-    localStorage.setItem(
-      key,
-      JSON.stringify(value)
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+function uniqueNumbers(values){
+
+  return [
+    ...new Set(
+      values
+        .map(Number)
+        .filter(Number.isFinite)
+    )
+  ];
+}
+
+
+function sortNumbers(values){
+
+  return [...values]
+    .map(Number)
+    .sort((a,b)=>a-b);
+}
+
+
+function randomInt(min,max){
+
+  return Math.floor(
+    Math.random() *
+    (max-min+1)
+  ) + min;
+}
+
+
+function allWhite(){
+
+  return Array.from(
+    {length:WHITE_MAX},
+    (_,i)=>i+1
+  );
+}
+
+
+function allPB(){
+
+  return Array.from(
+    {length:PB_MAX},
+    (_,i)=>i+1
+  );
+}
+
+
+function sampleUnique(pool,count){
+
+  const source = [...pool];
+  const result = [];
+
+  while(
+    source.length &&
+    result.length < count
+  ){
+
+    const index =
+      Math.floor(
+        Math.random()*source.length
+      );
+
+    result.push(
+      source.splice(index,1)[0]
     );
-
-    return true;
-
-  } catch (e) {
-    return false;
   }
+
+  return sortNumbers(result);
+}
+
+
+function clamp(value,min,max){
+
+  return Math.max(
+    min,
+    Math.min(max,value)
+  );
 }
 
 
@@ -4092,110 +1149,93 @@ function safeSet(key, value) {
    5. DRAW NORMALIZATION
    ============================================================ */
 
-function normalizeDraw(d) {
+function normalizeDraw(d){
 
-  if (!d) {
+  if(!d || typeof d !== "object"){
     return null;
   }
 
-  const date =
-    String(d.date || d.drawDate || "").trim();
+  let white = [];
 
-  let white =
-    Array.isArray(d.white)
-      ? d.white
-      : [
-          d.white1,
-          d.white2,
-          d.white3,
-          d.white4,
-          d.white5
-        ];
+  if(Array.isArray(d.white)){
+    white = d.white;
+  }
+  else if(Array.isArray(d.numbers)){
+    white = d.numbers;
+  }
+  else{
 
-  white = white
-    .map(Number)
-    .filter(Number.isFinite);
+    white = [
+      d.white1,
+      d.white2,
+      d.white3,
+      d.white4,
+      d.white5
+    ];
+  }
+
+  white = uniqueNumbers(white)
+    .filter(
+      n =>
+        n >= 1 &&
+        n <= WHITE_MAX
+    );
 
   const pb =
     Number(
       d.pb ??
       d.superball ??
       d.superBall ??
-      d.super
+      d.mega ??
+      d.special
     );
 
-  if (!date) {
-    return null;
-  }
-
-  if (white.length !== 5) {
-    return null;
-  }
-
-  if (
-    white.some(
-      n =>
-        !Number.isInteger(n) ||
-        n < 1 ||
-        n > 47
-    )
-  ) {
-    return null;
-  }
-
-  if (
-    !Number.isInteger(pb) ||
+  if(
+    !d.date ||
+    white.length !== WHITE_COUNT ||
+    !Number.isFinite(pb) ||
     pb < 1 ||
-    pb > 27
-  ) {
-    return null;
-  }
-
-  white = [...new Set(white)];
-
-  if (white.length !== 5) {
+    pb > PB_MAX
+  ){
     return null;
   }
 
   return {
-    date,
-    white: white.sort((a, b) => a - b),
-    pb
+    date: String(d.date).slice(0,10),
+    white: sortNumbers(white),
+    pb: Math.round(pb),
+    drawNumber:
+      d.drawNumber ??
+      d.draw ??
+      ""
   };
 }
 
 
-function normalizeHistory(list) {
+function normalizeHistory(input){
 
-  if (!Array.isArray(list)) {
+  if(!Array.isArray(input)){
     return [];
   }
 
-  const result = [];
+  const map = new Map();
 
-  for (const d of list) {
+  for(const item of input){
 
-    const normalized =
-      normalizeDraw(d);
+    const d =
+      normalizeDraw(item);
 
-    if (normalized) {
-      result.push(normalized);
-    }
+    if(!d) continue;
+
+    const key =
+      `${d.date}|${d.white.join(",")}|${d.pb}`;
+
+    map.set(key,d);
   }
 
-  const unique =
-    new Map();
-
-  for (const d of result) {
-    unique.set(
-      `${d.date}|${d.white.join(",")}|${d.pb}`,
-      d
-    );
-  }
-
-  return Array.from(unique.values())
+  return [...map.values()]
     .sort(
-      (a, b) =>
+      (a,b)=>
         new Date(b.date) -
         new Date(a.date)
     );
@@ -4203,300 +1243,401 @@ function normalizeHistory(list) {
 
 
 /* ============================================================
-   6. LOAD / SAVE DATA
+   6. LOCAL DATA
    ============================================================ */
 
-function loadData() {
+function loadData(){
 
-  const stored =
-    safeGet(STORAGE_KEY, null);
+  try{
 
-  if (Array.isArray(stored)) {
+    const stored =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
 
-    draws =
-      normalizeHistory(stored);
+    if(stored){
 
-  } else {
-
-    const old =
-      safeGet(OLD_STORAGE_KEY, null);
-
-    if (Array.isArray(old)) {
+      const parsed =
+        JSON.parse(stored);
 
       draws =
-        normalizeHistory(old);
+        normalizeHistory(
+          Array.isArray(parsed)
+            ? parsed
+            : parsed.draws || []
+        );
+    }
 
-    } else {
+  }catch(error){
 
-      draws =
-        normalizeHistory(SEED_DRAWS);
+    console.error(
+      "Unable to load local drawings:",
+      error
+    );
+
+    draws = [];
+  }
+
+
+  try{
+
+    const stored =
+      localStorage.getItem(
+        SAVED_KEY
+      );
+
+    if(stored){
+
+      const parsed =
+        JSON.parse(stored);
+
+      if(Array.isArray(parsed)){
+        savedNumbers = parsed;
+      }
+    }
+
+  }catch(error){
+
+    console.error(
+      "Unable to load saved numbers:",
+      error
+    );
+
+    savedNumbers = [];
+  }
+
+
+  try{
+
+    const stored =
+      localStorage.getItem(
+        SETTINGS_KEY
+      );
+
+    if(stored){
+
+      const parsed =
+        JSON.parse(stored);
+
+      if(
+        parsed &&
+        typeof parsed === "object"
+      ){
+
+        settings = {
+          ...settings,
+          ...parsed
+        };
+      }
+    }
+
+  }catch(error){
+
+    console.error(
+      "Unable to load settings:",
+      error
+    );
+  }
+
+
+  /* ----------------------------------------------------------
+     Migrate old V5 history if V6 history is empty.
+     ---------------------------------------------------------- */
+
+  if(!draws.length){
+
+    try{
+
+      const old =
+        localStorage.getItem(
+          OLD_STORAGE_KEY
+        );
+
+      if(old){
+
+        const parsed =
+          JSON.parse(old);
+
+        const oldDraws =
+          normalizeHistory(
+            Array.isArray(parsed)
+              ? parsed
+              : parsed.draws || []
+          );
+
+        if(oldDraws.length){
+
+          draws = oldDraws;
+
+          saveDraws();
+        }
+      }
+
+    }catch(error){
+
+      console.warn(
+        "V5 migration skipped:",
+        error
+      );
     }
   }
 
 
-  const storedSaved =
-    safeGet(SAVED_KEY, []);
-
-  savedNumbers =
-    Array.isArray(storedSaved)
-      ? storedSaved
-      : [];
-
-
-  const storedSettings =
-    safeGet(SETTINGS_KEY, null);
-
-  if (storedSettings) {
-
-    settings = {
-      ...settings,
-      ...storedSettings
-    };
-  }
-
-
-  $("autoUpdateToggle").checked =
-    settings.autoUpdate !== false;
-
-  $("analysisHistorySelect").value =
-    String(settings.analysisHistory);
-
-  $("drawCountSelect").value =
-    String(settings.drawCount);
-
-  $("strategySelect").value =
-    settings.strategy;
-
-  $("ticketCountSelect").value =
-    String(settings.ticketCount);
+  applySettingsToUI();
 }
 
 
-function saveDraws() {
-  safeSet(STORAGE_KEY, draws);
-}
+function saveDraws(){
 
-
-function saveSettings() {
-  safeSet(SETTINGS_KEY, settings);
-}
-
-
-function saveSavedNumbers() {
-  safeSet(SAVED_KEY, savedNumbers);
-}
-
-
-/* ============================================================
-   7. FORMATTING
-   ============================================================ */
-
-function formatDate(dateString) {
-
-  const d =
-    new Date(dateString + "T12:00:00");
-
-  if (Number.isNaN(d.getTime())) {
-    return dateString;
-  }
-
-  return d.toLocaleDateString(
-    undefined,
-    {
-      year: "numeric",
-      month: "short",
-      day: "numeric"
-    }
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(draws)
   );
 }
 
 
-function formatMoney(value) {
+function saveSavedNumbers(){
 
-  if (
-    value === null ||
-    value === undefined ||
-    value === "" ||
-    !Number.isFinite(Number(value))
-  ) {
-    return "—";
+  localStorage.setItem(
+    SAVED_KEY,
+    JSON.stringify(savedNumbers)
+  );
+}
+
+
+function saveSettings(){
+
+  const workerInput =
+    $("workerUrl");
+
+  const autoToggle =
+    $("autoUpdateToggle");
+
+  if(workerInput){
+    settings.workerUrl =
+      workerInput.value.trim();
   }
 
-  return "$" +
-    Number(value).toLocaleString(
-      "en-US",
-      {
-        maximumFractionDigits: 0
-      }
-    );
+  if(autoToggle){
+    settings.autoUpdate =
+      autoToggle.checked;
+  }
+
+  const latest =
+    $("latestCount");
+
+  if(latest){
+    settings.latestCount =
+      Number(latest.value);
+  }
+
+  const strategy =
+    $("strategy");
+
+  if(strategy){
+    settings.strategy =
+      strategy.value;
+  }
+
+  const ticketCount =
+    $("ticketCount");
+
+  if(ticketCount){
+    settings.ticketCount =
+      Number(ticketCount.value);
+  }
+
+  const strategyWindow =
+    $("strategyWindow");
+
+  if(strategyWindow){
+    settings.strategyWindow =
+      strategyWindow.value;
+  }
+
+  localStorage.setItem(
+    SETTINGS_KEY,
+    JSON.stringify(settings)
+  );
+}
+
+
+function applySettingsToUI(){
+
+  if($("workerUrl")){
+    $("workerUrl").value =
+      settings.workerUrl || "";
+  }
+
+  if($("autoUpdateToggle")){
+    $("autoUpdateToggle").checked =
+      settings.autoUpdate !== false;
+  }
+
+  if($("latestCount")){
+    $("latestCount").value =
+      String(
+        clamp(
+          Number(settings.latestCount) || 2,
+          2,
+          10
+        )
+      );
+  }
+
+  if($("strategy")){
+    $("strategy").value =
+      settings.strategy ||
+      "weightedBalanced";
+  }
+
+  if($("ticketCount")){
+    $("ticketCount").value =
+      String(
+        settings.ticketCount || 1
+      );
+  }
+
+  if($("strategyWindow")){
+    $("strategyWindow").value =
+      String(
+        settings.strategyWindow ||
+        "100"
+      );
+  }
 }
 
 
 /* ============================================================
-   8. TOAST
+   7. BALL DISPLAY
    ============================================================ */
 
-let toastTimer = null;
+function ballsHtml(
+  white,
+  pb
+){
 
-function showToast(message) {
+  return `
+    <div class="balls">
+      ${white.map(
+        n =>
+          `<span class="ball">${n}</span>`
+      ).join("")}
 
-  const toast =
-    $("toast");
+      <span class="ball pb">
+        ${pb}
+      </span>
+    </div>
+  `;
+}
 
-  const messageEl =
-    $("toastMessage");
 
-  if (!toast || !messageEl) {
+/* ============================================================
+   8. LATEST DRAWINGS
+   ============================================================ */
+
+function renderLatestDrawings(){
+
+  const container =
+    $("latestDraws");
+
+  if(!container) return;
+
+  const count =
+    clamp(
+      Number(
+        $("latestCount")?.value ||
+        settings.latestCount ||
+        2
+      ),
+      2,
+      10
+    );
+
+  const latest =
+    draws.slice(0,count);
+
+  if($("latestTitle")){
+    $("latestTitle").textContent =
+      `Last ${count} Drawings`;
+  }
+
+  if(!latest.length){
+
+    container.innerHTML =
+      `<div class="empty">
+        No drawing data available.
+       </div>`;
+
     return;
   }
 
-  messageEl.textContent =
-    message;
+  container.innerHTML =
+    latest.map(
+      d => `
+        <div class="draw-row">
 
-  toast.classList.add("show");
+          <div class="draw-date">
+            ${escapeHtml(d.date)}
+          </div>
 
-  clearTimeout(toastTimer);
+          ${ballsHtml(
+            d.white,
+            d.pb
+          )}
 
-  toastTimer =
-    setTimeout(
-      () => {
-        toast.classList.remove("show");
-      },
-      2600
-    );
+        </div>
+      `
+    ).join("");
 }
 
 
 /* ============================================================
-   9. RANDOM UTILITIES
+   9. FREQUENCY DATA
    ============================================================ */
 
-function randomInt(min, max) {
+function getAnalysisDraws(){
 
-  return Math.floor(
-    Math.random() *
-    (max - min + 1)
-  ) + min;
-}
-
-
-function shuffle(array) {
-
-  const a =
-    [...array];
-
-  for (
-    let i = a.length - 1;
-    i > 0;
-    i--
-  ) {
-
-    const j =
-      Math.floor(
-        Math.random() * (i + 1)
-      );
-
-    [
-      a[i],
-      a[j]
-    ] = [
-      a[j],
-      a[i]
-    ];
+  if(!draws.length){
+    return [];
   }
 
-  return a;
-}
+  const value =
+    settings.strategyWindow ||
+    $("strategyWindow")?.value ||
+    "100";
 
-
-function sampleUnique(array, count) {
-
-  return shuffle(array)
-    .slice(0, count);
-}
-
-
-function weightedPick(items, weights) {
-
-  let total =
-    weights.reduce(
-      (sum, w) =>
-        sum + Math.max(0, w),
-      0
-    );
-
-  if (total <= 0) {
-    return items[
-      randomInt(0, items.length - 1)
-    ];
+  if(value === "all"){
+    return draws;
   }
 
-  let r =
-    Math.random() * total;
+  const count =
+    Number(value);
 
-  for (
-    let i = 0;
-    i < items.length;
-    i++
-  ) {
-
-    r -=
-      Math.max(0, weights[i]);
-
-    if (r <= 0) {
-      return items[i];
-    }
+  if(!Number.isFinite(count)){
+    return draws.slice(0,100);
   }
 
-  return items[
-    items.length - 1
-  ];
-}
-
-
-/* ============================================================
-   10. SUPERLOTTO PLUS NUMBER RANGES
-   ============================================================ */
-
-function allWhite() {
-
-  return Array.from(
-    { length: 47 },
-    (_, i) => i + 1
+  return draws.slice(
+    0,
+    Math.max(1,count)
   );
 }
 
 
-function allPB() {
-
-  return Array.from(
-    { length: 27 },
-    (_, i) => i + 1
-  );
-}
-
-
-/* ============================================================
-   11. FREQUENCY COUNTS
-   ============================================================ */
-
-function countsWhite(history) {
+function getWhiteCounts(data){
 
   const counts =
-    {};
+    Array(WHITE_MAX+1).fill(0);
 
-  for (let i = 1; i <= 47; i++) {
-    counts[i] = 0;
-  }
+  for(const d of data){
 
-  for (const d of history) {
+    for(const n of d.white){
 
-    for (const n of d.white) {
-
-      if (
-        Object.prototype.hasOwnProperty
-          .call(counts, n)
-      ) {
+      if(
+        n >= 1 &&
+        n <= WHITE_MAX
+      ){
         counts[n]++;
       }
     }
@@ -4506,25 +1647,18 @@ function countsWhite(history) {
 }
 
 
-function countsPB(history) {
+function getPBCounts(data){
 
   const counts =
-    {};
+    Array(PB_MAX+1).fill(0);
 
-  for (let i = 1; i <= 27; i++) {
-    counts[i] = 0;
-  }
+  for(const d of data){
 
-  for (const d of history) {
-
-    const n =
-      Number(d.pb);
-
-    if (
-      Object.prototype.hasOwnProperty
-        .call(counts, n)
-    ) {
-      counts[n]++;
+    if(
+      d.pb >= 1 &&
+      d.pb <= PB_MAX
+    ){
+      counts[d.pb]++;
     }
   }
 
@@ -4532,37 +1666,30 @@ function countsPB(history) {
 }
 
 
-/* ============================================================
-   12. LAST-SEEN AGES
-   ============================================================ */
+function getAges(data,max){
 
-function lastSeenAges(history, maxNumber) {
+  const ages =
+    Array(max+1).fill(
+      data.length
+    );
 
-  const ages = {};
-
-  for (
-    let i = 1;
-    i <= maxNumber;
-    i++
-  ) {
-    ages[i] = history.length;
-  }
-
-  for (
-    let index = 0;
-    index < history.length;
-    index++
-  ) {
+  for(let i=0;i<data.length;i++){
 
     const d =
-      history[index];
+      data[i];
 
-    for (const n of d.white) {
+    for(const n of d.white){
 
-      if (
-        ages[n] === history.length
-      ) {
-        ages[n] = index;
+      if(
+        n>=1 &&
+        n<=max
+      ){
+
+        ages[n] =
+          Math.min(
+            ages[n],
+            i
+          );
       }
     }
   }
@@ -4571,4057 +1698,324 @@ function lastSeenAges(history, maxNumber) {
 }
 
 
-function lastSeenPBAges(history) {
+/* ============================================================
+   10. WEIGHTED SELECTION
+   ============================================================ */
 
-  const ages = {};
+function weightedPick(
+  pool,
+  weights,
+  count
+){
 
-  for (let i = 1; i <= 27; i++) {
-    ages[i] = history.length;
-  }
+  const result = [];
+  const available = [...pool];
 
-  for (
-    let index = 0;
-    index < history.length;
-    index++
-  ) {
+  while(
+    result.length < count &&
+    available.length
+  ){
 
-    const pb =
-      Number(history[index].pb);
+    let total = 0;
 
-    if (
-      ages[pb] === history.length
-    ) {
-      ages[pb] = index;
+    for(const n of available){
+
+      const w =
+        Number(weights[n]) || 0;
+
+      total +=
+        Math.max(.01,w);
+    }
+
+    let target =
+      Math.random()*total;
+
+    let chosen =
+      available[
+        available.length-1
+      ];
+
+    for(const n of available){
+
+      target -=
+        Math.max(
+          .01,
+          Number(weights[n]) || 0
+        );
+
+      if(target <= 0){
+
+        chosen = n;
+        break;
+      }
+    }
+
+    result.push(chosen);
+
+    const index =
+      available.indexOf(chosen);
+
+    if(index>=0){
+      available.splice(index,1);
     }
   }
 
-  return ages;
+  return sortNumbers(result);
 }
 
 
 /* ============================================================
-   13. WEIGHTING HELPERS
+   11. BALANCED GENERATION
    ============================================================ */
 
-function normalizedWeights(
-  counts,
-  numbers
-) {
+function isBalanced(numbers){
 
-  const values =
-    numbers.map(
-      n => counts[n] || 0
-    );
+  const odd =
+    numbers.filter(
+      n => n % 2
+    ).length;
 
-  const max =
-    Math.max(
-      1,
-      ...values
-    );
+  const even =
+    numbers.length -
+    odd;
 
-  return values.map(
-    v => 1 + (v / max) * 4
+  return (
+    Math.abs(odd-even) <= 1
   );
 }
 
-
-function inverseWeights(
-  counts,
-  numbers
-) {
-
-  const values =
-    numbers.map(
-      n => counts[n] || 0
-    );
-
-  const max =
-    Math.max(
-      1,
-      ...values
-    );
-
-  return values.map(
-    v => 1 + ((max - v) / max) * 4
-  );
-}
-
-
-function recencyWeights(
-  ages,
-  numbers
-) {
-
-  const maxAge =
-    Math.max(
-      1,
-      ...numbers.map(
-        n => ages[n] || 0
-      )
-    );
-
-  return numbers.map(
-    n =>
-      1 +
-      ((maxAge - (ages[n] || 0))
-        / maxAge) * 4
-  );
-}
-
-
-function overdueWeights(
-  ages,
-  numbers
-) {
-
-  return numbers.map(
-    n =>
-      1 +
-      Math.min(
-        8,
-        ages[n] || 0
-      )
-  );
-}
-
-
-/* ============================================================
-   14. BASIC SUPERBALL GENERATOR
-   ============================================================ */
-
-function generatePB(history) {
-
-  const numbers =
-    allPB();
-
-  const counts =
-    countsPB(history);
-
-  const weights =
-    normalizedWeights(
-      counts,
-      numbers
-    );
-
-  return weightedPick(
-    numbers,
-    weights
-  );
-}
-
-
-/* ============================================================
-   15. BALANCED ODD / EVEN
-   ============================================================ */
 
 function generateBalanced(
-  history
-) {
-
-  const numbers =
-    allWhite();
-
-  const shuffled =
-    shuffle(numbers);
-
-  const odd =
-    shuffled.filter(
-      n => n % 2 === 1
-    );
-
-  const even =
-    shuffled.filter(
-      n => n % 2 === 0
-    );
-
-
-  let selected = [];
-
-
-  const oddCount =
-    Math.random() < 0.5
-      ? 2
-      : 3;
-
-  const evenCount =
-    5 - oddCount;
-
-
-  selected.push(
-    ...sampleUnique(
-      odd,
-      oddCount
-    )
-  );
-
-  selected.push(
-    ...sampleUnique(
-      even,
-      evenCount
-    )
-  );
-
-
-  return {
-    white: selected.sort(
-      (a, b) => a - b
-    ),
-    pb: generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   16. GOOD SPREAD
-   SuperLotto Plus:
-   Low 1–16
-   Mid 17–32
-   High 33–47
-   ============================================================ */
-
-function generateSpread(
-  history
-) {
-
-  const low =
-    Array.from(
-      { length: 16 },
-      (_, i) => i + 1
-    );
-
-  const mid =
-    Array.from(
-      { length: 16 },
-      (_, i) => i + 17
-    );
-
-  const high =
-    Array.from(
-      { length: 15 },
-      (_, i) => i + 33
-    );
-
-
-  const selected = [];
-
-  selected.push(
-    ...sampleUnique(low, 1)
-  );
-
-  selected.push(
-    ...sampleUnique(mid, 1)
-  );
-
-  selected.push(
-    ...sampleUnique(high, 1)
-  );
-
-
-  const remaining =
-    allWhite().filter(
-      n => !selected.includes(n)
-    );
-
-
-  selected.push(
-    ...sampleUnique(
-      remaining,
-      2
-    )
-  );
-
-
-  return {
-    white: selected.sort(
-      (a, b) => a - b
-    ),
-    pb: generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   17. HOT + COLD
-   ============================================================ */
-
-function generateHotCold(
-  history
-) {
-
-  const numbers =
-    allWhite();
-
-  const counts =
-    countsWhite(history);
-
-
-  const sorted =
-    [...numbers].sort(
-      (a, b) =>
-        counts[b] - counts[a]
-    );
-
-
-  const hot =
-    sorted.slice(
-      0,
-      Math.max(
-        10,
-        Math.ceil(numbers.length * 0.25)
-      )
-    );
-
-
-  const cold =
-    sorted.slice(
-      -Math.max(
-        10,
-        Math.ceil(numbers.length * 0.25)
-      )
-    );
-
-
-  const selected = [];
-
-  selected.push(
-    ...sampleUnique(hot, 2)
-  );
-
-  selected.push(
-    ...sampleUnique(cold, 2)
-  );
-
-
-  const remaining =
-    numbers.filter(
-      n => !selected.includes(n)
-    );
-
-
-  if (remaining.length) {
-
-    selected.push(
-      ...sampleUnique(
-        remaining,
-        1
-      )
-    );
-  }
-
-
-  return {
-    white: selected.sort(
-      (a, b) => a - b
-    ),
-    pb: generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   18. LOW + HIGH MIX
-   Low  = 1–23
-   High = 24–47
-   ============================================================ */
-
-function generateLowHigh(
-  history
-) {
-
-  const low =
-    Array.from(
-      { length: 23 },
-      (_, i) => i + 1
-    );
-
-  const high =
-    Array.from(
-      { length: 24 },
-      (_, i) => i + 24
-    );
-
-
-  const selected = [];
-
-  const lowCount =
-    Math.random() < 0.5
-      ? 2
-      : 3;
-
-  const highCount =
-    5 - lowCount;
-
-
-  selected.push(
-    ...sampleUnique(
-      low,
-      lowCount
-    )
-  );
-
-  selected.push(
-    ...sampleUnique(
-      high,
-      highCount
-    )
-  );
-
-
-  return {
-    white: selected.sort(
-      (a, b) => a - b
-    ),
-    pb: generatePB(history)
-  };
-}/* ============================================================
-   19. DECADE SPREAD
-   SuperLotto Plus: 1–47
-   Groups:
-   1–10
-   11–20
-   21–30
-   31–40
-   41–47
-   ============================================================ */
-
-function generateDecades(history) {
-
-  const groups = [
-    Array.from({length: 10}, (_, i) => i + 1),
-    Array.from({length: 10}, (_, i) => i + 11),
-    Array.from({length: 10}, (_, i) => i + 21),
-    Array.from({length: 10}, (_, i) => i + 31),
-    Array.from({length: 7},  (_, i) => i + 41)
-  ];
-
-  const selected = [];
-
-  for (const group of groups) {
-    selected.push(
-      group[randomInt(0, group.length - 1)]
-    );
-  }
-
-  return {
-    white: selected.sort((a, b) => a - b),
-    pb: generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   20. SUM BALANCED
-   ============================================================ */
-
-function generateSumBalanced(history) {
-
-  const numbers = allWhite();
-
-  /*
-    For 5 numbers from 1–47, the theoretical average
-    total is approximately 120.
-  */
-
-  const target = 120;
-
-  for (let attempt = 0; attempt < 100; attempt++) {
-
-    const selected =
-      sampleUnique(numbers, 5)
-        .sort((a, b) => a - b);
-
-    const sum =
-      selected.reduce(
-        (a, b) => a + b,
-        0
-      );
-
-    if (
-      sum >= target - 20 &&
-      sum <= target + 20
-    ) {
-      return {
-        white: selected,
-        pb: generatePB(history)
-      };
-    }
-  }
-
-  const fallback =
-    sampleUnique(numbers, 5)
-      .sort((a, b) => a - b);
-
-  return {
-    white: fallback,
-    pb: generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   21. PAIR BOOST
-   ============================================================ */
-
-function generatePairCounts(history) {
-
-  const pairs = {};
-
-  for (const d of history) {
-
-    const nums =
-      [...d.white].sort(
-        (a, b) => a - b
-      );
-
-    for (let i = 0; i < nums.length; i++) {
-
-      for (
-        let j = i + 1;
-        j < nums.length;
-        j++
-      ) {
-
-        const key =
-          `${nums[i]}-${nums[j]}`;
-
-        pairs[key] =
-          (pairs[key] || 0) + 1;
-      }
-    }
-  }
-
-  return pairs;
-}
-
-
-function generatePairBoost(history) {
-
-  const numbers = allWhite();
-
-  if (history.length < 2) {
-
-    return {
-      white:
-        sampleUnique(numbers, 5)
-          .sort((a, b) => a - b),
-      pb: generatePB(history)
-    };
-  }
-
-
-  const pairCounts =
-    generatePairCounts(history);
-
-  const counts =
-    countsWhite(history);
-
-  const selected = [];
-
-
-  /*
-    Start with a frequency-weighted number.
-  */
-
-  const firstWeights =
-    normalizedWeights(
-      counts,
-      numbers
-    );
-
-  selected.push(
-    weightedPick(
-      numbers,
-      firstWeights
-    )
-  );
-
-
-  while (selected.length < 5) {
-
-    const remaining =
-      numbers.filter(
-        n => !selected.includes(n)
-      );
-
-    const weights =
-      remaining.map(n => {
-
-        let score =
-          1 + (counts[n] || 0);
-
-        for (const s of selected) {
-
-          const a =
-            Math.min(n, s);
-
-          const b =
-            Math.max(n, s);
-
-          const key =
-            `${a}-${b}`;
-
-          score +=
-            (pairCounts[key] || 0) * 2;
-        }
-
-        return score;
-      });
-
-
-    selected.push(
-      weightedPick(
-        remaining,
-        weights
-      )
-    );
-  }
-
-
-  return {
-    white:
-      selected.sort(
-        (a, b) => a - b
-      ),
-    pb: generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   22. RANDOM TICKET
-   ============================================================ */
-
-function generateRandomTicket(history) {
-
-  return {
-    white:
-      sampleUnique(
-        allWhite(),
-        5
-      ).sort(
-        (a, b) => a - b
-      ),
-
-    pb:
-      randomInt(1, 27)
-  };
-}
-
-
-/* ============================================================
-   23. WEIGHTED FREQUENCY
-   ============================================================ */
-
-function generateWeighted(history) {
-
-  const numbers =
-    allWhite();
-
-  const counts =
-    countsWhite(history);
-
-  const selected = [];
-
-
-  while (selected.length < 5) {
-
-    const remaining =
-      numbers.filter(
-        n => !selected.includes(n)
-      );
-
-    const weights =
-      normalizedWeights(
-        counts,
-        remaining
-      );
-
-    selected.push(
-      weightedPick(
-        remaining,
-        weights
-      )
-    );
-  }
-
-
-  return {
-    white:
-      selected.sort(
-        (a, b) => a - b
-      ),
-
-    pb:
-      generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   24. COLD NUMBERS
-   ============================================================ */
-
-function generateCold(history) {
-
-  const numbers =
-    allWhite();
-
-  const counts =
-    countsWhite(history);
-
-  const weights =
-    inverseWeights(
-      counts,
-      numbers
-    );
-
-  const selected = [];
-
-
-  while (selected.length < 5) {
-
-    const remaining =
-      numbers.filter(
-        n => !selected.includes(n)
-      );
-
-    const remainingWeights =
-      inverseWeights(
-        counts,
-        remaining
-      );
-
-    selected.push(
-      weightedPick(
-        remaining,
-        remainingWeights
-      )
-    );
-  }
-
-
-  return {
-    white:
-      selected.sort(
-        (a, b) => a - b
-      ),
-
-    pb:
-      generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   25. HOT NUMBERS
-   ============================================================ */
-
-function generateHot(history) {
-
-  const numbers =
-    allWhite();
-
-  const counts =
-    countsWhite(history);
-
-  const weights =
-    normalizedWeights(
-      counts,
-      numbers
-    );
-
-  const selected = [];
-
-
-  while (selected.length < 5) {
-
-    const remaining =
-      numbers.filter(
-        n => !selected.includes(n)
-      );
-
-    const remainingWeights =
-      normalizedWeights(
-        counts,
-        remaining
-      );
-
-    selected.push(
-      weightedPick(
-        remaining,
-        remainingWeights
-      )
-    );
-  }
-
-
-  return {
-    white:
-      selected.sort(
-        (a, b) => a - b
-      ),
-
-    pb:
-      generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   26. RECENCY
-   ============================================================ */
-
-function generateRecency(history) {
-
-  const numbers =
-    allWhite();
-
-  const ages =
-    lastSeenAges(
-      history,
-      47
-    );
-
-  const selected = [];
-
-
-  while (selected.length < 5) {
-
-    const remaining =
-      numbers.filter(
-        n => !selected.includes(n)
-      );
-
-    const weights =
-      recencyWeights(
-        ages,
-        remaining
-      );
-
-    selected.push(
-      weightedPick(
-        remaining,
-        weights
-      )
-    );
-  }
-
-
-  return {
-    white:
-      selected.sort(
-        (a, b) => a - b
-      ),
-
-    pb:
-      generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   27. OVERDUE NUMBERS
-   ============================================================ */
-
-function generateOverdue(history) {
-
-  const numbers =
-    allWhite();
-
-  const ages =
-    lastSeenAges(
-      history,
-      47
-    );
-
-  const selected = [];
-
-
-  while (selected.length < 5) {
-
-    const remaining =
-      numbers.filter(
-        n => !selected.includes(n)
-      );
-
-    const weights =
-      overdueWeights(
-        ages,
-        remaining
-      );
-
-    selected.push(
-      weightedPick(
-        remaining,
-        weights
-      )
-    );
-  }
-
-
-  return {
-    white:
-      selected.sort(
-        (a, b) => a - b
-      ),
-
-    pb:
-      generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   28. WEIGHTED + BALANCED
-   ============================================================ */
-
-function generateWeightedBalanced(history) {
-
-  const numbers =
-    allWhite();
-
-  const counts =
-    countsWhite(history);
-
-  const odd =
-    numbers.filter(
-      n => n % 2 === 1
-    );
-
-  const even =
-    numbers.filter(
-      n => n % 2 === 0
-    );
-
-
-  const oddCount =
-    Math.random() < 0.5
-      ? 2
-      : 3;
-
-  const evenCount =
-    5 - oddCount;
-
-
-  const selected = [];
-
-
-  let oddRemaining =
-    [...odd];
-
-  let evenRemaining =
-    [...even];
-
-
-  for (
-    let i = 0;
-    i < oddCount;
-    i++
-  ) {
-
-    const weights =
-      normalizedWeights(
-        counts,
-        oddRemaining
-      );
-
-    const n =
-      weightedPick(
-        oddRemaining,
-        weights
-      );
-
-    selected.push(n);
-
-    oddRemaining =
-      oddRemaining.filter(
-        x => x !== n
-      );
-  }
-
-
-  for (
-    let i = 0;
-    i < evenCount;
-    i++
-  ) {
-
-    const weights =
-      normalizedWeights(
-        counts,
-        evenRemaining
-      );
-
-    const n =
-      weightedPick(
-        evenRemaining,
-        weights
-      );
-
-    selected.push(n);
-
-    evenRemaining =
-      evenRemaining.filter(
-        x => x !== n
-      );
-  }
-
-
-  return {
-    white:
-      selected.sort(
-        (a, b) => a - b
-      ),
-
-    pb:
-      generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   29. HYBRID AI
-   ============================================================ */
-
-function generateHybrid(history) {
-
-  const numbers =
-    allWhite();
-
-  const counts =
-    countsWhite(history);
-
-  const ages =
-    lastSeenAges(
-      history,
-      47
-    );
-
-
-  const selected = [];
-
-
-  while (selected.length < 5) {
-
-    const remaining =
-      numbers.filter(
-        n => !selected.includes(n)
-      );
-
-
-    const weights =
-      remaining.map(n => {
-
-        const frequency =
-          counts[n] || 0;
-
-        const age =
-          ages[n] || 0;
-
-
-        /*
-          Combine:
-          - frequency
-          - recency
-          - overdue behavior
-        */
-
-        const frequencyScore =
-          1 + frequency * 1.5;
-
-        const recencyScore =
-          1 + Math.max(
-            0,
-            10 - age
-          ) * 0.5;
-
-        const overdueScore =
-          1 + Math.min(
-            10,
-            age
-          ) * 0.4;
-
-
-        return (
-          frequencyScore +
-          recencyScore +
-          overdueScore
-        );
-      });
-
-
-    selected.push(
-      weightedPick(
-        remaining,
-        weights
-      )
-    );
-  }
-
-
-  /*
-    Make the result slightly more balanced
-    when possible.
-  */
-
-  const oddCount =
-    selected.filter(
-      n => n % 2 === 1
-    ).length;
-
-
-  if (
-    oddCount === 0 ||
-    oddCount === 5
-  ) {
-
-    const replacementIndex =
-      randomInt(
-        0,
-        selected.length - 1
-      );
-
-
-    const parity =
-      oddCount === 0
-        ? 1
-        : 0;
-
-
-    const candidates =
-      numbers.filter(
-        n =>
-          n % 2 === parity &&
-          !selected.includes(n)
-      );
-
-
-    if (candidates.length) {
-
-      selected[
-        replacementIndex
-      ] =
-        candidates[
-          randomInt(
-            0,
-            candidates.length - 1
-          )
-        ];
-    }
-  }
-
-
-  return {
-    white:
-      selected.sort(
-        (a, b) => a - b
-      ),
-
-    pb:
-      generatePB(history)
-  };
-}
-
-
-/* ============================================================
-   30. MAIN TICKET GENERATOR
-   ============================================================ */
-
-function generateTicket(
-  strategy,
-  history
-) {
-
-  switch (strategy) {
-
-    case "random":
-      return generateRandomTicket(history);
-
-    case "balanced":
-      return generateBalanced(history);
-
-    case "hot":
-      return generateHot(history);
-
-    case "cold":
-      return generateCold(history);
-
-    case "hotcold":
-      return generateHotCold(history);
-
-    case "spread":
-      return generateSpread(history);
-
-    case "weighted":
-      return generateWeighted(history);
-
-    case "weightedBalanced":
-      return generateWeightedBalanced(history);
-
-    case "lowhigh":
-      return generateLowHigh(history);
-
-    case "recency":
-      return generateRecency(history);
-
-    case "hybrid":
-      return generateHybrid(history);
-
-    case "overdue":
-      return generateOverdue(history);
-
-    case "decades":
-      return generateDecades(history);
-
-    case "sum":
-      return generateSumBalanced(history);
-
-    case "pair":
-      return generatePairBoost(history);
-
-    default:
-      return generateRandomTicket(history);
-  }
-}
-
-
-/* ============================================================
-   31. BALANCE CHECK
-   ============================================================ */
-
-function isBalanced(ticket) {
-
-  if (
-    !ticket ||
-    !Array.isArray(ticket.white) ||
-    ticket.white.length !== 5
-  ) {
-    return false;
-  }
-
-
-  const odd =
-    ticket.white.filter(
-      n => n % 2 === 1
-    ).length;
-
-
-  const low =
-    ticket.white.filter(
-      n => n <= 23
-    ).length;
-
-
-  const high =
-    ticket.white.filter(
-      n => n >= 24
-    ).length;
-
-
-  const sum =
-    ticket.white.reduce(
-      (a, b) => a + b,
-      0
-    );
-
-
-  return (
-    odd >= 2 &&
-    odd <= 3 &&
-    low >= 2 &&
-    high >= 2 &&
-    sum >= 90 &&
-    sum <= 150
-  );
-}
-
-
-/* ============================================================
-   32. STRATEGY NAMES
-   ============================================================ */
-
-function strategyName(strategy) {
-
-  const names = {
-
-    random:
-      "Random",
-
-    balanced:
-      "Balanced Odd / Even",
-
-    hot:
-      "Hot Numbers",
-
-    cold:
-      "Cold Numbers",
-
-    hotcold:
-      "Hot + Cold Mix",
-
-    spread:
-      "Good Spread",
-
-    weighted:
-      "Weighted Frequency",
-
-    weightedBalanced:
-      "Weighted + Balanced ⭐",
-
-    lowhigh:
-      "Low + High Mix",
-
-    recency:
-      "Recency",
-
-    hybrid:
-      "Hybrid AI",
-
-    overdue:
-      "Overdue Numbers",
-
-    decades:
-      "Decade Spread",
-
-    sum:
-      "Sum Balanced",
-
-    pair:
-      "Pair Boost"
-  };
-
-
-  return (
-    names[strategy] ||
-    strategy
-  );
-}
-
-
-/* ============================================================
-   33. RENDER TICKET
-   ============================================================ */
-
-function renderTicket(
-  ticket,
-  index
-) {
-
-  const balance =
-    isBalanced(ticket);
-
-
-  return `
-    <div class="ticket-card">
-
-      <div class="ticket-header">
-
-        <span>
-          Ticket ${index + 1}
-        </span>
-
-        ${
-          balance
-            ? `<span class="badge success">
-                 Balanced
-               </span>`
-            : ""
-        }
-
-      </div>
-
-
-      <div class="ticket-balls">
-
-        ${ticket.white
-          .map(
-            n =>
-              `<span class="ball">
-                 ${n}
-               </span>`
-          )
-          .join("")}
-
-
-        <span class="ball pb">
-          ${ticket.pb}
-        </span>
-
-      </div>
-
-
-      <div class="ticket-actions">
-
-        <button
-          class="small-btn copy-ticket-btn"
-          data-index="${index}"
-        >
-          Copy
-        </button>
-
-        <button
-          class="small-btn save-ticket-btn"
-          data-index="${index}"
-        >
-          Save
-        </button>
-
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* ============================================================
-   34. GENERATE TICKETS
-   ============================================================ */
-
-function generateTickets() {
-
-  const strategy =
-    $("strategySelect").value;
-
-  const count =
-    Number(
-      $("ticketCountSelect").value
-    );
-
-
-  settings.strategy =
-    strategy;
-
-  settings.ticketCount =
-    count;
-
-  saveSettings();
-
-
-  const history =
-    draws.slice(
-      0,
-      Math.max(
-        1,
-        Number(
-          settings.analysisHistory
-        ) || 100
-      )
-    );
-
-
-  generatedTickets = [];
-
-
-  for (
-    let i = 0;
-    i < count;
-    i++
-  ) {
-
-    let ticket =
-      generateTicket(
-        strategy,
-        history
-      );
-
-
-    /*
-      Ensure valid unique white numbers.
-    */
-
-    ticket.white =
-      [...new Set(
-        ticket.white
-      )]
-      .filter(
-        n =>
-          Number.isInteger(n) &&
-          n >= 1 &&
-          n <= 47
-      );
-
-
-    while (
-      ticket.white.length < 5
-    ) {
-
-      const remaining =
-        allWhite().filter(
-          n =>
-            !ticket.white.includes(n)
-        );
-
-      ticket.white.push(
-        remaining[
-          randomInt(
-            0,
-            remaining.length - 1
-          )
-        ]
-      );
-    }
-
-
-    ticket.white =
-      ticket.white
-        .slice(0, 5)
-        .sort(
-          (a, b) => a - b
-        );
-
-
-    if (
-      !Number.isInteger(ticket.pb) ||
-      ticket.pb < 1 ||
-      ticket.pb > 27
-    ) {
-
-      ticket.pb =
-        randomInt(1, 27);
-    }
-
-
-    generatedTickets.push(
-      ticket
-    );
-  }
-
-
-  const container =
-    $("generatedTickets");
-
-
-  container.innerHTML =
-    generatedTickets
-      .map(
-        (ticket, index) =>
-          renderTicket(
-            ticket,
-            index
-          )
-      )
-      .join("");
-
-
-  renderStrategyAnalysis(
-    strategy,
-    history
-  );
-
-
-  attachTicketButtons();
-
-
-  showToast(
-    `${count} SuperLotto Plus ticket${
-      count === 1 ? "" : "s"
-    } generated`
-  );
-}
-
-
-/* ============================================================
-   35. TICKET BUTTONS
-   ============================================================ */
-
-function attachTicketButtons() {
-
-  document
-    .querySelectorAll(
-      ".copy-ticket-btn"
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const index =
-            Number(
-              button.dataset.index
-            );
-
-          copyTicket(index);
-        }
-      );
-    });
-
-
-  document
-    .querySelectorAll(
-      ".save-ticket-btn"
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const index =
-            Number(
-              button.dataset.index
-            );
-
-          saveTicket(index);
-        }
-      );
-    });
-}
-
-
-/* ============================================================
-   36. COPY TICKET
-   ============================================================ */
-
-async function copyTicket(index) {
-
-  const ticket =
-    generatedTickets[index];
-
-  if (!ticket) {
-    return;
-  }
-
-
-  const text =
-    `${ticket.white.join(" ")} + Superball ${ticket.pb}`;
-
-
-  try {
-
-    await navigator.clipboard.writeText(
-      text
-    );
-
-    showToast(
-      "Ticket copied"
-    );
-
-  } catch (e) {
-
-    showToast(
-      "Unable to copy ticket"
-    );
-  }
-}
-
-
-/* ============================================================
-   37. SAVE TICKET
-   ============================================================ */
-
-function saveTicket(index) {
-
-  const ticket =
-    generatedTickets[index];
-
-  if (!ticket) {
-    return;
-  }
-
-
-  savedNumbers.unshift({
-    id:
-      Date.now() +
-      Math.random(),
-
-    date:
-      new Date().toISOString(),
-
-    white:
-      [...ticket.white],
-
-    pb:
-      ticket.pb,
-
-    source:
-      "Generated"
-  });
-
-
-  savedNumbers =
-    savedNumbers.slice(
-      0,
-      100
-    );
-
-
-  saveSavedNumbers();
-
-  renderSavedNumbers();
-
-  showToast(
-    "Ticket saved"
-  );
-}
-
-
-/* ============================================================
-   38. STRATEGY ANALYSIS
-   ============================================================ */
-
-function renderStrategyAnalysis(
-  strategy,
-  history
-) {
-
-  const box =
-    $("strategyAnalysis");
-
-
-  if (!box) {
-    return;
-  }
-
-
-  if (!history.length) {
-
-    box.innerHTML =
-      `<div class="muted">
-         No historical data available.
-       </div>`;
-
-    return;
-  }
-
-
-  const counts =
-    countsWhite(history);
-
-
-  const ranked =
-    allWhite()
-      .sort(
-        (a, b) =>
-          counts[b] - counts[a]
-      );
-
-
-  const top =
-    ranked.slice(0, 5);
-
-  const bottom =
-    ranked
-      .slice(-5)
-      .reverse();
-
-
-  const averageSum =
-    history.reduce(
-      (sum, d) =>
-        sum +
-        d.white.reduce(
-          (a, b) => a + b,
-          0
-        ),
-      0
-    ) / history.length;
-
-
-  box.innerHTML = `
-
-    <div class="analysis-summary">
-
-      <div class="analysis-item">
-        <span>Strategy</span>
-        <strong>
-          ${strategyName(strategy)}
-        </strong>
-      </div>
-
-      <div class="analysis-item">
-        <span>Drawings analyzed</span>
-        <strong>
-          ${history.length}
-        </strong>
-      </div>
-
-      <div class="analysis-item">
-        <span>Average white-ball sum</span>
-        <strong>
-          ${averageSum.toFixed(1)}
-        </strong>
-      </div>
-
-    </div>
-
-
-    <div class="analysis-columns">
-
-      <div>
-        <div class="mini-title">
-          🔥 Most Frequent
-        </div>
-
-        <div class="mini-balls">
-          ${top
-            .map(
-              n =>
-                `<span class="mini-ball">
-                   ${n}
-                 </span>`
-            )
-            .join("")}
-        </div>
-      </div>
-
-
-      <div>
-        <div class="mini-title">
-          ❄️ Least Frequent
-        </div>
-
-        <div class="mini-balls">
-          ${bottom
-            .map(
-              n =>
-                `<span class="mini-ball">
-                   ${n}
-                 </span>`
-            )
-            .join("")}
-        </div>
-      </div>
-
-    </div>
-  `;
-}
-
-
-/* ============================================================
-   39. RENDER SAVED NUMBERS
-   ============================================================ */
-
-function renderSavedNumbers() {
-
-  const container =
-    $("savedNumbers");
-
-
-  if (!container) {
-    return;
-  }
-
-
-  if (!savedNumbers.length) {
-
-    container.innerHTML =
-      `<div class="muted">
-         No saved numbers yet.
-       </div>`;
-
-    return;
-  }
-
-
-  container.innerHTML =
-    savedNumbers
-      .map(
-        (item, index) => `
-
-          <div class="saved-item">
-
-            <div class="saved-item-main">
-
-              <div class="saved-balls">
-
-                ${item.white
-                  .map(
-                    n =>
-                      `<span class="ball small">
-                         ${n}
-                       </span>`
-                  )
-                  .join("")}
-
-                <span class="ball pb small">
-                  ${item.pb}
-                </span>
-
-              </div>
-
-              <div class="saved-meta">
-                ${
-                  item.source ||
-                  "Saved"
-                }
-              </div>
-
-            </div>
-
-
-            <div class="saved-actions">
-
-              <button
-                class="small-btn edit-saved-btn"
-                data-index="${index}"
-              >
-                Edit
-              </button>
-
-              <button
-                class="small-btn danger-btn delete-saved-btn"
-                data-index="${index}"
-              >
-                Delete
-              </button>
-
-            </div>
-
-          </div>
-        `
-      )
-      .join("");
-
-
-  document
-    .querySelectorAll(
-      ".delete-saved-btn"
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const index =
-            Number(
-              button.dataset.index
-            );
-
-          savedNumbers.splice(
-            index,
-            1
-          );
-
-          saveSavedNumbers();
-
-          renderSavedNumbers();
-
-          showToast(
-            "Saved number deleted"
-          );
-        }
-      );
-    });
-
-
-  document
-    .querySelectorAll(
-      ".edit-saved-btn"
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          const index =
-            Number(
-              button.dataset.index
-            );
-
-          editSavedNumber(index);
-        }
-      );
-    });
-}
-
-
-/* ============================================================
-   40. EDIT SAVED NUMBER
-   ============================================================ */
-
-function editSavedNumber(index) {
-
-  const item =
-    savedNumbers[index];
-
-  if (!item) {
-    return;
-  }
-
-
-  const values =
-    item.white || [];
-
-
-  const w1 =
-    prompt(
-      "White number 1 (1–47)",
-      values[0]
-    );
-
-  if (w1 === null) {
-    return;
-  }
-
-
-  const w2 =
-    prompt(
-      "White number 2 (1–47)",
-      values[1]
-    );
-
-  if (w2 === null) {
-    return;
-  }
-
-
-  const w3 =
-    prompt(
-      "White number 3 (1–47)",
-      values[2]
-    );
-
-  if (w3 === null) {
-    return;
-  }
-
-
-  const w4 =
-    prompt(
-      "White number 4 (1–47)",
-      values[3]
-    );
-
-  if (w4 === null) {
-    return;
-  }
-
-
-  const w5 =
-    prompt(
-      "White number 5 (1–47)",
-      values[4]
-    );
-
-  if (w5 === null) {
-    return;
-  }
-
-
-  const pb =
-    prompt(
-      "Superball (1–27)",
-      item.pb
-    );
-
-  if (pb === null) {
-    return;
-  }
-
-
-  const white =
-    [
-      Number(w1),
-      Number(w2),
-      Number(w3),
-      Number(w4),
-      Number(w5)
-    ];
-
-
-  const superball =
-    Number(pb);
-
-
-  if (
-    white.some(
-      n =>
-        !Number.isInteger(n) ||
-        n < 1 ||
-        n > 47
-    )
-  ) {
-
-    showToast(
-      "White numbers must be 1–47"
-    );
-
-    return;
-  }
-
-
-  if (
-    new Set(white).size !== 5
-  ) {
-
-    showToast(
-      "White numbers must be unique"
-    );
-
-    return;
-  }
-
-
-  if (
-    !Number.isInteger(superball) ||
-    superball < 1 ||
-    superball > 27
-  ) {
-
-    showToast(
-      "Superball must be 1–27"
-    );
-
-    return;
-  }
-
-
-  item.white =
-    white.sort(
-      (a, b) => a - b
-    );
-
-  item.pb =
-    superball;
-
-  item.source =
-    "Edited";
-
-
-  saveSavedNumbers();
-
-  renderSavedNumbers();
-
-  showToast(
-    "Saved number updated"
-  );
-}/* ============================================================
-   41. RENDER LATEST DRAWINGS
-   ============================================================ */
-
-function renderLatestDrawings() {
-
-  const container =
-    $("latestDrawings");
-
-  if (!container) {
-    return;
-  }
-
-  const count =
-    Number(
-      $("drawCountSelect").value
-    ) || 2;
-
-  const latest =
-    draws.slice(
-      0,
-      count
-    );
-
-  if (!latest.length) {
-
-    container.innerHTML =
-      `<div class="muted">
-        No drawing data available.
-      </div>`;
-
-    return;
-  }
-
-  container.innerHTML =
-    latest
-      .map(
-        d => `
-          <div class="drawing-row">
-
-            <div class="drawing-date">
-              ${formatDate(d.date)}
-            </div>
-
-            <div class="drawing-balls">
-
-              ${d.white
-                .map(
-                  n =>
-                    `<span class="ball">
-                      ${n}
-                    </span>`
-                )
-                .join("")}
-
-              <span class="ball pb">
-                ${d.pb}
-              </span>
-
-            </div>
-
-          </div>
-        `
-      )
-      .join("");
-}
-
-
-/* ============================================================
-   42. RENDER WHITE BALL STATISTICS
-   ============================================================ */
-
-function renderWhiteStats() {
-
-  const container =
-    $("whiteStats");
-
-  if (!container) {
-    return;
-  }
-
-  if (!draws.length) {
-
-    container.innerHTML =
-      `<div class="muted">
-        No historical data available.
-      </div>`;
-
-    return;
-  }
-
-
-  const counts =
-    countsWhite(draws);
-
-
-  const numbers =
-    allWhite();
-
-
-  const total =
-    draws.length;
-
-
-  const sorted =
-    [...numbers].sort(
-      (a, b) => {
-
-        if (counts[b] !== counts[a]) {
-          return counts[b] - counts[a];
-        }
-
-        return a - b;
-      }
-    );
-
-
-  const hot =
-    sorted.slice(
-      0,
-      10
-    );
-
-
-  const cold =
-    [...numbers]
-      .sort(
-        (a, b) => {
-
-          if (counts[a] !== counts[b]) {
-            return counts[a] - counts[b];
-          }
-
-          return a - b;
-        }
-      )
-      .slice(
-        0,
-        10
-      );
-
-
-  const average =
-    (
-      draws.reduce(
-        (sum, d) =>
-          sum +
-          d.white.reduce(
-            (a, b) => a + b,
-            0
-          ),
-        0
-      )
-      /
-      total
-      /
-      5
-    );
-
-
-  const lowCount =
-    draws.reduce(
-      (sum, d) =>
-        sum +
-        d.white.filter(
-          n => n <= 23
-        ).length,
-      0
-    );
-
-
-  const highCount =
-    draws.reduce(
-      (sum, d) =>
-        sum +
-        d.white.filter(
-          n => n >= 24
-        ).length,
-      0
-    );
-
-
-  container.innerHTML = `
-
-    <div class="stats-summary">
-
-      <div>
-        <span>Drawings</span>
-        <strong>${total}</strong>
-      </div>
-
-      <div>
-        <span>Average Number</span>
-        <strong>${average.toFixed(1)}</strong>
-      </div>
-
-      <div>
-        <span>Low 1–23</span>
-        <strong>${lowCount}</strong>
-      </div>
-
-      <div>
-        <span>High 24–47</span>
-        <strong>${highCount}</strong>
-      </div>
-
-    </div>
-
-
-    <div class="stats-section">
-
-      <div class="mini-title">
-        🔥 Hot Numbers
-      </div>
-
-      <div class="mini-balls">
-
-        ${hot
-          .map(
-            n =>
-              `<span
-                class="mini-ball"
-                title="${counts[n]} appearances"
-              >
-                ${n}
-              </span>`
-          )
-          .join("")}
-
-      </div>
-
-    </div>
-
-
-    <div class="stats-section">
-
-      <div class="mini-title">
-        ❄️ Cold Numbers
-      </div>
-
-      <div class="mini-balls">
-
-        ${cold
-          .map(
-            n =>
-              `<span
-                class="mini-ball"
-                title="${counts[n]} appearances"
-              >
-                ${n}
-              </span>`
-          )
-          .join("")}
-
-      </div>
-
-    </div>
-
-  `;
-}
-
-
-/* ============================================================
-   43. SUPERBALL STATISTICS
-   ============================================================ */
-
-function renderPBStats() {
-
-  const container =
-    $("pbStats");
-
-  if (!container) {
-    return;
-  }
-
-  if (!draws.length) {
-
-    container.innerHTML =
-      `<div class="muted">
-        No historical data available.
-      </div>`;
-
-    return;
-  }
-
-
-  const counts =
-    countsPB(draws);
-
-
-  const numbers =
-    allPB();
-
-
-  const total =
-    draws.length;
-
-
-  const sum =
-    draws.reduce(
-      (s, d) =>
-        s + Number(d.pb),
-      0
-    );
-
-
-  const average =
-    sum / total;
-
-
-  const sorted =
-    [...numbers].sort(
-      (a, b) => {
-
-        if (counts[b] !== counts[a]) {
-          return counts[b] - counts[a];
-        }
-
-        return a - b;
-      }
-    );
-
-
-  const hot =
-    sorted.slice(
-      0,
-      8
-    );
-
-
-  const cold =
-    [...numbers]
-      .sort(
-        (a, b) => {
-
-          if (counts[a] !== counts[b]) {
-            return counts[a] - counts[b];
-          }
-
-          return a - b;
-        }
-      )
-      .slice(
-        0,
-        8
-      );
-
-
-  container.innerHTML = `
-
-    <div class="stats-summary">
-
-      <div>
-        <span>Drawings</span>
-        <strong>${total}</strong>
-      </div>
-
-      <div>
-        <span>Average Superball</span>
-        <strong>${average.toFixed(1)}</strong>
-      </div>
-
-    </div>
-
-
-    <div class="stats-section">
-
-      <div class="mini-title">
-        🔥 Hot Superballs
-      </div>
-
-      <div class="mini-balls">
-
-        ${hot
-          .map(
-            n =>
-              `<span
-                class="mini-ball pb-mini"
-                title="${counts[n]} appearances"
-              >
-                ${n}
-              </span>`
-          )
-          .join("")}
-
-      </div>
-
-    </div>
-
-
-    <div class="stats-section">
-
-      <div class="mini-title">
-        ❄️ Cold Superballs
-      </div>
-
-      <div class="mini-balls">
-
-        ${cold
-          .map(
-            n =>
-              `<span
-                class="mini-ball pb-mini"
-                title="${counts[n]} appearances"
-              >
-                ${n}
-              </span>`
-          )
-          .join("")}
-
-      </div>
-
-    </div>
-
-  `;
-}
-
-
-/* ============================================================
-   44. RENDER ALL STATISTICS
-   ============================================================ */
-
-function renderStats() {
-
-  renderWhiteStats();
-  renderPBStats();
-}
-
-
-/* ============================================================
-   45. WORKER UPDATE
-   ============================================================ */
-
-async function updateFromWorker(
-  showMessage = true
-) {
-
-  const status =
-    $("updateStatus");
-
-  const jackpotMeta =
-    $("jackpotMeta");
-
-
-  if (status) {
-    status.textContent =
-      "Updating SuperLotto Plus data…";
-  }
-
-  if (jackpotMeta) {
-    jackpotMeta.textContent =
-      "Updating SuperLotto Plus data…";
-  }
-
-
-  try {
-
-    /*
-      Cloudflare Worker endpoint.
-
-      If your Worker is on the same domain,
-      /api/superlotto is recommended.
-
-      You can change this URL later if needed.
-    */
-
-    const response =
-      await fetch(
-        "/api/superlotto",
-        {
-          method: "GET",
-          cache: "no-store"
-        }
-      );
-
-
-    if (!response.ok) {
-      throw new Error(
-        `HTTP ${response.status}`
-      );
-    }
-
-
-    const data =
-      await response.json();
-
-
-    /*
-      Accept several compatible response formats.
-    */
-
-    let incoming = [];
-
-
-    if (
-      Array.isArray(data)
-    ) {
-
-      incoming = data;
-
-    } else if (
-      Array.isArray(data.draws)
-    ) {
-
-      incoming = data.draws;
-
-    } else if (
-      Array.isArray(data.history)
-    ) {
-
-      incoming = data.history;
-    }
-
-
-    if (incoming.length) {
-
-      const normalized =
-        normalizeHistory(
-          incoming
-        );
-
-
-      /*
-        Merge with existing local history.
-      */
-
-      const merged =
-        normalizeHistory(
-          [
-            ...draws,
-            ...normalized
-          ]
-        );
-
-
-      if (merged.length) {
-
-        draws =
-          merged;
-
-        saveDraws();
-      }
-    }
-
-
-    /*
-      Jackpot information.
-    */
-
-    const jackpot =
-      data.jackpot ??
-      data.estimatedJackpot ??
-      data.nextJackpot;
-
-
-    const cash =
-      data.cashValue ??
-      data.cash;
-
-
-    if ($("jackpotAmount")) {
-
-      $("jackpotAmount").textContent =
-        jackpot !== undefined &&
-        jackpot !== null &&
-        jackpot !== ""
-          ? (
-              typeof jackpot === "number"
-                ? formatMoney(jackpot)
-                : String(jackpot)
-            )
-          : "—";
-    }
-
-
-    if ($("cashValue")) {
-
-      $("cashValue").textContent =
-        cash !== undefined &&
-        cash !== null &&
-        cash !== ""
-          ? (
-              typeof cash === "number"
-                ? formatMoney(cash)
-                : String(cash)
-            )
-          : "—";
-    }
-
-
-    if ($("jackpotMeta")) {
-
-      $("jackpotMeta").textContent =
-        "SuperLotto Plus data updated";
-    }
-
-
-    if (status) {
-
-      status.textContent =
-        "SuperLotto Plus data updated";
-    }
-
-
-    renderLatestDrawings();
-    renderStats();
-
-
-    if (showMessage) {
-
-      showToast(
-        "SuperLotto Plus data refreshed"
-      );
-    }
-
-
-    return true;
-
-  } catch (error) {
-
-    console.error(
-      "SuperLotto update error:",
-      error
-    );
-
-
-    if (status) {
-
-      status.textContent =
-        "Update unavailable — using saved data";
-    }
-
-
-    if ($("jackpotMeta")) {
-
-      $("jackpotMeta").textContent =
-        "Using saved SuperLotto Plus data";
-    }
-
-
-    renderLatestDrawings();
-    renderStats();
-
-
-    if (showMessage) {
-
-      showToast(
-        "Unable to update SuperLotto Plus data"
-      );
-    }
-
-
-    return false;
-  }
-}
-
-
-/* ============================================================
-   46. AUTO UPDATE
-   ============================================================ */
-
-async function automaticUpdate() {
-
-  if (
-    settings.autoUpdate !== true
-  ) {
-    return;
-  }
-
-  await updateFromWorker(
-    false
-  );
-}
-
-
-/* ============================================================
-   47. CSV DOWNLOAD
-   ============================================================ */
-
-function downloadFile(
-  filename,
-  content,
-  type
-) {
-
-  const blob =
-    new Blob(
-      [content],
-      { type }
-    );
-
-
-  const url =
-    URL.createObjectURL(
-      blob
-    );
-
-
-  const a =
-    document.createElement(
-      "a"
-    );
-
-  a.href = url;
-
-  a.download =
-    filename;
-
-  document.body.appendChild(a);
-
-  a.click();
-
-  a.remove();
-
-  setTimeout(
-    () => {
-      URL.revokeObjectURL(url);
-    },
-    1000
-  );
-}
-
-
-function csvEscape(value) {
-
-  const s =
-    String(value ?? "");
-
-
-  if (
-    s.includes(",") ||
-    s.includes('"') ||
-    s.includes("\n")
-  ) {
-
-    return `"${s.replace(
-      /"/g,
-      '""'
-    )}"`;
-  }
-
-
-  return s;
-}
-
-
-function downloadCSV() {
-
-  const rows = [
-    [
-      "Date",
-      "White1",
-      "White2",
-      "White3",
-      "White4",
-      "White5",
-      "Superball"
-    ]
-  ];
-
-
-  for (const d of draws) {
-
-    rows.push([
-      d.date,
-      ...d.white,
-      d.pb
-    ]);
-  }
-
-
-  const csv =
-    rows
-      .map(
-        row =>
-          row
-            .map(csvEscape)
-            .join(",")
-      )
-      .join("\n");
-
-
-  downloadFile(
-    "superlotto-plus-history-v6.csv",
-    csv,
-    "text/csv;charset=utf-8"
-  );
-
-
-  showToast(
-    "CSV downloaded"
-  );
-}
-
-
-/* ============================================================
-   48. JSON DOWNLOAD
-   ============================================================ */
-
-function downloadJSON() {
-
-  const data = {
-
-    game:
-      "SuperLotto Plus",
-
-    version:
-      "6.3.1",
-
-    rules: {
-      whiteBalls:
-        "1-47",
-
-      superball:
-        "1-27"
-    },
-
-    draws:
-      draws,
-
-    savedNumbers:
-      savedNumbers,
-
-    exportedAt:
-      new Date().toISOString()
-  };
-
-
-  downloadFile(
-    "superlotto-plus-ai-lab-v6.json",
-    JSON.stringify(
-      data,
-      null,
-      2
-    ),
-    "application/json"
-  );
-
-
-  showToast(
-    "JSON downloaded"
-  );
-}
-
-
-/* ============================================================
-   49. IMPORT JSON
-   ============================================================ */
-
-async function importJSONFile(
-  file
-) {
-
-  if (!file) {
-    return;
-  }
-
-
-  try {
-
-    const text =
-      await file.text();
-
-
-    const parsed =
-      JSON.parse(text);
-
-
-    let incoming = [];
-
-
-    if (
-      Array.isArray(parsed)
-    ) {
-
-      incoming =
-        parsed;
-
-    } else if (
-      Array.isArray(parsed.draws)
-    ) {
-
-      incoming =
-        parsed.draws;
-
-    } else if (
-      Array.isArray(parsed.history)
-    ) {
-
-      incoming =
-        parsed.history;
-    }
-
-
-    const normalized =
-      normalizeHistory(
-        incoming
-      );
-
-
-    if (!normalized.length) {
-
-      throw new Error(
-        "No valid SuperLotto Plus drawings found."
-      );
-    }
-
-
-    draws =
-      normalizeHistory([
-        ...draws,
-        ...normalized
-      ]);
-
-
-    saveDraws();
-
-
-    /*
-      If saved numbers are included,
-      import them as well when valid.
-    */
-
-    if (
-      Array.isArray(
-        parsed.savedNumbers
-      )
-    ) {
-
-      savedNumbers =
-        parsed.savedNumbers;
-
-      saveSavedNumbers();
-    }
-
-
-    renderLatestDrawings();
-    renderSavedNumbers();
-    renderStats();
-
-
-    showToast(
-      `${normalized.length} drawing${
-        normalized.length === 1
-          ? ""
-          : "s"
-      } imported`
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "JSON import error:",
-      error
-    );
-
-
-    showToast(
-      "Invalid SuperLotto Plus JSON file"
-    );
-  }
-}
-
-
-/* ============================================================
-   50. RESET DATABASE
-   ============================================================ */
-
-function resetDatabase() {
-
-  const confirmed =
-    confirm(
-      "Reset the historical SuperLotto Plus database?"
-    );
-
-
-  if (!confirmed) {
-    return;
-  }
-
-
-  draws =
-    normalizeHistory(
-      SEED_DRAWS
-    );
-
-
-  saveDraws();
-
-
-  renderLatestDrawings();
-  renderStats();
-
-
-  showToast(
-    "SuperLotto Plus database reset"
-  );
-}
-
-
-/* ============================================================
-   51. MANUAL NUMBER ENTRY
-   ============================================================ */
-
-function saveManualNumbers() {
-
-  const inputs = [
-    $("m1"),
-    $("m2"),
-    $("m3"),
-    $("m4"),
-    $("m5")
-  ];
-
-
-  const white =
-    inputs.map(
-      input =>
-        Number(input.value)
-    );
-
-
-  const pb =
-    Number(
-      $("mpb").value
-    );
-
-
-  if (
-    white.some(
-      n =>
-        !Number.isInteger(n) ||
-        n < 1 ||
-        n > 47
-    )
-  ) {
-
-    showToast(
-      "White numbers must be 1–47"
-    );
-
-    return;
-  }
-
-
-  if (
-    new Set(white).size !== 5
-  ) {
-
-    showToast(
-      "White numbers must be unique"
-    );
-
-    return;
-  }
-
-
-  if (
-    !Number.isInteger(pb) ||
-    pb < 1 ||
-    pb > 27
-  ) {
-
-    showToast(
-      "Superball must be 1–27"
-    );
-
-    return;
-  }
-
-
-  savedNumbers.unshift({
-
-    id:
-      Date.now() +
-      Math.random(),
-
-    date:
-      new Date().toISOString(),
-
-    white:
-      white.sort(
-        (a, b) => a - b
-      ),
-
-    pb:
-
-      pb,
-
-    source:
-      "Manual"
-  });
-
-
-  savedNumbers =
-    savedNumbers.slice(
-      0,
-      100
-    );
-
-
-  saveSavedNumbers();
-
-  renderSavedNumbers();
-
-
-  inputs.forEach(
-    input => {
-      input.value = "";
-    }
-  );
-
-
-  $("mpb").value = "";
-
-
-  showToast(
-    "Manual numbers saved"
-  );
-}
-
-
-/* ============================================================
-   52. SAVE ALL GENERATED
-   ============================================================ */
-
-function saveAllGenerated() {
-
-  if (
-    !generatedTickets.length
-  ) {
-
-    showToast(
-      "Generate tickets first"
-    );
-
-    return;
-  }
-
-
-  for (
-    const ticket of generatedTickets
-  ) {
-
-    savedNumbers.unshift({
-
-      id:
-        Date.now() +
-        Math.random(),
-
-      date:
-        new Date().toISOString(),
-
-      white:
-        [...ticket.white],
-
-      pb:
-        ticket.pb,
-
-      source:
-        "Generated"
-    });
-  }
-
-
-  savedNumbers =
-    savedNumbers.slice(
-      0,
-      100
-    );
-
-
-  saveSavedNumbers();
-
-  renderSavedNumbers();
-
-
-  showToast(
-    "Generated tickets saved"
-  );
-}
-
-
-/* ============================================================
-   53. CLEAR SAVED NUMBERS
-   ============================================================ */
-
-function clearSavedNumbers() {
-
-  if (
-    !savedNumbers.length
-  ) {
-
-    showToast(
-      "No saved numbers"
-    );
-
-    return;
-  }
-
-
-  const confirmed =
-    confirm(
-      "Clear all saved SuperLotto Plus numbers?"
-    );
-
-
-  if (!confirmed) {
-    return;
-  }
-
-
-  savedNumbers = [];
-
-  saveSavedNumbers();
-
-  renderSavedNumbers();
-
-
-  showToast(
-    "Saved numbers cleared"
-  );
-}
-
-
-/* ============================================================
-   54. BACKTESTING
-   ============================================================ */
-
-function getMatches(
-  ticket,
-  drawing
-) {
-
-  const whiteMatches =
-    ticket.white.filter(
-      n =>
-        drawing.white.includes(n)
-    ).length;
-
-
-  const pbMatch =
-    ticket.pb === drawing.pb;
-
-
-  return {
-    whiteMatches,
-    pbMatch
-  };
-}
-
-
-function renderBacktestSummary(
-  results
-) {
-
-  const container =
-    $("backtestResults");
-
-
-  if (!container) {
-    return;
-  }
-
-
-  if (!results.length) {
-
-    container.innerHTML =
-      `<div class="muted">
-        Not enough historical data for backtesting.
-      </div>`;
-
-    return;
-  }
-
-
-  let totalWhite =
-    0;
-
-  let totalPB =
-    0;
-
-  let maxWhite =
-    0;
-
-  let maxPrizeTier =
-    "None";
-
-
-  const matchCounts = {
-    "0": 0,
-    "1": 0,
-    "2": 0,
-    "3": 0,
-    "4": 0,
-    "5": 0
-  };
-
-
-  let jackpotLevel =
-    0;
-
-
-  for (
-    const r of results
-  ) {
-
-    totalWhite +=
-      r.whiteMatches;
-
-    if (r.pbMatch) {
-      totalPB++;
-    }
-
-
-    maxWhite =
-      Math.max(
-        maxWhite,
-        r.whiteMatches
-      );
-
-
-    matchCounts[
-      String(r.whiteMatches)
-    ]++;
-
-
-    /*
-      Track the strongest observed
-      match category.
-    */
-
-    if (
-      r.whiteMatches >= 5 &&
-      r.pbMatch
-    ) {
-
-      jackpotLevel = 5;
-
-    } else if (
-      r.whiteMatches >= 5
-    ) {
-
-      jackpotLevel =
-        Math.max(
-          jackpotLevel,
-          4
-        );
-
-    } else if (
-      r.whiteMatches >= 4 &&
-      r.pbMatch
-    ) {
-
-      jackpotLevel =
-        Math.max(
-          jackpotLevel,
-          3
-        );
-
-    } else if (
-      r.whiteMatches >= 4
-    ) {
-
-      jackpotLevel =
-        Math.max(
-          jackpotLevel,
-          2
-        );
-
-    } else if (
-      r.whiteMatches >= 3 &&
-      r.pbMatch
-    ) {
-
-      jackpotLevel =
-        Math.max(
-          jackpotLevel,
-          1
-        );
-    }
-  }
-
-
-  const averageWhite =
-    totalWhite /
-    results.length;
-
-
-  const pbRate =
-    (
-      totalPB /
-      results.length
-    ) * 100;
-
-
-  const levelNames = {
-    0: "None",
-    1: "3 + Superball",
-    2: "4 White",
-    3: "4 + Superball",
-    4: "5 White",
-    5: "5 + Superball"
-  };
-
-
-  maxPrizeTier =
-    levelNames[jackpotLevel];
-
-
-  container.innerHTML = `
-
-    <div class="backtest-summary">
-
-      <div class="backtest-stat">
-        <span>Drawings Tested</span>
-        <strong>
-          ${results.length}
-        </strong>
-      </div>
-
-
-      <div class="backtest-stat">
-        <span>Average White Matches</span>
-        <strong>
-          ${averageWhite.toFixed(2)}
-        </strong>
-      </div>
-
-
-      <div class="backtest-stat">
-        <span>Superball Match Rate</span>
-        <strong>
-          ${pbRate.toFixed(1)}%
-        </strong>
-      </div>
-
-
-      <div class="backtest-stat">
-        <span>Best Result</span>
-        <strong>
-          ${maxPrizeTier}
-        </strong>
-      </div>
-
-    </div>
-
-
-    <div class="match-distribution">
-
-      <div class="mini-title">
-        Match Distribution
-      </div>
-
-
-      <div class="distribution-row">
-
-        <span>0</span>
-        <strong>
-          ${matchCounts["0"]}
-        </strong>
-
-      </div>
-
-
-      <div class="distribution-row">
-
-        <span>1</span>
-        <strong>
-          ${matchCounts["1"]}
-        </strong>
-
-      </div>
-
-
-      <div class="distribution-row">
-
-        <span>2</span>
-        <strong>
-          ${matchCounts["2"]}
-        </strong>
-
-      </div>
-
-
-      <div class="distribution-row">
-
-        <span>3</span>
-        <strong>
-          ${matchCounts["3"]}
-        </strong>
-
-      </div>
-
-
-      <div class="distribution-row">
-
-        <span>4</span>
-        <strong>
-          ${matchCounts["4"]}
-        </strong>
-
-      </div>
-
-
-      <div class="distribution-row">
-
-        <span>5</span>
-        <strong>
-          ${matchCounts["5"]}
-        </strong>
-
-      </div>
-
-    </div>
-
-  `;
-}
-
-
-/* ============================================================
-   55. RUN WALK-FORWARD BACKTEST
-   ============================================================ */
-
-function runBacktest() {
-
-  const strategy =
-    $("backtestStrategy").value;
-
-
-  const trainingWindow =
-    Number(
-      $("backtestWindow").value
-    );
-
-
-  /*
-    Need enough data for a training window
-    plus at least one future drawing.
-  */
-
-  if (
-    draws.length <= trainingWindow
-  ) {
-
-    $("backtestResults").innerHTML =
-      `<div class="muted">
-        Not enough historical data.
-        Need more than ${trainingWindow}
-        drawings.
-      </div>`;
-
-    return;
-  }
-
-
-  const chronological =
-    [...draws].sort(
-      (a, b) =>
-        new Date(a.date) -
-        new Date(b.date)
-    );
-
-
-  const results = [];
-
-
-  /*
-    Walk forward through the historical data.
-    The ticket for each test drawing is generated
-    only from drawings available before it.
-  */
-
-  for (
-    let i = trainingWindow;
-    i < chronological.length;
-    i++
-  ) {
-
-    const training =
-      chronological.slice(
-        Math.max(
-          0,
-          i - trainingWindow
-        ),
-        i
-      );
-
-
-    const actual =
-      chronological[i];
-
+  pool,
+  count
+){
+
+  for(let i=0;i<300;i++){
 
     const ticket =
-      generateTicket(
-        strategy,
-        training
+      sampleUnique(
+        pool,
+        count
       );
 
-
-    const matches =
-      getMatches(
-        ticket,
-        actual
-      );
-
-
-    results.push({
-
-      date:
-        actual.date,
-
-      ticket,
-
-      whiteMatches:
-        matches.whiteMatches,
-
-      pbMatch:
-        matches.pbMatch
-
-    });
+    if(isBalanced(ticket)){
+      return ticket;
+    }
   }
 
-
-  renderBacktestSummary(
-    results
-  );
-
-
-  showToast(
-    "Backtest complete"
-  );
-}
-
-
-/* ============================================================
-   56. EVENT LISTENERS
-   ============================================================ */
-
-$("generateBtn")
-  .addEventListener(
-    "click",
-    generateTickets
-  );
-
-
-$("saveGeneratedBtn")
-  .addEventListener(
-    "click",
-    saveAllGenerated
-  );
-
-
-$("clearSavedBtn")
-  .addEventListener(
-    "click",
-    clearSavedNumbers
-  );
-
-
-$("saveManualBtn")
-  .addEventListener(
-    "click",
-    saveManualNumbers
-  );
-
-
-$("refreshStatsBtn")
-  .addEventListener(
-    "click",
-    renderStats
-  );
-
-
-$("refreshDrawingsBtn")
-  .addEventListener(
-    "click",
-    renderLatestDrawings
-  );
-
-
-$("refreshJackpotBtn")
-  .addEventListener(
-    "click",
-    () =>
-      updateFromWorker(true)
-  );
-
-
-$("updateNowBtn")
-  .addEventListener(
-    "click",
-    () =>
-      updateFromWorker(true)
-  );
-
-
-$("runBacktestBtn")
-  .addEventListener(
-    "click",
-    runBacktest
-  );
-
-
-$("drawCountSelect")
-  .addEventListener(
-    "change",
-    event => {
-
-      settings.drawCount =
-        Number(
-          event.target.value
-        );
-
-      saveSettings();
-
-      renderLatestDrawings();
-    }
-  );
-
-
-$("analysisHistorySelect")
-  .addEventListener(
-    "change",
-    event => {
-
-      settings.analysisHistory =
-        event.target.value === "all"
-          ? "all"
-          : Number(
-              event.target.value
-            );
-
-      saveSettings();
-
-      if (
-        generatedTickets.length
-      ) {
-
-        renderStrategyAnalysis(
-          settings.strategy,
-          getAnalysisHistory()
-        );
-      }
-    }
-  );
-
-
-$("strategySelect")
-  .addEventListener(
-    "change",
-    event => {
-
-      settings.strategy =
-        event.target.value;
-
-      saveSettings();
-    }
-  );
-
-
-$("ticketCountSelect")
-  .addEventListener(
-    "change",
-    event => {
-
-      settings.ticketCount =
-        Number(
-          event.target.value
-        );
-
-      saveSettings();
-    }
-  );
-
-
-$("autoUpdateToggle")
-  .addEventListener(
-    "change",
-    event => {
-
-      settings.autoUpdate =
-        event.target.checked;
-
-      saveSettings();
-
-
-      if (
-        settings.autoUpdate
-      ) {
-
-        showToast(
-          "Automatic update enabled"
-        );
-
-      } else {
-
-        showToast(
-          "Automatic update disabled"
-        );
-      }
-    }
-  );
-
-
-$("importJsonInput")
-  .addEventListener(
-    "change",
-    event => {
-
-      const file =
-        event.target.files?.[0];
-
-      if (file) {
-        importJSONFile(file);
-      }
-
-      event.target.value = "";
-    }
-  );
-
-
-$("downloadCsvBtn")
-  .addEventListener(
-    "click",
-    downloadCSV
-  );
-
-
-$("downloadJsonBtn")
-  .addEventListener(
-    "click",
-    downloadJSON
-  );
-
-
-$("resetDataBtn")
-  .addEventListener(
-    "click",
-    resetDatabase
-  );
-
-
-/* ============================================================
-   57. ANALYSIS HISTORY HELPER
-   ============================================================ */
-
-function getAnalysisHistory() {
-
-  if (
-    settings.analysisHistory ===
-    "all"
-  ) {
-
-    return draws;
-  }
-
-
-  const count =
-    Number(
-      settings.analysisHistory
-    ) || 100;
-
-
-  return draws.slice(
-    0,
+  return sampleUnique(
+    pool,
     count
   );
 }
 
 
 /* ============================================================
-   58. INITIALIZATION
+   12. SPREAD
    ============================================================ */
 
-async function init() {
+function generateSpread(){
 
-  loadData();
+  for(let i=0;i<300;i++){
 
+    const ticket =
+      sampleUnique(
+        allWhite(),
+        WHITE_COUNT
+      );
 
-  renderLatestDrawings();
+    const low =
+      ticket.filter(
+        n=>n<=16
+      ).length;
 
-  renderSavedNumbers();
+    const mid =
+      ticket.filter(
+        n=>n>=17 && n<=32
+      ).length;
 
-  renderStats();
+    const high =
+      ticket.filter(
+        n=>n>=33
+      ).length;
 
-
-  /*
-    Initial jackpot display.
-  */
-
-  if ($("jackpotAmount")) {
-    $("jackpotAmount").textContent =
-      "Loading...";
+    if(
+      low>=1 &&
+      mid>=1 &&
+      high>=1
+    ){
+      return ticket;
+    }
   }
 
-  if ($("cashValue")) {
-    $("cashValue").textContent =
-      "—";
-  }
-
-
-  /*
-    Automatically update when the app opens.
-  */
-
-  if (
-    settings.autoUpdate === true
-  ) {
-
-    await automaticUpdate();
-  }
-
-
-  /*
-    Render again after update.
-  */
-
-  renderLatestDrawings();
-
-  renderSavedNumbers();
-
-  renderStats();
+  return sampleUnique(
+    allWhite(),
+    WHITE_COUNT
+  );
 }
 
 
 /* ============================================================
-   59. START APP
+   13. LOW / HIGH
    ============================================================ */
 
-init();
+function generateLowHigh(){
 
-</script>
+  for(let i=0;i<300;i++){
 
-</body>
+    const ticket =
+      sampleUnique(
+        allWhite(),
+        WHITE_COUNT
+      );
+
+    const low =
+      ticket.filter(
+        n=>n<=23
+      ).length;
+
+    const high =
+      ticket.length-low;
+
+    if(
+      low>=2 &&
+      high>=2
+    ){
+      return ticket;
+    }
+  }
+
+  return sampleUnique(
+    allWhite(),
+    WHITE_COUNT
+  );
+}
+
+
+/* ============================================================
+   14. DECADES
+   ============================================================ */
+
+function generateDecades(){
+
+  const groups = [
+    [1,10],
+    [11,20],
+    [21,30],
+    [31,40],
+    [41,47]
+  ];
+
+  const result = [];
+
+  for(const group of groups){
+
+    if(result.length>=WHITE_COUNT){
+      break;
+    }
+
+    const [min,max] =
+      group;
+
+    result.push(
+      randomInt(min,max)
+    );
+  }
+
+  while(
+    result.length<WHITE_COUNT
+  ){
+
+    const n =
+      randomInt(
+        1,
+        WHITE_MAX
+      );
+
+    if(!result.includes(n)){
+      result.push(n);
+    }
+  }
+
+  return sortNumbers(
+    uniqueNumbers(result)
+  );
+}
+
+
+/* ============================================================
+   15. SUM BALANCED
+   ============================================================ */
+
+function generateSumBalanced(){
+
+  const target =
+    Math.round(
+      (
+        WHITE_MAX *
+        (WHITE_COUNT+1)
+      ) / 2
+    );
+
+  let best =
+    null;
+
+  let bestDiff =
+    Infinity;
+
+  for(let i=0;i<150;i++){
+
+    const ticket =
+      sampleUnique(
+        allWhite(),
+        WHITE_COUNT
+      );
+
+    const sum =
+      ticket.reduce(
+        (a,b)=>a+b,
+        0
+      );
+
+    const diff =
+      Math.abs(
+        sum-target
+      );
+
+    if(diff<bestDiff){
+
+      bestDiff = diff;
+      best = ticket;
+    }
+  }
+
+  return best ||
+    sampleUnique(
+      allWhite(),
+      WHITE_COUNT
+    );
+}function renderSaved(){const box=$("savedNumbers");if(!savedNumbers.length){box.innerHTML='<div class="empty">No saved numbers.</div>';return;}box.innerHTML=savedNumbers.map((t,i)=>`<div class="saved-row"><div class="saved-number">${ballsHtml(t.white,t.pb)}</div><button class="small danger" data-delete="${i}">Delete</button></div>`).join("");box.querySelectorAll("[data-delete]").forEach(btn=>{btn.onclick=()=>{savedNumbers.splice(Number(btn.dataset.delete),1);saveSaved();renderSaved();showToast("Saved number deleted.");};});}
+function renderGenerated(){const box=$("generatedTickets");if(!generatedTickets.length){box.innerHTML='<div class="empty">Tap Generate Tickets to create numbers.</div>';return;}box.innerHTML=generatedTickets.map((t,i)=>`<div class="ticket"><div class="ticket-head"><strong>Ticket ${i+1}</strong><button class="small" data-save-ticket="${i}">Save</button></div>${ballsHtml(t.white,t.pb)}</div>`).join("");box.querySelectorAll("[data-save-ticket]").forEach(btn=>{btn.onclick=()=>{const t=generatedTickets[Number(btn.dataset.saveTicket)];savedNumbers.push({white:[...t.white],pb:t.pb});saveSaved();renderSaved();showToast("Ticket saved.");};});}
+function generateTickets(){const strategy=$("strategy").value;const count=Math.max(1,Math.min(20,Number($("ticketCount").value)||1));const data=[...history].sort((a,b)=>a.date.localeCompare(b.date));generatedTickets=[];for(let i=0;i<count;i++){let ticket=generateTicket(strategy,data);let guard=0;while(generatedTickets.some(x=>x.white.join(",")===ticket.white.join(",")&&x.pb===ticket.pb)&&guard<50){ticket=generateTicket(strategy,data);guard++;}generatedTickets.push(ticket);}renderGenerated();showToast(`${count} ticket${count===1?"":"s"} generated.`);}
+function saveManual(){const inputs=["m1","m2","m3","m4","m5"].map(id=>Number($(id).value));const pb=Number($("mpb").value);if(inputs.some(n=>!Number.isInteger(n)||n<1||n>47)){showToast("White balls must be 1–47.");return;}if(new Set(inputs).size!==5){showToast("White balls must be unique.");return;}if(!Number.isInteger(pb)||pb<1||pb>27){showToast("Superball must be 1–27.");return;}const ticket={white:[...inputs].sort((a,b)=>a-b),pb};savedNumbers.push(ticket);saveSaved();renderSaved();["m1","m2","m3","m4","m5","mpb"].forEach(id=>$(id).value="");showToast("Numbers saved.");}
+function clearSaved(){if(!savedNumbers.length){showToast("No saved numbers.");return;}if(confirm("Clear all saved numbers?")){savedNumbers=[];saveSaved();renderSaved();showToast("Saved numbers cleared.");}}
+function updateJackpot(data){if(data.jackpot!==undefined)$("jackpot").textContent=data.jackpot||"—";if(data.cashValue!==undefined)$("cashValue").textContent=data.cashValue||"—";if(data.nextDrawing!==undefined)$("nextDrawing").textContent=data.nextDrawing||"—";if($("ticketCost"))$("ticketCost").textContent="Ticket Cost: $1";$("syncStatus").textContent=`Updated ${new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}`;}
+function setUpdateStatus(message,isError=false){const el=$("updateStatus");if(!el)return;el.textContent=message;el.classList.toggle("error",!!isError);}
+function parseWorkerResponse(payload){if(!payload)return null;let draws=payload.draws;if(!Array.isArray(draws)&&Array.isArray(payload.history))draws=payload.history;if(!Array.isArray(draws))return null;return {draws:normalizeHistory(draws),jackpot:payload.jackpot,cashValue:payload.cashValue,nextDrawing:payload.nextDrawing};}
+async function updateFromWorker(showMessage=true){if(updateInProgress)return;const raw=(settings.workerUrl||"").trim();if(!raw){setUpdateStatus("Enter your Cloudflare Worker URL first.",true);if(showMessage)showToast("Worker URL is missing.");return;}updateInProgress=true;setUpdateStatus("Updating…");try{let url=raw.replace(/\/$/,"");if(!/\/api\/superlotto$/i.test(url)){url+="/api/superlotto";}const response=await fetch(url,{method:"GET",cache:"no-store"});if(!response.ok)throw new Error(`Worker returned HTTP ${response.status}`);const payload=await response.json();const parsed=parseWorkerResponse(payload);if(!parsed||!parsed.draws.length)throw new Error("Worker returned no valid SuperLotto Plus drawings.");history=parsed.draws;saveHistory();updateJackpot(parsed);renderLatest();renderStatistics();renderSaved();lastSyncTime=Date.now();$("syncStatus").textContent=`Synced ${new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}`;setUpdateStatus(`Updated successfully — ${history.length} drawings loaded.`);if(showMessage)showToast(`Updated ${history.length} drawings.`);}catch(err){console.error(err);setUpdateStatus(`Update failed: ${err.message}`,true);if(showMessage)showToast("Update failed. Check Worker URL.");}finally{updateInProgress=false;}}
+function exportCSV(){if(!history.length){showToast("No drawing data to export.");return;}const rows=[["Date","White 1","White 2","White 3","White 4","White 5","Superball"]];[...history].sort((a,b)=>a.date.localeCompare(b.date)).forEach(d=>rows.push([d.date,...d.white,d.pb]));const csv=rows.map(row=>row.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\r\n");const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="superlotto-plus-history.csv";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportJSON(){const blob=new Blob([JSON.stringify({game:"SuperLotto Plus",updatedAt:new Date().toISOString(),draws:history},null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="superlotto-plus-history.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function importJSON(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const obj=JSON.parse(reader.result);const imported=normalizeHistory(Array.isArray(obj)?obj:obj.draws);if(!imported.length)throw new Error("No valid drawings found.");history=imported;saveHistory();renderLatest();renderStatistics();showToast(`Imported ${history.length} drawings.`);}catch(e){showToast(`Import failed: ${e.message}`);}};reader.readAsText(file);}
+function resetDatabase(){if(!confirm("Reset all downloaded drawing history?"))return;history=normalizeHistory(SEED_DRAWS);saveHistory();renderLatest();renderStatistics();showToast("Drawing history reset.");}
+function strategyName(value){const option=$("strategy").querySelector(`option[value="${value}"]`);return option?option.textContent:value;}
+function getBacktestWindow(){const value=$("strategyWindow")?.value||"100";if(value==="all")return history.length;return Math.min(history.length,Math.max(10,Number(value)||100));}
+function testTicketAgainstDraw(ticket,draw){const whiteMatches=ticket.white.filter(n=>draw.white.includes(n)).length;const pbMatch=ticket.pb===draw.pb;return {whiteMatches,pbMatch};}
+function backtestStrategy(strategy,draws){if(draws.length<10)return {error:"Not enough historical drawings for backtesting."};const results={drawings:draws.length,tickets:0,whiteHits:0,pbHits:0,threePlus:0,fourPlus:0,fivePlus:0};for(let i=0;i<draws.length-1;i++){const training=draws.slice(0,i+1);const actual=draws[i+1];const ticket=generateTicket(strategy,training,()=>0.5);const r=testTicketAgainstDraw(ticket,actual);results.tickets++;if(r.whiteMatches>0)results.whiteHits+=r.whiteMatches;if(r.pbMatch)results.pbHits++;if(r.whiteMatches>=3)results.threePlus++;if(r.whiteMatches>=4)results.fourPlus++;if(r.whiteMatches===5)results.fivePlus++;}return results;}
+function runBacktest(){const output=$("backtestOutput");const strategy=$("strategy").value;const requested=Math.max(10,Number($("backtestWindow").value)||100);const ordered=[...history].sort((a,b)=>a.date.localeCompare(b.date));const data=ordered.slice(-Math.min(requested,ordered.length));if(data.length<10){output.innerHTML='<div class="empty">Need at least 10 drawings for backtesting.</div>';return;}output.innerHTML='<div class="loading">Running backtest…</div>';setTimeout(()=>{const r=backtestStrategy(strategy,data);output.innerHTML=`<div class="backtest-summary"><div><strong>${strategyName(strategy)}</strong></div><div>Drawings tested: <strong>${r.drawings-1}</strong></div><div>White-ball hits: <strong>${r.whiteHits}</strong></div><div>Superball hits: <strong>${r.pbHits}</strong></div><div>3+ white matches: <strong>${r.threePlus}</strong></div><div>4+ white matches: <strong>${r.fourPlus}</strong></div><div>5 white matches: <strong>${r.fivePlus}</strong></div></div>`;},50);}
+function updateProgress(percent,text){const area=$("progressArea");const bar=$("progressBar");const label=$("progressText");if(area)area.style.display="block";if(bar)bar.style.width=`${Math.max(0,Math.min(100,percent))}%`;if(label)label.textContent=text||"";}
+function clearProgress(){const area=$("progressArea");if(area)area.style.display="none";}
+function renderInitial(){renderLatest();renderSaved();renderStatistics();renderGenerated();$("updateStatus").textContent=history.length?`${history.length} drawings available.`:"No drawing data available.";}
+function init(){loadData();renderInitial();$("generateBtn").addEventListener("click",generateTickets);$("saveManualBtn").addEventListener("click",saveManual);$("clearManualBtn").addEventListener("click",clearSaved);$("refreshBtn").addEventListener("click",renderLatest);$("latestCount").addEventListener("change",()=>{settings.latestCount=$("latestCount").value;saveSettings();renderLatest();});$("statsWindow").addEventListener("change",renderStatistics);$("backtestBtn").addEventListener("click",runBacktest);$("saveSettingsBtn").addEventListener("click",()=>{saveSettings();showToast("Settings saved.");});$("updateNowBtn").addEventListener("click",()=>updateFromWorker(true));$("exportCsvBtn").addEventListener("click",exportCSV);$("exportJsonBtn").addEventListener("click",exportJSON);$("csvFile").addEventListener("change",e=>{const file=e.target.files?.[0];if(file)importJSON(file);e.target.value="";});$("resetDbBtn").addEventListener("click",resetDatabase);$("updateOnOpen").addEventListener("change",()=>{saveSettings();});if(settings.updateOnOpen){setTimeout(()=>updateFromWorker(false),500);}}
+document.addEventListener("DOMContentLoaded",init);
+</script></body>
 </html>
