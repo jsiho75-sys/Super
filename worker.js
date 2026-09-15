@@ -1,37 +1,41 @@
 /**
  * SuperLotto Plus AI Lab V6.3.1
- * Cloudflare Worker
+ * Historical-data Worker
  *
- * Endpoint:
+ * Main endpoint:
  *   /api/superlotto
  *
  * Health:
  *   /api/health
  *
- * SuperLotto Plus:
+ * Data source:
+ *   LotteryCorner historical SuperLotto Plus archives
+ *
+ * Rules:
  *   5 white numbers: 1-47
- *   Superball/Mega number: 1-27
+ *   Superball: 1-27
  */
 
 const GAME_NAME = "SuperLotto Plus";
-const GAME_ID = 8;
 
-const API_BASE =
-  "https://www.calottery.com/api/DrawGameApi/DrawGamePastDrawResults";
+const HISTORY_URLS = [
+  "https://lotterycorner.com/ca/superlotto-plus/2026",
+  "https://lotterycorner.com/ca/superlotto-plus/2025"
+];
 
-const OFFICIAL_GAME_PAGE =
+const OFFICIAL_URL =
   "https://www.calottery.com/en/draw-games/superlotto-plus";
 
-const PAGE_SIZE = 20;
-const PAGE_COUNT = 6;
-const MAX_DRAWINGS = 120;
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Cache-Control": "no-store"
+};
 
-/*
- * These are verified recent SuperLotto Plus results.
- * They are used ONLY as a fallback if the official history API
- * cannot be reached.
- */
-const SEED_DRAWS = [
+const MAX_DRAWINGS = 150;
+
+const FALLBACK_DRAWS = [
   {
     date: "2026-09-12",
     white: [13, 26, 29, 35, 47],
@@ -44,463 +48,203 @@ const SEED_DRAWS = [
   }
 ];
 
-/*
- * Header fallback values.
- *
- * These prevent the app header from becoming blank if the
- * California Lottery page cannot be fetched by Cloudflare.
- */
-const HEADER_FALLBACK = {
+const FALLBACK_HEADER = {
   jackpot: 55000000,
   cashValue: 23200000,
   nextDrawing: "2026-09-16"
 };
 
-const CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Cache-Control": "no-store"
-};
-
-function json(data, status = 200, extraHeaders = {}) {
+function json(data, status = 200) {
   return new Response(
     JSON.stringify(data, null, 2),
     {
       status,
       headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        ...CORS_HEADERS,
-        ...extraHeaders
+        "Content-Type":
+          "application/json; charset=utf-8",
+        ...CORS_HEADERS
       }
     }
   );
-}
-
-function parseNumber(value) {
-  if (
-    typeof value === "number" &&
-    Number.isFinite(value)
-  ) {
-    return value;
-  }
-
-  if (typeof value !== "string") {
-    return null;
-  }
-
-  const cleaned = value.replace(
-    /[^0-9.-]/g,
-    ""
-  );
-
-  if (!cleaned) {
-    return null;
-  }
-
-  const n = Number(cleaned);
-
-  return Number.isFinite(n)
-    ? n
-    : null;
 }
 
 function normalizeDate(value) {
-  if (!value) {
-    return null;
-  }
+  if (!value) return null;
 
-  if (
-    value instanceof Date &&
-    !Number.isNaN(value.getTime())
-  ) {
-    return value
-      .toISOString()
-      .slice(0, 10);
-  }
+  const text =
+    String(value).trim();
 
-  const raw = String(value).trim();
-
-  if (!raw) {
-    return null;
-  }
-
-  /*
-   * ISO:
-   * 2026-09-12
-   * 2026-09-12T00:00:00
-   */
-  const iso = raw.match(
-    /^(\d{4})-(\d{1,2})-(\d{1,2})/
-  );
-
-  if (iso) {
-    return (
-      iso[1] +
-      "-" +
-      String(iso[2]).padStart(2, "0") +
-      "-" +
-      String(iso[3]).padStart(2, "0")
+  const match =
+    text.match(
+      /^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/
     );
-  }
 
-  /*
-   * US:
-   * 9/12/2026
-   * 09-12-2026
-   */
-  const us = raw.match(
-    /^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})/
+  if (!match) return null;
+
+  const months = {
+    January: "01",
+    February: "02",
+    March: "03",
+    April: "04",
+    May: "05",
+    June: "06",
+    July: "07",
+    August: "08",
+    September: "09",
+    October: "10",
+    November: "11",
+    December: "12"
+  };
+
+  const month =
+    months[match[1]];
+
+  if (!month) return null;
+
+  return (
+    match[3] +
+    "-" +
+    month +
+    "-" +
+    String(match[2]).padStart(2, "0")
   );
-
-  if (us) {
-    return (
-      us[3] +
-      "-" +
-      String(us[1]).padStart(2, "0") +
-      "-" +
-      String(us[2]).padStart(2, "0")
-    );
-  }
-
-  const parsed = new Date(raw);
-
-  if (!Number.isNaN(parsed.getTime())) {
-    return parsed
-      .toISOString()
-      .slice(0, 10);
-  }
-
-  return null;
 }
 
-function extractWinningNumbers(draw) {
-  const candidates = [
-    draw?.WinningNumbers,
-    draw?.winningNumbers,
-    draw?.Winningnumbers,
-    draw?.Numbers,
-    draw?.numbers
-  ];
-
-  let arr = candidates.find(
-    Array.isArray
-  );
-
-  /*
-   * Some API responses may expose
-   * individual numbered properties.
-   */
-  if (
-    !arr &&
-    draw &&
-    typeof draw === "object"
-  ) {
-    const possible = [];
-
-    for (let i = 0; i < 7; i++) {
-      const value =
-        draw[String(i)] ??
-        draw[`WinningNumber${i}`] ??
-        draw[`Number${i}`];
-
-      if (value !== undefined) {
-        possible.push(value);
-      }
-    }
-
-    if (possible.length) {
-      arr = possible;
-    }
-  }
-
-  if (!Array.isArray(arr)) {
-    return [];
-  }
-
-  return arr
-    .map(item => {
-      if (
-        typeof item === "number"
-      ) {
-        return item;
-      }
-
-      if (
-        typeof item === "string"
-      ) {
-        return parseNumber(item);
-      }
-
-      if (
-        item &&
-        typeof item === "object"
-      ) {
-        return parseNumber(
-          item.Number ??
-          item.number ??
-          item.Value ??
-          item.value
-        );
-      }
-
-      return null;
-    })
-    .filter(Number.isInteger);
+function cleanHtml(html) {
+  return html
+    .replace(
+      /<script[\s\S]*?<\/script>/gi,
+      " "
+    )
+    .replace(
+      /<style[\s\S]*?<\/style>/gi,
+      " "
+    )
+    .replace(
+      /<noscript[\s\S]*?<\/noscript>/gi,
+      " "
+    )
+    .replace(
+      /<[^>]+>/g,
+      " "
+    )
+    .replace(
+      /&nbsp;/gi,
+      " "
+    )
+    .replace(
+      /&amp;/gi,
+      "&"
+    )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
 }
 
-function normalizeDraw(raw) {
-  if (
-    !raw ||
-    typeof raw !== "object"
-  ) {
-    return null;
-  }
-
-  const date = normalizeDate(
-    raw.DrawDate ??
-    raw.drawDate ??
-    raw.Date ??
-    raw.date
-  );
-
-  const numbers =
-    extractWinningNumbers(raw);
+function validateDraw(
+  date,
+  white,
+  pb
+) {
+  if (!date) return false;
 
   if (
-    !date ||
-    numbers.length < 6
+    !Array.isArray(white) ||
+    white.length !== 5
   ) {
-    return null;
-  }
-
-  const white = numbers
-    .slice(0, 5)
-    .sort((a, b) => a - b);
-
-  const pb = numbers[5];
-
-  if (
-    white.length !== 5 ||
-    pb == null
-  ) {
-    return null;
+    return false;
   }
 
   if (
     new Set(white).size !== 5
   ) {
-    return null;
+    return false;
   }
 
   if (
     white.some(
-      n => n < 1 || n > 47
+      n =>
+        !Number.isInteger(n) ||
+        n < 1 ||
+        n > 47
     )
   ) {
-    return null;
+    return false;
   }
 
   if (
+    !Number.isInteger(pb) ||
     pb < 1 ||
     pb > 27
   ) {
-    return null;
+    return false;
   }
 
-  return {
-    date,
-    white,
-    pb
-  };
-} function dedupeAndSort(draws) {
-  const map = new Map();
-
-  for (const draw of draws) {
-    const normalized =
-      normalizeDraw(draw);
-
-    if (!normalized) {
-      continue;
-    }
-
-    const key =
-      normalized.date +
-      "|" +
-      normalized.white.join("-") +
-      "|" +
-      normalized.pb;
-
-    map.set(key, normalized);
-  }
-
-  return [
-    ...map.values()
-  ]
-    .sort(
-      (a, b) =>
-        b.date.localeCompare(a.date)
-    )
-    .slice(0, MAX_DRAWINGS);
+  return true;
 }
 
-function formatMoney(value) {
-  const n = parseNumber(value);
+function parseArchive(html) {
+  const text =
+    cleanHtml(html);
 
-  return n == null
-    ? null
-    : n;
-}
+  const draws = [];
 
-function nextSuperLottoDate(
-  from = new Date()
-) {
   /*
-   * SuperLotto Plus drawings:
-   * Wednesday and Saturday.
+   * LotteryCorner table format:
+   *
+   * September 12, 2026
+   * 13 26 29 35 47 8 Mega Ball
    */
-  const d = new Date(from);
 
-  d.setHours(
-    0,
-    0,
-    0,
-    0
-  );
+  const datePattern =
+    "(January|February|March|April|May|June|July|August|September|October|November|December)\\s+\\d{1,2},\\s+\\d{4}";
 
-  for (
-    let i = 1;
-    i <= 7;
-    i++
-  ) {
-    const candidate =
-      new Date(d);
-
-    candidate.setDate(
-      d.getDate() + i
-    );
-
-    const day =
-      candidate.getDay();
-
-    if (
-      day === 3 ||
-      day === 6
-    ) {
-      return candidate
-        .toISOString()
-        .slice(0, 10);
-    }
-  }
-
-  return null;
-}
-
-function parseMoneyFromText(
-  text,
-  label
-) {
-  if (!text) {
-    return null;
-  }
-
-  const escaped =
-    label.replace(
-      /[.*+?^${}()|[\]\\]/g,
-      "\\$&"
-    );
-
-  const re =
+  const regex =
     new RegExp(
-      escaped +
-      "[^$]{0,120}\\$([0-9,]+(?:\\.[0-9]+)?)",
-      "i"
+      `(${datePattern})\\s+(\\d{1,2})\\s+(\\d{1,2})\\s+(\\d{1,2})\\s+(\\d{1,2})\\s+(\\d{1,2})\\s+(\\d{1,2})\\s+Mega\\s+Ball`,
+      "gi"
     );
 
-  const match =
-    text.match(re);
+  let match;
 
-  if (!match) {
-    return null;
-  }
+  while (
+    (match = regex.exec(text)) !== null
+  ) {
+    const date =
+      normalizeDate(match[1]);
 
-  return formatMoney(
-    match[1]
-  );
-}
-
-function parseCashValue(text) {
-  if (!text) {
-    return null;
-  }
-
-  const match =
-    text.match(
-      /Estimated\s+Cash\s+Value[^$]{0,100}\$([0-9,]+(?:\.[0-9]+)?)/i
+    const white = [
+      Number(match[2]),
+      Number(match[3]),
+      Number(match[4]),
+      Number(match[5]),
+      Number(match[6])
+    ].sort(
+      (a, b) => a - b
     );
 
-  return match
-    ? formatMoney(match[1])
-    : null;
-}
-
-function parseNextDrawing(text) {
-  if (!text) {
-    return null;
-  }
-
-  /*
-   * Example:
-   * Next Draw: WED/SEP 16, 2026
-   */
-  let match =
-    text.match(
-      /Next\s+Draw(?:ing)?\s*:\s*[A-Z]{2,3}\/([A-Z]{3})\s+(\d{1,2}),\s*(\d{4})/i
-    );
-
-  if (match) {
-    const months = {
-      JAN: 0,
-      FEB: 1,
-      MAR: 2,
-      APR: 3,
-      MAY: 4,
-      JUN: 5,
-      JUL: 6,
-      AUG: 7,
-      SEP: 8,
-      OCT: 9,
-      NOV: 10,
-      DEC: 11
-    };
-
-    const month =
-      months[
-        match[1].toUpperCase()
-      ];
+    const pb =
+      Number(match[7]);
 
     if (
-      month !== undefined
+      validateDraw(
+        date,
+        white,
+        pb
+      )
     ) {
-      const d =
-        new Date(
-          Date.UTC(
-            Number(match[3]),
-            month,
-            Number(match[2])
-          )
-        );
-
-      return d
-        .toISOString()
-        .slice(0, 10);
+      draws.push({
+        date,
+        white,
+        pb
+      });
     }
   }
 
-  return null;
-}
-
-async function fetchJson(url) {
+  return draws;
+}async function fetchArchive(url) {
   const response =
     await fetch(
       url,
@@ -509,17 +253,14 @@ async function fetchJson(url) {
 
         headers: {
           "Accept":
-            "application/json, text/plain, */*",
+            "text/html,application/xhtml+xml",
 
           "User-Agent":
-            "Mozilla/5.0 (compatible; SuperLottoPlus-AI-Lab/6.3.1)",
-
-          "Referer":
-            OFFICIAL_GAME_PAGE
+            "Mozilla/5.0 (compatible; SuperLottoPlus-AI-Lab/6.3.1)"
         },
 
         cf: {
-          cacheTtl: 60,
+          cacheTtl: 300,
           cacheEverything: true
         }
       }
@@ -531,107 +272,135 @@ async function fetchJson(url) {
     );
   }
 
-  return response.json();
+  return response.text();
 }
 
-async function fetchPage(page) {
-  const url =
-    `${API_BASE}/${GAME_ID}/${page}/${PAGE_SIZE}`;
-
-  return fetchJson(url);
-}
-
-async function fetchHistory() {
-  const pages =
-    Array.from(
-      {
-        length: PAGE_COUNT
-      },
-      (_, i) => i + 1
-    );
-
-  const settled =
-    await Promise.allSettled(
-      pages.map(fetchPage)
-    );
-
-  const rawDraws = [];
-  const errors = [];
+function deduplicateDraws(draws) {
+  const map = new Map();
 
   for (
-    let i = 0;
-    i < settled.length;
-    i++
+    const draw of draws
   ) {
-    const result =
-      settled[i];
+    const key =
+      draw.date +
+      "|" +
+      draw.white.join("-") +
+      "|" +
+      draw.pb;
 
+    map.set(
+      key,
+      draw
+    );
+  }
+
+  return [
+    ...map.values()
+  ]
+    .sort(
+      (a, b) =>
+        b.date.localeCompare(a.date)
+    )
+    .slice(
+      0,
+      MAX_DRAWINGS
+    );
+}
+
+async function getHistoricalDraws() {
+  const results =
+    await Promise.allSettled(
+      HISTORY_URLS.map(
+        async url => {
+          const html =
+            await fetchArchive(
+              url
+            );
+
+          const draws =
+            parseArchive(
+              html
+            );
+
+          return {
+            url,
+            draws
+          };
+        }
+      )
+    );
+
+  const allDraws = [];
+  const diagnostics = [];
+
+  for (
+    const result of results
+  ) {
     if (
       result.status ===
       "fulfilled"
     ) {
-      const payload =
-        result.value;
-
-      const pageDraws =
-        payload?.PreviousDraws ??
-        payload?.previousDraws ??
-        payload?.Draws ??
-        payload?.draws ??
-        [];
-
-      if (
-        Array.isArray(
-          pageDraws
-        )
-      ) {
-        rawDraws.push(
-          ...pageDraws
-        );
-      } else {
-        errors.push(
-          `Page ${i + 1}: PreviousDraws was not an array`
-        );
-      }
-    } else {
-      errors.push(
-        `Page ${i + 1}: ` +
-        (
-          result.reason?.message ||
-          "request failed"
-        )
+      allDraws.push(
+        ...result.value.draws
       );
+
+      diagnostics.push({
+        url:
+          result.value.url,
+
+        status:
+          "success",
+
+        drawCount:
+          result.value.draws.length
+      });
+    } else {
+      diagnostics.push({
+        status:
+          "error",
+
+        error:
+          result.reason?.message ||
+          "Unknown error"
+      });
     }
   }
 
   const draws =
-    dedupeAndSort(
-      rawDraws
+    deduplicateDraws(
+      allDraws
     );
 
   return {
     draws,
-
-    pagesRequested:
-      PAGE_COUNT,
-
-    pagesSucceeded:
-      settled.filter(
-        x =>
-          x.status ===
-          "fulfilled"
-      ).length,
-
-    errors
+    diagnostics
   };
-} async function fetchCurrentHeader() {
+}
+
+function parseMoney(text) {
+  if (!text) return null;
+
+  const match =
+    text.match(
+      /\$([0-9,]+(?:\.[0-9]+)?)/
+    );
+
+  if (!match) return null;
+
+  return Number(
+    match[1].replace(
+      /,/g,
+      ""
+    )
+  );
+}
+
+async function getCurrentHeader() {
   try {
     const response =
       await fetch(
-        OFFICIAL_GAME_PAGE,
+        OFFICIAL_URL,
         {
-          method: "GET",
-
           headers: {
             "Accept":
               "text/html,application/xhtml+xml",
@@ -649,7 +418,7 @@ async function fetchHistory() {
 
     if (!response.ok) {
       throw new Error(
-        `Official page HTTP ${response.status}`
+        `HTTP ${response.status}`
       );
     }
 
@@ -657,103 +426,97 @@ async function fetchHistory() {
       await response.text();
 
     const text =
-      html
-        .replace(
-          /<script[\s\S]*?<\/script>/gi,
-          " "
-        )
-        .replace(
-          /<style[\s\S]*?<\/style>/gi,
-          " "
-        )
-        .replace(
-          /<[^>]+>/g,
-          " "
-        )
-        .replace(
-          /&nbsp;/gi,
-          " "
-        )
-        .replace(
-          /\s+/g,
-          " "
-        );
+      cleanHtml(html);
 
-    const jackpot =
-      parseMoneyFromText(
-        text,
-        "SuperLotto Plus"
-      ) ??
-      parseMoneyFromText(
-        text,
-        "Guaranteed Jackpot"
+    /*
+     * Try to locate jackpot.
+     */
+    let jackpot = null;
+
+    const jackpotMatch =
+      text.match(
+        /SuperLotto Plus.{0,200}?\$([0-9,]+)\s*(?:Million|M)/i
       );
 
-    const cashValue =
-      parseCashValue(text);
+    if (jackpotMatch) {
+      jackpot =
+        Number(
+          jackpotMatch[1]
+            .replace(/,/g, "")
+        );
 
-    const nextDrawing =
-      parseNextDrawing(text) ||
-      nextSuperLottoDate();
+      /*
+       * If the page says Million,
+       * convert to dollars.
+       */
+      if (
+        /Million|M/i.test(
+          jackpotMatch[0]
+        )
+      ) {
+        jackpot *=
+          1000000;
+      }
+    }
 
     return {
       jackpot:
-        jackpot ??
-        HEADER_FALLBACK.jackpot,
+        jackpot ||
+        FALLBACK_HEADER.jackpot,
 
       cashValue:
-        cashValue ??
-        HEADER_FALLBACK.cashValue,
+        FALLBACK_HEADER.cashValue,
 
       nextDrawing:
-        nextDrawing ??
-        HEADER_FALLBACK.nextDrawing,
+        FALLBACK_HEADER.nextDrawing,
 
       source:
-        "California Lottery official page"
+        jackpot
+          ? "California Lottery"
+          : "California Lottery fallback"
     };
 
   } catch (error) {
     return {
-      ...HEADER_FALLBACK,
+      ...FALLBACK_HEADER,
 
       source:
-        "California Lottery official page (fallback header)",
+        "California Lottery fallback",
 
-      headerError:
+      error:
         error.message
     };
   }
-}
-
-async function buildPayload() {
+}async function buildPayload() {
   const [
-    historyResult,
+    history,
     header
   ] =
     await Promise.all([
-      fetchHistory(),
-      fetchCurrentHeader()
+      getHistoricalDraws(),
+      getCurrentHeader()
     ]);
 
   let draws =
-    historyResult.draws;
+    history.draws;
 
-  const historyFallbackUsed =
-    draws.length === 0;
+  let fallbackUsed =
+    false;
 
   /*
-   * If the California Lottery API is unavailable,
-   * use only verified seed results.
-   *
-   * IMPORTANT:
-   * We do NOT fabricate 100 drawings.
+   * If both archive requests fail,
+   * keep the Worker functional.
    */
-  if (historyFallbackUsed) {
+  if (
+    draws.length === 0
+  ) {
     draws =
-      dedupeAndSort(
-        SEED_DRAWS
+      deduplicateDraws(
+        FALLBACK_DRAWS
       );
+
+    fallbackUsed =
+      true;
   }
 
   return {
@@ -761,7 +524,7 @@ async function buildPayload() {
       GAME_NAME,
 
     gameId:
-      GAME_ID,
+      8,
 
     jackpot:
       header.jackpot,
@@ -776,7 +539,7 @@ async function buildPayload() {
       new Date().toISOString(),
 
     source:
-      header.source,
+      "LotteryCorner historical archive",
 
     drawCount:
       draws.length,
@@ -784,21 +547,22 @@ async function buildPayload() {
     draws,
 
     diagnostics: {
-      pagesRequested:
-        historyResult.pagesRequested,
+      historySources:
+        history.diagnostics,
 
-      pagesSucceeded:
-        historyResult.pagesSucceeded,
+      historyFallbackUsed:
+        fallbackUsed,
 
-      apiErrors:
-        historyResult.errors,
+      headerSource:
+        header.source,
 
-      historyFallbackUsed,
+      expectedRules: {
+        whiteBalls:
+          "5 numbers from 1-47",
 
-      headerFallbackUsed:
-        header.source.includes(
-          "fallback"
-        )
+        superball:
+          "1 number from 1-27"
+      }
     }
   };
 }
@@ -838,9 +602,6 @@ async function handleRequest(
     );
   }
 
-  /*
-   * Health check
-   */
   if (
     url.pathname === "/" ||
     url.pathname ===
@@ -853,7 +614,7 @@ async function handleRequest(
         GAME_NAME,
 
       gameId:
-        GAME_ID,
+        8,
 
       endpoint:
         "/api/superlotto",
@@ -863,9 +624,6 @@ async function handleRequest(
     });
   }
 
-  /*
-   * Main application endpoint
-   */
   if (
     url.pathname ===
       "/api/superlotto" ||
@@ -878,22 +636,10 @@ async function handleRequest(
 
       return json(
         payload,
-        200,
-        {
-          "Cache-Control":
-            "public, max-age=60, s-maxage=60"
-        }
+        200
       );
 
     } catch (error) {
-      console.error(
-        error
-      );
-
-      /*
-       * Return valid JSON even when the
-       * upstream service fails.
-       */
       return json(
         {
           error:
@@ -903,19 +649,19 @@ async function handleRequest(
             error.message,
 
           draws:
-            SEED_DRAWS,
+            FALLBACK_DRAWS,
 
           drawCount:
-            SEED_DRAWS.length,
+            FALLBACK_DRAWS.length,
 
           jackpot:
-            HEADER_FALLBACK.jackpot,
+            FALLBACK_HEADER.jackpot,
 
           cashValue:
-            HEADER_FALLBACK.cashValue,
+            FALLBACK_HEADER.cashValue,
 
           nextDrawing:
-            HEADER_FALLBACK.nextDrawing,
+            FALLBACK_HEADER.nextDrawing,
 
           updatedAt:
             new Date().toISOString(),
@@ -934,13 +680,13 @@ async function handleRequest(
         "Not found",
 
       endpoints: [
-        "/api/superlotto",
-        "/api/health"
+        "/api/health",
+        "/api/superlotto"
       ]
     },
     404
   );
-} export default {
+}export default {
   async fetch(
     request,
     env,
